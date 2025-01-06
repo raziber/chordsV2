@@ -40,7 +40,16 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="search"
+        name="home"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="house.fill" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="index"
         options={{
           title: "Search",
           tabBarIcon: ({ color }) => (
@@ -49,15 +58,6 @@ export default function TabLayout() {
               name="magnifyingglass.circle.fill"
               color={color}
             />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
           ),
         }}
       />
