@@ -9,6 +9,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import "react-native-reanimated";
+import * as NavigationBar from "expo-navigation-bar";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -24,6 +25,7 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
+      NavigationBar.setPositionAsync("absolute");
     }
   }, [loaded]);
 

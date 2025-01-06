@@ -19,19 +19,21 @@ export default function TabLayout() {
         tabBarShowLabel: true,
         tabBarLabelStyle: {
           fontSize: 11,
-          fontFamily: "Inter_500Medium",
+          fontWeight: "100",
+          paddingTop: 4,
         },
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
             position: "absolute",
+            // Use a transparent background on iOS to show the blur effect
           },
           default: {
             backgroundColor: Colors[colorScheme ?? "dark"].backgroundOverlay,
             paddingHorizontal: 20,
+            paddingTop: 5,
             height: 90,
             borderTopWidth: 0,
           },
