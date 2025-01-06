@@ -68,4 +68,51 @@ export default class Cache {
       return 0;
     }
   }
+
+  static async fetchUrl<T>(
+    url: string,
+    parser: (data: string) => T
+  ): Promise<T | null> {
+    const cachedData = await this.tryGetFromCache<T>(url);
+    if (cachedData) return cachedData;
+
+    return await this.fetchAndCache<T>(url, parser);
+  }
+
+  private static async tryGetFromCache<T>(url: string): Promise<T | null> {
+    const cachedData = await this.get(url);
+    if (cachedData) {
+      console.log("Using cached data for:", url);
+      return cachedData as T;
+    }
+    return null;
+  }
+
+  private static async fetchAndCache<T>(
+    url: string,
+    parser: (data: string) => T
+  ): Promise<T | null> {
+    try {
+      const rawData = await this.fetchData(url);
+      if (!rawData) return null;
+
+      const parsedData = parser(rawData);
+      await this.save(url, parsedData);
+      return parsedData;
+    } catch (error) {
+      console.error("Error processing data for:", url, error);
+      return null;
+    }
+  }
+
+  private static async fetchData(url: string): Promise<string | null> {
+    try {
+      console.log("Fetching fresh data from:", url);
+      const response = await fetch(url);
+      return await response.text();
+    } catch (error) {
+      console.error("Network error for:", url, error);
+      return null;
+    }
+  }
 }

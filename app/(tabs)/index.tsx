@@ -14,9 +14,8 @@ export default function SearchScreen() {
 }
 
 async function handleSearch() {
-  console.log("Search button pressed");
   const url = buildSearchUrl("perfect");
-  const data = await getSearchData(url);
+  const data = await Cache.fetchUrl(url, parseSearchResults);
   console.log(data ? "Search completed" : "Search failed");
   return data;
 }
@@ -27,39 +26,9 @@ function buildSearchUrl(query: string): string {
   )}`;
 }
 
-async function getSearchData(url: string): Promise<string | null> {
-  const cachedData = await getCachedData(url);
-  if (cachedData) return cachedData;
-  return await getFreshData(url);
-}
-
-async function getCachedData(url: string): Promise<string | null> {
-  const cachedData = await Cache.get(url);
-  if (cachedData) {
-    console.log("Using cached data");
-    return cachedData;
-  }
-  return null;
-}
-
-async function getFreshData(url: string): Promise<string | null> {
-  console.log("Fetching fresh data");
-  const response = await fetchUrlData(url);
-  if (response) {
-    await Cache.save(url, response);
-    return response;
-  }
-  return null;
-}
-
-async function fetchUrlData(url: string): Promise<string | null> {
-  try {
-    const response = await fetch(url);
-    return await response.text();
-  } catch (error) {
-    console.log("Error:", error);
-    return null;
-  }
+function parseSearchResults(htmlText: string): any {
+  // Add your parsing logic here
+  return htmlText; // For now, just returning the raw text
 }
 
 const styles = StyleSheet.create({
