@@ -1,14 +1,18 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import React from "react";
-import { StyleSheet, Button } from "react-native";
+import { StyleSheet, Button, View } from "react-native";
 import Cache from "@/utils/cacheUtils";
 
 export default function SearchScreen() {
   return (
     <ThemedView style={styles.container}>
       <ThemedText type="title">Search</ThemedText>
-      <Button title="Run Search" onPress={() => handleSearch()} />
+      <View style={styles.buttonsContainer}>
+        <Button title="Run Search" onPress={() => handleSearch()} />
+        <View style={styles.buttonSpacer} />
+        <Button title="Clear Cache" onPress={() => Cache.clear()} />
+      </View>
     </ThemedView>
   );
 }
@@ -16,7 +20,7 @@ export default function SearchScreen() {
 async function handleSearch() {
   const url = buildSearchUrl("perfect");
   const data = await Cache.fetchUrl(url, parseSearchResults);
-  console.log(data ? "Search completed" : "Search failed");
+  console.log(data ? data : "Search failed");
   return data;
 }
 
@@ -28,7 +32,8 @@ function buildSearchUrl(query: string): string {
 
 function parseSearchResults(htmlText: string): any {
   // Add your parsing logic here
-  return htmlText; // For now, just returning the raw text
+  // For example, to extract the first 10 characters:
+  return htmlText.slice(0, 10);
 }
 
 const styles = StyleSheet.create({
@@ -36,5 +41,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  buttonsContainer: {
+    marginTop: 20,
+    alignItems: "center",
+  },
+  buttonSpacer: {
+    height: 10,
   },
 });

@@ -37,6 +37,7 @@ export default class Cache {
     try {
       const keys = await AsyncStorage.getAllKeys();
       await AsyncStorage.multiRemove(keys);
+      console.log("Cache cleared");
     } catch (error) {
       console.error("Cache clear error:", error);
     }
