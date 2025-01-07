@@ -26,6 +26,7 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
+      NavigationBar.setBackgroundColorAsync("#00000000");
       NavigationBar.setPositionAsync("absolute");
       Cache.removeExpired();
     }
