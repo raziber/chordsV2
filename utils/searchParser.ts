@@ -1,6 +1,8 @@
 import HtmlUtils from "./htmlUtils";
 import JsonUtils from "./jsonUtils";
 
+export const SEARCH_PAGE_LIMIT = 3;
+
 export interface RawSearchResult {
   id: number;
   song_id: number;
@@ -44,6 +46,24 @@ export interface RawSearchResult {
 }
 
 export default class Search {
+  async searchMultiplePages(
+    baseUrl: string,
+    pages: number
+  ): Promise<RawSearchResult[]> {
+    const allResults: RawSearchResult[] = [];
+
+    for (let page = 1; page <= pages; page++) {
+      const pageUrl = `${baseUrl}page=${page}&search_type=title&`;
+      console.log(`Fetching page ${page}...`);
+      const response = await fetch(pageUrl);
+      const html = await response.text();
+      const results = this.parseSearchResults(HtmlUtils.decode(html));
+      allResults.push(...results);
+    }
+
+    return this.filterResultsWithMostVotes(allResults);
+  }
+
   parseSearchResults(htmlText: string): RawSearchResult[] {
     try {
       const cleanHtml = HtmlUtils.decode(htmlText);
