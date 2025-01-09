@@ -54,7 +54,6 @@ export default class Search {
 
     for (let page = 1; page <= pages; page++) {
       const pageUrl = `${baseUrl}page=${page}&search_type=title&`;
-      console.log(`Fetching page ${page}...`);
       const response = await fetch(pageUrl);
       const html = await response.text();
       const results = this.parseSearchResults(HtmlUtils.decode(html));
@@ -87,7 +86,6 @@ export default class Search {
       }
     });
 
-    console.log(`Unique song_ids found: ${songMap.size}`);
     return Array.from(songMap.values());
   }
 
