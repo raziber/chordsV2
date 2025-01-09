@@ -48,12 +48,27 @@ export default class Search {
     try {
       const cleanHtml = HtmlUtils.decode(htmlText);
       const results = this.extractResults(cleanHtml);
-      this.logResults(results);
-      return results;
+      const uniqueResults = this.filterResultsWithMostVotes(results);
+      return uniqueResults;
     } catch (error) {
       console.error("Search parsing error:", error);
       return [];
     }
+  }
+
+  filterResultsWithMostVotes(results: RawSearchResult[]): RawSearchResult[] {
+    // Group by song_id and keep track of processing
+    const songMap = new Map<number, RawSearchResult>();
+
+    results.forEach((result) => {
+      const existing = songMap.get(result.song_id);
+      if (!existing || existing.votes < result.votes) {
+        songMap.set(result.song_id, result);
+      }
+    });
+
+    console.log(`Unique song_ids found: ${songMap.size}`);
+    return Array.from(songMap.values());
   }
 
   private extractResults(html: string): RawSearchResult[] {

@@ -20,12 +20,12 @@ export default function SearchScreen() {
 
 async function handleSearch() {
   const search = new Search();
-  const url = buildSearchUrl("perfect");
+  const url = buildSearchUrl("frac");
   const data = await Cache.fetchUrl(
     url,
     search.parseSearchResults.bind(search)
   );
-  console.log(data ? data : "Search failed");
+  console.log(data ? data.length : "Search failed");
   return data;
 }
 

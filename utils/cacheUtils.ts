@@ -83,7 +83,6 @@ export default class Cache {
   private static async tryGetFromCache<T>(url: string): Promise<T | null> {
     const cachedData = await this.get(url);
     if (cachedData) {
-      console.log("Using cached data for:", url);
       return cachedData as T;
     }
     return null;
@@ -108,7 +107,6 @@ export default class Cache {
 
   private static async fetchData(url: string): Promise<string | null> {
     try {
-      console.log("Fetching fresh data from:", url);
       const response = await fetch(url);
       return await response.text();
     } catch (error) {
