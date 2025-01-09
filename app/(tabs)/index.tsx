@@ -3,6 +3,7 @@ import { ThemedView } from "@/components/ThemedView";
 import React from "react";
 import { StyleSheet, Button, View } from "react-native";
 import Cache from "@/utils/cacheUtils";
+import Search from "@/utils/searchParser";
 
 export default function SearchScreen() {
   return (
@@ -18,8 +19,12 @@ export default function SearchScreen() {
 }
 
 async function handleSearch() {
+  const search = new Search();
   const url = buildSearchUrl("perfect");
-  const data = await Cache.fetchUrl(url, parseSearchResults);
+  const data = await Cache.fetchUrl(
+    url,
+    search.parseSearchResults.bind(search)
+  );
   console.log(data ? data : "Search failed");
   return data;
 }
@@ -28,12 +33,6 @@ function buildSearchUrl(query: string): string {
   return `https://www.ultimate-guitar.com/search.php?page=1&search_type=title&value=${encodeURIComponent(
     query
   )}`;
-}
-
-function parseSearchResults(htmlText: string): any {
-  // Add your parsing logic here
-  // For example, to extract the first 10 characters:
-  return htmlText.slice(0, 10);
 }
 
 const styles = StyleSheet.create({

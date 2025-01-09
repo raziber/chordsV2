@@ -32,9 +32,11 @@ export default class JsonUtils {
       let bracketCount = 0;
       let i = startPos;
 
-      // Find the first opening bracket
+      // Skip any non-bracket characters (like the comma)
       while (i < text.length && text[i] !== "{") i++;
       if (i >= text.length) return null;
+
+      const jsonStartPos = i; // Start from the opening bracket
 
       // Now parse the JSON object
       while (i < text.length) {
@@ -42,7 +44,7 @@ export default class JsonUtils {
         if (text[i] === "}") {
           bracketCount--;
           if (bracketCount === 0) {
-            return text.substring(startPos, i + 1);
+            return text.substring(jsonStartPos, i + 1);
           }
         }
         i++;

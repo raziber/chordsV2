@@ -72,9 +72,34 @@ export default class Search {
 
   private logResults(results: RawSearchResult[]): void {
     results.forEach((result) => {
-      console.log(
-        `Title: ${result.song_name}\nArtist: ${result.artist_name}\nRating: ${result.rating}\nType: ${result.type}\nURL: ${result.tab_url}\n`
-      );
+      console.log(`
+      Result:
+      ID: ${result.id}
+      Song ID: ${result.song_id}
+      Title: ${result.song_name}
+      Artist ID: ${result.artist_id}
+      Artist: ${result.artist_name}
+      Type: ${result.type}
+      Part: ${result.part}
+      Version: ${result.version}
+      Votes: ${result.votes}
+      Difficulty: ${result.difficulty}
+      Rating: ${result.rating}
+      Date: ${result.date}
+      Status: ${result.status}
+      Preset ID: ${result.preset_id}
+      Access Type: ${result.tab_access_type}
+      TP Version: ${result.tp_version}
+      Tonality: ${result.tonality_name}
+      Description: ${result.version_description}
+      Verified: ${result.verified}
+      Recording: ${JSON.stringify(result.recording, null, 2)}
+      Album Cover: ${result.album_cover?.web_album_cover?.small || "None"}
+      Artist Cover: ${result.artist_cover?.web_artist_cover?.small || "None"}
+      Artist URL: ${result.artist_url}
+      Tab URL: ${result.tab_url}
+      ----------------------------------------
+      `);
     });
   }
 }
