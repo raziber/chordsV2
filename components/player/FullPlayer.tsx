@@ -6,6 +6,7 @@ import { usePlayer } from "@/contexts/PlayerContext";
 import { useTheme } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useBackHandler } from "@react-native-community/hooks";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
@@ -13,6 +14,14 @@ export function FullPlayer() {
   const { currentTrack, isExpanded, setIsExpanded } = usePlayer();
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
+
+  useBackHandler(() => {
+    if (isExpanded) {
+      setIsExpanded(false);
+      return true;
+    }
+    return false;
+  });
 
   if (!isExpanded || !currentTrack) return null;
 
