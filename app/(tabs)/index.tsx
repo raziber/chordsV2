@@ -41,36 +41,42 @@ export default function SearchScreen() {
   );
 }
 
-async function handleSearch(query: string) {
+// Export for testing
+export async function handleSearch(query: string) {
   query = query.trim();
   if (!query) return;
 
   const search = new Search();
   const cacheKey = `search_${query}`;
 
-  // Try to get from cache first
-  const cachedData = await Cache.get(cacheKey);
-  if (cachedData) {
-    console.log("Using cached search results");
-    return cachedData;
+  try {
+    // Try to get from cache first
+    const cachedData = await Cache.get(cacheKey);
+    if (cachedData) {
+      console.log("Using cached search results");
+      return cachedData;
+    }
+
+    // If not in cache, fetch all pages
+    console.log("Fetching search results...");
+    const baseUrl = `https://www.ultimate-guitar.com/search.php?value=${encodeURIComponent(
+      query
+    )}&`;
+    const data = await search.searchMultiplePages(baseUrl, SEARCH_PAGE_LIMIT);
+
+    // Cache the results
+    if (data.length > 0) {
+      await Cache.save(cacheKey, data);
+    }
+
+    console.log(
+      `Found ${data.length} unique results across ${SEARCH_PAGE_LIMIT} pages`
+    );
+    return data;
+  } catch (error) {
+    console.error("Search error:", error);
+    return [];
   }
-
-  // If not in cache, fetch all pages
-  console.log("Fetching search results...");
-  const baseUrl = `https://www.ultimate-guitar.com/search.php?value=${encodeURIComponent(
-    query
-  )}&`;
-  const data = await search.searchMultiplePages(baseUrl, SEARCH_PAGE_LIMIT);
-
-  // Cache the results
-  if (data.length > 0) {
-    await Cache.save(cacheKey, data);
-  }
-
-  console.log(
-    `Found ${data.length} unique results across ${SEARCH_PAGE_LIMIT} pages`
-  );
-  return data;
 }
 
 const styles = StyleSheet.create({
