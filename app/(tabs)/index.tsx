@@ -5,10 +5,25 @@ import { StyleSheet, Button, View, TextInput } from "react-native";
 import Cache from "@/utils/cacheUtils";
 import Search, { SEARCH_PAGE_LIMIT } from "@/utils/searchParser";
 import { useTheme } from "@react-navigation/native";
+import { SearchResult } from "@/types/search";
+import { SearchResultItem } from "@/components/SearchResultItem";
+import { ActivityIndicator, FlatList } from "react-native";
 
 export default function SearchScreen() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { colors } = useTheme();
+
+  const onSearch = async (query: string) => {
+    setIsLoading(true);
+    const data = await handleSearch(query);
+    const sortedData: SearchResult[] = (data || []).sort(
+      (a: SearchResult, b: SearchResult) => b.votes - a.votes
+    );
+    setResults(sortedData);
+    setIsLoading(false);
+  };
 
   return (
     <ThemedView style={styles.container}>
@@ -28,15 +43,26 @@ export default function SearchScreen() {
             ]}
             value={searchQuery}
             onChangeText={setSearchQuery}
-            onSubmitEditing={() => handleSearch(searchQuery)}
+            onSubmitEditing={() => onSearch(searchQuery)}
             placeholder="Enter search term..."
             placeholderTextColor={colors.text + "80"} // 50% opacity
             returnKeyType="search"
           />
-          <Button title="Search" onPress={() => handleSearch(searchQuery)} />
+          <Button title="Search" onPress={() => onSearch(searchQuery)} />
         </View>
         <Button title="Clear Cache" onPress={() => Cache.clear()} />
       </View>
+
+      {isLoading ? (
+        <ActivityIndicator size="large" color={colors.primary} />
+      ) : (
+        <FlatList
+          data={results}
+          renderItem={({ item }) => <SearchResultItem result={item} />}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={styles.resultsList}
+        />
+      )}
     </ThemedView>
   );
 }
@@ -103,5 +129,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
+  },
+  resultsList: {
+    padding: 10,
   },
 });
