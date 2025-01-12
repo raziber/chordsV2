@@ -11,6 +11,9 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import * as NavigationBar from "expo-navigation-bar";
 import Cache from "../utils/cacheUtils";
+import { PlayerProvider } from "@/contexts/PlayerContext";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { MiniPlayer } from "@/components/player/MiniPlayer";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -39,12 +42,17 @@ export default function RootLayout() {
   const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
 
   return (
-    <ThemeProvider value={theme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider value={theme}>
+        <PlayerProvider>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+          <MiniPlayer />
+          <StatusBar style="auto" />
+        </PlayerProvider>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }

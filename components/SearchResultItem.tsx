@@ -4,6 +4,7 @@ import { useTheme } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { ThemedText } from "./ThemedText";
 import { RawSearchResult } from "@/utils/searchParser";
+import { usePlayer } from "@/contexts/PlayerContext";
 
 interface Props {
   result: RawSearchResult;
@@ -11,9 +12,18 @@ interface Props {
 
 export function SearchResultItem({ result }: Props) {
   const { colors } = useTheme();
+  const { setCurrentTrack } = usePlayer();
 
   return (
-    <Pressable style={[styles.container, { backgroundColor: colors.card }]}>
+    <Pressable
+      style={({ pressed }) => [
+        styles.container,
+        { backgroundColor: colors.card },
+        pressed && { opacity: 0.7 },
+      ]}
+      onPress={() => setCurrentTrack(result)}
+      android_ripple={{ color: colors.text + "20" }}
+    >
       <Image
         source={{
           uri:
