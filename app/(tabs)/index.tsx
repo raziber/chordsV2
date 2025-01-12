@@ -97,7 +97,6 @@ export default function SearchScreen() {
           renderItem={({ item }) => <SearchResultItem result={item} />}
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={styles.resultsList}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
         />
       )}
     </ThemedView>
@@ -181,10 +180,6 @@ const styles = StyleSheet.create({
   },
   resultsList: {
     padding: 16,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: "rgba(127, 127, 127, 0.2)",
-    marginVertical: 8,
+    gap: 10,
   },
 });
