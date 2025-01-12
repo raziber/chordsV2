@@ -12,7 +12,12 @@ interface Props {
 
 export function SearchResultItem({ result }: Props) {
   const { colors } = useTheme();
-  const { setCurrentTrack } = usePlayer();
+  const { setCurrentTrack, setIsExpanded } = usePlayer();
+
+  const handlePress = () => {
+    setCurrentTrack(result);
+    setIsExpanded(true);
+  };
 
   return (
     <Pressable
@@ -21,7 +26,7 @@ export function SearchResultItem({ result }: Props) {
         { backgroundColor: colors.card },
         pressed && { opacity: 0.7 },
       ]}
-      onPress={() => setCurrentTrack(result)}
+      onPress={handlePress}
       android_ripple={{ color: colors.text + "20" }}
     >
       <Image
