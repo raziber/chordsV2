@@ -1,6 +1,14 @@
 import React from "react";
 import { StyleSheet, View, Dimensions, Image, Pressable } from "react-native";
-import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import Animated, {
+  SharedValue,
+  withSpring,
+  withTiming,
+  useAnimatedStyle,
+  Layout,
+  SlideInDown,
+  SlideOutDown,
+} from "react-native-reanimated";
 import { ThemedText } from "@/components/ThemedText";
 import { usePlayer } from "@/contexts/PlayerContext";
 import { useTheme } from "@react-navigation/native";
@@ -27,8 +35,8 @@ export function FullPlayer() {
 
   return (
     <Animated.View
-      entering={FadeIn}
-      exiting={FadeOut}
+      entering={SlideInDown.springify().damping(25).stiffness(200).mass(0.5)}
+      exiting={SlideOutDown.duration(150)}
       style={[styles.container, { backgroundColor: colors.card }]}
     >
       <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
