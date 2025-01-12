@@ -4,13 +4,21 @@ export default class JsonUtils {
     let pos = 0;
 
     while ((pos = this.findNextStart(text, startIdentifier, pos)) !== -1) {
-      const startPos = pos; // Start from the identifier position
+      const startPos = pos;
       const jsonObject = this.extractJsonObject(text, startPos);
       if (jsonObject) {
-        results.push(jsonObject);
-        pos += jsonObject.length;
+        try {
+          // Validate JSON before adding to results
+          JSON.parse(jsonObject);
+          results.push(jsonObject);
+          pos += jsonObject.length;
+        } catch (e) {
+          // Skip invalid JSON
+          pos++;
+        }
+      } else {
+        pos++;
       }
-      pos++; // Move past current position
     }
 
     return results;
@@ -29,22 +37,30 @@ export default class JsonUtils {
     startPos: number
   ): string | null {
     try {
-      let bracketCount = 0;
       let i = startPos;
 
-      // Skip any non-bracket characters (like the comma)
+      // Skip any non-bracket characters until we find our opening brace
       while (i < text.length && text[i] !== "{") i++;
       if (i >= text.length) return null;
 
-      const jsonStartPos = i; // Start from the opening bracket
+      const jsonStartPos = i;
+      let bracketCount = 0;
 
       // Now parse the JSON object
       while (i < text.length) {
-        if (text[i] === "{") bracketCount++;
-        if (text[i] === "}") {
+        const char = text[i];
+        if (char === "{") bracketCount++;
+        else if (char === "}") {
           bracketCount--;
           if (bracketCount === 0) {
-            return text.substring(jsonStartPos, i + 1);
+            const extracted = text.substring(jsonStartPos, i + 1);
+            // Validate the extracted string is actually JSON
+            try {
+              JSON.parse(extracted);
+              return extracted;
+            } catch {
+              return null;
+            }
           }
         }
         i++;
