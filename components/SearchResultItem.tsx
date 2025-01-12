@@ -1,17 +1,21 @@
 import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 import { ThemedText } from "./ThemedText";
-import { SearchResult } from "@/types/search";
+import { RawSearchResult } from "@/utils/searchParser";
 
 interface Props {
-  result: SearchResult;
+  result: RawSearchResult;
 }
 
 export function SearchResultItem({ result }: Props) {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: result.image_url || "https://placeholder.com/150" }}
+        source={{
+          uri:
+            result.album_cover?.web_album_cover?.small ||
+            "https://placeholder.com/150",
+        }}
         style={styles.image}
       />
       <View style={styles.info}>

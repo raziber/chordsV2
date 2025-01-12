@@ -5,21 +5,30 @@ import { StyleSheet, Button, View, TextInput } from "react-native";
 import Cache from "@/utils/cacheUtils";
 import Search, { SEARCH_PAGE_LIMIT } from "@/utils/searchParser";
 import { useTheme } from "@react-navigation/native";
-import { SearchResult } from "@/types/search";
+import { RawSearchResult } from "@/utils/searchParser";
 import { SearchResultItem } from "@/components/SearchResultItem";
 import { ActivityIndicator, FlatList } from "react-native";
 
 export default function SearchScreen() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [results, setResults] = useState<SearchResult[]>([]);
+  const [results, setResults] = useState<RawSearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { colors } = useTheme();
 
   const onSearch = async (query: string) => {
     setIsLoading(true);
     const data = await handleSearch(query);
-    const sortedData: SearchResult[] = (data || []).sort(
-      (a: SearchResult, b: SearchResult) => b.votes - a.votes
+    // Add these interfaces at the top of the file, after the imports
+    interface SortableResult {
+      votes: number;
+    }
+
+    // The modified line with types:
+    const sortedData: RawSearchResult[] = (data || []).sort(
+      (
+        a: RawSearchResult & SortableResult,
+        b: RawSearchResult & SortableResult
+      ) => b.votes - a.votes
     );
     setResults(sortedData);
     setIsLoading(false);
