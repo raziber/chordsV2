@@ -1,21 +1,52 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, TextInput, Animated, Pressable } from "react-native";
 import Cache from "@/utils/cacheUtils";
 import Search, { SEARCH_PAGE_LIMIT } from "@/utils/searchParser";
-import { useTheme } from "@react-navigation/native";
+import {
+  useTheme,
+  useNavigation,
+  TabActions,
+  EventArg,
+} from "@react-navigation/native";
+import type { BottomTabNavigationEventMap } from "@react-navigation/bottom-tabs";
 import { RawSearchResult } from "@/utils/searchParser";
 import { SearchResultItem } from "@/components/SearchResultItem";
 import { ActivityIndicator, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { FocusManager } from "@/utils/focusUtils";
+
+const SEARCH_INPUT_KEY = "main-search";
 
 export default function SearchScreen() {
+  const inputRef = useRef<TextInput>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState<RawSearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { colors } = useTheme();
   const searchAnim = new Animated.Value(0);
+  const navigation = useNavigation<any>();
+
+  useEffect(() => {
+    if (inputRef.current) {
+      FocusManager.register(SEARCH_INPUT_KEY, inputRef.current);
+    }
+
+    const unsubscribe = navigation.addListener(
+      "tabPress",
+      (e: EventArg<"tabPress">) => {
+        if (navigation.isFocused()) {
+          FocusManager.focus(SEARCH_INPUT_KEY);
+        }
+      }
+    );
+
+    return () => {
+      FocusManager.unregister(SEARCH_INPUT_KEY);
+      unsubscribe();
+    };
+  }, [navigation]);
 
   const animateSearch = () => {
     Animated.spring(searchAnim, {
@@ -66,6 +97,7 @@ export default function SearchScreen() {
             style={styles.searchIcon}
           />
           <TextInput
+            ref={inputRef}
             style={[styles.searchInput, { color: colors.text }]}
             value={searchQuery}
             onChangeText={setSearchQuery}
