@@ -52,23 +52,29 @@ export default class Search {
   ): Promise<RawSearchResult[]> {
     const allResults: RawSearchResult[] = [];
 
-    for (let page = 1; page <= pages; page++) {
-      const pageUrl = `${baseUrl}page=${page}&search_type=title&`;
-      const response = await fetch(pageUrl);
-      const html = await response.text();
-      const results = this.parseSearchResults(HtmlUtils.decode(html));
-      allResults.push(...results);
+    try {
+      for (let page = 1; page <= pages; page++) {
+        const pageUrl = `${baseUrl}page=${page}&search_type=title&`;
+        const response = await fetch(pageUrl);
+        const html = await response.text();
+        const results = this.parseSearchResults(html);
+        allResults.push(...results);
+      }
+    } catch (error) {
+      console.error("Search failed:", error);
+      return [];
     }
 
     return this.filterResultsWithMostVotes(allResults);
   }
 
   parseSearchResults(htmlText: string): RawSearchResult[] {
+    if (!htmlText) return [];
+
     try {
+      // Only decode HTML once
       const cleanHtml = HtmlUtils.decode(htmlText);
-      const results = this.extractResults(cleanHtml);
-      const uniqueResults = this.filterResultsWithMostVotes(results);
-      return uniqueResults;
+      return this.extractResults(cleanHtml);
     } catch (error) {
       console.error("Search parsing error:", error);
       return [];
@@ -90,17 +96,33 @@ export default class Search {
   }
 
   private extractResults(html: string): RawSearchResult[] {
-    const jsonStrings = JsonUtils.findJsonObjects(html, ',{"id"');
-    return jsonStrings
-      .map((jsonStr) => {
-        try {
-          return JSON.parse(jsonStr);
-        } catch (e) {
-          console.error("Failed to parse JSON:", e);
-          return null;
-        }
-      })
-      .filter((result): result is RawSearchResult => result !== null);
+    try {
+      const jsonStrings = JsonUtils.findJsonObjects(html, ',{"id"');
+      const results = jsonStrings
+        .map((jsonStr) => {
+          try {
+            const parsed = JSON.parse(jsonStr);
+            // Validate required fields
+            if (
+              parsed &&
+              typeof parsed === "object" &&
+              "id" in parsed &&
+              "song_id" in parsed &&
+              "song_name" in parsed
+            ) {
+              return parsed as RawSearchResult;
+            }
+            return null;
+          } catch (e) {
+            return null;
+          }
+        })
+        .filter((result): result is RawSearchResult => result !== null);
+
+      return results;
+    } catch (error) {
+      return [];
+    }
   }
 
   private logResults(results: RawSearchResult[]): void {
