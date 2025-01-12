@@ -23,20 +23,22 @@ export function SearchResultItem({ result }: Props) {
         style={styles.image}
       />
       <View style={styles.info}>
-        <ThemedText type="title" style={styles.songName} numberOfLines={1}>
-          {result.song_name}
-        </ThemedText>
+        <View style={styles.titleRow}>
+          <ThemedText type="title" style={styles.songName} numberOfLines={1}>
+            {result.song_name}
+          </ThemedText>
+          <View style={styles.stats}>
+            <Ionicons name="star" size={10} color={colors.text} />
+            <ThemedText style={styles.votes}>{result.votes}</ThemedText>
+          </View>
+        </View>
         <ThemedText style={styles.artistName} numberOfLines={1}>
           {result.artist_name}
         </ThemedText>
-        <View style={styles.stats}>
-          <Ionicons name="star" size={12} color={colors.text} />
-          <ThemedText style={styles.votes}>{result.votes}</ThemedText>
-        </View>
       </View>
       <Ionicons
         name="chevron-forward"
-        size={20}
+        size={16}
         color={colors.text}
         style={styles.arrow}
       />
@@ -48,38 +50,44 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 12,
-    borderRadius: 12,
+    padding: 8,
+    borderRadius: 8,
+    gap: 8,
   },
   image: {
     width: 50,
     height: 50,
-    borderRadius: 8,
+    borderRadius: 6,
   },
   info: {
     flex: 1,
-    marginLeft: 12,
-    gap: 4,
+    gap: 2,
+  },
+  titleRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 8,
   },
   songName: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "600",
+    flex: 1,
   },
   artistName: {
-    fontSize: 14,
+    fontSize: 12,
     opacity: 0.7,
   },
   stats: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 4,
+    gap: 2,
   },
   votes: {
-    fontSize: 12,
+    fontSize: 10,
     opacity: 0.6,
   },
   arrow: {
     opacity: 0.3,
-    marginLeft: 8,
   },
 });
