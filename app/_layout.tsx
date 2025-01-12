@@ -14,6 +14,7 @@ import Cache from "../utils/cacheUtils";
 import { PlayerProvider } from "@/contexts/PlayerContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { MiniPlayer } from "@/components/player/MiniPlayer";
+import { FullPlayer } from "@/components/player/FullPlayer";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -50,6 +51,7 @@ export default function RootLayout() {
             <Stack.Screen name="+not-found" />
           </Stack>
           <MiniPlayer />
+          <FullPlayer />
           <StatusBar style="auto" />
         </PlayerProvider>
       </ThemeProvider>
