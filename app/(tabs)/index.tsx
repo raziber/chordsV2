@@ -70,7 +70,7 @@ export default function SearchScreen() {
             value={searchQuery}
             onChangeText={setSearchQuery}
             onSubmitEditing={() => onSearch(searchQuery)}
-            placeholder="Search for songs..."
+            placeholder="What do you want to play?"
             placeholderTextColor={colors.text + "80"}
             returnKeyType="search"
           />
@@ -115,12 +115,10 @@ export async function handleSearch(query: string) {
     // Try to get from cache first
     const cachedData = await Cache.get(cacheKey);
     if (cachedData) {
-      console.log("Using cached search results");
       return cachedData;
     }
 
     // If not in cache, fetch all pages
-    console.log("Fetching search results...");
     const baseUrl = `https://www.ultimate-guitar.com/search.php?value=${encodeURIComponent(
       query
     )}&`;
@@ -131,9 +129,6 @@ export async function handleSearch(query: string) {
       await Cache.save(cacheKey, data);
     }
 
-    console.log(
-      `Found ${data.length} unique results across ${SEARCH_PAGE_LIMIT} pages`
-    );
     return data;
   } catch (error) {
     console.error("Search error:", error);
