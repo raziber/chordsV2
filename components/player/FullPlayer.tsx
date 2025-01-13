@@ -1,5 +1,13 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, Image, Pressable } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  Image,
+  Pressable,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import Animated, {
   SharedValue,
   withSpring,
@@ -39,35 +47,47 @@ export function FullPlayer() {
       exiting={SlideOutDown.duration(150)}
       style={[styles.container, { backgroundColor: colors.card }]}
     >
-      <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
-        <View style={styles.headerContent}>
-          <Pressable
-            onPress={() => setIsExpanded(false)}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            style={({ pressed }) => [
-              styles.backButton,
-              pressed && { opacity: 0.7 },
-            ]}
-          >
-            <Ionicons name="chevron-down" size={32} color={colors.text} />
-          </Pressable>
+      <ScrollView style={styles.scrollContainer} bounces={false}>
+        <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
+          <View style={styles.headerContent}>
+            <Pressable
+              onPress={() => setIsExpanded(false)}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+              style={({ pressed }) => [
+                styles.backButton,
+                pressed && { opacity: 0.7 },
+              ]}
+            >
+              <Ionicons name="chevron-down" size={32} color={colors.text} />
+            </Pressable>
+          </View>
         </View>
-      </View>
 
-      <View style={styles.content}>
-        <Image
-          source={{ uri: currentTrack.album_cover?.web_album_cover?.small }}
-          style={styles.albumArt}
-        />
-        <View style={styles.info}>
-          <ThemedText type="title" style={styles.title}>
-            {currentTrack.song_name}
-          </ThemedText>
-          <ThemedText type="subtitle" style={styles.artist}>
-            {currentTrack.artist_name}
-          </ThemedText>
+        <View style={styles.content}>
+          <Image
+            source={{ uri: currentTrack.album_cover?.web_album_cover?.small }}
+            style={styles.albumArt}
+          />
+          <View style={styles.info}>
+            <ThemedText type="title" style={styles.title}>
+              {currentTrack.song_name}
+            </ThemedText>
+            <ThemedText type="subtitle" style={styles.artist}>
+              {currentTrack.artist_name}
+            </ThemedText>
+          </View>
+
+          <View style={styles.tabContent}>
+            {!currentTrack.parsedTab ? (
+              <ActivityIndicator size="large" color={colors.primary} />
+            ) : (
+              <ThemedText style={styles.tabText}>
+                {currentTrack.parsedTab.content}
+              </ThemedText>
+            )}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </Animated.View>
   );
 }
@@ -120,5 +140,20 @@ const styles = StyleSheet.create({
   artist: {
     opacity: 0.7,
     textAlign: "center",
+  },
+  scrollContainer: {
+    flex: 1,
+  },
+  tabContent: {
+    width: "100%",
+    padding: 16,
+    marginTop: 16,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: "#ffffff20",
+  },
+  tabText: {
+    fontFamily: "monospace",
+    fontSize: 14,
+    lineHeight: 20,
   },
 });

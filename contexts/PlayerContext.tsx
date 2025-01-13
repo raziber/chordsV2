@@ -1,20 +1,23 @@
 import React, { createContext, useContext, useState } from "react";
 import { RawSearchResult } from "@/utils/searchParser";
+import { ParsedTab } from "@/utils/tabParser";
 
 interface PlayerContextType {
   isExpanded: boolean;
-  currentTrack: RawSearchResult | null;
+  currentTrack: Track | null;
   setIsExpanded: (expanded: boolean) => void;
-  setCurrentTrack: (track: RawSearchResult | null) => void;
+  setCurrentTrack: (track: Track | null) => void;
+}
+
+export interface Track extends RawSearchResult {
+  parsedTab?: ParsedTab | null;
 }
 
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined);
 
 export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState<RawSearchResult | null>(
-    null
-  );
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
 
   return (
     <PlayerContext.Provider

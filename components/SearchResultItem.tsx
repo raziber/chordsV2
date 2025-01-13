@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { ThemedText } from "./ThemedText";
 import { RawSearchResult } from "@/utils/searchParser";
 import { usePlayer } from "@/contexts/PlayerContext";
+import { fetchAndParseTab } from "@/utils/tabParser";
 
 interface Props {
   result: RawSearchResult;
@@ -14,8 +15,12 @@ export function SearchResultItem({ result }: Props) {
   const { colors } = useTheme();
   const { setCurrentTrack, setIsExpanded } = usePlayer();
 
-  const handlePress = () => {
-    setCurrentTrack(result);
+  const handlePress = async () => {
+    const parsedTab = await fetchAndParseTab(result.tab_url);
+    setCurrentTrack({
+      ...result,
+      parsedTab,
+    });
     setIsExpanded(true);
   };
 
