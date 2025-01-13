@@ -19,14 +19,19 @@ export function SearchResultItem({ result }: Props) {
     // First set the basic track info and expand
     setCurrentTrack({
       ...result,
-      parsedTab: null, // Will be populated later
+      parsedTab: null,
     });
     setIsExpanded(true);
     setIsLoading(true);
 
-    // Then fetch the data in the background
-    fetchAndParseTab(result.tab_url)
-      .then((parsedTab) => {
+    // Wait for animation to complete (typical duration is 300ms)
+    const ANIMATION_DURATION = 500; // slightly longer than animation to be safe
+
+    Promise.all([
+      fetchAndParseTab(result.tab_url),
+      new Promise((resolve) => setTimeout(resolve, ANIMATION_DURATION)),
+    ])
+      .then(([parsedTab]) => {
         setCurrentTrack({
           ...result,
           parsedTab,
