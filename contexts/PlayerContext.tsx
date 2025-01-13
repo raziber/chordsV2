@@ -5,8 +5,10 @@ import { ParsedTab } from "@/utils/tabParser";
 interface PlayerContextType {
   isExpanded: boolean;
   currentTrack: Track | null;
+  isLoading: boolean;
   setIsExpanded: (expanded: boolean) => void;
   setCurrentTrack: (track: Track | null) => void;
+  setIsLoading: (loading: boolean) => void;
 }
 
 export interface Track extends RawSearchResult {
@@ -18,10 +20,18 @@ const PlayerContext = createContext<PlayerContextType | undefined>(undefined);
 export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <PlayerContext.Provider
-      value={{ isExpanded, currentTrack, setIsExpanded, setCurrentTrack }}
+      value={{
+        isExpanded,
+        currentTrack,
+        isLoading,
+        setIsExpanded,
+        setCurrentTrack,
+        setIsLoading,
+      }}
     >
       {children}
     </PlayerContext.Provider>

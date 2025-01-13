@@ -13,15 +13,28 @@ interface Props {
 
 export function SearchResultItem({ result }: Props) {
   const { colors } = useTheme();
-  const { setCurrentTrack, setIsExpanded } = usePlayer();
+  const { setCurrentTrack, setIsExpanded, setIsLoading } = usePlayer();
 
-  const handlePress = async () => {
-    const parsedTab = await fetchAndParseTab(result.tab_url);
+  const handlePress = () => {
+    // First set the basic track info and expand
     setCurrentTrack({
       ...result,
-      parsedTab,
+      parsedTab: null, // Will be populated later
     });
     setIsExpanded(true);
+    setIsLoading(true);
+
+    // Then fetch the data in the background
+    fetchAndParseTab(result.tab_url)
+      .then((parsedTab) => {
+        setCurrentTrack({
+          ...result,
+          parsedTab,
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
