@@ -1,4 +1,4 @@
-import { ChordParser, Chord, ChordBase } from "./chordParser";
+import { ChordParser, Chord, ChordBase } from "../chordParser";
 
 describe("ChordParser", () => {
   describe("Basic Chords", () => {

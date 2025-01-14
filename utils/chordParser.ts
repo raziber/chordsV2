@@ -71,8 +71,57 @@ export class ChordParser {
       throw new Error("Invalid chord: multiple accidentals");
     }
 
-    // Parse all modifier types
-    this.parseModifiers(remaining, modifiers);
+    // Parse modifiers sequentially
+    while (remaining.length > 0) {
+      let found = false;
+
+      // Check compound modifiers first as they're the longest
+      for (const mod of COMPOUND_MODIFIERS) {
+        if (remaining.startsWith(mod)) {
+          modifiers.push({ type: "compound", value: mod });
+          remaining = remaining.slice(mod.length);
+          found = true;
+          break;
+        }
+      }
+      if (found) continue;
+
+      // Check alterations before individual accidentals and extensions
+      for (const mod of ALTERATION_MODIFIERS) {
+        if (remaining.startsWith(mod)) {
+          modifiers.push({ type: "alteration", value: mod });
+          remaining = remaining.slice(mod.length);
+          found = true;
+          break;
+        }
+      }
+      if (found) continue;
+
+      // Check remaining modifier types
+      const remainingModifiers = [
+        { type: "accidental", mods: ACCIDENTAL_MODIFIERS },
+        { type: "quality", mods: QUALITY_MODIFIERS },
+        { type: "extension", mods: EXTENSION_MODIFIERS },
+        { type: "suspension", mods: SUSPENSION_MODIFIERS },
+        { type: "addition", mods: ADDITION_MODIFIERS },
+      ] as const;
+
+      for (const { type, mods } of remainingModifiers) {
+        for (const mod of mods) {
+          if (remaining.startsWith(mod)) {
+            modifiers.push({ type, value: mod });
+            remaining = remaining.slice(mod.length);
+            found = true;
+            break;
+          }
+        }
+        if (found) break;
+      }
+
+      if (!found) {
+        throw new Error(`Invalid modifier sequence: ${remaining}`);
+      }
+    }
 
     // Validate modifier combinations
     this.validateModifierCombinations(modifiers);
@@ -108,82 +157,15 @@ export class ChordParser {
     }
   }
 
-  private static parseModifiers(
-    input: string,
-    modifiers: ChordModifier[]
-  ): void {
-    let remaining = input;
-
-    // Compound modifiers (need to check first as they're combinations)
-    const compoundMod = COMPOUND_MODIFIERS.find((mod) =>
-      remaining.includes(mod)
-    );
-    if (compoundMod) {
-      modifiers.push({ type: "compound", value: compoundMod });
-      remaining = remaining.replace(compoundMod, "");
-    }
-
-    // Order matters for the rest
-    this.checkModifiers(
-      remaining,
-      "accidental",
-      ACCIDENTAL_MODIFIERS,
-      modifiers
-    );
-    this.checkModifiers(remaining, "quality", QUALITY_MODIFIERS, modifiers);
-    this.checkModifiers(
-      remaining,
-      "suspension",
-      SUSPENSION_MODIFIERS,
-      modifiers
-    );
-    this.checkModifiers(remaining, "addition", ADDITION_MODIFIERS, modifiers);
-    this.checkModifiers(
-      remaining,
-      "alteration",
-      ALTERATION_MODIFIERS,
-      modifiers
-    );
-    this.checkModifiers(remaining, "extension", EXTENSION_MODIFIERS, modifiers);
-  }
-
-  private static checkModifiers(
-    input: string,
-    type: ModifierType,
-    possibleMods: readonly string[],
-    modifiers: ChordModifier[]
-  ): void {
-    for (const mod of possibleMods) {
-      if (input.includes(mod)) {
-        modifiers.push({ type, value: mod });
-      }
-    }
-  }
-
   static toString(chord: Chord): string {
-    const orderPriority: ModifierType[] = [
-      "accidental",
-      "quality",
-      "suspension",
-      "extension",
-      "addition",
-      "alteration",
-      "compound",
-      "bass",
-    ];
-
-    const sortedModifiers = chord.modifiers.sort(
-      (a, b) => orderPriority.indexOf(a.type) - orderPriority.indexOf(b.type)
-    );
-
     const mainPart =
       chord.base +
-      sortedModifiers
+      chord.modifiers
         .filter((m) => m.type !== "bass")
         .map((m) => m.value)
         .join("");
 
-    const bassModifier = sortedModifiers.find((m) => m.type === "bass");
+    const bassModifier = chord.modifiers.find((m) => m.type === "bass");
     return bassModifier ? `${mainPart}/${bassModifier.value}` : mainPart;
   }
 }
