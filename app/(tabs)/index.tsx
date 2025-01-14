@@ -158,7 +158,8 @@ export async function handleSearch(query: string): Promise<RawSearchResult[]> {
 
     // Cache the results
     if (data.length > 0) {
-      await Cache.save(cacheKey, data);
+      const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+      await Cache.save(cacheKey, data, { duration: CACHE_DURATION });
     }
 
     return data;

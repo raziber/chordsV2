@@ -33,7 +33,8 @@ export async function fetchAndParseTab(url: string): Promise<ParsedTab | null> {
 
     // Cache the results
     if (parsedData) {
-      await Cache.save(cacheKey, parsedData);
+      const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+      await Cache.save(cacheKey, parsedData, { duration: CACHE_DURATION });
     }
 
     return parsedData;
