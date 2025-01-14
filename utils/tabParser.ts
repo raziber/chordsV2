@@ -23,7 +23,7 @@ export async function fetchAndParseTab(url: string): Promise<ParsedTab | null> {
 
   try {
     // Try to get from cache first
-    const cachedData = await Cache.get(cacheKey);
+    const cachedData = (await Cache.get(cacheKey)) as ParsedTab;
     if (cachedData) {
       return cachedData;
     }

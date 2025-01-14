@@ -1,33 +1,75 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-interface CacheItem {
+interface CacheItem<T> {
   timestamp: number;
-  data: any;
+  data: T;
+  version?: string;
+}
+
+interface CacheOptions {
+  duration?: number;
+  prefix?: string;
+  validator?: (data: any) => boolean;
+  compress?: boolean;
+  version?: string;
 }
 
 export default class Cache {
-  private static readonly CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+  private static readonly DEFAULT_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+  private static readonly DEFAULT_PREFIX = "app_cache:";
 
-  static async get(key: string): Promise<any | null> {
+  private static getFullKey(key: string, options: CacheOptions): string {
+    const prefix =
+      options.prefix !== undefined ? options.prefix : this.DEFAULT_PREFIX;
+    return prefix + key;
+  }
+
+  static async get<T>(
+    key: string,
+    options: CacheOptions = {}
+  ): Promise<T | null> {
     try {
-      const cached = await AsyncStorage.getItem(key);
+      const fullKey = this.getFullKey(key, options);
+      const cached = await AsyncStorage.getItem(fullKey);
       if (!cached) return null;
 
-      const { data }: CacheItem = JSON.parse(cached);
-      return data;
+      const cacheItem: CacheItem<T> = JSON.parse(cached);
+
+      if (this.isExpired(cacheItem.timestamp, options.duration)) {
+        await AsyncStorage.removeItem(fullKey);
+        return null;
+      }
+
+      if (options.version && cacheItem.version !== options.version) {
+        await AsyncStorage.removeItem(fullKey);
+        return null;
+      }
+
+      if (options.validator && !options.validator(cacheItem.data)) {
+        await AsyncStorage.removeItem(fullKey);
+        return null;
+      }
+
+      return cacheItem.data;
     } catch (error) {
       console.error("Cache read error:", error);
       return null;
     }
   }
 
-  static async save(key: string, data: any): Promise<void> {
+  static async save<T>(
+    key: string,
+    data: T,
+    options: CacheOptions = {}
+  ): Promise<void> {
     try {
-      const cacheItem: CacheItem = {
+      const fullKey = this.getFullKey(key, options);
+      const cacheItem: CacheItem<T> = {
         timestamp: Date.now(),
         data,
+        version: options.version,
       };
-      await AsyncStorage.setItem(key, JSON.stringify(cacheItem));
+      await AsyncStorage.setItem(fullKey, JSON.stringify(cacheItem));
     } catch (error) {
       console.error("Cache write error:", error);
     }
@@ -43,14 +85,18 @@ export default class Cache {
     }
   }
 
-  static async removeExpired(): Promise<void> {
+  static async removeExpired(options: CacheOptions = {}): Promise<void> {
     try {
+      const prefix =
+        options.prefix !== undefined ? options.prefix : this.DEFAULT_PREFIX;
       const keys = await AsyncStorage.getAllKeys();
-      for (const key of keys) {
+      const prefixedKeys = keys.filter((key) => key.startsWith(prefix));
+
+      for (const key of prefixedKeys) {
         const cached = await AsyncStorage.getItem(key);
         if (cached) {
-          const { timestamp }: CacheItem = JSON.parse(cached);
-          if (Date.now() - timestamp > this.CACHE_DURATION) {
+          const { timestamp }: CacheItem<any> = JSON.parse(cached);
+          if (this.isExpired(timestamp, options.duration)) {
             await AsyncStorage.removeItem(key);
           }
         }
@@ -72,12 +118,13 @@ export default class Cache {
 
   static async fetchUrl<T>(
     url: string,
-    parser: (data: string) => T
+    parser: (data: string) => T,
+    options: CacheOptions = {}
   ): Promise<T | null> {
-    const cachedData = await this.tryGetFromCache<T>(url);
+    const cachedData = await this.get<T>(url, options);
     if (cachedData) return cachedData;
 
-    return await this.fetchAndCache<T>(url, parser);
+    return await this.fetchAndCache<T>(url, parser, options);
   }
 
   private static async tryGetFromCache<T>(url: string): Promise<T | null> {
@@ -90,19 +137,24 @@ export default class Cache {
 
   private static async fetchAndCache<T>(
     url: string,
-    parser: (data: string) => T
+    parser: (data: string) => T,
+    options: CacheOptions
   ): Promise<T | null> {
     try {
       const rawData = await this.fetchData(url);
       if (!rawData) return null;
 
       const parsedData = parser(rawData);
-      await this.save(url, parsedData);
+      await this.save(url, parsedData, options);
       return parsedData;
     } catch (error) {
       console.error("Error processing data for:", url, error);
       return null;
     }
+  }
+
+  private static isExpired(timestamp: number, duration?: number): boolean {
+    return Date.now() - timestamp > (duration || this.DEFAULT_DURATION);
   }
 
   private static async fetchData(url: string): Promise<string | null> {

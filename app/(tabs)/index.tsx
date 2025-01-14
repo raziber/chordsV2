@@ -136,9 +136,9 @@ export default function SearchScreen() {
 }
 
 // Export for testing
-export async function handleSearch(query: string) {
+export async function handleSearch(query: string): Promise<RawSearchResult[]> {
   query = query.trim();
-  if (!query) return;
+  if (!query) return [];
 
   const search = new Search();
   const cacheKey = `search_${query}`;
@@ -147,7 +147,7 @@ export async function handleSearch(query: string) {
     // Try to get from cache first
     const cachedData = await Cache.get(cacheKey);
     if (cachedData) {
-      return cachedData;
+      return cachedData as RawSearchResult[];
     }
 
     // If not in cache, fetch all pages
