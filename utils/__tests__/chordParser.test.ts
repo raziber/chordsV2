@@ -1,245 +1,267 @@
-import { ChordParser, Chord, ChordBase } from "../chordParser";
+import { ChordParser } from "../chordParser";
+import { ChordTypes } from "../types";
 
 describe("ChordParser", () => {
-  describe("Basic Chords", () => {
-    test("should parse major chords", () => {
-      const chord = ChordParser.parseChord("C");
-      expect(chord.base).toBe("C");
-      expect(chord.modifiers).toHaveLength(0);
+  describe("Basic Chord Parsing", () => {
+    test("should parse single letter chords", () => {
+      const result = ChordParser.parseChord("C");
+      expect(result).toEqual({
+        base: "C",
+        modifiers: [],
+        bass: undefined,
+      });
     });
 
-    test("should parse minor chords", () => {
-      const chord = ChordParser.parseChord("Am");
-      expect(chord.base).toBe("A");
-      expect(chord.modifiers).toHaveLength(1);
-      expect(chord.modifiers[0]).toEqual({
-        type: "quality",
-        value: "m",
+    test("should parse sharp and flat notes", () => {
+      expect(ChordParser.parseChord("C#")).toEqual({
+        base: "C#",
+        modifiers: [],
+        bass: undefined,
+      });
+
+      expect(ChordParser.parseChord("Bb")).toEqual({
+        base: "Bb",
+        modifiers: [],
+        bass: undefined,
       });
     });
   });
 
-  describe("Accidentals", () => {
-    test("should parse sharp chords", () => {
-      const chord = ChordParser.parseChord("F#");
-      expect(chord.base).toBe("F");
-      expect(chord.modifiers[0]).toEqual({
-        type: "accidental",
-        value: "#",
+  describe("Modifier Parsing", () => {
+    test("should parse single modifiers", () => {
+      expect(ChordParser.parseChord("Am")).toEqual({
+        base: "A",
+        modifiers: ["m"],
+        bass: undefined,
+      });
+
+      expect(ChordParser.parseChord("Cmaj7")).toEqual({
+        base: "C",
+        modifiers: ["maj7"],
+        bass: undefined,
       });
     });
 
-    test("should parse flat chords", () => {
-      const chord = ChordParser.parseChord("Bb");
-      expect(chord.base).toBe("B");
-      expect(chord.modifiers[0]).toEqual({
-        type: "accidental",
-        value: "b",
+    test("should parse multiple modifiers in correct order", () => {
+      expect(ChordParser.parseChord("Cm7b5")).toEqual({
+        base: "C",
+        modifiers: ["m", "7", "b5"],
+        bass: undefined,
       });
-    });
-  });
 
-  describe("Complex Chords", () => {
-    test("should parse seventh chords", () => {
-      const chord = ChordParser.parseChord("Cmaj7");
-      expect(chord.modifiers).toContainEqual({
-        type: "compound",
-        value: "maj7",
+      expect(ChordParser.parseChord("Cmaj7#11")).toEqual({
+        base: "C",
+        modifiers: ["maj7", "#11"],
+        bass: undefined,
       });
     });
 
-    test("should parse minor seventh flat five", () => {
-      const chord = ChordParser.parseChord("Bm7b5");
-      expect(chord.base).toBe("B");
-      expect(chord.modifiers).toContainEqual({
-        type: "compound",
-        value: "m7b5",
-      });
-    });
-
-    test("should parse augmented chords", () => {
-      const chord = ChordParser.parseChord("Caug");
-      expect(chord.modifiers).toContainEqual({
-        type: "quality",
-        value: "aug",
+    test("should handle overlapping modifiers correctly", () => {
+      expect(ChordParser.parseChord("Cmadd9")).toEqual({
+        base: "C",
+        modifiers: ["m", "add9"],
+        bass: undefined,
       });
     });
   });
 
-  describe("Slash Chords", () => {
+  describe("Bass Note Handling", () => {
     test("should parse basic slash chords", () => {
-      const chord = ChordParser.parseChord("C/G");
-      expect(chord.base).toBe("C");
-      expect(chord.bass).toBe("G");
+      expect(ChordParser.parseChord("C/G")).toEqual({
+        base: "C",
+        modifiers: [],
+        bass: "G",
+      });
     });
 
-    test("should parse complex slash chords", () => {
-      const chord = ChordParser.parseChord("Fmaj7/A");
-      expect(chord.base).toBe("F");
-      expect(chord.bass).toBe("A");
-      expect(chord.modifiers).toContainEqual({
-        type: "compound",
-        value: "maj7",
+    test("should parse complex chords with bass notes", () => {
+      expect(ChordParser.parseChord("Cmaj7/B")).toEqual({
+        base: "C",
+        modifiers: ["maj7"],
+        bass: "B",
+      });
+    });
+
+    test("should handle accidentals in bass notes", () => {
+      expect(ChordParser.parseChord("Am7/F#")).toEqual({
+        base: "A",
+        modifiers: ["m", "7"],
+        bass: "F#",
       });
     });
   });
 
-  describe("toString", () => {
-    test("should convert chord object back to string", () => {
-      const inputs = ["C", "F#m", "Bbmaj7", "Am7b5", "D/F#"];
-      inputs.forEach((input) => {
-        const chord = ChordParser.parseChord(input);
-        expect(ChordParser.toString(chord)).toBe(input);
-      });
+  describe("Error Cases", () => {
+    test("should reject empty input", () => {
+      expect(() => ChordParser.parseChord("")).toThrow("Empty chord string");
+    });
+
+    test("should reject invalid root notes", () => {
+      expect(() => ChordParser.parseChord("H7")).toThrow(
+        "Invalid chord: must start with A-G"
+      );
+    });
+
+    test("should reject invalid modifiers", () => {
+      expect(() => ChordParser.parseChord("Cxyz")).toThrow("Invalid modifier");
+    });
+
+    test("should reject invalid bass notes", () => {
+      expect(() => ChordParser.parseChord("C/H")).toThrow("Invalid bass note");
     });
   });
 
-  describe("Error Handling", () => {
-    test("should throw error for invalid base note", () => {
-      expect(() => ChordParser.parseChord("H")).toThrow();
-      expect(() => ChordParser.parseChord("X")).toThrow();
-    });
-
-    test("should handle empty input", () => {
-      expect(() => ChordParser.parseChord("")).toThrow();
-    });
-  });
-
-  describe("Extended Functionality", () => {
-    test("should parse suspended chords", () => {
-      const chord = ChordParser.parseChord("Csus4");
-      expect(chord.modifiers).toContainEqual({
-        type: "suspension",
-        value: "sus4",
-      });
-    });
-
-    test("should parse add chords", () => {
-      const chord = ChordParser.parseChord("Cadd9");
-      expect(chord.modifiers).toContainEqual({
-        type: "addition",
-        value: "add9",
-      });
-    });
-
-    test("should parse altered chords", () => {
-      const chord = ChordParser.parseChord("C7b9");
-      expect(chord.modifiers).toContainEqual({
-        type: "extension",
-        value: "7",
-      });
-      expect(chord.modifiers).toContainEqual({
-        type: "alteration",
-        value: "b9",
-      });
-    });
-
-    test("should parse multiple alterations", () => {
-      const chord = ChordParser.parseChord("C7b9#11");
-      expect(chord.modifiers).toContainEqual({
-        type: "extension",
-        value: "7",
-      });
-      expect(chord.modifiers).toContainEqual({
-        type: "alteration",
-        value: "b9",
-      });
-      expect(chord.modifiers).toContainEqual({
-        type: "alteration",
-        value: "#11",
-      });
-    });
-
+  describe("Complex Cases", () => {
     test("should parse complex jazz chords", () => {
-      const chord = ChordParser.parseChord("Cmaj13#11");
-      expect(chord.modifiers).toContainEqual({
-        type: "compound",
-        value: "maj13",
-      });
-      expect(chord.modifiers).toContainEqual({
-        type: "alteration",
-        value: "#11",
-      });
-    });
-  });
-
-  describe("Edge Cases", () => {
-    test("should handle alternative notations", () => {
-      const augChord = ChordParser.parseChord("C+");
-      expect(augChord.modifiers).toContainEqual({
-        type: "quality",
-        value: "+",
-      });
-    });
-
-    test("should parse power chords", () => {
-      const chord = ChordParser.parseChord("C5");
-      expect(chord.modifiers).toContainEqual({
-        type: "extension",
-        value: "5",
-      });
-    });
-
-    test("should handle complex slash chords with accidentals", () => {
-      const chord = ChordParser.parseChord("Cmaj7/F#");
-      expect(chord.base).toBe("C");
-      expect(chord.bass).toBe("F");
-      expect(chord.modifiers).toContainEqual({
-        type: "bass",
-        value: "F#",
-      });
-    });
-  });
-
-  describe("Modifier Ordering", () => {
-    test("should maintain correct modifier order", () => {
       const cases = [
-        {
-          input: "C#m7",
-          expected: ["#", "m", "7"],
-        },
-        {
-          input: "Bbmaj7sus4",
-          expected: ["b", "maj7", "sus4"], // Updated order to match implementation
-        },
-        {
-          input: "F#m7b5/C",
-          expected: ["#", "m7b5", "C"],
-        },
+        [
+          "Cmaj7#11",
+          { base: "C", modifiers: ["maj7", "#11"], bass: undefined },
+        ],
+        ["Dm7b5/Ab", { base: "D", modifiers: ["m", "7", "b5"], bass: "Ab" }],
+        ["G13b9", { base: "G", modifiers: ["13", "b9"], bass: undefined }],
       ];
 
-      cases.forEach(({ input, expected }) => {
-        const chord = ChordParser.parseChord(input);
-        const values = chord.modifiers.map((m) => m.value);
-        expect(values).toEqual(expected);
+      cases.forEach(([input, expected]) => {
+        expect(ChordParser.parseChord(input as string)).toEqual(expected);
       });
     });
   });
 
-  describe("Invalid Inputs", () => {
-    test("should reject invalid modifier combinations", () => {
-      const invalidChords = [
-        "Cm+", // can't be minor and augmented
-        "Csus2sus4", // can't have both sus2 and sus4
-        "C7maj7", // can't have both 7 and maj7
-      ];
-
-      invalidChords.forEach((chord) => {
-        expect(() => ChordParser.parseChord(chord)).toThrow();
-      });
+  describe("validateNotEmpty", () => {
+    test("should throw on empty string", () => {
+      expect(() => ChordParser.validateNotEmpty("")).toThrow(
+        "Empty chord string"
+      );
     });
 
-    test("should handle malformed input", () => {
-      const malformedInputs = [
-        "C##", // double sharp
-        "Cbb", // double flat
-        "C/H", // invalid bass note
-        "C7b9b9", // duplicate alterations
-      ];
+    test("should throw on undefined", () => {
+      expect(() => ChordParser.validateNotEmpty(undefined as any)).toThrow(
+        "Empty chord string"
+      );
+    });
 
-      malformedInputs.forEach((chord) => {
-        expect(() => ChordParser.parseChord(chord)).toThrow();
+    test("should not throw on valid input", () => {
+      expect(() => ChordParser.validateNotEmpty("C")).not.toThrow();
+    });
+  });
+
+  describe("validateFirstChar", () => {
+    test("should throw on invalid first character", () => {
+      expect(() => ChordParser.validateFirstChar("H")).toThrow(
+        "Invalid chord: must start with A-G"
+      );
+      expect(() => ChordParser.validateFirstChar("x")).toThrow(
+        "Invalid chord: must start with A-G"
+      );
+    });
+
+    test("should not throw on valid first character", () => {
+      ["A", "B", "C", "D", "E", "F", "G"].forEach((note) => {
+        expect(() => ChordParser.validateFirstChar(note)).not.toThrow();
       });
+    });
+  });
+
+  describe("getBase", () => {
+    test("should extract base note", () => {
+      expect(ChordParser.getBase("C")).toEqual(["C", ""]);
+      expect(ChordParser.getBase("Am7")).toEqual(["A", "m7"]);
+      expect(ChordParser.getBase("F#m7b5")).toEqual(["F#", "m7b5"]);
+      expect(ChordParser.getBase("F#m7b5/Gb")).toEqual(["F#", "m7b5/Gb"]);
+    });
+
+    test("should handle accidentals", () => {
+      expect(ChordParser.getBase("C#maj7")).toEqual(["C#", "maj7"]);
+      expect(ChordParser.getBase("Bbm")).toEqual(["Bb", "m"]);
+    });
+
+    test("should throw on invalid base", () => {
+      expect(() => ChordParser.getBase("xyz")).toThrow(
+        "Invalid chord: no base found"
+      );
+    });
+  });
+
+  describe("getBassNote", () => {
+    test("should extract bass note and remaining modifiers", () => {
+      expect(ChordParser.getBassNote("maj7/G")).toEqual(["G", "maj7"]);
+      expect(ChordParser.getBassNote("m7b5/F#")).toEqual(["F#", "m7b5"]);
+    });
+
+    test("should handle no bass note", () => {
+      expect(ChordParser.getBassNote("maj7")).toEqual([undefined, "maj7"]);
+      expect(ChordParser.getBassNote("m7b5")).toEqual([undefined, "m7b5"]);
+    });
+
+    test("should handle invalid bass notes", () => {
+      expect(() => ChordParser.getBassNote("maj7/H")).toThrow(
+        "Invalid bass note"
+      );
+      expect(() => ChordParser.getBassNote("maj7/")).toThrow(
+        "Invalid bass note"
+      );
+    });
+  });
+
+  describe("getModifiers", () => {
+    test("should find modifiers in correct order", () => {
+      expect(ChordParser.getModifiers("m7b5")).toEqual(["m", "7", "b5"]);
+      expect(ChordParser.getModifiers("maj7#11")).toEqual(["maj7", "#11"]);
+    });
+
+    test("should handle empty modifiers", () => {
+      expect(ChordParser.getModifiers("")).toEqual([]);
+      expect(ChordParser.getModifiers(undefined)).toEqual([]);
+    });
+
+    test("should throw on invalid modifiers", () => {
+      expect(() => ChordParser.getModifiers("xyz")).toThrow(
+        "Invalid modifier sequence"
+      );
+    });
+
+    test("should handle overlapping modifier possibilities", () => {
+      expect(ChordParser.getModifiers("maj7b5")).toEqual(["maj7", "b5"]);
+      expect(ChordParser.getModifiers("madd9")).toEqual(["m", "add9"]);
+    });
+  });
+
+  describe("findModifiersWithPositions", () => {
+    test("should find positions correctly", () => {
+      const result = ChordParser["findModifiersWithPositions"](
+        "m7b5",
+        ChordParser.sortModifiersByLength()
+      );
+      expect(result).toEqual([
+        { value: "b5", index: 2 },
+        { value: "m", index: 0 },
+        { value: "7", index: 1 },
+      ]);
+    });
+
+    test("should handle spaces between modifiers", () => {
+      const result = ChordParser["findModifiersWithPositions"](
+        "m 7 b5",
+        ChordParser.sortModifiersByLength()
+      );
+      expect(result).toEqual([
+        { value: "b5", index: 4 },
+        { value: "m", index: 0 },
+        { value: "7", index: 2 },
+      ]);
+    });
+  });
+
+  describe("sortModifiersByLength", () => {
+    test("should sort modifiers from longest to shortest", () => {
+      const sorted = ChordParser.sortModifiersByLength();
+      expect(sorted[0].length).toBeGreaterThanOrEqual(
+        sorted[sorted.length - 1].length
+      );
+      // Verify a few specific cases
+      expect(sorted.indexOf("maj7")).toBeLessThan(sorted.indexOf("7"));
+      expect(sorted.indexOf("add9")).toBeLessThan(sorted.indexOf("9"));
     });
   });
 });

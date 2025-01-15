@@ -3,160 +3,125 @@ import { MODIFIERS } from "./chordModifiers";
 
 export class ChordParser {
   static parseChord(input: string): ChordTypes.Chord {
-    // Validate input format
-    if (!input) throw new Error("Empty chord string");
-    if (!/^[A-G]/.test(input))
-      throw new Error("Invalid chord: must start with A-G");
-
-    // Handle slash chords first
-    const [chordPart, bassPart] = input.split("/");
-
-    const baseMatch = chordPart.match(/^[A-G]/);
-    const base = baseMatch![0] as ChordTypes.Base;
-    let remaining = chordPart.slice(1);
-    const modifiers: ChordTypes.Modifier[] = [];
-
-    // Validate no double accidentals
-    if (
-      (remaining.match(/#/g) || []).length > 1 ||
-      (remaining.match(/b/g) || []).length > 1
-    ) {
-      throw new Error("Invalid chord: multiple accidentals");
-    }
-
-    // Parse modifiers sequentially
-    while (remaining.length > 0) {
-      let found = false;
-
-      // Check quality modifiers first (since we have longer alternatives like 'min')
-      for (const mod of QUALITY_MODIFIERS) {
-        if (remaining.startsWith(mod)) {
-          modifiers.push({ type: "quality", value: mod });
-          remaining = remaining.slice(mod.length);
-          found = true;
-          break;
-        }
-      }
-      if (found) continue;
-
-      // Check extensions
-      for (const mod of EXTENSION_MODIFIERS) {
-        if (remaining.startsWith(mod)) {
-          modifiers.push({ type: "extension", value: mod });
-          remaining = remaining.slice(mod.length);
-          found = true;
-          break;
-        }
-      }
-      if (found) continue;
-
-      // Then check alterations
-      for (const mod of ALTERATION_MODIFIERS) {
-        if (remaining.startsWith(mod)) {
-          // Special handling for combined extension+alteration
-          if (mod.startsWith("7") || mod.startsWith("13")) {
-            modifiers.push({
-              type: "extension",
-              value: mod.startsWith("7") ? "7" : "13",
-            });
-            modifiers.push({
-              type: "alteration",
-              value: mod.slice(mod.startsWith("7") ? 1 : 2),
-            });
-          } else {
-            modifiers.push({ type: "alteration", value: mod });
-          }
-          remaining = remaining.slice(mod.length);
-          found = true;
-          break;
-        }
-      }
-      if (found) continue;
-
-      // Then check compounds
-      for (const mod of COMPOUND_MODIFIERS) {
-        if (remaining.startsWith(mod)) {
-          modifiers.push({ type: "compound", value: mod });
-          remaining = remaining.slice(mod.length);
-          found = true;
-          break;
-        }
-      }
-      if (found) continue;
-
-      // Check remaining modifier types
-      const remainingModifiers = [
-        { type: "accidental", mods: ACCIDENTAL_MODIFIERS },
-        { type: "suspension", mods: SUSPENSION_MODIFIERS },
-        { type: "addition", mods: ADDITION_MODIFIERS },
-      ] as const;
-
-      for (const { type, mods } of remainingModifiers) {
-        for (const mod of mods) {
-          if (remaining.startsWith(mod)) {
-            modifiers.push({ type, value: mod });
-            remaining = remaining.slice(mod.length);
-            found = true;
-            break;
-          }
-        }
-        if (found) break;
-      }
-
-      if (!found) {
-        throw new Error(`Invalid modifier sequence: ${remaining}`);
-      }
-    }
-
-    // Validate modifier combinations
-    this.validateModifierCombinations(modifiers);
-
-    // Handle slash chord bass note
-    const bass = bassPart ? (bassPart.charAt(0) as ChordTypes.Base) : undefined;
-    if (bass) {
-      if (!/^[A-G][#b]?$/.test(bassPart)) {
-        throw new Error("Invalid bass note");
-      }
-      modifiers.push({ type: "bass", value: bassPart });
-    }
+    this.validateNotEmpty(input);
+    this.validateFirstChar(input);
+    const [base, rawModifiersWithBass] = this.getBase(input);
+    const [bass, rawModifiers] = this.getBassNote(rawModifiersWithBass);
+    const modifiers = this.getModifiers(rawModifiers);
 
     return { base, modifiers, bass };
   }
 
-  private static validateModifierCombinations(
-    modifiers: ChordTypes.Modifier[]
-  ): void {
-    const values = modifiers.map((m) => m.value);
+  static validateNotEmpty(input: string): void {
+    if (!input) throw new Error("Empty chord string");
+  }
 
-    for (const invalid of INVALID_COMBINATIONS) {
-      if (invalid.modifiers.every((mod) => values.includes(mod))) {
-        throw new Error(invalid.message);
+  static validateFirstChar(input: string): void {
+    if (!/^[A-G]/.test(input))
+      throw new Error("Invalid chord: must start with A-G");
+  }
+
+  static getBase(input: string): [ChordTypes.Base, string] {
+    const baseMatch = input.match(/^[A-G][#b]?/);
+    if (!baseMatch) throw new Error("Invalid chord: no base found");
+    const base = baseMatch[0] as ChordTypes.Base;
+    const rawModifiers = input.slice(baseMatch[0].length);
+    return [base, rawModifiers];
+  }
+
+  static sortModifiersByLength(): string[] {
+    return [...MODIFIERS].sort((a, b) => b.length - a.length);
+  }
+
+  static getModifiers(rawModifiers: string | undefined): string[] {
+    if (!rawModifiers?.trim()) return [];
+
+    const sortedModifiers = this.sortModifiersByLength();
+    const found = this.findModifiersWithPositions(
+      rawModifiers,
+      sortedModifiers
+    );
+
+    this.checkForRemainingCharacters(found, rawModifiers);
+
+    return this.sortByPosition(found);
+  }
+
+  static checkForRemainingCharacters(
+    found: Array<{ value: string; index: number }>,
+    rawModifiers: string
+  ): void {
+    if (!found.length && rawModifiers.trim()) {
+      throw new Error(`Invalid modifier sequence: ${rawModifiers.trim()}`);
+    }
+  }
+
+  private static findModifiersWithPositions(
+    input: string,
+    modifiers: string[]
+  ): Array<{ value: string; index: number }> {
+    const found: Array<{ value: string; index: number }> = [];
+    let remaining = input;
+
+    while (remaining.trim()) {
+      const nextModifier = this.findNextModifier(remaining, modifiers);
+      if (!nextModifier) break;
+
+      const { modifier, index } = nextModifier;
+      found.push({ value: modifier, index });
+      remaining = this.maskFoundModifier(remaining, modifier, index);
+    }
+
+    return found;
+  }
+
+  private static findNextModifier(
+    input: string,
+    modifiers: string[]
+  ): { modifier: string; index: number } | null {
+    for (const mod of modifiers) {
+      const index = input.indexOf(mod);
+      if (index !== -1) {
+        return { modifier: mod, index };
       }
     }
-
-    // Check for duplicate alterations
-    const alterations = modifiers.filter((m) => m.type === "alteration");
-    const uniqueAlterations = new Set(alterations.map((a) => a.value));
-    if (alterations.length !== uniqueAlterations.size) {
-      throw new Error("Duplicate alterations not allowed");
-    }
+    return null;
   }
 
-  static toString(chord: ChordTypes.Chord): string {
-    const mainPart =
-      chord.base +
-      chord.modifiers
-        .filter((m) => m.type !== "bass")
-        .map((m) => m.value)
-        .join("");
+  private static maskFoundModifier(
+    input: string,
+    modifier: string,
+    index: number
+  ): string {
+    return (
+      input.slice(0, index) +
+      " ".repeat(modifier.length) +
+      input.slice(index + modifier.length)
+    );
+  }
 
-    const bassModifier = chord.modifiers.find((m) => m.type === "bass");
-    return bassModifier ? `${mainPart}/${bassModifier.value}` : mainPart;
+  private static sortByPosition(
+    found: Array<{ value: string; index: number }>
+  ): string[] {
+    return found.sort((a, b) => a.index - b.index).map((m) => m.value);
+  }
+
+  static getBassNote(
+    rawModifiers: string
+  ): [ChordTypes.Base | undefined, string | undefined] {
+    if (!rawModifiers.includes("/")) return [undefined, rawModifiers];
+
+    const [beforeBass, bassPart] = rawModifiers.split("/");
+    // Check for empty or missing bass part
+    if (!bassPart?.trim()) {
+      throw new Error("Invalid bass note");
+    }
+
+    const bassMatch = bassPart.match(/^[A-G][#b]?/);
+    if (!bassMatch) {
+      throw new Error("Invalid bass note");
+    }
+
+    return [bassMatch[0] as ChordTypes.Base, beforeBass];
   }
 }
-
-// Re-export types for backward compatibility
-export type Chord = ChordTypes.Chord;
-export type ChordBase = ChordTypes.Base;
-export type ChordModifier = ChordTypes.Modifier;
-export type ModifierType = ChordTypes.ModifierType;

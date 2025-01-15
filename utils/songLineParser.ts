@@ -1,5 +1,5 @@
 import { SongLine, TabTypes, ChordTypes } from "./types";
-import { ChordParser } from "./chordParser";
+import { ChordParser } from "./chordParserNew";
 
 export function songLineParser(input: string): SongLine.Line | null {
   if (input.trim() === "") return null;
