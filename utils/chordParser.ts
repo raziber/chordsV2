@@ -9,7 +9,7 @@ export class ChordParser {
     const [bass, rawModifiers] = this.getBassNote(rawModifiersWithBass);
     const modifiers = this.getModifiers(rawModifiers);
 
-    return { base, modifiers, bass };
+    return { base, modifiers, bass } as ChordTypes.Chord;
   }
 
   static validateNotEmpty(input: string): void {
