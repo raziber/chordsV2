@@ -34,50 +34,88 @@ export class ChordParser {
   }
 
   static getModifiers(rawModifiers: string | undefined): string[] {
-    if (!rawModifiers) return [];
-    const found: Array<{ value: string; index: number }> = [];
-    let remaining = rawModifiers;
+    if (!rawModifiers?.trim()) return [];
 
     const sortedModifiers = this.sortModifiersByLength();
+    const found = this.findModifiersWithPositions(
+      rawModifiers,
+      sortedModifiers
+    );
 
-    // First pass: find all modifiers and their positions
-    while (remaining.length > 0) {
-      let foundInPass = false;
+    this.checkForRemainingCharacters(found, rawModifiers);
 
-      for (const mod of sortedModifiers) {
-        const index = remaining.indexOf(mod);
-        if (index !== -1) {
-          found.push({ value: mod, index });
-          // Mask out the found modifier with spaces
-          remaining =
-            remaining.slice(0, index) +
-            " ".repeat(mod.length) +
-            remaining.slice(index + mod.length);
-          foundInPass = true;
-          break;
-        }
-      }
+    return this.sortByPosition(found);
+  }
 
-      if (!foundInPass) {
-        const firstRemaining = remaining.trim()[0];
-        if (firstRemaining) {
-          throw new Error(`Invalid modifier character: ${firstRemaining}`);
-        }
-        break;
-      }
+  static checkForRemainingCharacters(
+    found: Array<{ value: string; index: number }>,
+    rawModifiers: string
+  ): void {
+    if (!found.length && rawModifiers.trim()) {
+      throw new Error(`Invalid modifier sequence: ${rawModifiers.trim()}`);
+    }
+  }
+
+  private static findModifiersWithPositions(
+    input: string,
+    modifiers: string[]
+  ): Array<{ value: string; index: number }> {
+    const found: Array<{ value: string; index: number }> = [];
+    let remaining = input;
+
+    while (remaining.trim()) {
+      const nextModifier = this.findNextModifier(remaining, modifiers);
+      if (!nextModifier) break;
+
+      const { modifier, index } = nextModifier;
+      found.push({ value: modifier, index });
+      remaining = this.maskFoundModifier(remaining, modifier, index);
     }
 
-    // Return modifiers in their original order
+    return found;
+  }
+
+  private static findNextModifier(
+    input: string,
+    modifiers: string[]
+  ): { modifier: string; index: number } | null {
+    for (const mod of modifiers) {
+      const index = input.indexOf(mod);
+      if (index !== -1) {
+        return { modifier: mod, index };
+      }
+    }
+    return null;
+  }
+
+  private static maskFoundModifier(
+    input: string,
+    modifier: string,
+    index: number
+  ): string {
+    return (
+      input.slice(0, index) +
+      " ".repeat(modifier.length) +
+      input.slice(index + modifier.length)
+    );
+  }
+
+  private static sortByPosition(
+    found: Array<{ value: string; index: number }>
+  ): string[] {
     return found.sort((a, b) => a.index - b.index).map((m) => m.value);
   }
 
-  private static getBassNote(
+  static getBassNote(
     rawModifiers: string
   ): [ChordTypes.Base | undefined, string | undefined] {
     if (!rawModifiers.includes("/")) return [undefined, rawModifiers];
 
     const [beforeBass, bassPart] = rawModifiers.split("/");
-    if (!bassPart) return [undefined, beforeBass];
+    // Check for empty or missing bass part
+    if (!bassPart?.trim()) {
+      throw new Error("Invalid bass note");
+    }
 
     const bassMatch = bassPart.match(/^[A-G][#b]?/);
     if (!bassMatch) {
