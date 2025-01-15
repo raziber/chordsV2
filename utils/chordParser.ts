@@ -1,55 +1,8 @@
-export type ChordBase = "C" | "D" | "E" | "F" | "G" | "A" | "B";
-
-export interface ChordModifier {
-  type: ModifierType;
-  value: string;
-}
-
-export type ModifierType =
-  | "accidental" // #, b
-  | "quality" // m, aug, dim, +
-  | "extension" // 7, 9, 11, 13
-  | "compound" // maj7, m7b5, etc
-  | "addition" // add9, add11
-  | "suspension" // sus2, sus4
-  | "alteration" // b5, #5, b9, #9
-  | "bass"; // /G, /F#, etc
-
-export interface Chord {
-  base: ChordBase;
-  modifiers: ChordModifier[];
-  bass?: ChordBase; // For slash chords
-}
-
-const COMPOUND_MODIFIERS = [
-  "maj7",
-  "maj9",
-  "maj11",
-  "maj13",
-  "m7b5",
-  "dim7",
-  "7b5",
-  "7#5",
-  "mmaj7",
-  "6/9",
-] as const;
-
-const QUALITY_MODIFIERS = ["m", "aug", "dim", "+"] as const;
-const ACCIDENTAL_MODIFIERS = ["#", "b"] as const;
-const EXTENSION_MODIFIERS = ["5", "6", "7", "9", "11", "13"] as const;
-const SUSPENSION_MODIFIERS = ["sus2", "sus4"] as const;
-const ADDITION_MODIFIERS = ["add9", "add11", "add13"] as const;
-const ALTERATION_MODIFIERS = ["b5", "#5", "b9", "#9", "b11", "#11"] as const;
-
-// Add validation constants
-const INVALID_COMBINATIONS = [
-  { modifiers: ["m", "+"], message: "Can't be minor and augmented" },
-  { modifiers: ["sus2", "sus4"], message: "Can't have both sus2 and sus4" },
-  { modifiers: ["7", "maj7"], message: "Can't have both 7 and maj7" },
-] as const;
+import { ChordTypes } from "./types";
+import { MODIFIERS } from "./chordModifiers";
 
 export class ChordParser {
-  static parseChord(input: string): Chord {
+  static parseChord(input: string): ChordTypes.Chord {
     // Validate input format
     if (!input) throw new Error("Empty chord string");
     if (!/^[A-G]/.test(input))
@@ -59,9 +12,9 @@ export class ChordParser {
     const [chordPart, bassPart] = input.split("/");
 
     const baseMatch = chordPart.match(/^[A-G]/);
-    const base = baseMatch![0] as ChordBase;
+    const base = baseMatch![0] as ChordTypes.Base;
     let remaining = chordPart.slice(1);
-    const modifiers: ChordModifier[] = [];
+    const modifiers: ChordTypes.Modifier[] = [];
 
     // Validate no double accidentals
     if (
@@ -75,7 +28,52 @@ export class ChordParser {
     while (remaining.length > 0) {
       let found = false;
 
-      // Check compound modifiers first as they're the longest
+      // Check quality modifiers first (since we have longer alternatives like 'min')
+      for (const mod of QUALITY_MODIFIERS) {
+        if (remaining.startsWith(mod)) {
+          modifiers.push({ type: "quality", value: mod });
+          remaining = remaining.slice(mod.length);
+          found = true;
+          break;
+        }
+      }
+      if (found) continue;
+
+      // Check extensions
+      for (const mod of EXTENSION_MODIFIERS) {
+        if (remaining.startsWith(mod)) {
+          modifiers.push({ type: "extension", value: mod });
+          remaining = remaining.slice(mod.length);
+          found = true;
+          break;
+        }
+      }
+      if (found) continue;
+
+      // Then check alterations
+      for (const mod of ALTERATION_MODIFIERS) {
+        if (remaining.startsWith(mod)) {
+          // Special handling for combined extension+alteration
+          if (mod.startsWith("7") || mod.startsWith("13")) {
+            modifiers.push({
+              type: "extension",
+              value: mod.startsWith("7") ? "7" : "13",
+            });
+            modifiers.push({
+              type: "alteration",
+              value: mod.slice(mod.startsWith("7") ? 1 : 2),
+            });
+          } else {
+            modifiers.push({ type: "alteration", value: mod });
+          }
+          remaining = remaining.slice(mod.length);
+          found = true;
+          break;
+        }
+      }
+      if (found) continue;
+
+      // Then check compounds
       for (const mod of COMPOUND_MODIFIERS) {
         if (remaining.startsWith(mod)) {
           modifiers.push({ type: "compound", value: mod });
@@ -86,22 +84,9 @@ export class ChordParser {
       }
       if (found) continue;
 
-      // Check alterations before individual accidentals and extensions
-      for (const mod of ALTERATION_MODIFIERS) {
-        if (remaining.startsWith(mod)) {
-          modifiers.push({ type: "alteration", value: mod });
-          remaining = remaining.slice(mod.length);
-          found = true;
-          break;
-        }
-      }
-      if (found) continue;
-
       // Check remaining modifier types
       const remainingModifiers = [
         { type: "accidental", mods: ACCIDENTAL_MODIFIERS },
-        { type: "quality", mods: QUALITY_MODIFIERS },
-        { type: "extension", mods: EXTENSION_MODIFIERS },
         { type: "suspension", mods: SUSPENSION_MODIFIERS },
         { type: "addition", mods: ADDITION_MODIFIERS },
       ] as const;
@@ -127,7 +112,7 @@ export class ChordParser {
     this.validateModifierCombinations(modifiers);
 
     // Handle slash chord bass note
-    const bass = bassPart ? (bassPart.charAt(0) as ChordBase) : undefined;
+    const bass = bassPart ? (bassPart.charAt(0) as ChordTypes.Base) : undefined;
     if (bass) {
       if (!/^[A-G][#b]?$/.test(bassPart)) {
         throw new Error("Invalid bass note");
@@ -139,7 +124,7 @@ export class ChordParser {
   }
 
   private static validateModifierCombinations(
-    modifiers: ChordModifier[]
+    modifiers: ChordTypes.Modifier[]
   ): void {
     const values = modifiers.map((m) => m.value);
 
@@ -157,7 +142,7 @@ export class ChordParser {
     }
   }
 
-  static toString(chord: Chord): string {
+  static toString(chord: ChordTypes.Chord): string {
     const mainPart =
       chord.base +
       chord.modifiers
@@ -169,3 +154,9 @@ export class ChordParser {
     return bassModifier ? `${mainPart}/${bassModifier.value}` : mainPart;
   }
 }
+
+// Re-export types for backward compatibility
+export type Chord = ChordTypes.Chord;
+export type ChordBase = ChordTypes.Base;
+export type ChordModifier = ChordTypes.Modifier;
+export type ModifierType = ChordTypes.ModifierType;

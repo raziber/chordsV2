@@ -1,25 +1,27 @@
 // Chord related types
 export namespace ChordTypes {
-  export type Base = "C" | "D" | "E" | "F" | "G" | "A" | "B";
-
-  export type ModifierType =
-    | "accidental"
-    | "quality"
-    | "extension"
-    | "compound"
-    | "addition"
-    | "suspension"
-    | "alteration"
-    | "bass";
-
-  export interface Modifier {
-    type: ModifierType;
-    value: string;
-  }
+  export type Base =
+    | "C"
+    | "C#"
+    | "D"
+    | "D#"
+    | "Db"
+    | "E"
+    | "Eb"
+    | "F"
+    | "F#"
+    | "G"
+    | "G#"
+    | "Gb"
+    | "A"
+    | "A#"
+    | "Ab"
+    | "B"
+    | "Bb";
 
   export interface Chord {
     base: Base;
-    modifiers: Modifier[];
+    modifiers: string[];
     bass?: Base;
   }
 
