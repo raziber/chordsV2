@@ -380,6 +380,25 @@ Hello world`;
           ]);
         });
       });
+
+      describe("complex scenarios", () => {
+        it("should handle complex chords and separate lyrics line", () => {
+          const input =
+            "[ch]Cm7b5[/ch]                  [ch]Amaj7[/ch]     \n       and this is a line of lyrics here";
+          expect(LineParser.detectLineTypes(input)).toEqual([
+            SongLine.Type.Chords,
+            SongLine.Type.Lyrics,
+          ]);
+        });
+
+        it("should handle inline repeat markers in lyrics", () => {
+          const input = "some song    (X2)\n and this is more";
+          expect(LineParser.detectLineTypes(input)).toEqual([
+            SongLine.Type.Lyrics,
+            SongLine.Type.Lyrics,
+          ]);
+        });
+      });
     });
   });
 });
