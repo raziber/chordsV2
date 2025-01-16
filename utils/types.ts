@@ -37,11 +37,6 @@ export namespace ChordTypes {
 
 // Tab related types
 export namespace TabTypes {
-  export interface Position {
-    fret: number;
-    position: number;
-  }
-
   export interface Strings {
     e?: Position[];
     B?: Position[];
@@ -49,6 +44,10 @@ export namespace TabTypes {
     D?: Position[];
     A?: Position[];
     E?: Position[];
+  }
+  export interface Position {
+    fret: number;
+    position: number;
   }
 }
 
@@ -63,6 +62,7 @@ export namespace SongLine {
     TabsAndLyrics = "tabsAndLyrics",
     ChordsAndTabs = "chordsAndTabs",
     All = "all",
+    Repeats = "repeats",
   }
 
   export interface Line {
