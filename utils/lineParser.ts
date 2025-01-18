@@ -28,10 +28,8 @@ export class LineParser {
       return this.parseBarsLine(noRepeatsLines);
     }
     const extractedContent = this.extractContentFromLines(noRepeatsLines);
-    // here its still good
     const combinedContent = this.combineLines(extractedContent);
-    console.log("combined content lyrics-", combinedContent["lyrics"]);
-    const features = this.convertToFeatures(combinedContent);
+    const features = this.convertToFeatures(combinedContent, repeats);
     const type = this.determineLineType(features);
 
     return {
@@ -42,17 +40,20 @@ export class LineParser {
   }
 
   private static convertToFeatures(
-    content: ExtractedLineContent
+    content: ExtractedLineContent,
+    repeats?: number
   ): LineFeatures {
     const hasChords = !!content.chords?.length;
     const hasTabs = !!content.tabs && Object.keys(content.tabs).length > 0;
     const hasLyrics = !!content.lyrics?.trim();
+    const isRepeat =
+      repeats !== undefined && !hasChords && !hasTabs && !hasLyrics;
 
     return {
       hasChords,
       hasTabs,
       hasLyrics,
-      isRepeat: false,
+      isRepeat,
       extractedChords: content.chords?.map((c) => c.chord.base),
       extractedTabs: content.tabs ? Object.keys(content.tabs) : [],
     };
@@ -61,14 +62,16 @@ export class LineParser {
   private static extractContentFromLines(
     lines: string[]
   ): ExtractedLineContent[] {
+    console.log("lines:", lines);
     return lines.map((line) => {
-      console.log(line);
       const [noTabsLine, tabs] = this.extractTabs(line);
-      console.log(noTabsLine);
+      console.log("tabs:", tabs);
       const [noChordsLine, chords] = this.extractChords(noTabsLine);
+      console.log("chords:", chords);
       const lyrics = this.extractLyrics(
         this.removeSpecialCharacters(noChordsLine)
       );
+      console.log("lyrics:", lyrics);
 
       return { lyrics, chords, tabs };
     });
@@ -86,18 +89,6 @@ export class LineParser {
       "001x": SongLine.Type.Lyrics, // Has only lyrics
       "0001": SongLine.Type.Repeats, // Is a repeat marker
     };
-
-  static extractChordContent(line: string): ExtractedContent {
-    const chords: string[] = [];
-    const remainingLine = line.replace(
-      /\[ch\](.*?)\[\/ch\]/g,
-      (match, chord) => {
-        chords.push(chord);
-        return "";
-      }
-    );
-    return { content: chords, remainingLine };
-  }
 
   private static readonly VALID_STRING_NAMES: string[] = [
     "C",
@@ -119,9 +110,9 @@ export class LineParser {
     "B",
   ];
 
-  private static readonly TAB_REGEX_PATTERN = `^(${LineParser.VALID_STRING_NAMES.map(
+  private static readonly TAB_REGEX_PATTERN = `(${LineParser.VALID_STRING_NAMES.map(
     (s) => s.replace("#", "\\#")
-  ).join("|")})\\|([-\\d\\s]+(?:\\||$))`;
+  ).join("|")})\\|([\\dpxh/s-]+\\|?)`;
 
   private static readonly TAB_STRING_REGEX = new RegExp(
     LineParser.TAB_REGEX_PATTERN
@@ -227,7 +218,7 @@ export class LineParser {
 
   private static isBarsLine(lines: string[]): boolean {
     for (const line of lines) {
-      const withoutChords = this.extractChordContent(line).remainingLine;
+      const withoutChords = this.extractChords(line)[0];
       const cleanedLine = withoutChords.trim();
       if (cleanedLine && !/^[|\s\(\)\[\]\{\}]*$/.test(cleanedLine)) {
         return false;
@@ -241,48 +232,71 @@ export class LineParser {
     return { type: SongLine.Type.Bars };
   }
 
-  private static extractTabs(line: string): [string, TabTypes.Strings] {
-    // Only proceed if line starts with a valid string indicator followed by |
-    if (
-      !line.match(
-        new RegExp(
-          `^(${this.VALID_STRING_NAMES.map((s) => s.replace("#", "\\#")).join(
-            "|"
-          )})\\|`
-        )
-      )
-    ) {
-      return [line, {}];
-    }
+  static extractTabs(line: string): [string, TabTypes.Strings] {
+    const [stringName, rawFretsDetails, lineWithoutTabs] = this.findTab(line);
+    const frets = this.parseFrets(rawFretsDetails);
 
+    return [lineWithoutTabs, { [stringName]: frets }];
+  }
+
+  static parseFrets(rawFretsDetails: string): TabTypes.Position[] {
+    const frets: TabTypes.Position[] = [];
+    let totalOffset = 0;
+    const specialChars = Object.values(TabTypes.TabSpecialChar).sort(
+      (a, b) => b.length - a.length
+    );
+
+    for (let i = 0; i < rawFretsDetails.length; i++) {
+      const char = rawFretsDetails[i];
+      if (char === "-") {
+        continue;
+      }
+      // Handle multi-digit numeric frets
+      if (/\d/.test(char)) {
+        let numericFret = char;
+        while (
+          i + 1 < rawFretsDetails.length &&
+          /\d/.test(rawFretsDetails[i + 1])
+        ) {
+          numericFret += rawFretsDetails[++i];
+        }
+        frets.push({
+          fret: parseInt(numericFret, 10),
+          position: i - totalOffset,
+        });
+        continue;
+      }
+      // Check for multi-character special tabs first
+      let matched = false;
+      for (const sc of specialChars) {
+        if (rawFretsDetails.substr(i, sc.length) === sc) {
+          frets.push({
+            fret: sc as TabTypes.TabSpecialChar,
+            position: i - totalOffset,
+          });
+          i += sc.length - 1;
+          matched = true;
+          break;
+        }
+      }
+      if (!matched) {
+        // If no multi-character match, just continue
+      }
+    }
+    return frets;
+  }
+
+  static findTab(line: string): [string, string, string] {
     const match = line.match(this.TAB_STRING_REGEX);
-    if (!match) return [line, {}];
+    if (!match) return ["", "", line.trim()]; // Trim if no match is found
 
-    const [fullMatch, stringName, tabContent] = match;
-    if (!tabContent.startsWith(" ")) return [line, {}];
+    if (match.length < 3) return ["", "", line.trim()]; // Ensure safe destructuring
 
-    const positions: TabTypes.Position[] = [];
-    let currentPosition = 0;
+    const stringName = match[1];
+    const rawFretsDetails = match[2].replace(/\|$/, ""); // Remove trailing '|'
+    const lineWithoutTabs = line.replace(match[0], "").trim(); // Remove match & trim
 
-    const cleanContent = tabContent.replace(/\|$/, "");
-    cleanContent.replace(/(\d+)/g, (match, fret) => {
-      positions.push({
-        fret: parseInt(fret),
-        position: currentPosition,
-      });
-      currentPosition += match.length + 1;
-      return match;
-    });
-
-    // Don't modify the line if it's not actually a tab line (e.g., just numbers)
-    if (positions.length === 0) {
-      return [line, {}];
-    }
-
-    return [
-      line.replace(fullMatch, "").trim(),
-      { [stringName]: positions } as TabTypes.Strings,
-    ];
+    return [stringName, rawFretsDetails, lineWithoutTabs];
   }
 
   private static extractChords(line: string): [string, ChordTypes.Position[]] {
@@ -317,8 +331,6 @@ export class LineParser {
     contents: ExtractedLineContent[]
   ): ExtractedLineContent {
     const combined: ExtractedLineContent = {};
-    console.log("contents here-", contents);
-    console.log("combined here-", combined);
 
     contents.forEach((content) => {
       if (content.lyrics) {

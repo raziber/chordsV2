@@ -128,29 +128,6 @@ describe("LineParser", () => {
   });
 
   describe("Core Extraction Methods", () => {
-    describe("extractChordContent", () => {
-      it("should extract single chord", () => {
-        const input = "[ch]Am[/ch]";
-        const result = LineParser.extractChordContent(input);
-        expect(result.content).toEqual(["Am"]);
-        expect(result.remainingLine).toBe("");
-      });
-
-      it("should extract multiple chords", () => {
-        const input = "[ch]Am[/ch] [ch]C[/ch] [ch]F[/ch]";
-        const result = LineParser.extractChordContent(input);
-        expect(result.content).toEqual(["Am", "C", "F"]);
-        expect(result.remainingLine).toBe("  ");
-      });
-
-      it("should preserve non-chord content", () => {
-        const input = "[ch]Am[/ch] Hello [ch]C[/ch] World";
-        const result = LineParser.extractChordContent(input);
-        expect(result.content).toEqual(["Am", "C"]);
-        expect(result.remainingLine).toBe(" Hello  World");
-      });
-    });
-
     describe("extractTabContent", () => {
       it("should extract tab line with standard string names", () => {
         const input = "E|---0---2---|";
@@ -191,7 +168,7 @@ describe("LineParser", () => {
         const input = "C#|---0---2---| Some lyrics";
         const result = LineParser.extractTabContent(input);
         expect(result.content).toEqual(["C#|---0---2---|"]);
-        expect(result.remainingLine).toBe(" Some lyrics");
+        expect(result.remainingLine).toBe("Some lyrics");
       });
     });
 
@@ -217,6 +194,93 @@ describe("LineParser", () => {
         expect(result.content).toEqual(["x3"]);
         expect(result.remainingLine).toBe("Play this part and continue");
       });
+    });
+
+    describe("extractTabs", () => {
+      it("should return the original line and empty tab object when provided an invalid string name", () => {
+        const input = "wrong|---0---|";
+        const result = LineParser.extractTabs(input);
+        expect(result).toEqual([input, {}]);
+      });
+
+      it("should parse a valid tab line for a recognized string name", () => {
+        const input = "E|---0---2---|";
+        const [remaining, tabs] = LineParser.extractTabs(input);
+        console.log([remaining, tabs]);
+
+        expect(remaining).toBe("");
+        expect(tabs).toHaveProperty("E");
+        expect(tabs["E"]).toEqual([
+          { fret: 0, position: 3 },
+          { fret: 2, position: 7 },
+        ]);
+      });
+
+      it("should skip lines that only contain numbers without a valid string name", () => {
+        const input = "1 2 3 4";
+        const result = LineParser.extractTabs(input);
+        expect(result).toEqual([input, {}]);
+      });
+    });
+  });
+
+  describe("parseFrets", () => {
+    it("should return empty array when input is blank", () => {
+      const result = LineParser.parseFrets("");
+      expect(result).toEqual([]);
+    });
+
+    it("should parse numeric frets correctly", () => {
+      const result = LineParser.parseFrets("0-2-5");
+      expect(result).toEqual([
+        { fret: 0, position: 0 },
+        { fret: 2, position: 2 },
+        { fret: 5, position: 4 },
+      ]);
+    });
+
+    it("should parse special char for dead note, grace note, ghost note", () => {
+      const result = LineParser.parseFrets("xg(n)p");
+      expect(result).toEqual([
+        { fret: "x", position: 0 },
+        { fret: "g", position: 1 },
+        { fret: "(n)", position: 2 },
+        { fret: "p", position: 5 },
+      ]);
+    });
+
+    it("should ignore dashes and only track special chars or numbers", () => {
+      const result = LineParser.parseFrets("-x--5-g");
+      expect(result).toEqual([
+        { fret: "x", position: 1 },
+        { fret: 5, position: 4 },
+        { fret: "g", position: 6 },
+      ]);
+    });
+  });
+
+  describe("findTab", () => {
+    it("should return empty triple if the line has no match", () => {
+      const result = LineParser.findTab("badLine123");
+      expect(result).toEqual(["", "", "badLine123"]);
+    });
+
+    it("should return matched string name, frets, and clipped line", () => {
+      const input = "E|---3--| Hello";
+      const result = LineParser.findTab(input);
+      expect(result).toEqual(["E", "---3--", "Hello"]);
+    });
+
+    it("should remove trailing pipe from the rawFretsDetails", () => {
+      const input = "A|----5--| more stuff";
+      const result = LineParser.findTab(input);
+      expect(result).toEqual(["A", "----5--", "more stuff"]);
+    });
+
+    it("should find tabs even after lyrics", () => {
+      const input = " more stuff A|----5--|";
+      const result = LineParser.findTab(input);
+      expect(result).toEqual(["A", "----5--", "more stuff"]);
     });
   });
 });

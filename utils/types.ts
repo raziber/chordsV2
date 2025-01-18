@@ -61,8 +61,31 @@ export namespace TabTypes {
   }
 
   export interface Position {
-    fret: number;
+    fret: number | TabSpecialChar;
     position: number;
+  }
+
+  export enum TabSpecialChar {
+    DeadNote = "x",
+    GraceNote = "g",
+    GhostNote = "(n)",
+    HammerOn = "h",
+    PullOff = "p",
+    Release = "r",
+    AccentedNote = ">",
+    Tapping = "t",
+    Bend = "b",
+    BendRelease = "br",
+    PreBend = "pb",
+    PreBendRelease = "pbr",
+    SlideUp = "/",
+    SlideDown = "\\",
+    Vibrato = "~",
+    Slap = "s",
+    Pop = "P",
+    PalmMute = "PM",
+    Trill = "TR",
+    TremoloPicking = "N",
   }
 }
 
