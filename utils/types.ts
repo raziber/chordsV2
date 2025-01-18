@@ -63,6 +63,7 @@ export namespace SongLine {
     ChordsAndTabs = "chordsAndTabs",
     All = "all",
     Repeats = "repeats",
+    LegendBorder = "legendBorder",
   }
 
   export interface Line {

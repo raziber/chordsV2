@@ -1,6 +1,68 @@
+import { contains } from "cheerio";
 import { SongLine, TabTypes, ChordTypes } from "./types";
 
 export class LineParser {
+  static parseLine(line: string): SongLine.Line {
+    this.validateInput(line);
+    const subLines = this.prepareSubLines(line);
+    return this.parseProcessedSubLines(subLines);
+  }
+
+  private static prepareSubLines(line: string): string[] {
+    const nonEmptySubLines = this.removeEmptyLines(line.split("\n"));
+
+    if (this.isLegendBorderLine(nonEmptySubLines[0])) {
+      return ["legend-border"];
+    }
+
+    return nonEmptySubLines;
+  }
+
+  private static parseProcessedSubLines(subLines: string[]): SongLine.Line {
+    if (subLines[0] === "legend-border") {
+      return { type: SongLine.Type.LegendBorder };
+    }
+
+    const [noRepeatsLines, repeats] = this.extractRepeats(subLines);
+
+    if (this.isBarsLine(noRepeatsLines)) {
+      return this.parseBarsLine(noRepeatsLines);
+    }
+
+    const extractedContent = this.extractContentFromLines(noRepeatsLines);
+    const combinedContent = this.combineLines(extractedContent);
+    const type = this.determineLineType(combinedContent);
+
+    return {
+      type,
+      ...combinedContent,
+      repeats,
+    };
+  }
+
+  private static extractContentFromLines(
+    lines: string[]
+  ): ExtractedLineContent[] {
+    return lines.map((line) => {
+      const [noTabsLine, tabs] = this.extractTabs(line);
+      const [noChordsLine, chords] = this.extractChords(noTabsLine);
+      const lyrics = this.extractLyrics(
+        this.removeSpecialCharacters(noChordsLine)
+      );
+
+      return { lyrics, chords, tabs };
+    });
+  }
+
+  private static determineSubLinesTypes(lines: string[]): SongLine.Type[] {
+    return lines.flatMap((line) => {
+      const features = this.detectLineFeatures(line);
+      return features
+        .map((f) => this.determineLineType(f))
+        .filter((type): type is SongLine.Type => type !== undefined);
+    });
+  }
+
   private static readonly LINE_PATTERN_TO_TYPE: Record<string, SongLine.Type> =
     {
       // [chords, tabs, lyrics, repeats]
@@ -87,13 +149,6 @@ export class LineParser {
     };
   }
 
-  // Main public interface
-  static detectLineTypes(input: string): SongLine.Type[] {
-    this.validateInput(input);
-    const nonEmptyLines = this.removeEmptyLines(input.split("\n"));
-    return this.analyzeLines(nonEmptyLines);
-  }
-
   // Private helper methods
   private static validateInput(input: string): void {
     if (!input) throw new Error("Empty line string");
@@ -101,15 +156,6 @@ export class LineParser {
 
   private static removeEmptyLines(lines: string[]): string[] {
     return lines.filter((line) => line.trim() !== "");
-  }
-
-  private static analyzeLines(lines: string[]): SongLine.Type[] {
-    return lines.flatMap((line) => {
-      const features = this.detectLineFeatures(line);
-      return features
-        .map((f) => this.determineLineType(f))
-        .filter((type): type is SongLine.Type => type !== undefined);
-    });
   }
 
   private static detectLineFeatures(line: string): LineFeatures[] {
@@ -236,6 +282,67 @@ export class LineParser {
   private static hasLyricContent(line: string): boolean {
     return this.hasTextContent(this.cleanLine(line));
   }
+
+  private static isLegendBorderLine(line: string): boolean {
+    if (line.trim() containsOnly "*" chars) return true;
+    return false;
+  }
+
+  private static extractRepeats(
+    lines: string[]
+  ): [string[], number | undefined] {
+    // should find any x or X followed by a number or proceeded by a number (can be more than a single digit number)
+    // will return the input without the repeats and the number of repeats
+    return [lines, undefined];
+  }
+
+  private static isBarsLine(lines: string[]): boolean {
+    // should check if there are only chord tags, vertical bars '|' and brackets '(', ')','[', ']', '{', '}' in the line
+    // if that is the case then this is a bars line
+    // can use a function called extractChords to get the line without the chords and then check if the line contains only the allowed characters (and spaces are allowed)
+    return false;
+  }
+
+  private static parseBarsLine(lines: string[]): SongLine.Line {
+    // Implementation needed
+    return { type: SongLine.Type.Bars };
+  }
+
+  private static extractTabs(line: string): [string, any] {
+    // should find any combination of a letter (string name) and right after that a vertical bar '|' and then a hypen '-'.
+    // that means it is a start of a tab notation for that string.
+    // should return the line without the tabs and the tabs found.
+    // the tabs themselves should include the string name and the tab information.
+    // it will use a function called parse tabs to parse the tab information.
+    return [line, undefined];
+  }
+
+  private static extractChords(line: string): [string, any] {
+    // should find any text between [ch] and [/ch] tags
+    // should return the line without the chords and the chords found.
+    // the chords themselves should be parsed using a function from the chordParser class.
+    // the output of this extractChords function should be string and then a list of chords with positions where the positions are the center of the chord, disregarding the ch tabs (start and end) and rounding down to the nearest integer.
+    return [line, undefined];
+  }
+
+  private static extractLyrics(line: string): string {
+    // Implementation needed
+    return line;
+  }
+
+  private static removeSpecialCharacters(line: string): string {
+    // should remove empty (), [], {}, '', "", do not trim spaces.
+    // should return the line without the special characters.
+    // should remove nested special characters only if they are closed and empty.
+    return line;
+  }
+
+  private static combineLines(contents: ExtractedLineContent[]): ExtractedLineContent {
+    // should take all lyrics and string them together - have a space between them.
+    // should take all chords and add them to a single list (with positions added so that the added positions start where the last chord ended).
+    // should take the tabs and combine into a strings type object.
+    return {};
+  }
 }
 
 interface ExtractedContent {
@@ -251,4 +358,10 @@ interface LineFeatures {
   extractedChords?: string[];
   extractedTabs?: string[];
   extractedRepeats?: string[];
+}
+
+interface ExtractedLineContent {
+  lyrics?: string;
+  chords?: any;
+  tabs?: any;
 }
