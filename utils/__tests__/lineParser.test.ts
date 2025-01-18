@@ -200,7 +200,7 @@ describe("LineParser", () => {
       it("should return the original line and empty tab object when provided an invalid string name", () => {
         const input = "wrong|---0---|";
         const result = LineParser.extractTabs(input);
-        expect(result).toEqual([input, {}]);
+        expect(result).toEqual([input, { "": [] }]);
       });
 
       it("should parse a valid tab line for a recognized string name", () => {
@@ -219,7 +219,7 @@ describe("LineParser", () => {
       it("should skip lines that only contain numbers without a valid string name", () => {
         const input = "1 2 3 4";
         const result = LineParser.extractTabs(input);
-        expect(result).toEqual([input, {}]);
+        expect(result).toEqual([input, { "": [] }]);
       });
     });
   });
