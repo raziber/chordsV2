@@ -77,7 +77,7 @@ describe("LineParser", () => {
         const result = LineParser.parseLine(input);
         expect(result).toMatchObject({
           type: SongLine.Type.ChordsAndLyrics,
-          lyrics: " first second",
+          lyrics: " first  second",
           chords: expect.arrayContaining([
             expect.objectContaining({
               chord: expect.objectContaining({ base: "A", modifiers: ["m"] }),

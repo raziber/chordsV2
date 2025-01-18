@@ -23,15 +23,14 @@ export class LineParser {
     if (subLines[0] === "legend-border") {
       return { type: SongLine.Type.LegendBorder };
     }
-
     const [noRepeatsLines, repeats] = this.extractRepeats(subLines);
-
     if (this.isBarsLine(noRepeatsLines)) {
       return this.parseBarsLine(noRepeatsLines);
     }
-
     const extractedContent = this.extractContentFromLines(noRepeatsLines);
+    // here its still good
     const combinedContent = this.combineLines(extractedContent);
+    console.log("combined content lyrics-", combinedContent["lyrics"]);
     const features = this.convertToFeatures(combinedContent);
     const type = this.determineLineType(features);
 
@@ -63,7 +62,9 @@ export class LineParser {
     lines: string[]
   ): ExtractedLineContent[] {
     return lines.map((line) => {
+      console.log(line);
       const [noTabsLine, tabs] = this.extractTabs(line);
+      console.log(noTabsLine);
       const [noChordsLine, chords] = this.extractChords(noTabsLine);
       const lyrics = this.extractLyrics(
         this.removeSpecialCharacters(noChordsLine)
@@ -288,30 +289,6 @@ export class LineParser {
     const chords: ChordTypes.Position[] = [];
     let lineWithoutChords = line;
     let totalOffset = 0;
-    // "12[ch]Am[/ch]123[ch]Cmaj7[/ch]1[ch]F[/ch]1234"
-    // should find the center of each chord and return the chord and its position
-    // should return "12 123 1 1234" and
-    // [
-    // { chord:
-    //    { base: "A", modifiers: [m] },
-    //    position: 3 },
-    // { chord:
-    //    { base: "C", modifiers: [maj7] },
-    //    position: 9 },
-    // { chord:
-    //    { base: "F", modifiers: [] },
-    //    position: 13 }
-    // ]
-
-    // this will run the regex on the line and for each match, it will run the function
-    // after each match, it will replace the match with spaces of the same length
-    // only after match was replaced with spaces, the next match will be found
-    const chTagsLength = "[ch][/ch]".length;
-    // "12[ch]Am[/ch]123[ch]Cmaj7[/ch]1[ch]F[/ch]1234"
-    // 2 + (2/2) + 0 = 3
-    // "12123[ch]Cmaj7[/ch]1[ch]F[/ch]1234"
-    // total += 2;
-    // 5 + (5/2) + 2 = 9
     line.replace(/\[ch\](.*?)\[\/ch\]/g, (match, chord, index) => {
       const position = Math.floor(index + chord.length / 2 + totalOffset);
       totalOffset += chord.length;
@@ -340,43 +317,44 @@ export class LineParser {
     contents: ExtractedLineContent[]
   ): ExtractedLineContent {
     const combined: ExtractedLineContent = {};
+    console.log("contents here-", contents);
+    console.log("combined here-", combined);
 
-    // Combine lyrics preserving leading spaces but normalizing internal spaces
-    const lyrics = contents
-      .map((c) => c.lyrics?.trim())
-      .filter((l): l is string => !!l)
-      .join(" ");
-    if (lyrics) combined.lyrics = lyrics;
-
-    // Combine chords with offset
-    let offset = 0;
-    const allChords: ChordTypes.Position[] = [];
     contents.forEach((content) => {
-      if (content.chords) {
-        allChords.push(
-          ...content.chords.map((c) => ({
-            ...c,
-            position: c.position + offset,
-          }))
-        );
-      }
       if (content.lyrics) {
-        offset += content.lyrics.length + 1;
+        if (!combined.lyrics || combined.lyrics.length === 0) {
+          combined.lyrics = content.lyrics.trimEnd();
+        } else {
+          combined.lyrics =
+            combined.lyrics.trimEnd() + " " + content.lyrics.trimEnd();
+        }
       }
-    });
-    if (allChords.length) combined.chords = allChords;
-
-    // Combine tabs
-    const allTabs: TabTypes.Strings = {};
-    contents.forEach((content) => {
+      if (content.chords) {
+        if (!combined.chords) combined.chords = [];
+        content.chords.forEach((chord) => {
+          combined.chords!.push({
+            chord: chord.chord,
+            position: Math.max(
+              (combined.lyrics || "").length + chord.position,
+              combined.chords?.[combined.chords.length - 1]?.position || 0
+            ),
+          });
+        });
+      }
       if (content.tabs) {
-        Object.entries(content.tabs).forEach(([string, positions]) => {
-          if (!allTabs[string]) allTabs[string] = [];
-          allTabs[string].push(...positions);
+        if (!combined.tabs) combined.tabs = {};
+        Object.keys(content.tabs).forEach((stringName) => {
+          if (!(combined.tabs as TabTypes.Strings)[stringName])
+            (combined.tabs as TabTypes.Strings)[stringName] = [];
+          (content.tabs as TabTypes.Strings)[stringName].forEach((position) => {
+            (combined.tabs as TabTypes.Strings)[stringName].push({
+              fret: position.fret,
+              position: (combined.lyrics || "").length + position.position,
+            });
+          });
         });
       }
     });
-    if (Object.keys(allTabs).length) combined.tabs = allTabs;
 
     return combined;
   }
