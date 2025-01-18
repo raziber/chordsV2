@@ -1,5 +1,6 @@
 import { contains } from "cheerio";
 import { SongLine, TabTypes, ChordTypes } from "./types";
+import { ChordParser } from "./chordParser";
 
 export class LineParser {
   static parseLine(line: string): SongLine.Line {
@@ -72,15 +73,6 @@ export class LineParser {
     });
   }
 
-  private static determineSubLinesTypes(lines: string[]): SongLine.Type[] {
-    return lines.flatMap((line) => {
-      const features = this.detectLineFeatures(line);
-      return features
-        .map((f) => this.determineLineType(f))
-        .filter((type): type is SongLine.Type => type !== undefined);
-    });
-  }
-
   private static readonly LINE_PATTERN_TO_TYPE: Record<string, SongLine.Type> =
     {
       // [chords, tabs, lyrics, repeats]
@@ -94,7 +86,6 @@ export class LineParser {
       "0001": SongLine.Type.Repeats, // Is a repeat marker
     };
 
-  // Public methods for testing
   static extractChordContent(line: string): ExtractedContent {
     const chords: string[] = [];
     const remainingLine = line.replace(
@@ -204,131 +195,6 @@ export class LineParser {
     return lines.filter((line) => line.trim() !== "");
   }
 
-  private static detectLineFeatures(line: string): LineFeatures[] {
-    const features = this.initializeFeatures();
-
-    // Process all content at once
-    const { remainingLine: afterChords } = this.processChords(line, features);
-    const { remainingLine: afterTabs } = this.processTabs(
-      afterChords.trim(),
-      features
-    );
-    const { content: repeats, remainingLine: afterRepeats } =
-      this.extractRepeatContent(afterTabs.trim());
-
-    // Determine if there's any actual content
-    features.hasLyrics = this.checkForLyrics(afterRepeats);
-    const hasContent =
-      features.hasChords || features.hasTabs || features.hasLyrics;
-
-    // Only consider it a repeat if it's the ONLY thing in the line
-    if (!hasContent && repeats.length > 0) {
-      features.isRepeat = true;
-      features.extractedRepeats = repeats;
-    }
-
-    return [features];
-  }
-
-  private static processLineWithoutRepeats(
-    line: string,
-    features: LineFeatures
-  ): string {
-    // Process chords
-    const { remainingLine: afterChords } = this.processChords(line, features);
-
-    // Process tabs
-    const { remainingLine: afterTabs } = this.processTabs(
-      afterChords.trim(),
-      features
-    );
-
-    return afterTabs.trim();
-  }
-
-  private static processLine(line: string, features: LineFeatures): string {
-    // Process chords
-    const { remainingLine: afterChords } = this.processChords(line, features);
-
-    // Process tabs
-    const { remainingLine: afterTabs } = this.processTabs(
-      afterChords.trim(),
-      features
-    );
-
-    // Process repeats and maintain proper spacing
-    const { remainingLine: afterRepeats } = this.processRepeats(
-      afterTabs.trim(),
-      features
-    );
-
-    // Ensure consistent spacing for lyrics detection
-    return afterRepeats.trim();
-  }
-
-  private static processChords(
-    line: string,
-    features: LineFeatures
-  ): ExtractedContent {
-    const extraction = this.extractChordContent(line);
-    features.hasChords = extraction.content.length > 0;
-    features.extractedChords = extraction.content;
-    return extraction;
-  }
-
-  private static processTabs(
-    line: string,
-    features: LineFeatures
-  ): ExtractedContent {
-    const extraction = this.extractTabContent(line);
-    features.hasTabs = extraction.content.length > 0;
-    features.extractedTabs = extraction.content;
-    return extraction;
-  }
-
-  private static processRepeats(
-    line: string,
-    features: LineFeatures
-  ): ExtractedContent {
-    const extraction = this.extractRepeatContent(line);
-    features.isRepeat = extraction.content.length > 0;
-    features.extractedRepeats = extraction.content;
-    return extraction;
-  }
-
-  private static checkForLyrics(line: string): boolean {
-    const cleanedLine = this.removeNonAlphaNumeric(line);
-    // Consider a line with just spaces, empty, or only repeat markers as not having lyrics
-    return (
-      this.hasTextContent(cleanedLine) &&
-      !/^(?:\d+[xX]|[xX]\d+)$/.test(cleanedLine.trim())
-    );
-  }
-
-  private static cleanLine(line: string): string {
-    const { remainingLine: withoutChords } = this.extractChordContent(line);
-    const { remainingLine: withoutTabs } =
-      this.extractTabContent(withoutChords);
-    const { remainingLine: withoutRepeats } =
-      this.extractRepeatContent(withoutTabs);
-    return this.removeNonAlphaNumeric(withoutRepeats);
-  }
-
-  private static removeTabs(line: string): string {
-    // Remove tab notation (everything after string indicator)
-    return line.replace(/^[eEADGB]\|.*$/, "");
-  }
-
-  private static removeRepeats(line: string): string {
-    // Remove x3, X3, 3x, 3X patterns
-    return line.replace(/(?:\d+[xX]|[xX]\d+)/, "");
-  }
-
-  // For detecting mixed content (when we need to know if there are lyrics WITH other elements)
-  private static hasLyricContent(line: string): boolean {
-    return this.hasTextContent(this.cleanLine(line));
-  }
-
   private static isLegendBorderLine(line: string): boolean {
     return line
       .trim()
@@ -422,37 +288,47 @@ export class LineParser {
     const chords: ChordTypes.Position[] = [];
     let lineWithoutChords = line;
     let totalOffset = 0;
+    // "12[ch]Am[/ch]123[ch]Cmaj7[/ch]1[ch]F[/ch]1234"
+    // should find the center of each chord and return the chord and its position
+    // should return "12 123 1 1234" and
+    // [
+    // { chord:
+    //    { base: "A", modifiers: [m] },
+    //    position: 3 },
+    // { chord:
+    //    { base: "C", modifiers: [maj7] },
+    //    position: 9 },
+    // { chord:
+    //    { base: "F", modifiers: [] },
+    //    position: 13 }
+    // ]
 
-    line.replace(/\[ch\](.*?)\[\/ch\]/g, (match, chord, offset) => {
-      const realPosition = offset - totalOffset;
-      // Split chord into base and modifiers
-      const [base, ...modifiers] = this.parseChordParts(chord);
-      chords.push({
-        chord: { base: base as ChordTypes.Base, modifiers },
-        position: realPosition,
-      });
-      totalOffset += match.length - chord.length;
+    // this will run the regex on the line and for each match, it will run the function
+    // after each match, it will replace the match with spaces of the same length
+    // only after match was replaced with spaces, the next match will be found
+    const chTagsLength = "[ch][/ch]".length;
+    // "12[ch]Am[/ch]123[ch]Cmaj7[/ch]1[ch]F[/ch]1234"
+    // 2 + (2/2) + 0 = 3
+    // "12123[ch]Cmaj7[/ch]1[ch]F[/ch]1234"
+    // total += 2;
+    // 5 + (5/2) + 2 = 9
+    line.replace(/\[ch\](.*?)\[\/ch\]/g, (match, chord, index) => {
+      const position = Math.floor(index + chord.length / 2 + totalOffset);
+      totalOffset += chord.length;
+      chords.push({ chord: ChordParser.parseChord(chord), position });
       lineWithoutChords = lineWithoutChords.replace(
         match,
-        " ".repeat(chord.length)
+        "".repeat(match.length)
       );
-      return "";
+      return match;
     });
 
+    // Preserve the original spacing
     return [lineWithoutChords, chords];
   }
 
-  private static parseChordParts(chord: string): [string, ...string[]] {
-    // Basic chord parsing - handle common patterns
-    const match = chord.match(/^([A-G][b#]?)(.*)$/);
-    if (!match) return [chord, []];
-    const [_, base, modifiers] = match;
-    if (!modifiers) return [base];
-    return [base, modifiers];
-  }
-
   private static extractLyrics(line: string): string {
-    // Implementation needed
+    // Don't trim - preserve spaces
     return line;
   }
 
@@ -465,7 +341,7 @@ export class LineParser {
   ): ExtractedLineContent {
     const combined: ExtractedLineContent = {};
 
-    // Combine lyrics with single spaces
+    // Combine lyrics preserving leading spaces but normalizing internal spaces
     const lyrics = contents
       .map((c) => c.lyrics?.trim())
       .filter((l): l is string => !!l)
