@@ -31,12 +31,30 @@ export class LineParser {
 
     const extractedContent = this.extractContentFromLines(noRepeatsLines);
     const combinedContent = this.combineLines(extractedContent);
-    const type = this.determineLineType(combinedContent);
+    const features = this.convertToFeatures(combinedContent);
+    const type = this.determineLineType(features);
 
     return {
-      type,
+      type: type || SongLine.Type.Lyrics, // Fallback to lyrics if no specific type determined
       ...combinedContent,
       repeats,
+    };
+  }
+
+  private static convertToFeatures(
+    content: ExtractedLineContent
+  ): LineFeatures {
+    const hasChords = !!content.chords?.length;
+    const hasTabs = !!content.tabs && Object.keys(content.tabs).length > 0;
+    const hasLyrics = !!content.lyrics?.trim();
+
+    return {
+      hasChords,
+      hasTabs,
+      hasLyrics,
+      isRepeat: false,
+      extractedChords: content.chords?.map((c) => c.chord.base),
+      extractedTabs: content.tabs ? Object.keys(content.tabs) : [],
     };
   }
 
@@ -111,7 +129,7 @@ export class LineParser {
 
   private static readonly TAB_REGEX_PATTERN = `^(${LineParser.VALID_STRING_NAMES.map(
     (s) => s.replace("#", "\\#")
-  ).join("|")})\|(.*?\||[^|\\s]*?)(?:\\s|$)`;
+  ).join("|")})\\|([-\\d\\s]+(?:\\||$))`;
 
   private static readonly TAB_STRING_REGEX = new RegExp(
     LineParser.TAB_REGEX_PATTERN
@@ -121,12 +139,12 @@ export class LineParser {
     const tabs: string[] = [];
     const remainingLine = line.replace(
       this.TAB_STRING_REGEX,
-      (match, stringName, tab) => {
-        tabs.push(`${stringName}|${tab}`);
-        return match.slice(match.indexOf("|") + 1);
+      (match, stringName, tabContent) => {
+        tabs.push(`${stringName}|${tabContent}`);
+        return tabContent.startsWith(" ") ? tabContent : "";
       }
     );
-    return { content: tabs, remainingLine };
+    return { content: tabs, remainingLine: remainingLine.trim() };
   }
 
   static extractRepeatContent(line: string): ExtractedContent {
@@ -321,13 +339,19 @@ export class LineParser {
   private static extractRepeats(
     lines: string[]
   ): [string[], number | undefined] {
-    const repeatRegex = /(?:\d+[xX]|[xX]\d+)/;
+    const repeatRegex = /(?:^|\s)(\d+[xX]|[xX]\d+)(?:\s|$)/;
     for (let i = 0; i < lines.length; i++) {
       const match = lines[i].match(repeatRegex);
       if (match) {
-        const repeatNum = parseInt(match[0].replace(/[xX]/, ""));
+        const fullMatch = match[0];
+        const repeat = match[1];
+        const repeatNum = parseInt(repeat.replace(/[xX]/, ""));
         const newLines = [...lines];
-        newLines[i] = lines[i].replace(match[0], "").trim();
+        const originalLine = newLines[i];
+        newLines[i] = lines[i].replace(
+          fullMatch,
+          fullMatch.startsWith(" ") ? " " : ""
+        );
         return [newLines, repeatNum];
       }
     }
@@ -351,15 +375,30 @@ export class LineParser {
   }
 
   private static extractTabs(line: string): [string, TabTypes.Strings] {
-    const match = line.match(this.TAB_STRING_REGEX);
+    // Only proceed if line starts with a valid string indicator followed by |
+    if (
+      !line.match(
+        new RegExp(
+          `^(${this.VALID_STRING_NAMES.map((s) => s.replace("#", "\\#")).join(
+            "|"
+          )})\\|`
+        )
+      )
+    ) {
+      return [line, {}];
+    }
 
+    const match = line.match(this.TAB_STRING_REGEX);
     if (!match) return [line, {}];
 
     const [fullMatch, stringName, tabContent] = match;
+    if (!tabContent.startsWith(" ")) return [line, {}];
+
     const positions: TabTypes.Position[] = [];
     let currentPosition = 0;
 
-    tabContent.replace(/(\d+)/g, (match, fret) => {
+    const cleanContent = tabContent.replace(/\|$/, "");
+    cleanContent.replace(/(\d+)/g, (match, fret) => {
       positions.push({
         fret: parseInt(fret),
         position: currentPosition,
@@ -368,11 +407,15 @@ export class LineParser {
       return match;
     });
 
-    const tabs = {
-      [stringName]: positions,
-    } as TabTypes.Strings;
+    // Don't modify the line if it's not actually a tab line (e.g., just numbers)
+    if (positions.length === 0) {
+      return [line, {}];
+    }
 
-    return [line.replace(fullMatch, ""), tabs];
+    return [
+      line.replace(fullMatch, "").trim(),
+      { [stringName]: positions } as TabTypes.Strings,
+    ];
   }
 
   private static extractChords(line: string): [string, ChordTypes.Position[]] {
@@ -382,11 +425,13 @@ export class LineParser {
 
     line.replace(/\[ch\](.*?)\[\/ch\]/g, (match, chord, offset) => {
       const realPosition = offset - totalOffset;
+      // Split chord into base and modifiers
+      const [base, ...modifiers] = this.parseChordParts(chord);
       chords.push({
-        chord: { base: chord as ChordTypes.Base, modifiers: [] },
+        chord: { base: base as ChordTypes.Base, modifiers },
         position: realPosition,
       });
-      totalOffset += match.length;
+      totalOffset += match.length - chord.length;
       lineWithoutChords = lineWithoutChords.replace(
         match,
         " ".repeat(chord.length)
@@ -395,6 +440,15 @@ export class LineParser {
     });
 
     return [lineWithoutChords, chords];
+  }
+
+  private static parseChordParts(chord: string): [string, ...string[]] {
+    // Basic chord parsing - handle common patterns
+    const match = chord.match(/^([A-G][b#]?)(.*)$/);
+    if (!match) return [chord, []];
+    const [_, base, modifiers] = match;
+    if (!modifiers) return [base];
+    return [base, modifiers];
   }
 
   private static extractLyrics(line: string): string {
@@ -409,38 +463,34 @@ export class LineParser {
   private static combineLines(
     contents: ExtractedLineContent[]
   ): ExtractedLineContent {
-    const combined: ExtractedLineContent = {
-      lyrics: contents
-        .map((c) => c.lyrics)
-        .filter((l) => l)
-        .join(" ")
-        .replace(/\s+/g, " ")
-        .trim(),
-    };
+    const combined: ExtractedLineContent = {};
 
-    // Combine chords with updated positions
-    let totalOffset = 0;
+    // Combine lyrics with single spaces
+    const lyrics = contents
+      .map((c) => c.lyrics?.trim())
+      .filter((l): l is string => !!l)
+      .join(" ");
+    if (lyrics) combined.lyrics = lyrics;
+
+    // Combine chords with offset
+    let offset = 0;
     const allChords: ChordTypes.Position[] = [];
     contents.forEach((content) => {
       if (content.chords) {
         allChords.push(
-          ...content.chords.map(
-            (c: ChordTypes.Position): ChordTypes.Position => ({
-              ...c,
-              position: c.position + totalOffset,
-            })
-          )
+          ...content.chords.map((c) => ({
+            ...c,
+            position: c.position + offset,
+          }))
         );
       }
       if (content.lyrics) {
-        totalOffset += content.lyrics.length + 1; // +1 for space between lines
+        offset += content.lyrics.length + 1;
       }
     });
-    if (allChords.length > 0) {
-      combined.chords = allChords;
-    }
+    if (allChords.length) combined.chords = allChords;
 
-    // Combine tabs from all lines
+    // Combine tabs
     const allTabs: TabTypes.Strings = {};
     contents.forEach((content) => {
       if (content.tabs) {
@@ -450,9 +500,7 @@ export class LineParser {
         });
       }
     });
-    if (Object.keys(allTabs).length > 0) {
-      combined.tabs = allTabs;
-    }
+    if (Object.keys(allTabs).length) combined.tabs = allTabs;
 
     return combined;
   }
@@ -475,6 +523,6 @@ interface LineFeatures {
 
 interface ExtractedLineContent {
   lyrics?: string;
-  chords?: any;
-  tabs?: any;
+  chords?: ChordTypes.Position[];
+  tabs?: TabTypes.Strings;
 }

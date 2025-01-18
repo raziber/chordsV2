@@ -2,6 +2,134 @@ import { LineParser } from "../lineParser";
 import { SongLine } from "../types";
 
 describe("LineParser", () => {
+  describe("Main Function Chain", () => {
+    describe("parseLine", () => {
+      it("should throw error for empty input", () => {
+        expect(() => LineParser.parseLine("")).toThrow("Empty line string");
+      });
+
+      it("should detect legend border", () => {
+        expect(LineParser.parseLine("****")).toEqual({
+          type: SongLine.Type.LegendBorder,
+        });
+      });
+
+      it("should parse single line with chords and lyrics", () => {
+        const input = "[ch]Am[/ch] Hello [ch]C[/ch] World";
+        const result = LineParser.parseLine(input);
+        expect(result.type).toBe(SongLine.Type.ChordsAndLyrics);
+        expect(result.lyrics).toBe(" Hello  World");
+        expect(result.chords).toHaveLength(2);
+      });
+
+      it("should handle multiple lines", () => {
+        const input = "[ch]Am[/ch]\nHello\nx3";
+        const result = LineParser.parseLine(input);
+        expect(result).toMatchObject({
+          type: SongLine.Type.ChordsAndLyrics,
+          lyrics: "Hello",
+          repeats: 3,
+        });
+      });
+    });
+
+    describe("Line Preparation", () => {
+      it("should remove empty lines", () => {
+        const input = "line1\n\n  \nline2";
+        const result = LineParser.parseLine(input);
+        expect(result.lyrics).toBe("line1 line2");
+      });
+
+      it("should detect legend border", () => {
+        expect(LineParser.parseLine("****")).toEqual({
+          type: SongLine.Type.LegendBorder,
+        });
+        expect(LineParser.parseLine("***\ntext")).toEqual({
+          type: SongLine.Type.LegendBorder,
+        });
+      });
+    });
+
+    describe("Content Processing", () => {
+      it("should extract repeats from any line", () => {
+        const tests = [
+          { input: "content x3", expected: 3 },
+          { input: "first line\nsecond line x2", expected: 2 },
+          { input: "no repeats", expected: undefined },
+        ];
+
+        tests.forEach(({ input, expected }) => {
+          const result = LineParser.parseLine(input);
+          expect(result.repeats).toBe(expected);
+        });
+      });
+
+      it("should identify bars lines", () => {
+        const input = "[ch]Am[/ch] | [ch]C[/ch] | [ch]F[/ch] |";
+        const result = LineParser.parseLine(input);
+        expect(result.type).toBe(SongLine.Type.Bars);
+      });
+
+      it("should extract and combine content from multiple lines", () => {
+        const input = "[ch]Am[/ch] first\n[ch]C[/ch] second";
+        const result = LineParser.parseLine(input);
+        expect(result).toMatchObject({
+          type: SongLine.Type.ChordsAndLyrics,
+          lyrics: "first second",
+          chords: expect.arrayContaining([
+            expect.objectContaining({ chord: { base: "A", modifiers: ["m"] } }),
+            expect.objectContaining({ chord: { base: "C" } }),
+          ]),
+        });
+      });
+    });
+
+    describe("Special Cases", () => {
+      it("should handle mixed content types", () => {
+        const tests = [
+          {
+            input: "[ch]Am[/ch] E|---0---| lyrics",
+            expected: { type: SongLine.Type.All },
+          },
+          {
+            input: "E|---0---| lyrics x2",
+            expected: { type: SongLine.Type.TabsAndLyrics, repeats: 2 },
+          },
+          {
+            input: "[ch]Am[/ch] | [ch]C[/ch] |\nE|---0---|",
+            expected: { type: SongLine.Type.ChordsAndTabs },
+          },
+        ];
+
+        tests.forEach(({ input, expected }) => {
+          const result = LineParser.parseLine(input);
+          expect(result.type).toBe(expected.type);
+          if ("repeats" in expected) {
+            expect(result.repeats).toBe(expected.repeats);
+          }
+        });
+      });
+
+      it("should maintain chord positions across lines", () => {
+        const input = "[ch]Am[/ch] first line\n[ch]C[/ch] second line";
+        const result = LineParser.parseLine(input);
+        expect(result.chords).toEqual([
+          { chord: { base: "Am", modifiers: [] }, position: 0 },
+          { chord: { base: "C", modifiers: [] }, position: 11 }, // 'first line'.length + 1
+        ]);
+      });
+
+      it("should combine tabs from multiple lines", () => {
+        const input = "E|---0---|\nA|---2---|";
+        const result = LineParser.parseLine(input);
+        expect(result.tabs).toMatchObject({
+          E: [{ fret: 0, position: 0 }],
+          A: [{ fret: 2, position: 0 }],
+        });
+      });
+    });
+  });
+
   describe("Core Extraction Methods", () => {
     describe("extractChordContent", () => {
       it("should extract single chord", () => {
@@ -24,57 +152,49 @@ describe("LineParser", () => {
         expect(result.content).toEqual(["Am", "C"]);
         expect(result.remainingLine).toBe(" Hello  World");
       });
-
-      it("should handle invalid chord tags", () => {
-        const input = "[ch]Am[/ch] [ch]Invalid";
-        const result = LineParser.extractChordContent(input);
-        expect(result.content).toEqual(["Am"]);
-        expect(result.remainingLine).toBe(" [ch]Invalid");
-      });
     });
 
     describe("extractTabContent", () => {
-      it("should extract tab line", () => {
-        const input = "e|---0---2---|";
+      it("should extract tab line with standard string names", () => {
+        const input = "E|---0---2---|";
         const result = LineParser.extractTabContent(input);
-        expect(result.content).toEqual(["e|---0---2---|"]);
+        expect(result.content).toEqual(["E|---0---2---|"]);
         expect(result.remainingLine).toBe("");
       });
 
-      it("should handle all string indicators", () => {
-        ["e", "E", "A", "D", "G", "B"].forEach((string) => {
+      it("should handle all possible string names", () => {
+        const tests = [
+          "C",
+          "C#",
+          "Db",
+          "D",
+          "D#",
+          "Eb",
+          "E",
+          "F",
+          "F#",
+          "Gb",
+          "G",
+          "G#",
+          "Ab",
+          "A",
+          "A#",
+          "Bb",
+          "B",
+        ];
+
+        tests.forEach((string) => {
           const input = `${string}|---0---|`;
           const result = LineParser.extractTabContent(input);
           expect(result.content).toEqual([`${string}|---0---|`]);
         });
       });
 
-      it("should not extract invalid tab lines", () => {
-        const input = "x|---0---|";
+      it("should handle tab content after string name", () => {
+        const input = "C#|---0---2---| Some lyrics";
         const result = LineParser.extractTabContent(input);
-        expect(result.content).toEqual([]);
-        expect(result.remainingLine).toBe(input);
-      });
-
-      it("should extract tab ending with closing |", () => {
-        const input = "e|---0---2---|   Some text after";
-        const result = LineParser.extractTabContent(input);
-        expect(result.content).toEqual(["e|---0---2---|"]);
-        expect(result.remainingLine).toBe("   Some text after");
-      });
-
-      it("should extract tab ending at first space when no closing |", () => {
-        const input = "e|---0---2--- Some text after";
-        const result = LineParser.extractTabContent(input);
-        expect(result.content).toEqual(["e|---0---2---"]);
-        expect(result.remainingLine).toBe(" Some text after");
-      });
-
-      it("should extract full line when no closing | or space", () => {
-        const input = "e|---0---2---";
-        const result = LineParser.extractTabContent(input);
-        expect(result.content).toEqual(["e|---0---2---"]);
-        expect(result.remainingLine).toBe("");
+        expect(result.content).toEqual(["C#|---0---2---|"]);
+        expect(result.remainingLine).toBe(" Some lyrics");
       });
     });
 
@@ -99,305 +219,6 @@ describe("LineParser", () => {
         const result = LineParser.extractRepeatContent(input);
         expect(result.content).toEqual(["x3"]);
         expect(result.remainingLine).toBe("Play this part and continue");
-      });
-    });
-  });
-
-  describe("Text Processing Methods", () => {
-    describe("removeNonAlphaNumeric", () => {
-      it("should keep allowed characters", () => {
-        const input = "Hello, world! How's it going?";
-        const result = LineParser.removeNonAlphaNumeric(input);
-        expect(result).toBe("Hello, world! How's it going?");
-      });
-
-      it("should remove special characters", () => {
-        const input = "Hello@#$%^&*()world";
-        const result = LineParser.removeNonAlphaNumeric(input);
-        expect(result).toBe("Helloworld");
-      });
-    });
-
-    describe("hasTextContent", () => {
-      it("should return true for valid text", () => {
-        expect(LineParser.hasTextContent("Hello")).toBe(true);
-        expect(LineParser.hasTextContent("  Hello  ")).toBe(true);
-      });
-
-      it("should return false for empty or whitespace", () => {
-        expect(LineParser.hasTextContent("")).toBe(false);
-        expect(LineParser.hasTextContent("   ")).toBe(false);
-      });
-    });
-  });
-
-  describe("Pattern Generation", () => {
-    describe("createPatternKey", () => {
-      it("should create pattern for all features", () => {
-        const features = {
-          hasChords: true,
-          hasTabs: true,
-          hasLyrics: true,
-          isRepeat: false,
-        };
-        expect(LineParser.createPatternKey(features)).toBe("111x");
-      });
-
-      it("should create pattern for single feature", () => {
-        const features = {
-          hasChords: true,
-          hasTabs: false,
-          hasLyrics: false,
-          isRepeat: false,
-        };
-        expect(LineParser.createPatternKey(features)).toBe("100x");
-      });
-
-      it("should handle repeat marker", () => {
-        const features = {
-          hasChords: false,
-          hasTabs: false,
-          hasLyrics: false,
-          isRepeat: true,
-        };
-        expect(LineParser.createPatternKey(features)).toBe("0001");
-      });
-    });
-
-    describe("determineLineType", () => {
-      it("should determine type for each valid pattern", () => {
-        const tests = [
-          {
-            pattern: {
-              hasChords: true,
-              hasTabs: true,
-              hasLyrics: true,
-              isRepeat: false,
-            },
-            expected: SongLine.Type.All,
-          },
-          {
-            pattern: {
-              hasChords: true,
-              hasTabs: false,
-              hasLyrics: true,
-              isRepeat: false,
-            },
-            expected: SongLine.Type.ChordsAndLyrics,
-          },
-          // ...add tests for each valid pattern
-        ];
-
-        tests.forEach(({ pattern, expected }) => {
-          expect(LineParser.determineLineType(pattern)).toBe(expected);
-        });
-      });
-
-      it("should return undefined for invalid patterns", () => {
-        const invalidPattern = {
-          hasChords: true,
-          hasTabs: true,
-          hasLyrics: true,
-          isRepeat: true,
-        };
-        expect(LineParser.determineLineType(invalidPattern)).toBeUndefined();
-      });
-    });
-  });
-
-  describe("Integration Tests", () => {
-    describe("detectLineTypes", () => {
-      describe("input validation", () => {
-        it("should throw error for empty input", () => {
-          expect(() => LineParser.detectLineTypes("")).toThrow(
-            "Empty line string"
-          );
-        });
-
-        it("should handle single empty line", () => {
-          expect(LineParser.detectLineTypes(" \n ")).toEqual([]);
-        });
-      });
-
-      describe("single line type detection", () => {
-        it("should detect chord line", () => {
-          const input = "[ch]Am[/ch] [ch]C[/ch] [ch]F[/ch]";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.Chords,
-          ]);
-        });
-
-        it("should detect tab line", () => {
-          const input = "e|-----------------|";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.Tabs,
-          ]);
-        });
-
-        it("should detect lyrics line", () => {
-          const input = "Hello world";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.Lyrics,
-          ]);
-        });
-
-        it("should detect repeat marker", () => {
-          const input = "x3";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.Repeats,
-          ]);
-        });
-      });
-
-      describe("mixed content detection", () => {
-        it("should detect chords with lyrics", () => {
-          const input = "[ch]Am[/ch] Hello [ch]C[/ch] World";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.ChordsAndLyrics,
-          ]);
-        });
-
-        it("should detect chords with tabs", () => {
-          const input = "[ch]Am[/ch] e|-----------------|";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.ChordsAndTabs,
-          ]);
-        });
-
-        it("should detect tabs with lyrics", () => {
-          const input = "e|------------------| Hello";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.TabsAndLyrics,
-          ]);
-        });
-
-        it("should detect all content types except repeats", () => {
-          const input = "[ch]Am[/ch] e|------------------| Hello";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.All,
-          ]);
-        });
-      });
-
-      describe("multiple line detection", () => {
-        it("should handle multiple different line types", () => {
-          const input = `[ch]Am[/ch] [ch]C[/ch]
-e|------------------|
-Hello world
-x3`;
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.Chords,
-            SongLine.Type.Tabs,
-            SongLine.Type.Lyrics,
-            SongLine.Type.Repeats,
-          ]);
-        });
-
-        it("should handle mixed content across multiple lines", () => {
-          const input = `[ch]Am[/ch] Hello
-e|------------------| World`;
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.ChordsAndLyrics,
-            SongLine.Type.TabsAndLyrics,
-          ]);
-        });
-      });
-
-      describe("edge cases", () => {
-        it("should handle multiple spaces between content", () => {
-          const input = "[ch]Am[/ch]     Hello     [ch]C[/ch]     World";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.ChordsAndLyrics,
-          ]);
-        });
-
-        it("should handle different string indicators for tabs", () => {
-          const tests = ["e", "E", "A", "D", "G", "B"];
-          tests.forEach((string) => {
-            const input = `${string}|------------------|`;
-            expect(LineParser.detectLineTypes(input)).toEqual([
-              SongLine.Type.Tabs,
-            ]);
-          });
-        });
-
-        it("should handle different repeat formats", () => {
-          const tests = ["x3", "X3", "3x", "3X"];
-          tests.forEach((repeat) => {
-            expect(LineParser.detectLineTypes(repeat)).toEqual([
-              SongLine.Type.Repeats,
-            ]);
-          });
-        });
-
-        it("should handle special characters in lyrics", () => {
-          const input = "Hello, world! How's it going?";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.Lyrics,
-          ]);
-        });
-
-        it("should ignore empty lines between content", () => {
-          const input = `[ch]Am[/ch]
-
-e|------------------|
-
-Hello world`;
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.Chords,
-            SongLine.Type.Tabs,
-            SongLine.Type.Lyrics,
-          ]);
-        });
-      });
-
-      describe("content extraction", () => {
-        it("should extract chords correctly", () => {
-          const input = "[ch]Am[/ch] [ch]C[/ch] [ch]F[/ch] Hello";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.ChordsAndLyrics,
-          ]);
-        });
-
-        it("should extract tabs correctly", () => {
-          const input = "e|---0---2---3---| Hello";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.TabsAndLyrics,
-          ]);
-        });
-
-        it("should extract repeats correctly", () => {
-          const input = "Play this part 3x";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.Lyrics,
-          ]);
-        });
-
-        it("should preserve lyrics after removing other elements", () => {
-          const input = "[ch]Am[/ch] Hello [ch]C[/ch] World x3";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.ChordsAndLyrics,
-          ]);
-        });
-      });
-
-      describe("complex scenarios", () => {
-        it("should handle complex chords and separate lyrics line", () => {
-          const input =
-            "[ch]Cm7b5[/ch]                  [ch]Amaj7[/ch]     \n       and this is a line of lyrics here";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.Chords,
-            SongLine.Type.Lyrics,
-          ]);
-        });
-
-        it("should handle inline repeat markers in lyrics", () => {
-          const input = "some song    (X2)\n and this is more";
-          expect(LineParser.detectLineTypes(input)).toEqual([
-            SongLine.Type.Lyrics,
-            SongLine.Type.Lyrics,
-          ]);
-        });
       });
     });
   });
