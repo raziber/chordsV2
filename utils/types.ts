@@ -37,14 +37,29 @@ export namespace ChordTypes {
 
 // Tab related types
 export namespace TabTypes {
+  export type StringName =
+    | "C"
+    | "C#"
+    | "Db"
+    | "D"
+    | "D#"
+    | "Eb"
+    | "E"
+    | "F"
+    | "F#"
+    | "Gb"
+    | "G"
+    | "G#"
+    | "Ab"
+    | "A"
+    | "A#"
+    | "Bb"
+    | "B";
+
   export interface Strings {
-    e?: Position[];
-    B?: Position[];
-    G?: Position[];
-    D?: Position[];
-    A?: Position[];
-    E?: Position[];
+    [key: string]: Position[]; // Allow any valid string name as key
   }
+
   export interface Position {
     fret: number;
     position: number;

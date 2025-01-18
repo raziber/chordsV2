@@ -89,13 +89,41 @@ export class LineParser {
     return { content: chords, remainingLine };
   }
 
+  private static readonly VALID_STRING_NAMES: string[] = [
+    "C",
+    "C#",
+    "Db",
+    "D",
+    "D#",
+    "Eb",
+    "E",
+    "F",
+    "F#",
+    "Gb",
+    "G",
+    "G#",
+    "Ab",
+    "A",
+    "A#",
+    "Bb",
+    "B",
+  ];
+
+  private static readonly TAB_REGEX_PATTERN = `^(${LineParser.VALID_STRING_NAMES.map(
+    (s) => s.replace("#", "\\#")
+  ).join("|")})\|(.*?\||[^|\\s]*?)(?:\\s|$)`;
+
+  private static readonly TAB_STRING_REGEX = new RegExp(
+    LineParser.TAB_REGEX_PATTERN
+  );
+
   static extractTabContent(line: string): ExtractedContent {
     const tabs: string[] = [];
     const remainingLine = line.replace(
-      /^([eEADGB]\|.*?\||[eEADGB]\|[^|\s]*?)(?:\s|$)/,
-      (match, tab) => {
-        tabs.push(tab);
-        return match.slice(tab.length);
+      this.TAB_STRING_REGEX,
+      (match, stringName, tab) => {
+        tabs.push(`${stringName}|${tab}`);
+        return match.slice(match.indexOf("|") + 1);
       }
     );
     return { content: tabs, remainingLine };
@@ -284,23 +312,37 @@ export class LineParser {
   }
 
   private static isLegendBorderLine(line: string): boolean {
-    if (line.trim() containsOnly "*" chars) return true;
-    return false;
+    return line
+      .trim()
+      .split("")
+      .every((char) => char === "*");
   }
 
   private static extractRepeats(
     lines: string[]
   ): [string[], number | undefined] {
-    // should find any x or X followed by a number or proceeded by a number (can be more than a single digit number)
-    // will return the input without the repeats and the number of repeats
+    const repeatRegex = /(?:\d+[xX]|[xX]\d+)/;
+    for (let i = 0; i < lines.length; i++) {
+      const match = lines[i].match(repeatRegex);
+      if (match) {
+        const repeatNum = parseInt(match[0].replace(/[xX]/, ""));
+        const newLines = [...lines];
+        newLines[i] = lines[i].replace(match[0], "").trim();
+        return [newLines, repeatNum];
+      }
+    }
     return [lines, undefined];
   }
 
   private static isBarsLine(lines: string[]): boolean {
-    // should check if there are only chord tags, vertical bars '|' and brackets '(', ')','[', ']', '{', '}' in the line
-    // if that is the case then this is a bars line
-    // can use a function called extractChords to get the line without the chords and then check if the line contains only the allowed characters (and spaces are allowed)
-    return false;
+    for (const line of lines) {
+      const withoutChords = this.extractChordContent(line).remainingLine;
+      const cleanedLine = withoutChords.trim();
+      if (cleanedLine && !/^[|\s\(\)\[\]\{\}]*$/.test(cleanedLine)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   private static parseBarsLine(lines: string[]): SongLine.Line {
@@ -308,21 +350,51 @@ export class LineParser {
     return { type: SongLine.Type.Bars };
   }
 
-  private static extractTabs(line: string): [string, any] {
-    // should find any combination of a letter (string name) and right after that a vertical bar '|' and then a hypen '-'.
-    // that means it is a start of a tab notation for that string.
-    // should return the line without the tabs and the tabs found.
-    // the tabs themselves should include the string name and the tab information.
-    // it will use a function called parse tabs to parse the tab information.
-    return [line, undefined];
+  private static extractTabs(line: string): [string, TabTypes.Strings] {
+    const match = line.match(this.TAB_STRING_REGEX);
+
+    if (!match) return [line, {}];
+
+    const [fullMatch, stringName, tabContent] = match;
+    const positions: TabTypes.Position[] = [];
+    let currentPosition = 0;
+
+    tabContent.replace(/(\d+)/g, (match, fret) => {
+      positions.push({
+        fret: parseInt(fret),
+        position: currentPosition,
+      });
+      currentPosition += match.length + 1;
+      return match;
+    });
+
+    const tabs = {
+      [stringName]: positions,
+    } as TabTypes.Strings;
+
+    return [line.replace(fullMatch, ""), tabs];
   }
 
-  private static extractChords(line: string): [string, any] {
-    // should find any text between [ch] and [/ch] tags
-    // should return the line without the chords and the chords found.
-    // the chords themselves should be parsed using a function from the chordParser class.
-    // the output of this extractChords function should be string and then a list of chords with positions where the positions are the center of the chord, disregarding the ch tabs (start and end) and rounding down to the nearest integer.
-    return [line, undefined];
+  private static extractChords(line: string): [string, ChordTypes.Position[]] {
+    const chords: ChordTypes.Position[] = [];
+    let lineWithoutChords = line;
+    let totalOffset = 0;
+
+    line.replace(/\[ch\](.*?)\[\/ch\]/g, (match, chord, offset) => {
+      const realPosition = offset - totalOffset;
+      chords.push({
+        chord: { base: chord as ChordTypes.Base, modifiers: [] },
+        position: realPosition,
+      });
+      totalOffset += match.length;
+      lineWithoutChords = lineWithoutChords.replace(
+        match,
+        " ".repeat(chord.length)
+      );
+      return "";
+    });
+
+    return [lineWithoutChords, chords];
   }
 
   private static extractLyrics(line: string): string {
@@ -331,17 +403,58 @@ export class LineParser {
   }
 
   private static removeSpecialCharacters(line: string): string {
-    // should remove empty (), [], {}, '', "", do not trim spaces.
-    // should return the line without the special characters.
-    // should remove nested special characters only if they are closed and empty.
-    return line;
+    return line.replace(/\(\)|\[\]|\{\}|''|""|\(\s*\)|\[\s*\]|\{\s*\}/g, "");
   }
 
-  private static combineLines(contents: ExtractedLineContent[]): ExtractedLineContent {
-    // should take all lyrics and string them together - have a space between them.
-    // should take all chords and add them to a single list (with positions added so that the added positions start where the last chord ended).
-    // should take the tabs and combine into a strings type object.
-    return {};
+  private static combineLines(
+    contents: ExtractedLineContent[]
+  ): ExtractedLineContent {
+    const combined: ExtractedLineContent = {
+      lyrics: contents
+        .map((c) => c.lyrics)
+        .filter((l) => l)
+        .join(" ")
+        .replace(/\s+/g, " ")
+        .trim(),
+    };
+
+    // Combine chords with updated positions
+    let totalOffset = 0;
+    const allChords: ChordTypes.Position[] = [];
+    contents.forEach((content) => {
+      if (content.chords) {
+        allChords.push(
+          ...content.chords.map(
+            (c: ChordTypes.Position): ChordTypes.Position => ({
+              ...c,
+              position: c.position + totalOffset,
+            })
+          )
+        );
+      }
+      if (content.lyrics) {
+        totalOffset += content.lyrics.length + 1; // +1 for space between lines
+      }
+    });
+    if (allChords.length > 0) {
+      combined.chords = allChords;
+    }
+
+    // Combine tabs from all lines
+    const allTabs: TabTypes.Strings = {};
+    contents.forEach((content) => {
+      if (content.tabs) {
+        Object.entries(content.tabs).forEach(([string, positions]) => {
+          if (!allTabs[string]) allTabs[string] = [];
+          allTabs[string].push(...positions);
+        });
+      }
+    });
+    if (Object.keys(allTabs).length > 0) {
+      combined.tabs = allTabs;
+    }
+
+    return combined;
   }
 }
 
