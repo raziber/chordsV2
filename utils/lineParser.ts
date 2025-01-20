@@ -1,4 +1,31 @@
-import { contains } from "cheerio";
+/**
+ * LineParser - Parses song content into structured data
+ *
+ * Main responsibilities:
+ * - Identifies line types (chords, tabs, lyrics, etc.)
+ * - Parses special elements (repeats, bars, legends)
+ * - Validates input structure
+ *
+ * Processing flow:
+ * 1. Input validation
+ * 2. Line splitting and empty line removal
+ * 3. Special case detection (legend borders)
+ * 4. Repeat extraction
+ * 5. Content type analysis
+ * 6. Specific content parsing (bars, chords, tabs)
+ *
+ * Output: SongLine.Line objects containing:
+ * - Line type (chord, tab, lyric, etc.)
+ * - Parsed content
+ * - Repeat information
+ * - Special formatting
+ *
+ * @example
+ * const parser = new LineParser();
+ * const result = parser.parseLine("[ch]Em[/ch]   [ch]G[/ch]   [ch]D[/ch]\/ Here are the lyrics");
+ * // Returns: { type: SongLine.Type.Chord, content: [...chords] }
+ */
+
 import { SongLine, TabTypes, ChordTypes } from "./types";
 import { ChordParser } from "./chordParser";
 
