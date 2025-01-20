@@ -105,6 +105,15 @@ describe("LineParser", () => {
             input: "[ch]Am[/ch] | [ch]C[/ch] |\nE|---0---|",
             expected: { type: SongLine.Type.ChordsAndTabs },
           },
+          {
+            input:
+              "   | [ch]Am[/ch] | [ch]C[/ch] |\nE|---0---|\nA|----2--|\nD|-1--0--|",
+            expected: { type: SongLine.Type.ChordsAndTabs },
+          },
+          {
+            input: "[ch]Am[/ch] | [ch]C[/ch] |\nE|---0---|     and that's it",
+            expected: { type: SongLine.Type.All },
+          },
         ];
 
         tests.forEach(({ input, expected }) => {
@@ -122,6 +131,31 @@ describe("LineParser", () => {
         expect(result.tabs).toMatchObject({
           E: [{ fret: 0, position: 3 }],
           A: [{ fret: 2, position: 4 }],
+        });
+      });
+
+      it("should combine tabs from multiple lines", () => {
+        const input =
+          "E|---0---|\nA|----2--|\nD|---0---|\nG|----2s8|\nB|-1p0---|\ne|-3--2--|";
+        const result = LineParser.parseLine(input);
+        expect(result.tabs).toMatchObject({
+          E: [{ fret: 0, position: 3 }],
+          A: [{ fret: 2, position: 4 }],
+          D: [{ fret: 0, position: 3 }],
+          G: [
+            { fret: 2, position: 4 },
+            { fret: "s", position: 5 },
+            { fret: 8, position: 6 },
+          ],
+          B: [
+            { fret: 1, position: 1 },
+            { fret: "p", position: 2 },
+            { fret: 0, position: 3 },
+          ],
+          e: [
+            { fret: 3, position: 1 },
+            { fret: 2, position: 4 },
+          ],
         });
       });
     });

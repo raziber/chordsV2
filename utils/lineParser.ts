@@ -114,6 +114,7 @@ export class LineParser {
     "A#",
     "Bb",
     "B",
+    "e",
   ];
 
   private static readonly TAB_REGEX_PATTERN = `(${LineParser.VALID_STRING_NAMES.map(
