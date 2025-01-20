@@ -1,5 +1,5 @@
 /**
- * LineParser - Parses song content into structured data
+ * LineParser - Parses song lines ([tab] tags) into structured data
  *
  * Main responsibilities:
  * - Identifies line types (chords, tabs, lyrics, etc.)
