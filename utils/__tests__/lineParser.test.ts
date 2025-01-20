@@ -308,7 +308,6 @@ describe("LineParser", () => {
       it("should parse a valid tab line for a recognized string name", () => {
         const input = "E|---0---2---|";
         const [remaining, tabs] = LineParser.extractTabs(input);
-        console.log([remaining, tabs]);
 
         expect(remaining).toBe("");
         expect(tabs).toHaveProperty("E");

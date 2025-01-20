@@ -47,7 +47,6 @@ export class LineParser {
   }
 
   private static parseProcessedSubLines(subLines: string[]): SongLine.Line {
-    console.log("subLines:", subLines);
     if (subLines[0] === "legend-border") {
       return { type: SongLine.Type.LegendBorder };
     }
@@ -56,13 +55,9 @@ export class LineParser {
       return this.parseBarsLine(noRepeatsLines);
     }
     const extractedContent = this.extractContentFromLines(noRepeatsLines);
-    console.log("extractedContent:", extractedContent);
     const combinedContent = this.combineLines(extractedContent);
-    console.log("combinedContent:", combinedContent);
     const features = this.convertToFeatures(combinedContent, repeats);
-    console.log("features:", features);
     const type = this.determineLineType(features);
-    console.log("type:", type);
 
     return {
       type: type || SongLine.Type.Lyrics, // Fallback to lyrics if no specific type determined
