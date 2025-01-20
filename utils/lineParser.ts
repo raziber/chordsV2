@@ -20,6 +20,7 @@ export class LineParser {
   }
 
   private static parseProcessedSubLines(subLines: string[]): SongLine.Line {
+    console.log("subLines:", subLines);
     if (subLines[0] === "legend-border") {
       return { type: SongLine.Type.LegendBorder };
     }
@@ -28,9 +29,13 @@ export class LineParser {
       return this.parseBarsLine(noRepeatsLines);
     }
     const extractedContent = this.extractContentFromLines(noRepeatsLines);
+    console.log("extractedContent:", extractedContent);
     const combinedContent = this.combineLines(extractedContent);
+    console.log("combinedContent:", combinedContent);
     const features = this.convertToFeatures(combinedContent, repeats);
+    console.log("features:", features);
     const type = this.determineLineType(features);
+    console.log("type:", type);
 
     return {
       type: type || SongLine.Type.Lyrics, // Fallback to lyrics if no specific type determined
@@ -43,9 +48,14 @@ export class LineParser {
     content: ExtractedLineContent,
     repeats?: number
   ): LineFeatures {
-    const hasChords = !!content.chords?.length;
-    const hasTabs = !!content.tabs && Object.keys(content.tabs).length > 0;
-    const hasLyrics = !!content.lyrics?.trim();
+    const cleanedLyrics = content.lyrics
+      ? this.removeNonAlphaNumeric(content.lyrics)
+      : "";
+    const hasChords = !!content.chords && content.chords.length > 0;
+    const hasTabs =
+      !!content.tabs &&
+      Object.values(content.tabs).some((positions) => positions.length > 0);
+    const hasLyrics = cleanedLyrics.length > 0;
     const isRepeat =
       repeats !== undefined && !hasChords && !hasTabs && !hasLyrics;
 
@@ -62,16 +72,12 @@ export class LineParser {
   private static extractContentFromLines(
     lines: string[]
   ): ExtractedLineContent[] {
-    console.log("lines:", lines);
     return lines.map((line) => {
       const [noTabsLine, tabs] = this.extractTabs(line);
-      console.log("tabs:", tabs);
       const [noChordsLine, chords] = this.extractChords(noTabsLine);
-      console.log("chords:", chords);
       const lyrics = this.extractLyrics(
         this.removeSpecialCharacters(noChordsLine)
       );
-      console.log("lyrics:", lyrics);
 
       return { lyrics, chords, tabs };
     });
