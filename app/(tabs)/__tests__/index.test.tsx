@@ -22,7 +22,7 @@ describe("handleSearch", () => {
 
   it("should return early if query is empty", async () => {
     const result = await handleSearch("");
-    expect(result).toBeUndefined();
+    expect(result).toStrictEqual([]);
     expect(Cache.get).not.toHaveBeenCalled();
   });
 
@@ -54,7 +54,8 @@ describe("handleSearch", () => {
     );
     expect(Cache.save).toHaveBeenCalledWith(
       "search_new query",
-      mockSearchResults
+      mockSearchResults,
+      { duration: 24 * 60 * 60 * 1000 /* 24 hours */ }
     );
   });
 
