@@ -159,6 +159,74 @@ describe("LineParser", () => {
         });
       });
     });
+
+    describe("parseBarsLine", () => {
+      it("should parse a single bar with no chords", () => {
+        const input = "|";
+        const result = LineParser.parseLine(input);
+        expect(result.type).toBe(SongLine.Type.Bars);
+        expect(result.bars).toEqual([]);
+      });
+
+      it("should parse multiple bars with chords", () => {
+        const input = "|[ch]Am[/ch] | [ch]C[/ch] | [ch]G[/ch] |";
+        const result = LineParser.parseLine(input);
+        expect(result.type).toBe(SongLine.Type.Bars);
+        expect(result.bars).toHaveLength(3);
+        expect(result.bars).toEqual([
+          { chords: [{ base: "A", modifiers: ["m"] }] },
+          { chords: [{ base: "C", modifiers: [] }] },
+          { chords: [{ base: "G", modifiers: [] }] },
+        ]);
+      });
+
+      it("should parse bars with no closing line", () => {
+        const input = "|[ch]Am[/ch] | [ch]C[/ch] | [ch]G[/ch] ";
+        const result = LineParser.parseLine(input);
+        expect(result.type).toBe(SongLine.Type.Bars);
+        expect(result.bars).toHaveLength(3);
+        expect(result.bars).toEqual([
+          { chords: [{ base: "A", modifiers: ["m"] }] },
+          { chords: [{ base: "C", modifiers: [] }] },
+          { chords: [{ base: "G", modifiers: [] }] },
+        ]);
+      });
+
+      it("should handle extra whitespace or missing bars", () => {
+        const input = "   | [ch]A[/ch] |    |";
+        const result = LineParser.parseLine(input);
+        expect(result.type).toBe(SongLine.Type.Bars);
+        expect(result.bars).toHaveLength(1);
+      });
+    });
+  });
+
+  describe("parseBarsLine Direct Tests", () => {
+    it("should parse a single bar with no chords", () => {
+      const lines = ["|"];
+      const result = LineParser.parseBarsLine(lines);
+      expect(result.type).toBe(SongLine.Type.Bars);
+      expect(result.bars).toEqual([]);
+    });
+
+    it("should parse multiple bars with chords", () => {
+      const lines = ["|[ch]Am[/ch] | [ch]C[/ch] | [ch]G[/ch] |"];
+      const result = LineParser.parseBarsLine(lines);
+      expect(result.type).toBe(SongLine.Type.Bars);
+      expect(result.bars).toHaveLength(3);
+      expect(result.bars).toEqual([
+        { chords: [{ base: "A", modifiers: ["m"] }] },
+        { chords: [{ base: "C", modifiers: [] }] },
+        { chords: [{ base: "G", modifiers: [] }] },
+      ]);
+    });
+
+    it("should handle extra whitespace or missing bars", () => {
+      const lines = ["   | [ch]A[/ch] |    |"];
+      const result = LineParser.parseBarsLine(lines);
+      expect(result.type).toBe(SongLine.Type.Bars);
+      expect(result.bars).toHaveLength(1);
+    });
   });
 
   describe("Core Extraction Methods", () => {

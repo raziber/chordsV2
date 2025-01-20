@@ -234,9 +234,25 @@ export class LineParser {
     return true;
   }
 
-  private static parseBarsLine(lines: string[]): SongLine.Line {
-    // Implementation needed
-    return { type: SongLine.Type.Bars };
+  static parseBarsLine(lines: string[]): SongLine.Line {
+    const joined = lines.join(" ");
+    let barStrings = joined.split("|").map((b) => b.trim());
+
+    // Remove leading empty bars
+    while (barStrings.length && !barStrings[0]) {
+      barStrings.shift();
+    }
+    // Remove trailing empty bars
+    while (barStrings.length && !barStrings[barStrings.length - 1]) {
+      barStrings.pop();
+    }
+
+    const bars = barStrings.map((segment) => {
+      const [_, chordPositions] = this.extractChords(segment);
+      const chords = chordPositions.map((pos) => pos.chord);
+      return { chords };
+    });
+    return { type: SongLine.Type.Bars, bars };
   }
 
   static extractTabs(line: string): [string, TabTypes.Strings] {
