@@ -19,8 +19,38 @@ export class TabParser {
   }
 
   private splitToParts(html: string): [string, string, string, string] {
-    // Implement logic to split HTML into parts
-    return ["", "", "", ""];
+    const preSongMetadataPart = this.findPreSongMetadata(html);
+    const preIntroPart = this.findPreIntro(html);
+    const songPart = this.findSong(html);
+    const postSongMetadataPart = this.findPostSongMetadata(html);
+
+    return [preSongMetadataPart, preIntroPart, songPart, postSongMetadataPart];
+  }
+
+  private findPreSongMetadata(html: string): string {
+    const preSongMetadataStartText = ',"tab":{"id":';
+    const preSongMetadataEndText = ',"content":"';
+    return "";
+  }
+
+  private findPreIntro(html: string): string {
+    const preIntroStartText = '{"content":"';
+    const preIntroEndText = "[Intro]";
+    // if not found, return empty string
+    return "";
+  }
+
+  private findSong(html: string): string {
+    const songStartText = "[Intro]";
+    const songStartTextAlt = '{"content":"';
+    const songEndText = '","revision_id';
+    return "";
+  }
+
+  private findPostSongMetadata(html: string): string {
+    const postSongMetadataStartText = ',"strummings":';
+    // don't know the ending yet
+    return "";
   }
 
   private parseParts(parts: [string, string, string, string]): SongTypes.Song {
