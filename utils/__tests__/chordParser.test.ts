@@ -1,5 +1,5 @@
 import { ChordParser } from "../chordParser";
-import { ChordTypes } from "../types";
+import { ChordTypes } from "../../types/types";
 
 describe("ChordParser", () => {
   describe("Basic Chord Parsing", () => {

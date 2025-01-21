@@ -26,10 +26,10 @@
  * // Returns: { type: SongLine.Type.Chord, content: [...chords] }
  */
 
-import { SongLine, TabTypes, ChordTypes } from "./types";
+import { SongLine, TabsTypes, ChordTypes } from "../types/types";
 import { ChordParser } from "./chordParser";
 
-export class LineParser {
+export default class LineParser {
   static parseLine(line: string): SongLine.Line {
     this.validateInput(line);
     const subLines = this.prepareSubLines(line);
@@ -277,17 +277,17 @@ export class LineParser {
     return { type: SongLine.Type.Bars, bars };
   }
 
-  static extractTabs(line: string): [string, TabTypes.Strings] {
+  static extractTabs(line: string): [string, TabsTypes.Strings] {
     const [stringName, rawFretsDetails, lineWithoutTabs] = this.findTab(line);
     const frets = this.parseFrets(rawFretsDetails);
 
     return [lineWithoutTabs, { [stringName]: frets }];
   }
 
-  static parseFrets(rawFretsDetails: string): TabTypes.Position[] {
-    const frets: TabTypes.Position[] = [];
+  static parseFrets(rawFretsDetails: string): TabsTypes.Position[] {
+    const frets: TabsTypes.Position[] = [];
     let totalOffset = 0;
-    const specialChars = Object.values(TabTypes.TabSpecialChar).sort(
+    const specialChars = Object.values(TabsTypes.TabSpecialChar).sort(
       (a, b) => b.length - a.length
     );
 
@@ -316,7 +316,7 @@ export class LineParser {
       for (const sc of specialChars) {
         if (rawFretsDetails.substr(i, sc.length) === sc) {
           frets.push({
-            fret: sc as TabTypes.TabSpecialChar,
+            fret: sc as TabsTypes.TabSpecialChar,
             position: i - totalOffset,
           });
           i += sc.length - 1;
@@ -401,14 +401,16 @@ export class LineParser {
       if (content.tabs) {
         if (!combined.tabs) combined.tabs = {};
         Object.keys(content.tabs).forEach((stringName) => {
-          if (!(combined.tabs as TabTypes.Strings)[stringName])
-            (combined.tabs as TabTypes.Strings)[stringName] = [];
-          (content.tabs as TabTypes.Strings)[stringName].forEach((position) => {
-            (combined.tabs as TabTypes.Strings)[stringName].push({
-              fret: position.fret,
-              position: (combined.lyrics || "").length + position.position,
-            });
-          });
+          if (!(combined.tabs as TabsTypes.Strings)[stringName])
+            (combined.tabs as TabsTypes.Strings)[stringName] = [];
+          (content.tabs as TabsTypes.Strings)[stringName].forEach(
+            (position) => {
+              (combined.tabs as TabsTypes.Strings)[stringName].push({
+                fret: position.fret,
+                position: (combined.lyrics || "").length + position.position,
+              });
+            }
+          );
         });
       }
     });
@@ -435,5 +437,5 @@ interface LineFeatures {
 interface ExtractedLineContent {
   lyrics?: string;
   chords?: ChordTypes.Position[];
-  tabs?: TabTypes.Strings;
+  tabs?: TabsTypes.Strings;
 }

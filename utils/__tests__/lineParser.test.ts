@@ -1,5 +1,5 @@
 import { LineParser } from "../lineParser";
-import { SongLine } from "../types";
+import { SongLine } from "../../types/types";
 
 describe("LineParser", () => {
   describe("Main Function Chain", () => {

@@ -36,7 +36,7 @@ export namespace ChordTypes {
 }
 
 // Tab related types
-export namespace TabTypes {
+export namespace TabsTypes {
   export type StringName =
     | "C"
     | "C#"
@@ -109,10 +109,30 @@ export namespace SongLine {
     lyrics?: string;
     chords?: ChordTypes.Position[];
     bars?: ChordTypes.Bar[];
-    tabs?: TabTypes.Strings;
+    tabs?: TabsTypes.Strings;
     hasClosingBar?: boolean;
     repeats?: number;
     comments?: string;
+  }
+}
+
+export namespace SongTypes {
+  export interface Metadata {
+    title: string;
+    artist: string;
+    album: string;
+    year: string;
+  }
+
+  export interface Section {
+    title: string;
+    lines: SongLine.Line[];
+  }
+
+  export interface Song {
+    metadata: Metadata;
+    preIntro: string;
+    song: Section[];
   }
 }
 

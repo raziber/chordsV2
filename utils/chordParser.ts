@@ -1,4 +1,4 @@
-import { ChordTypes } from "./types";
+import { ChordTypes } from "@/types/types";
 import { MODIFIERS } from "./chordModifiers";
 
 export class ChordParser {
