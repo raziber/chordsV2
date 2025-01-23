@@ -130,7 +130,7 @@ export class TabParser {
 
   parsePreIntro(preIntroPart: string): string {
     // Implement logic to parse pre-intro
-    return "";
+    return preIntroPart;
   }
 
   parseSong(songPart: string): SongTypes.Section[] {

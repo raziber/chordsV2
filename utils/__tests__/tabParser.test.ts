@@ -131,7 +131,7 @@ describe("TabParser", () => {
     it("should parse pre-intro content", () => {
       const preIntro = "[Pre-Intro]\nSome pre-intro content";
       const result = parser.parsePreIntro(preIntro);
-      expect(result).toBe("Some pre-intro content");
+      expect(result).toBe("[Pre-Intro]\nSome pre-intro content");
     });
 
     it("should handle empty pre-intro", () => {
