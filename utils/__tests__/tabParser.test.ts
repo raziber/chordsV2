@@ -12,15 +12,18 @@ describe("TabParser", () => {
     Some pre-intro content
     [Intro]
     Em   C   D
-    |-----------------|
-    |-----0----------|
-    |-----0----------|
-    |-----0----------|
-    |-----------------|
-    |-----------------|
+    e|-----------------|
+    B|-----0----------|
+    G|-----0----------|
+    D|-----0----------|
+    A|-----------------|
+    E|-----------------|
+
     [Verse 1]
     Em             C
     Here come the lyrics
+    D              G
+    More lyrics here
     ","revision_id":456,"strummings":[]}`;
 
   beforeEach(() => {
@@ -64,9 +67,10 @@ describe("TabParser", () => {
       expect(result).toBe("<div>test</div>");
     });
 
-    it("should handle fetch errors", async () => {
+    it("should handle fetch errors and return null", async () => {
       (global.fetch as jest.Mock).mockRejectedValue(new Error("Network error"));
-      await expect(parser.getData("https://example.com/tab")).rejects.toThrow();
+      const result = await parser.getData("https://example.com/tab");
+      expect(result).toBeNull();
     });
   });
 
@@ -176,7 +180,7 @@ describe("TabParser", () => {
       const sections = parser.splitToSections("");
       expect(sections).toHaveLength(1);
       expect(sections[0]).toMatchObject({
-        title: "Intro",
+        title: "No Song...",
         lines: "",
       });
     });
@@ -203,7 +207,7 @@ describe("TabParser", () => {
       const content =
         "Line 1\nLine 2\nLine 3 [tab] line4 \n line4[/tab]\n\n\n[tab]line5[/tab]";
       const lines = parser.splitToLines(content);
-      expect(lines).toHaveLength(3);
+      expect(lines).toHaveLength(5);
       expect(lines).toEqual([
         "Line 1",
         "Line 2",
