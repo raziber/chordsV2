@@ -8,7 +8,8 @@ export default class HtmlUtils {
 
   static simplifyNewlines(html: string): string {
     if (!html) return "";
-    return html.replace(/\r/g, "\n");
+    // First replace all \r\n with \n, then replace any remaining \r with \n
+    return html.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
   }
 
   static stripTags(html: string): string {
