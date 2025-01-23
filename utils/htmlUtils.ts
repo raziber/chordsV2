@@ -6,6 +6,11 @@ export default class HtmlUtils {
     return he.decode(html);
   }
 
+  static simplifyNewlines(html: string): string {
+    if (!html) return "";
+    return html.replace(/\r/g, "\n");
+  }
+
   static stripTags(html: string): string {
     if (!html) return "";
     return html.replace(/<[^>]*>/g, "");

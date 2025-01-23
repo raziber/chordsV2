@@ -5,7 +5,27 @@ import { Ionicons } from "@expo/vector-icons";
 import { ThemedText } from "./ThemedText";
 import { RawSearchResult } from "@/utils/searchParser";
 import { usePlayer } from "@/contexts/PlayerContext";
-import { fetchAndParseTab } from "@/utils/tabParser";
+import { TabParser } from "@/utils/tabParser";
+import { SongTypes } from "@/types/types";
+
+const logParsedTab = (parsedTab: SongTypes.Song | null) => {
+  if (!parsedTab) {
+    console.log("No tab parsed");
+    return;
+  }
+
+  console.log("\n=== Parsed Tab ===");
+  console.log("Metadata:", parsedTab.metadata);
+  console.log("Pre-Intro:", parsedTab.preIntro);
+  console.log("\nSections:");
+  parsedTab.song.forEach((section, i) => {
+    console.log(`\n[${section.title}]`);
+    section.lines.forEach((line) => {
+      console.log(JSON.stringify(line));
+    });
+  });
+  console.log("================\n");
+};
 
 interface Props {
   result: RawSearchResult;
@@ -14,6 +34,7 @@ interface Props {
 export function SearchResultItem({ result }: Props) {
   const { colors } = useTheme();
   const { setCurrentTrack, setIsExpanded, setIsLoading } = usePlayer();
+  const tabParser = new TabParser();
 
   const handlePress = () => {
     // First set the basic track info and expand
@@ -28,10 +49,11 @@ export function SearchResultItem({ result }: Props) {
     const ANIMATION_DURATION = 500; // slightly longer than animation to be safe
 
     Promise.all([
-      fetchAndParseTab(result.tab_url),
+      tabParser.parseTab(result.tab_url),
       new Promise((resolve) => setTimeout(resolve, ANIMATION_DURATION)),
     ])
       .then(([parsedTab]) => {
+        logParsedTab(parsedTab);
         setCurrentTrack({
           ...result,
           parsedTab,

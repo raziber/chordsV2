@@ -184,6 +184,26 @@ describe("TabParser", () => {
         lines: "",
       });
     });
+
+    it("should not treat [ch] and [tab] tags as section titles", () => {
+      const songContent =
+        "[Verse 1]\nif i add this[ch]Em[/ch] [ch]C[/ch] [ch]D[/ch]\nSome lyrics\n[tab]|-3-2-1-|[/tab]\n[Chorus]\nMore content";
+
+      console.log("\n=== Test Input ===");
+      console.log("Content:", songContent);
+
+      const sections = parser.splitToSections(songContent);
+      console.log("\n=== Raw Sections ===");
+      console.dir(sections, { depth: null });
+
+      expect(sections).toHaveLength(2);
+      expect(sections[0].title).toBe("Verse 1");
+      expect(sections[1].title).toBe("Chorus");
+
+      // Verify the special tags are preserved in the lines
+      expect(sections[0].lines).toContain("[ch]Em[/ch] [ch]C[/ch] [ch]D[/ch]");
+      expect(sections[0].lines).toContain("[tab]|-3-2-1-|[/tab]");
+    });
   });
 
   describe("parseSection", () => {
@@ -220,6 +240,34 @@ describe("TabParser", () => {
     it("should handle empty content", () => {
       const lines = parser.splitToLines("");
       expect(lines).toHaveLength(0);
+    });
+
+    it("should properly detect and preserve tab content", () => {
+      const tabContent = `
+        Em C D
+        [tab]
+        e|---0---3---|
+        B|-----5-----|
+        G|---0-------|
+        D|---0-------|
+        A|-----------|
+        E|-----------|
+        [/tab]
+        Am F C
+      `;
+
+      const lines = parser.splitToLines(tabContent);
+
+      // Verify tab content is preserved as one unit
+      const tabLine = lines.find((line) => line.includes("e|---0---3---"));
+      expect(tabLine).toBeDefined();
+      expect(tabLine).toContain("e|---0---3---");
+      expect(tabLine).toContain("B|-----5-----");
+      expect(tabLine).toContain("G|---0-------");
+
+      // Verify non-tab content is split normally
+      expect(lines).toContain("Em C D");
+      expect(lines).toContain("Am F C");
     });
   });
 });

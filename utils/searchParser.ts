@@ -74,7 +74,8 @@ export default class Search {
     try {
       // Only decode HTML once
       const cleanHtml = HtmlUtils.decode(htmlText);
-      return this.extractResults(cleanHtml);
+      const simplifiedHtml = HtmlUtils.simplifyNewlines(cleanHtml);
+      return this.extractResults(simplifiedHtml);
     } catch (error) {
       console.error("Search parsing error:", error);
       return [];

@@ -14,7 +14,8 @@ export class TabParser {
     try {
       const response = await fetch(url);
       const html = await response.text();
-      return HtmlUtils.decode(html);
+      const cleanedHtml = HtmlUtils.decode(html);
+      return HtmlUtils.simplifyNewlines(cleanedHtml);
     } catch (error) {
       console.error("Error fetching data:", error);
       return null;
@@ -151,18 +152,19 @@ export class TabParser {
     const sections = this.extractSections(content);
     return sections.length > 0
       ? sections
-      : [{ title: "Intro", lines: content.trim() }];
+      : [{ title: "Intro", lines: content }];
   }
 
   private extractSections(content: string): { title: string; lines: string }[] {
-    const sectionRegex = /\[(.*?)\]([^[]*)/g;
+    const sectionRegex =
+      /\[(?!(?:\/)?(?:ch|tab)\])([^\]]+)\]([\s\S]*?)(?=\[(?!(?:\/)?(?:ch|tab)\])[^\]]+\]|$)/g;
     const sections: { title: string; lines: string }[] = [];
     let match;
 
     while ((match = sectionRegex.exec(content)) !== null) {
       sections.push({
         title: match[1].trim(),
-        lines: match[2],
+        lines: match[2].replace(/^\n+|\n+$/g, ""),
       });
     }
 
