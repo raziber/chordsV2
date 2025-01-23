@@ -1,4 +1,4 @@
-import { LineParser } from "../lineParser";
+import LineParser from "../lineParser";
 import { SongLine } from "../../types/types";
 
 describe("LineParser", () => {
