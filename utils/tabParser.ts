@@ -10,7 +10,7 @@ export class TabParser {
     return this.parseParts(this.splitToParts(data));
   }
 
-  private async getData(url: string): Promise<string> {
+  async getData(url: string): Promise<string> {
     const response = await fetch(url);
     const html = await response.text();
     const decodedHtml = HtmlUtils.decode(html);
@@ -18,7 +18,7 @@ export class TabParser {
     return decodedHtml;
   }
 
-  private splitToParts(html: string): [string, string, string, string] {
+  splitToParts(html: string): [string, string, string, string] {
     const preSongMetadataPart = this.findPreSongMetadata(html);
     const preIntroPart = this.findPreIntro(html);
     const songPart = this.findSong(html);
@@ -53,7 +53,7 @@ export class TabParser {
     return "";
   }
 
-  private parseParts(parts: [string, string, string, string]): SongTypes.Song {
+  parseParts(parts: [string, string, string, string]): SongTypes.Song {
     const [preSongMetadataPart, preIntroPart, songPart, postSongMetadataPart] =
       parts;
 
@@ -71,7 +71,7 @@ export class TabParser {
     };
   }
 
-  private parseMetadata(
+  parseMetadata(
     preSongMetadataPart: string,
     postSongMetadataPart: string
   ): SongTypes.Metadata {
@@ -84,12 +84,12 @@ export class TabParser {
     };
   }
 
-  private parsePreIntro(preIntroPart: string): string {
+  parsePreIntro(preIntroPart: string): string {
     // Implement logic to parse pre-intro
     return "";
   }
 
-  private parseSong(songPart: string): SongTypes.Section[] {
+  parseSong(songPart: string): SongTypes.Section[] {
     let parsedSections: SongTypes.Section[] = [];
 
     const sections = this.splitToSections(songPart);
@@ -99,17 +99,12 @@ export class TabParser {
     return parsedSections;
   }
 
-  private splitToSections(
-    songPart: string
-  ): Array<{ title: string; lines: string }> {
+  splitToSections(songPart: string): Array<{ title: string; lines: string }> {
     // Implement logic to split song part into sections
     return [{ title: "Intro", lines: "" }];
   }
 
-  private parseSection(section: {
-    title: string;
-    lines: string;
-  }): SongTypes.Section {
+  parseSection(section: { title: string; lines: string }): SongTypes.Section {
     const parsedLines: SongLine.Line[] = [];
     const lines = this.splitToLines(section.lines);
     lines.forEach((line) => {
@@ -122,7 +117,7 @@ export class TabParser {
     };
   }
 
-  private splitToLines(section: string): string[] {
+  splitToLines(section: string): string[] {
     // Implement logic to split section into lines
     return [];
   }
