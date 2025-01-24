@@ -96,9 +96,15 @@ describe("LineParser", () => {
 
         expect(result.type).toBe(SongLine.Type.ChordsAndLyrics);
         expect(result.lyrics).toBe("I found a love for me");
-        expect(result.chords).toContain([
-          { chord: { base: "G", modifiers: [] }, position: 11 },
-          { chord: { base: "E", modifiers: ["m"] }, position: 21 },
+        expect(result.chords).toEqual([
+          {
+            chord: { base: "G", bass: undefined, modifiers: [] },
+            position: 11,
+          },
+          {
+            chord: { base: "E", bass: undefined, modifiers: ["m"] },
+            position: 21,
+          },
         ]);
       });
     });

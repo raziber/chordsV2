@@ -94,35 +94,19 @@ export default class LineParser {
   private static extractContentFromLines(
     lines: string[]
   ): ExtractedLineContent[] {
-    console.log("=== Start extractContentFromLines ===");
-    console.log("Input lines:", lines);
-
     const results = lines.map((line, index) => {
-      console.log(`\nProcessing line ${index + 1}:`, line);
-
       const [noTabsLine, tabs] = this.extractTabs(line);
-      console.log("After tab extraction:", {
-        remainingLine: noTabsLine,
-        extractedTabs: tabs,
-      });
 
       const [noChordsLine, chords] = this.extractChords(noTabsLine);
-      console.log("After chord extraction:", {
-        remainingLine: noChordsLine,
-        extractedChords: chords.map((c) => c.chord.base),
-      });
 
       const lyrics = this.extractLyrics(
         this.removeSpecialCharacters(noChordsLine)
       );
-      console.log("Final lyrics:", lyrics);
 
       const result = { lyrics, chords, tabs };
-      console.log(`Line ${index + 1} result:`, result);
       return result;
     });
 
-    console.log("=== End extractContentFromLines ===");
     return results;
   }
 
@@ -386,9 +370,15 @@ export default class LineParser {
       lineWithoutChords += segment;
       chordlessIndex += segment.length; // we've added that many chars ignoring chord tags
 
-      // The center of the chord is chordlessIndex + floor(chordText.length / 2)
-      const position = chordlessIndex + Math.floor(chordText.length / 2);
-      chords.push({ chord: ChordParser.parseChord(chordText), position });
+      // Now we calculate the chord center offset
+      const chordCenter = chordlessIndex + Math.floor(chordText.length / 2);
+      chords.push({
+        chord: ChordParser.parseChord(chordText),
+        position: chordCenter,
+      });
+
+      // Treat the chord as occupying its own length in the chordlessIndex.
+      chordlessIndex += chordText.length;
 
       // Advance lastIndex past "[ch]...[/ch]"
       lastIndex = matchStart + matchLength;
