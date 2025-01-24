@@ -382,19 +382,19 @@ describe("LineParser", () => {
     it("should return matched string name, frets, and clipped line", () => {
       const input = "E|---3--| Hello";
       const result = LineParser.findTab(input);
-      expect(result).toEqual(["E", "---3--", "Hello"]);
+      expect(result).toEqual(["E", "---3--", " Hello"]);
     });
 
     it("should remove trailing pipe from the rawFretsDetails", () => {
       const input = "A|----5--| more stuff";
       const result = LineParser.findTab(input);
-      expect(result).toEqual(["A", "----5--", "more stuff"]);
+      expect(result).toEqual(["A", "----5--", " more stuff"]);
     });
 
     it("should find tabs even after lyrics", () => {
       const input = " more stuff A|----5--|";
       const result = LineParser.findTab(input);
-      expect(result).toEqual(["A", "----5--", "more stuff"]);
+      expect(result).toEqual(["A", "----5--", " more stuff "]);
     });
   });
 });

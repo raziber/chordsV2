@@ -94,15 +94,36 @@ export default class LineParser {
   private static extractContentFromLines(
     lines: string[]
   ): ExtractedLineContent[] {
-    return lines.map((line) => {
+    console.log("=== Start extractContentFromLines ===");
+    console.log("Input lines:", lines);
+
+    const results = lines.map((line, index) => {
+      console.log(`\nProcessing line ${index + 1}:`, line);
+
       const [noTabsLine, tabs] = this.extractTabs(line);
+      console.log("After tab extraction:", {
+        remainingLine: noTabsLine,
+        extractedTabs: tabs,
+      });
+
       const [noChordsLine, chords] = this.extractChords(noTabsLine);
+      console.log("After chord extraction:", {
+        remainingLine: noChordsLine,
+        extractedChords: chords.map((c) => c.chord.base),
+      });
+
       const lyrics = this.extractLyrics(
         this.removeSpecialCharacters(noChordsLine)
       );
+      console.log("Final lyrics:", lyrics);
 
-      return { lyrics, chords, tabs };
+      const result = { lyrics, chords, tabs };
+      console.log(`Line ${index + 1} result:`, result);
+      return result;
     });
+
+    console.log("=== End extractContentFromLines ===");
+    return results;
   }
 
   private static readonly LINE_PATTERN_TO_TYPE: Record<string, SongLine.Type> =
@@ -333,33 +354,53 @@ export default class LineParser {
 
   static findTab(line: string): [string, string, string] {
     const match = line.match(this.TAB_STRING_REGEX);
-    if (!match) return ["", "", line.trim()]; // Trim if no match is found
+    if (!match) return ["", "", line]; // return if no match is found
 
-    if (match.length < 3) return ["", "", line.trim()]; // Ensure safe destructuring
+    if (match.length < 3) return ["", "", line]; // Ensure safe destructuring
 
     const stringName = match[1];
     const rawFretsDetails = match[2].replace(/\|$/, ""); // Remove trailing '|'
-    const lineWithoutTabs = line.replace(match[0], "").trim(); // Remove match & trim
+    const lineWithoutTabs = line.replace(match[0], ""); // Remove match
 
     return [stringName, rawFretsDetails, lineWithoutTabs];
   }
 
   private static extractChords(line: string): [string, ChordTypes.Position[]] {
     const chords: ChordTypes.Position[] = [];
-    let lineWithoutChords = line;
-    let totalOffset = 0;
-    line.replace(/\[ch\](.*?)\[\/ch\]/g, (match, chord, index) => {
-      const position = Math.floor(index + chord.length / 2 + totalOffset);
-      totalOffset += chord.length;
-      chords.push({ chord: ChordParser.parseChord(chord), position });
-      lineWithoutChords = lineWithoutChords.replace(
-        match,
-        "".repeat(match.length)
-      );
-      return match;
-    });
+    let lineWithoutChords = "";
+    let chordlessIndex = 0; // tracks how many visible chars (ignoring chord tags) we've appended
 
-    // Preserve the original spacing
+    // We'll find all [ch]chordText[/ch] with a global regex
+    const chordRegex = /\[ch\](.*?)\[\/ch\]/g;
+    let lastIndex = 0;
+    let match: RegExpExecArray | null;
+
+    while ((match = chordRegex.exec(line)) !== null) {
+      const chordText = match[1]; // e.g. "Em"
+      const matchStart = match.index; // index of "[ch]" in the original line
+      const matchLength = match[0].length; // length of "[ch]...[/ch]"
+
+      // Append everything from the end of the previous match up to this chord to lineWithoutChords
+      // (This preserves all whitespace between chords.)
+      const segment = line.substring(lastIndex, matchStart);
+      lineWithoutChords += segment;
+      chordlessIndex += segment.length; // we've added that many chars ignoring chord tags
+
+      // The center of the chord is chordlessIndex + floor(chordText.length / 2)
+      const position = chordlessIndex + Math.floor(chordText.length / 2);
+      chords.push({ chord: ChordParser.parseChord(chordText), position });
+
+      // Advance lastIndex past "[ch]...[/ch]"
+      lastIndex = matchStart + matchLength;
+    }
+
+    // Append anything that remains after the last chord match
+    if (lastIndex < line.length) {
+      const remainder = line.substring(lastIndex);
+      lineWithoutChords += remainder;
+      chordlessIndex += remainder.length;
+    }
+
     return [lineWithoutChords, chords];
   }
 
