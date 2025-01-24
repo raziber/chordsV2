@@ -33,7 +33,9 @@ export default class LineParser {
   static parseLine(line: string): SongLine.Line {
     this.validateInput(line);
     const subLines = this.prepareSubLines(line);
-    return this.parseProcessedSubLines(subLines);
+    const result = this.parseProcessedSubLines(subLines);
+
+    return result;
   }
 
   private static prepareSubLines(line: string): string[] {
@@ -372,6 +374,7 @@ export default class LineParser {
 
       // Now we calculate the chord center offset
       const chordCenter = chordlessIndex + Math.floor(chordText.length / 2);
+
       chords.push({
         chord: ChordParser.parseChord(chordText),
         position: chordCenter,
@@ -408,7 +411,7 @@ export default class LineParser {
   ): ExtractedLineContent {
     const combined: ExtractedLineContent = {};
 
-    contents.forEach((content) => {
+    contents.forEach((content, index) => {
       if (content.lyrics) {
         if (!combined.lyrics || combined.lyrics.length === 0) {
           combined.lyrics = content.lyrics.trimEnd();
@@ -420,12 +423,14 @@ export default class LineParser {
       if (content.chords) {
         if (!combined.chords) combined.chords = [];
         content.chords.forEach((chord) => {
+          const newPosition = Math.max(
+            (combined.lyrics || "").length + chord.position,
+            combined.chords?.[combined.chords.length - 1]?.position || 0
+          );
+
           combined.chords!.push({
             chord: chord.chord,
-            position: Math.max(
-              (combined.lyrics || "").length + chord.position,
-              combined.chords?.[combined.chords.length - 1]?.position || 0
-            ),
+            position: newPosition,
           });
         });
       }

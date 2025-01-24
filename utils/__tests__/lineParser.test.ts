@@ -91,7 +91,7 @@ describe("LineParser", () => {
 
       it("should preserve whitespace between chords", () => {
         const input =
-          "           [ch]G[/ch]        [ch]Em[/ch]\nI found a love for me";
+          "          [ch]G[/ch]        [ch]Em[/ch]\nI found a love for me";
         const result = LineParser.parseLine(input);
 
         expect(result.type).toBe(SongLine.Type.ChordsAndLyrics);
@@ -99,11 +99,11 @@ describe("LineParser", () => {
         expect(result.chords).toEqual([
           {
             chord: { base: "G", bass: undefined, modifiers: [] },
-            position: 11,
+            position: 10,
           },
           {
             chord: { base: "E", bass: undefined, modifiers: ["m"] },
-            position: 21,
+            position: 20,
           },
         ]);
       });
