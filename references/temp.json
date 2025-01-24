@@ -1,0 +1,52 @@
+{
+  "data": {
+    "id": 1956589,
+    "song_id": 1710759,
+    "song_name": "Perfect",
+    "artist_id": 30232,
+    "artist_name": "Ed Sheeran",
+    "type": "Chords",
+    "part": "",
+    "version": 1,
+    "votes": 48732,
+    "difficulty": "novice",
+    "rating": 4.86138,
+    "date": "1488453515",
+    "status": "approved",
+    "preset_id": 18913,
+    "tab_access_type": "public",
+    "tp_version": 0,
+    "tonality_name": "Ab",
+    "version_description": "",
+    "verified": 0,
+    "recording": {
+      "is_acoustic": 0,
+      "tonality_name": "",
+      "performance": null,
+      "recording_artists": [],
+      "video_urls": null
+    },
+    "album_cover": {
+      "has_album_cover": true,
+      "web_album_cover": {
+        "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/0/0f8b9bf9c443adca6fa05d958962f30a78cfcec4/cover.jpg@300"
+      }
+    },
+    "artist_cover": {
+      "has_artist_cover": true,
+      "web_artist_cover": {
+        "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/d/d6e9af040ded2c2527e4e3aa70be2238/primary-cover.jpg@300"
+      }
+    },
+    "artist_url": "https://www.ultimate-guitar.com/artist/ed_sheeran_30232",
+    "tab_url": "https://tabs.ultimate-guitar.com/tab/ed-sheeran/perfect-chords-1956589",
+    "date_update": "1679839047",
+    "user_id": 1474302,
+    "user_iq": 2287,
+    "username": "LYNX-Music",
+    "type_name": "Chords",
+    "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/ed-sheeran/perfect-guitar-pro-2364703"
+  },
+  "backing_track_tip": false,
+  "tab_view": { "wiki_tab": {} }
+}

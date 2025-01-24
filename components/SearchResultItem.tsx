@@ -14,17 +14,17 @@ const logParsedTab = (parsedTab: SongTypes.Song | null) => {
     return;
   }
 
-  console.log("\n=== Parsed Tab ===");
-  console.log("Metadata:", parsedTab.metadata);
-  console.log("Pre-Intro:", parsedTab.preIntro);
-  console.log("\nSections:");
-  parsedTab.song.forEach((section, i) => {
-    console.log(`\n[${section.title}]`);
-    section.lines.forEach((line) => {
-      console.log(JSON.stringify(line));
-    });
-  });
-  console.log("================\n");
+  // console.log("\n=== Parsed Tab ===");
+  // console.log("Metadata:", parsedTab.metadata);
+  // console.log("Pre-Intro:", parsedTab.preIntro);
+  // console.log("\nSections:");
+  // parsedTab.song.forEach((section, i) => {
+  //   console.log(`\n[${section.title}]`);
+  //   section.lines.forEach((line) => {
+  //     console.log(JSON.stringify(line));
+  //   });
+  // });
+  // console.log("================\n");
 };
 
 interface Props {

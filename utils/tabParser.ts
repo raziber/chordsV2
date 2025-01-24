@@ -40,6 +40,7 @@ export class TabParser {
       preSongMetadataEndText,
       html
     );
+
     if (match[0]) {
       return '"id":' + match[0];
     }
@@ -120,13 +121,32 @@ export class TabParser {
     preSongMetadataPart: string,
     postSongMetadataPart: string
   ): SongTypes.Metadata {
-    // Implement logic to parse metadata
-    return {
-      title: "",
-      artist: "",
-      album: "",
-      year: "",
-    };
+    try {
+      // Combine and clean up the JSON string
+      const jsonStr = '{"data":{' + preSongMetadataPart + "}}}";
+      console.log(jsonStr);
+      // Parse the JSON string into an object
+      const data = JSON.parse(jsonStr);
+      console.log(JSON.stringify(data));
+
+      return {
+        title: data.song_name || "",
+        artist: data.artist_name || "",
+        album: "", // Add if available in the data
+        year: data.date
+          ? new Date(data.date * 1000).getFullYear().toString()
+          : "",
+        // You can add more metadata fields here as needed
+      };
+    } catch (error) {
+      console.error("Error parsing metadata:", error);
+      return {
+        title: "",
+        artist: "",
+        album: "",
+        year: "",
+      };
+    }
   }
 
   parsePreIntro(preIntroPart: string): string {
