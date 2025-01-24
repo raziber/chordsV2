@@ -53,27 +53,27 @@ describe("HtmlUtils", () => {
 
   describe("simplifyNewlines", () => {
     it("should convert \\r\\n to \\n", () => {
-      const input = "Hello\r\nWorld";
+      const input = "Hello\\r\\nWorld";
       const expected = "Hello\nWorld";
       expect(HtmlUtils.simplifyNewlines(input)).toBe(expected);
     });
 
     it("should convert \\r to \\n", () => {
-      const input = "Hello\rWorld";
+      const input = "Hello\\rWorld";
       const expected = "Hello\nWorld";
       expect(HtmlUtils.simplifyNewlines(input)).toBe(expected);
     });
 
     it("should handle mixed line endings in complex text", () => {
       const input =
-        "[Intro]\r\n[ch]G[/ch]\r\n\r\n[Verse 1]\r\n[tab]          [ch]G[/ch]        [ch]Em[/ch]\r\nI found a love for me";
+        "[Intro]\\r\\n[ch]G[/ch]\\r\\n\\r\\n[Verse 1]\\r\\n[tab]          [ch]G[/ch]        [ch]Em[/ch]\\r\\nI found a love for me";
       const expected =
         "[Intro]\n[ch]G[/ch]\n\n[Verse 1]\n[tab]          [ch]G[/ch]        [ch]Em[/ch]\nI found a love for me";
       expect(HtmlUtils.simplifyNewlines(input)).toBe(expected);
     });
 
     it("should handle mixed line endings", () => {
-      const input = "Hello\r\nWorld\rTest\nFinal";
+      const input = "Hello\\r\\nWorld\\rTest\\nFinal";
       const expected = "Hello\nWorld\nTest\nFinal";
       expect(HtmlUtils.simplifyNewlines(input)).toBe(expected);
     });
@@ -95,7 +95,7 @@ describe("HtmlUtils", () => {
     });
 
     it("should handle multiple consecutive line endings", () => {
-      const input = "Hello\r\r\rWorld";
+      const input = "Hello\\r\\r\\rWorld";
       const expected = "Hello\n\n\nWorld";
       expect(HtmlUtils.simplifyNewlines(input)).toBe(expected);
     });
