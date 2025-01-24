@@ -88,6 +88,19 @@ describe("LineParser", () => {
           ]),
         });
       });
+
+      it("should preserve whitespace between chords", () => {
+        const input =
+          "           [ch]G[/ch]        [ch]Em[/ch]\nI found a love for me";
+        const result = LineParser.parseLine(input);
+
+        expect(result.type).toBe(SongLine.Type.ChordsAndLyrics);
+        expect(result.lyrics).toBe("I found a love for me");
+        expect(result.chords).toContain([
+          { chord: { base: "G", modifiers: [] }, position: 11 },
+          { chord: { base: "E", modifiers: ["m"] }, position: 21 },
+        ]);
+      });
     });
 
     describe("Special Cases", () => {
