@@ -6,7 +6,6 @@ import { SongLine, SongTypes } from "@/types/types";
 export class TabParser {
   async parseTab(url: string): Promise<SongTypes.Song | null> {
     const data = await this.getData(url);
-    console.log("simplified JSON:", JSON.stringify(data));
     if (!data) return null;
     return this.parseParts(this.splitToParts(data));
   }
@@ -16,7 +15,6 @@ export class TabParser {
       const response = await fetch(url);
       const html = await response.text();
       const cleanedHtml = HtmlUtils.decode(html);
-      console.log("cleanedHtml JSON:", JSON.stringify(cleanedHtml));
       return HtmlUtils.simplifyNewlines(cleanedHtml);
     } catch (error) {
       console.error("Error fetching data:", error);
