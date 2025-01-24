@@ -373,7 +373,7 @@ export default class LineParser {
       chordlessIndex += segment.length; // we've added that many chars ignoring chord tags
 
       // Now we calculate the chord center offset
-      const chordCenter = chordlessIndex + Math.floor(chordText.length / 2);
+      const chordCenter = chordlessIndex + chordText.length / 2;
 
       chords.push({
         chord: ChordParser.parseChord(chordText),
