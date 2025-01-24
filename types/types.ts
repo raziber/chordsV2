@@ -118,10 +118,55 @@ export namespace SongLine {
 
 export namespace SongTypes {
   export interface Metadata {
-    title: string;
-    artist: string;
-    album: string;
-    year: string;
+    // must have
+    id: number;
+    song_id: number;
+    song_name: string;
+    artist_id: number;
+    artist_name: string;
+    votes: number;
+    type: string;
+    tab_url: string;
+
+    // optional
+    part?: string;
+    version?: number;
+    difficulty?: string;
+    rating?: number;
+    date?: string;
+    status?: string;
+    preset_id?: number;
+    tab_access_type?: string;
+    tp_version?: number;
+    tonality_name?: string;
+    version_description?: string;
+    verified?: number;
+    recording?: {
+      is_acoustic?: number;
+      tonality_name?: string;
+      performance?: any | null;
+      recording_artists?: any[];
+      video_urls?: any | null;
+    };
+    album_cover?: {
+      has_album_cover?: boolean;
+      web_album_cover?: {
+        small?: string;
+      };
+    };
+    artist_cover?: {
+      has_artist_cover?: boolean;
+      web_artist_cover?: {
+        small?: string;
+      };
+    };
+    artist_url?: string;
+    date_update?: string;
+    user_id?: number;
+    user_iq?: number;
+    username?: string;
+    type_name?: string;
+    best_pro_tab_url?: string;
   }
 
   export interface Section {

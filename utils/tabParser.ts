@@ -110,6 +110,8 @@ export class TabParser {
     const preIntro = this.parsePreIntro(preIntroPart);
     const song = this.parseSong(songPart);
 
+    console.log("Metadata:", JSON.stringify(metadata));
+
     return {
       metadata,
       preIntro,
@@ -124,27 +126,32 @@ export class TabParser {
     try {
       // Combine and clean up the JSON string
       const jsonStr = '{"data":{' + preSongMetadataPart + "}}}";
-      console.log(jsonStr);
       // Parse the JSON string into an object
       const data = JSON.parse(jsonStr);
-      console.log(JSON.stringify(data));
+
+      console.log("Data:", JSON.stringify(data));
 
       return {
-        title: data.song_name || "",
-        artist: data.artist_name || "",
-        album: "", // Add if available in the data
-        year: data.date
-          ? new Date(data.date * 1000).getFullYear().toString()
-          : "",
-        // You can add more metadata fields here as needed
+        song_name: data.data.song_name || "",
+        artist_name: data.data.artist_name || "",
+        id: data.data.id || 0,
+        artist_id: data.data.artist_id || 0,
+        votes: data.data.votes || 0,
+        type: data.data.type || "",
+        song_id: data.data.song_id || 0,
+        tab_url: data.data.tab_url || "",
       };
     } catch (error) {
       console.error("Error parsing metadata:", error);
       return {
-        title: "",
-        artist: "",
-        album: "",
-        year: "",
+        song_name: "",
+        artist_name: "",
+        id: 0,
+        artist_id: 0,
+        votes: 0,
+        type: "",
+        song_id: 0,
+        tab_url: "",
       };
     }
   }
