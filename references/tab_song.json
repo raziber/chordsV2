@@ -1,0 +1,1945 @@
+{
+  "config": {
+    "releaseVer": "ug-web_app_1.11.89",
+    "backendReleaseVer": "13.16.14",
+    "adsReleaseVer": "8_14_0",
+    "renderType": "react",
+    "urlFacebook": "https://www.ultimate-guitar.com/user/auth/oauth?service=facebook",
+    "urlGoogle": "https://www.ultimate-guitar.com/user/auth/oauth?service=google",
+    "urlApple": "https://www.ultimate-guitar.com/user/auth/oauth?service=apple",
+    "main_server": "ultimate-guitar.com",
+    "ps_server": "plus.ultimate-guitar.com",
+    "api_web_serv": "api-web.ultimate-guitar.com",
+    "static_server": "https://tabs.ultimate-guitar.com/static",
+    "statik_cache": "_ver1737134100",
+    "staticPrefix": "/static",
+    "requestSchema": "https",
+    "time": 1737158290000,
+    "isGDPRAvailable": false,
+    "isCcpaAvailable": false,
+    "user": {
+      "id": 3633583,
+      "uuid": 0,
+      "unified_id": "1.1734123905.817990904",
+      "session": {
+        "id": "1.1737158190.1737158290.28",
+        "expire_duration": 300,
+        "expire_duration_dispersion": [5000, 10000],
+        "enable_refresh": true,
+        "parsed_session": {
+          "version": 1,
+          "id": 1737158190,
+          "updated": 1737158290,
+          "number": 28
+        },
+        "is_renew_session": false
+      },
+      "username": "raziber",
+      "iq": "",
+      "contributorPower": 0,
+      "is_bot": false,
+      "is_banned": false
+    },
+    "isOfficeUser": false,
+    "isOfficeRequest": false,
+    "isWebp": false,
+    "isBot": false,
+    "is_mobile": false,
+    "is_tablet": false,
+    "isThemeMobile": false,
+    "isIe": false,
+    "isEs6": true,
+    "isAsia": false,
+    "isPaidMobWeb": false,
+    "newLayout": true,
+    "socketCluster": {
+      "serviceKey": "f0557aa8-2d06-43d9-9c16-f885bc710b97:main",
+      "channelPrefix": "f0557aa8-2d06-43d9-9c16-f885bc710b97:main#prod",
+      "hostname": "socketcluster.k8s.mu.se",
+      "port": 443,
+      "channelName": "36d0de0b2f704eed3bb1782fca783023"
+    },
+    "metricaId": 0,
+    "captcha_id": "6LfCo_8SAAAAALEMHnlK18j8IemlAdvmxwRnQe2v",
+    "stripeApiKey": "",
+    "country": "IL",
+    "countryCode": "IL",
+    "browserName": "Chrome",
+    "os": "Windows",
+    "platform": 1,
+    "browser": "{\"browser\":{\"name\":\"Chrome\",\"version\":\"131\",\"type\":\"browser\"},\"engine\":{\"name\":\"Blink\"},\"os\":{\"name\":\"Windows\",\"version\":{\"value\":\"10.0\",\"alias\":\"10\"}},\"device\":{\"type\":\"desktop\"}}",
+    "urlUgProAppIcon": "https://tabs.ultimate-guitar.com/static/public/ug/img/app_icons/icon_ug_pro.png",
+    "withCritical": false,
+    "analytics": {
+      "pageViewId": 1737158290138341,
+      "userTrackerId": "SwEKQWcQBw=="
+    },
+    "braintree": {
+      "environment": "production",
+      "tokenizationKey": "production_8htvrhhr_67vpx3rpxt6m5z7c",
+      "paypalClientId": "ASwoeikdyflPIKFAC3U34ewfFVRE5-_p6qc1TTQG9g_sHNs3RP5Sq3pE_e7V2p0VTi-nJQuIA5ApP1XH",
+      "googlePayClientId": "BCR2DN6TZPEKBZBZ"
+    },
+    "vimeo": {
+      "baseImagePath": "https://cdn.ustatik.com/s3/ug.video.warm/preview/"
+    },
+    "hasStaticCache": 1,
+    "rtAnalytics": {
+      "trackUrl": "https://stats.ultimate-guitar.com/components/ab/event",
+      "trackingEnabled": true,
+      "forceSendEvents": [
+        "Tab Favorite Add Click",
+        "Tab Rate Click",
+        "Tab View",
+        "Tab View 12s",
+        "Tab View 15s",
+        "Tab View 60s",
+        "Tab View 120s",
+        "Tab View 180s",
+        "View",
+        "View 15s",
+        "Tour Start"
+      ],
+      "tabToolLogging": true,
+      "samplerHeartbeat": 5,
+      "forceSendDebounceTimeout": 1000,
+      "bufferSize": 10
+    },
+    "xtz": {
+      "isActive": true,
+      "hasAccess": true,
+      "canToggle": false,
+      "feedbackChannel": null
+    },
+    "jinba": {
+      "customTimings": [],
+      "appLabel": "tab_page_text",
+      "appLabelExp": "null"
+    },
+    "metricaParams": {
+      "rights": 0,
+      "proRights": 0,
+      "coursesRights": 0,
+      "singRights": 0,
+      "u_id": "SwEKQWcQBw==",
+      "auth": "google",
+      "is_registered": 1,
+      "ab": {
+        "4488": 2,
+        "4701": 1,
+        "5241": 1,
+        "5544": 2,
+        "5631": 1,
+        "5643": 1,
+        "824": 2,
+        "857": 2,
+        "902": 2,
+        "923": 2,
+        "947": 1,
+        "950": 2,
+        "956": 1,
+        "965": 1,
+        "992": 2,
+        "1394": 2,
+        "1430": 3,
+        "1433": 2,
+        "1436": 2,
+        "1483": 2,
+        "1492": 2,
+        "1495": 2,
+        "1522": 2,
+        "1615": 2,
+        "1618": 2,
+        "1678": 2,
+        "1750": 2,
+        "1765": 2,
+        "1816": 2,
+        "1966": 3,
+        "2084": 2,
+        "2150": 1,
+        "2153": 2,
+        "2225": 1,
+        "2513": 3,
+        "2738": 2,
+        "3115": 3,
+        "3412": 1,
+        "3442": 2,
+        "3523": 2,
+        "3775": 2,
+        "3874": 2,
+        "3922": 2,
+        "4099": 2,
+        "4195": 2,
+        "4476": 2,
+        "4491": 2,
+        "4530": 2,
+        "4569": 2,
+        "4605": 2,
+        "4665": 2,
+        "4752": 2,
+        "4857": 2,
+        "4881": 3,
+        "5127": 2,
+        "5145": 2,
+        "5178": 2,
+        "5274": 2,
+        "5313": 2,
+        "5397": 2,
+        "5499": 1,
+        "5526": 2,
+        "5562": 2
+      },
+      "bookRights": 0,
+      "bookEduRights": 0,
+      "unified_id": "1.1734123905.817990904",
+      "session_id": "1.1737158190.1737158290.28"
+    }
+  },
+  "store": {
+    "offers": [],
+    "page": {
+      "data": {
+        "mobile_device": null,
+        "show_rate_layer": false,
+        "tab": {
+          "id": 8519,
+          "song_id": 29886,
+          "song_name": "Nothing Else Matters",
+          "artist_id": 954,
+          "artist_name": "Metallica",
+          "type": "Tabs",
+          "part": "",
+          "version": 1,
+          "votes": 4880,
+          "difficulty": "intermediate",
+          "rating": 4.7381299999999999528199623455293476581573486328125,
+          "date": "1004486400",
+          "status": "approved",
+          "preset_id": 9823,
+          "tab_access_type": "public",
+          "tp_version": 0,
+          "tonality_name": "Em",
+          "version_description": "",
+          "verified": 0,
+          "recording": {
+            "is_acoustic": 0,
+            "tonality_name": "",
+            "performance": null,
+            "recording_artists": []
+          },
+          "album_cover": {
+            "has_album_cover": true,
+            "web_album_cover": {
+              "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/a/a4e303636f65c7203e43a7170b4be48fde34f9f7/cover.jpg@300"
+            }
+          },
+          "artist_cover": {
+            "has_artist_cover": true,
+            "web_artist_cover": {
+              "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/6/621024bafd4212b4e8c58daad1b9b237/primary-cover.jpg@300"
+            }
+          },
+          "artist_url": "https://www.ultimate-guitar.com/artist/metallica_954",
+          "tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-8519",
+          "date_update": "1698797408",
+          "user_id": 0,
+          "user_iq": 0,
+          "username": "Unregistered",
+          "type_name": "Tab",
+          "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441"
+        },
+        "backing_track_tip": false,
+        "tab_view": {
+          "wiki_tab": {
+            "content": "[Intro]\r\n\r\n[tab]e|----------0--------|----------0--------|----------0--------|----------0-----7--|\r\nB|-------0-----0-----|-------0-----0-----|-------0-----0-----|-------0-----0-----|\r\nG|----0-----------0--|----0-----------0--|----0-----------0--|----0--------------|\r\nD|-------------------|-------------------|-------------------|-------------------|\r\nA|-------------------|-------------------|-------------------|-------------------|\r\nE|-0-----------------|-0-----------------|-0-----------------|-0-----------------|[/tab]\r\n\r\n[tab]e|-7-----------7p0---------|---------7---8---7h8p7\\5---7---5-\\-0---|\r\nB|-----0-----------0-------|-0-------0---0-------------0-----------|\r\nG|---------0-----------0---|-----0---------------------------------|\r\nD|-------------------------|---------------------------------------|\r\nA|-------------------------|---------------------------------------|\r\nE|-0-----------------------|-0-------------------------------------|[/tab]\r\n\r\n[tab]e|-------------2p0---------|-------------0---0---0---|\r\nB|-5-------5-------5-------|---------5-------5---5---|\r\nG|-----5---------------5---|-----5-----------5---5---|\r\nD|-------------------------|-------------------------|\r\nA|-0-----------------------|-0---------------0---2---|\r\nE|-------------------------|-------------------------|[/tab]\r\n\r\n[tab]e|-0-----------3p0-----0---|-0-----------0h5p0---------|\r\nB|-5-------5-------5---5---|-7-------7---------7p0-0h5-|\r\nG|-5-----5---5-------5-5---|-7-----7---7---------------|\r\nD|-------------------------|---------------------------|\r\nA|-3---3---------------3---|-5---5---------------------|\r\nE|-------------------------|---------------------------|[/tab]\r\n\r\n[tab]      NH------|\r\ne|----------12-------|----------0--------|----------0--------|----------0--------|\r\nB|-------12----0-----|-------0-----0-----|-------0-----0-----|-------0-----0-----|\r\nG|----12----------0--|----0-----------0--|----0-----------0--|----0-----------0--|\r\nD|-------------------|-------------------|-------------------|-------------------|\r\nA|-------------------|-------------------|-------------------|-------------------|\r\nE|-0-----------------|-0-----------------|-0-----------------|-0-----------------|[/tab]\r\n\r\n[tab]e|-------------7-----------|-------------------------|-------------7-----------|\r\nB|-------------8-----------|---------7-----------5---|-------------8-----------|\r\nG|-----------9-------------|---------7-----------5---|-----------9-------------|\r\nD|---------9---------------|-----7-----------5-------|---------9---------------|\r\nA|-------7-----------------|-5-----------3-----------|-------7-----------------|\r\nE|-0-----------------------|-------------------------|-0-----------------------|[/tab]\r\n\r\n[tab]e|-------------------------|-------------7-----------|-----5-----------3-------|\r\nB|---------7-----------5---|-------------8-----------|-------7-----------5-----|\r\nG|---------7-----------5---|-----------9-------------|---------7-----------5---|\r\nD|-----7-----------5-------|---------9---------------|-------------------------|\r\nA|-5-----------3-----------|-------7-----------------|-5-----------3-----------|\r\nE|-------------------------|-0-----------------------|-------------------------|[/tab]\r\n\r\n[tab]e|-----3-----------2-------|----------0--------|----------0--------|\r\nB|-------3-----------4-----|-------0-----0-----|-------0-----0-----|\r\nG|---------4-----------2---|----0-----------0--|----0-----------0--|\r\nD|-------------------------|-------------------|-------------------|\r\nA|-------------2-----------|-------------------|-------------------|\r\nE|-3-----------------------|-0-----------------|-0-----------------|[/tab]\r\n\r\n\r\n[Verse]\r\n\r\n[tab]e|-------------3-----0-----|-2-----3-----0-----------|\r\nB|---------0-----------0---|---------3-------3-------|\r\nG|-----0-----------0-----0-|-----------0-------0-----|\r\nD|-------------------------|-0---0-------------------|\r\nA|-------------------------|-------------3-----------|\r\nE|-0-----------------------|---------------------3-2-|\r\n           So close, no matter how far[/tab]\r\n\r\n[tab]e|-------------3-----0-----|-2-----------------------|\r\nB|---------0-----------0---|-------3-----3-----------|\r\nG|-----0-----------0-----0-|---------2p0-----0-------|\r\nD|-------------------------|-0---0-------------------|\r\nA|-------------------------|-------------3-----------|\r\nE|-0-----------------------|---------------------3-2-|\r\n           Couldn&#039;t be much more from the heart[/tab]\r\n\r\n[tab]e|-------------3-----0-----|-2-----3-----3-----------|---------3---0-----2-----|\r\nB|---------0-----------0---|---------3-------3-------|---------3---0-------0---|\r\nG|-----0-----------0-----0-|-----------0---------0---|-----0-------2-----------|\r\nD|-------------------------|-0---0-------------------|-------------------------|\r\nA|-------------------------|-------------3-----------|-------------2---2-------|\r\nE|-0-----------------------|-------------------------|-3-----------------------|\r\n            Forever trusting who we are                        and nothing else[/tab]\r\n\r\n[tab]e|-------------0-----------|-------------0-----------|\r\nB|---------0-------0-------|---------0-------0-------|\r\nG|-----0---------------0---|-----0-------------------|\r\nD|-------------------------|-------------------------|\r\nA|-------------------------|-------------------------|\r\nE|-0-----------------------|-0-------------------3-2-|\r\n   matters[/tab]\r\n\r\n\r\n[Chorus]\r\n\r\n[tab]e|-0-----0-----|-2-----2-2-2-3---2--0--2-|\r\nB|-1-----2-----|-3-----3-3-3-3---3--3--3-|\r\nG|-0-----2-----|-2-----2-2-2-2---2--2--2-|\r\nD|-2-----2-----|-0-----0-0-0-0---0--0--0-|\r\nA|-3-----0-----|-------------------------|\r\nE|-------------|-------------------------|\r\n   Never cared for what they do...[/tab]\r\n\r\n[tab]e|-0-----0-----|-2-----2-2-2-3---2--0--2-|\r\nB|-1-----2-----|-3-----3-3-3-3---3--3--3-|\r\nG|-0-----2-----|-2-----2-2-2-2---2--2--2-|\r\nD|-2-----2-----|-0-----0-0-0-0---0--0--0-|\r\nA|-3-----0-----|-------------------------|\r\nE|-------------|-------------------------|[/tab]\r\n\r\n[tab]e|-0-----0-----|-2-----2-2-2-0-----------|\r\nB|-1-----2-----|-3-----3-3-3-0-----------|\r\nG|-0-----2-----|-2-----2-2-2-0-----------|\r\nD|-2-----2-----|-0-----0-0-0-2-----------|\r\nA|-3-----0-----|-------------2-----------|\r\nE|-------------|-------------0-----------|[/tab]\r\n\r\n\r\n[Interlude]\r\n\r\n[tab]e|-12-------14-------|-15-------17-------|-8--------8--------|----------8--------|\r\nB|----12-------12----|----12-------12----|----5--------5-----|-------5-----5-----|\r\nG|-------------------|-------------------|-------5--------5--|----5-----------5\\-|\r\nD|-------------------|-------------------|-------------------|-------------------|\r\nA|-------------------|-------------------|-------------------|-0-----------------|\r\nE|-------------------|-------------------|-------------------|-------------------|[/tab]\r\n\r\n[tab]e|-0-----------0-----|0h2----------0-----|-0--0-----0--------|----------0--------|\r\nB|----1-----------1--|----3-----------3--|-12-12~~~-12~~~~---|-------0-----0-----|\r\nG|-------0-----------|-------2-----------|-------------------|----0-----------0--|\r\nD|-------------------|-------------------|-------------------|-------------------|\r\nA|-------------------|-------------------|-------------------|-------------------|\r\nE|-------------------|-------------------|-------------------|-0-----------------|[/tab]\r\n\r\n[tab]e|-12-------14-------|-15-------17-------|-8--------8--------|----------8--------|\r\nB|----12-------12----|----12-------12----|----5--------5-----|-------5-----5-----|\r\nG|-------------------|-------------------|-------5--------5--|----5-----------5\\-|\r\nD|-------------------|-------------------|-------------------|-------------------|\r\nA|-------------------|-------------------|-------------------|-0-----------------|\r\nE|-------------------|-------------------|-------------------|-------------------|[/tab]\r\n\r\n[tab]e|-0-----------0-----|0h2----------0-----|-0--0-----0--------|----------0---------|\r\nB|----1-----------1--|----3-----------3--|-12-12~~~-12~~~~---|-------0-----0------|\r\nG|-------0-----------|-------2-----------|-------------------|----0---------------|\r\nD|-------------------|-------------------|-------------------|--------------------|\r\nA|-------------------|-------------------|-------------------|--------------------|\r\nE|-------------------|-------------------|-------------------|-0--------------3-2-|[/tab]\r\n\r\n\r\n[Interlude Solo]\r\n\r\n[tab]e|--------3-----3--5--5(7)5--5-----3--5---10--7--6(8)6--|\r\nB|--3--5-----5------------------5-----------------------|\r\nG|------------------------------------------------------|\r\nD|------------------------------------------------------|\r\nA|------------------------------------------------------|\r\nE|------------------------------------------------------|[/tab]\r\n\r\n[tab]e|--10--6(8)6---10--6(8)6---10--6(8)6---10--6(8)6---3-0-|\r\nB|------------------------------------------------------|\r\nG|------------------------------------------------------|\r\nD|------------------------------------------------------|\r\nA|------------------------------------------------------|\r\nE|------------------------------------------------------|[/tab]\r\n\r\n\r\n[Verse]\r\n\r\n[tab]e|-------------3-----0-----|-2---2-2-2-3-0---0-0-----|\r\nB|---------0-----------0---|-3---3-3-3-3-3---3-3-----|\r\nG|-----0-----------0-------|-2---2-2-2-2-0---0-0-----| x2\r\nD|-------------------------|-0---0-0-0-0-2---2-2-----|\r\nA|-------------------------|-------------3---3-3-----|\r\nE|-0-----------------------|---------------------3-2-|[/tab]\r\n\r\n[tab]e|-------------3-----0-----|-2---2-2-2-3-0-----------|---------3---2-----2-----|\r\nB|---------0-----------0---|-3---3-3-3-3-3---3-------|---------3---0-------0---|\r\nG|-----0-----------0-------|-2---2-2-2-2-0-------0---|-----0-------2-----------|\r\nD|-------------------------|-0---0-0-0-0-2-----------|-------------1-----------|\r\nA|-------------------------|-------------3-----------|-------------2---2-------|\r\nE|-0-----------------------|-------------------------|-3-----------------------|[/tab]\r\n\r\n\r\n[Solo]\r\n\r\n[tab]e|---------------------------|-------------------------------------|\r\nB|-15------15----------------|-------------------------------------|\r\nG|-14b16---14b16r14-12--14-12|-11-12-11----11-------------12-14-12-|\r\nD|---------------------------|----------14----12-14----------------|\r\nA|---------------------------|-------------------------------------|\r\nE|---------------------------|-------------------------------------|[/tab]\r\n\r\n[tab]e|-------12-------12---------------|--------------------------|\r\nB|----12-------12----15p14h12------|--15b17--r15-15-15--------|\r\nG|-14(16)---14(16)-----------------|--------------------------|\r\nD|---------------------------------|--------------------------|\r\nA|---------------------------------|--------------------------|\r\nE|---------------------------------|--------------------------|[/tab]\r\n\r\n[tab]e|-15(17)--15---14-15-|----15-14----14-15-14-12|--------------------|\r\nB|--------------------|-12-------12------------|-15-14-12-----------|\r\nG|--------------------|------------------------|-----------12-14-12-|\r\nD|--------------------|------------------------|--------------------|\r\nA|--------------------|------------------------|--------------------|\r\nE|--------------------|------------------------|--------------------|[/tab]\r\n\r\n[tab]e|-------------------------|-12-------------------------------|\r\nB|----------------------12-|-------12-15(17)15--12h15b17--r15-|\r\nG|-14(16)14-12----12-14(16)|----------------------------------|\r\nD|-------------14----------|----------------------------------|\r\nA|-------------------------|----------------------------------|\r\nE|-------------------------|----------------------------------|[/tab]\r\n\r\n[tab]e|------------------------------|\r\nB|-12h15p12~~~~~~\\7--5h7p5~~~~~~|\r\nG|------------------------------|\r\nD|------------------------------|\r\nA|------------------------------|\r\nE|------------------------------|[/tab]\r\n\r\n\r\n[Outro]\r\n\r\n[tab]e|----------0--------|----------0-----7--|-7-----------7p0---------|\r\nB|-------0-----0-----|-------0-----0-----|---------0-------0-------|\r\nG|----0-----------0--|----0--------------|-----0---------------0---|\r\nD|-------------------|-------------------|-------------------------|\r\nA|-------------------|-------------------|-------------------------|\r\nE|-0-----------------|-0-----------------|-0-----------------------|[/tab]\r\n\r\n[tab]e|---------7---8---7h8\\5---7-5-\\0--0--0-|\r\nB|---------0---0-----------0------------|\r\nG|-----0--------------------------------| x4\r\nD|--------------------------------------|\r\nA|--------------------------------------|\r\nE|-0----------------------------------0-|[/tab]\r\n\r\n\r\n************************************\r\n\r\n| h    Hammer-on\r\n| p    Pull-off\r\n| \\    Slide down\r\n| ~    Vibrato\r\n| (n)  Ghost note\r\n| b    Bend\r\n| r    Release\r\n| NH   Natural harmonic\r\n\r\n************************************",
+            "revision_id": 26,
+            "user_id": 3360025,
+            "username": "NSpen1",
+            "date": 1698797407
+          },
+          "contributors": [
+            {
+              "userid": 18155266,
+              "username": "blandmitch",
+              "usergroupid": 2,
+              "iq": 12
+            },
+            {
+              "userid": 23706381,
+              "username": "cameronthiele1",
+              "usergroupid": 2,
+              "iq": 12
+            },
+            {
+              "userid": 15687026,
+              "username": "chocosibita1",
+              "usergroupid": 3,
+              "iq": 12
+            },
+            {
+              "userid": 1869224,
+              "username": "evfidripiy",
+              "usergroupid": 2,
+              "iq": 121433
+            },
+            {
+              "userid": 726057,
+              "username": "Fox-x-x",
+              "usergroupid": 2,
+              "iq": 84347
+            },
+            {
+              "userid": 62039876,
+              "username": "george2tomlinson",
+              "usergroupid": 2,
+              "iq": 13
+            },
+            {
+              "userid": 10234845,
+              "username": "joseph.ross999",
+              "usergroupid": 2,
+              "iq": 22
+            },
+            {
+              "userid": 9290769,
+              "username": "mandelstamdavid",
+              "usergroupid": 2,
+              "iq": 8770
+            },
+            {
+              "userid": 29852118,
+              "username": "mangiapisolino",
+              "usergroupid": 21,
+              "iq": 33
+            },
+            {
+              "userid": 3360025,
+              "username": "NSpen1",
+              "usergroupid": 25,
+              "iq": 238212
+            },
+            {
+              "userid": 17344840,
+              "username": "o565611",
+              "usergroupid": 3,
+              "iq": 12
+            },
+            {
+              "userid": 13347880,
+              "username": "rafaelhakim",
+              "usergroupid": 21,
+              "iq": 19
+            },
+            {
+              "userid": 11435220,
+              "username": "rponomarenko",
+              "usergroupid": 21,
+              "iq": 2958
+            },
+            {
+              "userid": 61635806,
+              "username": "swarajsamanta.pkt",
+              "usergroupid": 2,
+              "iq": 12
+            },
+            {
+              "userid": 13901102,
+              "username": "Tikken",
+              "usergroupid": 21,
+              "iq": 75333
+            }
+          ],
+          "strummings": [],
+          "has_hq_description": 0,
+          "blocked": false,
+          "adsupp_binary_blocked": null,
+          "meta": {
+            "tonality": "Em",
+            "tuning": {
+              "name": "Standard",
+              "value": "E A D G B E",
+              "index": 1
+            },
+            "difficulty": "intermediate"
+          },
+          "has_official_version": true,
+          "has_chord_pro": true,
+          "has_preset": false,
+          "versions": [
+            {
+              "id": 1910953,
+              "song_id": 29886,
+              "song_name": "Nothing Else Matters",
+              "artist_id": 954,
+              "artist_name": "Metallica",
+              "type": "Official",
+              "part": "",
+              "version": 1,
+              "votes": 11812,
+              "difficulty": "",
+              "rating": 4.84560000000000012931877790833823382854461669921875,
+              "date": "1687551495",
+              "status": "approved",
+              "preset_id": 9823,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "Em",
+              "version_description": "",
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": []
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/a/a4e303636f65c7203e43a7170b4be48fde34f9f7/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/6/621024bafd4212b4e8c58daad1b9b237/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/metallica_954",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-official-1910953",
+              "date_update": "1717427891",
+              "user_id": 11953453,
+              "user_iq": 238,
+              "username": "Virgil47",
+              "type_name": "Official",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441"
+            },
+            {
+              "id": 8522,
+              "song_id": 29886,
+              "song_name": "Nothing Else Matters",
+              "artist_id": 954,
+              "artist_name": "Metallica",
+              "type": "Tabs",
+              "part": "",
+              "version": 2,
+              "votes": 87,
+              "difficulty": "",
+              "rating": 4.39336999999999999744204615126363933086395263671875,
+              "date": "1004486400",
+              "status": "approved",
+              "preset_id": 9823,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "Em",
+              "version_description": null,
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": []
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/a/a4e303636f65c7203e43a7170b4be48fde34f9f7/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/6/621024bafd4212b4e8c58daad1b9b237/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/metallica_954",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-8522",
+              "date_update": "1468580784",
+              "user_id": 0,
+              "user_iq": 0,
+              "username": "Unregistered",
+              "type_name": "Tab",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441"
+            },
+            {
+              "id": 8799,
+              "song_id": 29886,
+              "song_name": "Nothing Else Matters",
+              "artist_id": 954,
+              "artist_name": "Metallica",
+              "type": "Tabs",
+              "part": "",
+              "version": 3,
+              "votes": 19,
+              "difficulty": "",
+              "rating": 4.018390000000000128466126625426113605499267578125,
+              "date": "1004486400",
+              "status": "approved",
+              "preset_id": 9823,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "Em",
+              "version_description": null,
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": []
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/a/a4e303636f65c7203e43a7170b4be48fde34f9f7/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/6/621024bafd4212b4e8c58daad1b9b237/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/metallica_954",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-8799",
+              "date_update": "1004486400",
+              "user_id": 0,
+              "user_iq": 0,
+              "username": "Unregistered",
+              "type_name": "Tab",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441"
+            },
+            {
+              "id": 24563,
+              "song_id": 29886,
+              "song_name": "Nothing Else Matters",
+              "artist_id": 954,
+              "artist_name": "Metallica",
+              "type": "Tabs",
+              "part": "",
+              "version": 4,
+              "votes": 30,
+              "difficulty": "",
+              "rating": 4.37591000000000018843593352357856929302215576171875,
+              "date": "1015027200",
+              "status": "approved",
+              "preset_id": 9823,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "Em",
+              "version_description": null,
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": []
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/a/a4e303636f65c7203e43a7170b4be48fde34f9f7/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/6/621024bafd4212b4e8c58daad1b9b237/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/metallica_954",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-24563",
+              "date_update": "1475593965",
+              "user_id": 0,
+              "user_iq": 0,
+              "username": "Unregistered",
+              "type_name": "Tab",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441"
+            },
+            {
+              "id": 54340,
+              "song_id": 29886,
+              "song_name": "Nothing Else Matters",
+              "artist_id": 954,
+              "artist_name": "Metallica",
+              "type": "Tabs",
+              "part": "",
+              "version": 5,
+              "votes": 42,
+              "difficulty": "",
+              "rating": 4.5867199999999996862243278883397579193115234375,
+              "date": "1056326400",
+              "status": "approved",
+              "preset_id": 9823,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "Em",
+              "version_description": null,
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": []
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/a/a4e303636f65c7203e43a7170b4be48fde34f9f7/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/6/621024bafd4212b4e8c58daad1b9b237/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/metallica_954",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-54340",
+              "date_update": "1472896301",
+              "user_id": 48887,
+              "user_iq": 85,
+              "username": "rollingaerofan",
+              "type_name": "Tab",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441"
+            },
+            {
+              "id": 58473,
+              "song_id": 29886,
+              "song_name": "Nothing Else Matters",
+              "artist_id": 954,
+              "artist_name": "Metallica",
+              "type": "Tabs",
+              "part": "",
+              "version": 6,
+              "votes": 17,
+              "difficulty": "",
+              "rating": 4.3701600000000002665956344571895897388458251953125,
+              "date": "1061164800",
+              "status": "approved",
+              "preset_id": 9823,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "Em",
+              "version_description": null,
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": []
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/a/a4e303636f65c7203e43a7170b4be48fde34f9f7/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/6/621024bafd4212b4e8c58daad1b9b237/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/metallica_954",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-58473",
+              "date_update": "1061164800",
+              "user_id": 0,
+              "user_iq": 0,
+              "username": "Unregistered",
+              "type_name": "Tab",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441"
+            },
+            {
+              "id": 90841,
+              "song_id": 29886,
+              "song_name": "Nothing Else Matters",
+              "artist_id": 954,
+              "artist_name": "Metallica",
+              "type": "Tabs",
+              "part": "",
+              "version": 7,
+              "votes": 1964,
+              "difficulty": "advanced",
+              "rating": 4.89754000000000022652102416031993925571441650390625,
+              "date": "1064880000",
+              "status": "approved",
+              "preset_id": 9823,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "",
+              "version_description": "",
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": []
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/a/a4e303636f65c7203e43a7170b4be48fde34f9f7/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/6/621024bafd4212b4e8c58daad1b9b237/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/metallica_954",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-90841",
+              "date_update": "1714483443",
+              "user_id": 58004,
+              "user_iq": 630,
+              "username": "juzcook",
+              "type_name": "Tab",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441"
+            },
+            {
+              "id": 729068,
+              "song_id": 29886,
+              "song_name": "Nothing Else Matters",
+              "artist_id": 954,
+              "artist_name": "Metallica",
+              "type": "Tabs",
+              "part": "",
+              "version": 8,
+              "votes": 18,
+              "difficulty": "",
+              "rating": 3.97163000000000021572077457676641643047332763671875,
+              "date": "1220663966",
+              "status": "approved",
+              "preset_id": 9823,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "Em",
+              "version_description": "",
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": []
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/a/a4e303636f65c7203e43a7170b4be48fde34f9f7/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/6/621024bafd4212b4e8c58daad1b9b237/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/metallica_954",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-729068",
+              "date_update": "1486202635",
+              "user_id": 992438,
+              "user_iq": 82,
+              "username": "Metal-Ears",
+              "type_name": "Tab",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441"
+            },
+            {
+              "id": 1758823,
+              "song_id": 29886,
+              "song_name": "Nothing Else Matters",
+              "artist_id": 954,
+              "artist_name": "Metallica",
+              "type": "Tabs",
+              "part": "",
+              "version": 9,
+              "votes": 38,
+              "difficulty": "intermediate",
+              "rating": 4.57078999999999968650854498264379799365997314453125,
+              "date": "1439375533",
+              "status": "approved",
+              "preset_id": 9823,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "Em",
+              "version_description": null,
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": []
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/a/a4e303636f65c7203e43a7170b4be48fde34f9f7/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/6/621024bafd4212b4e8c58daad1b9b237/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/metallica_954",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-1758823",
+              "date_update": "1467202533",
+              "user_id": 8477212,
+              "user_iq": 343,
+              "username": "matshoi",
+              "type_name": "Tab",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441"
+            },
+            {
+              "id": 1883943,
+              "song_id": 29886,
+              "song_name": "Nothing Else Matters",
+              "artist_id": 954,
+              "artist_name": "Metallica",
+              "type": "Tabs",
+              "part": "",
+              "version": 10,
+              "votes": 32,
+              "difficulty": "intermediate",
+              "rating": 4.925869999999999748752088635228574275970458984375,
+              "date": "1475783143",
+              "status": "approved",
+              "preset_id": 9823,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "",
+              "version_description": "Tab for only one guitar (kirk&#039;s) except the fill.",
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": []
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/a/a4e303636f65c7203e43a7170b4be48fde34f9f7/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/6/621024bafd4212b4e8c58daad1b9b237/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/metallica_954",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-1883943",
+              "date_update": "1538644069",
+              "user_id": 11729354,
+              "user_iq": 358,
+              "username": "andi.winter",
+              "type_name": "Tab",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441"
+            },
+            {
+              "id": 2510187,
+              "song_id": 29886,
+              "song_name": "Nothing Else Matters",
+              "artist_id": 954,
+              "artist_name": "Metallica",
+              "type": "Tabs",
+              "part": "",
+              "version": 11,
+              "votes": 15,
+              "difficulty": "",
+              "rating": 4.57800000000000029132252166164107620716094970703125,
+              "date": "1541586129",
+              "status": "approved",
+              "preset_id": 9823,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "",
+              "version_description": "",
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": []
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/a/a4e303636f65c7203e43a7170b4be48fde34f9f7/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/6/621024bafd4212b4e8c58daad1b9b237/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/metallica_954",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-2510187",
+              "date_update": "1681182288",
+              "user_id": 19203868,
+              "user_iq": 41,
+              "username": "lauracoffey",
+              "type_name": "Tab",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441"
+            }
+          ],
+          "song_image": "ifQhQv9nlaM",
+          "applicature": null,
+          "piano_inversions": null,
+          "last_comments": [
+            {
+              "id": 527582,
+              "rowid": 8519,
+              "text": "The tab is almost right but it is not played tuned down half a step, its played on normal tuning.",
+              "author_userid": 0,
+              "rating": 168,
+              "userid": 950,
+              "usergroupid": 21,
+              "username": "Kirk1804",
+              "date_created": 1006473600,
+              "type": 4,
+              "parent_id": 0,
+              "added_from": "",
+              "updated_at": null,
+              "status": "new",
+              "moderator_user_id": 11953509,
+              "likes_count": 206,
+              "dislikes_count": 38,
+              "contributor_level": 1,
+              "avatar": "https://tabs.ultimate-guitar.com/static/users/0/5/9/950.gif?d=d",
+              "date": 1006473600,
+              "user_iq": 40,
+              "localized_text": ""
+            },
+            {
+              "id": 529218,
+              "rowid": 8519,
+              "text": "Nope its is tuned normal not 1/2 step down im pretty sure thats this is almost 100% correct",
+              "author_userid": 0,
+              "rating": 92,
+              "userid": 12959,
+              "usergroupid": 2,
+              "username": "Fightin` Dingo",
+              "date_created": 1011398400,
+              "type": 4,
+              "parent_id": 0,
+              "added_from": "",
+              "updated_at": null,
+              "status": "new",
+              "moderator_user_id": 11953509,
+              "likes_count": 102,
+              "dislikes_count": 10,
+              "contributor_level": null,
+              "avatar": "https://tabs.ultimate-guitar.com/static/users/9/5/9/12959.gif?d=d",
+              "date": 1011398400,
+              "user_iq": 10,
+              "localized_text": ""
+            },
+            {
+              "id": 535691,
+              "rowid": 8519,
+              "text": "i think the song is beautiful, i only just started playing, but the tab was easy to follow and sounded great(well, all except i havent been playing long)  i dont really care if it is regular tuning or not, if youre playing it in your own home, i dont think metallica will have anything to say about it if its in regular tuning or not.  thanks for the awesome tab",
+              "author_userid": 0,
+              "rating": 29,
+              "userid": 20831,
+              "usergroupid": 2,
+              "username": "laylah",
+              "date_created": 1016409600,
+              "type": 4,
+              "parent_id": 0,
+              "added_from": "",
+              "updated_at": null,
+              "status": "new",
+              "moderator_user_id": 11953509,
+              "likes_count": 30,
+              "dislikes_count": 1,
+              "contributor_level": null,
+              "avatar": "https://tabs.ultimate-guitar.com/static/users/1/3/8/20831.gif?d=d",
+              "date": 1016409600,
+              "user_iq": 10,
+              "localized_text": ""
+            }
+          ],
+          "comments": 344,
+          "stats": { "view_total": 18181969, "favorites_count": 124671 },
+          "chord_type": "guitar",
+          "tab_corrects": [],
+          "is_simplify_available": false,
+          "can_edit_tab": false,
+          "can_edit_strumming": false,
+          "can_send_tab_stats": true,
+          "official_backingtrack": null,
+          "tab_search_link": "https://www.ultimate-guitar.com/search.php?band_name=Metallica&amp;song_name=nothing+else+matters&amp;type%5B0%5D=200&amp;type%5B1%5D=300",
+          "wiki_tab_user_group_id": 25,
+          "wiki_tab_user_iq": 238233,
+          "user_group_id": 0,
+          "count_rating": 4880,
+          "encode_strummings": "",
+          "alert": null,
+          "official_backingtrack_url": "https://www.ultimate-guitar.com/backing_track/metallica/nothing_else_matters_21945",
+          "official_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-official-1910953",
+          "official_tab_want": null,
+          "tab_manually_highlighted": false,
+          "pro_tab_onbording": null,
+          "smart_auto_scroll_available": true,
+          "lyrics_lines": [],
+          "video_feed": { "total_count": 1937, "artist_total_count": 0 },
+          "ug_difficulty": "intermediate",
+          "new_ug_difficulty": null,
+          "tracking": {
+            "ctx": {
+              "user_registered": 1366548188,
+              "url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-8519",
+              "referer": "https://www.ultimate-guitar.com/explore?type[]=Tabs",
+              "utm_source": "",
+              "utm_medium": "",
+              "utm_campaign": "",
+              "utm_content": "",
+              "utm_term": "",
+              "tab_id": 8519,
+              "tab_type": "Tabs",
+              "tab_created": 1004486400,
+              "tab_open_source": "",
+              "tab_views": 18181969,
+              "tab_favourites_count": 124671,
+              "tab_version": 1,
+              "tab_ratings_count": 4880,
+              "tab_rating": 4.7381299999999999528199623455293476581573486328125,
+              "tab_ug_difficulty": "intermediate",
+              "tab_author_difficulty": "intermediate",
+              "song_id": 29886,
+              "song_artist_id": 954,
+              "h": 223132457,
+              "dt": 1737158290
+            }
+          },
+          "brothers_by_type": null,
+          "brothers_count": null,
+          "binary_id": null
+        },
+        "artist_image": "https://tabs.ultimate-guitar.com/static/storage/marketing/images/0/0b84abb34b9ffca2d1af10830f54d5225cf26088.jpeg",
+        "access": {
+          "can_edit_tab": false,
+          "can_edit_strumming": false,
+          "can_delete_comment": false,
+          "can_manage_rating": false,
+          "can_vote_strumming": true
+        },
+        "recommended_tabs": [],
+        "recentry_viewed_key": "tab:8519",
+        "criticals": [],
+        "online": { "users": 10426, "guests": 2090 },
+        "is_in_linking_exp": true,
+        "is_in_indonesia_title_exp": false,
+        "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-guitar-pro-225441",
+        "xtz_player_force_show": false,
+        "xtz_player_force_new": false
+      },
+      "header_bidding": {
+        "page_type": "tab_desktop",
+        "ad_units": [
+          {
+            "code": "ad_cs_2010320_160_600",
+            "dfpCode": "UG_ATF_160",
+            "sizes": [[160, 600]],
+            "placementId": "7478445",
+            "layoutPlacement": "side",
+            "mediaTypes": { "banner": { "sizes": [[160, 600]] } },
+            "refresh": {
+              "delay": 30000,
+              "delayDeviation": 10000,
+              "maxVisibleTime": 1000,
+              "limit": 30
+            },
+            "appnexusPlacementId": 12097756,
+            "mediaType": "banner",
+            "bids": [
+              {
+                "bidder": "appnexus",
+                "params": {
+                  "placementId": 7478445,
+                  "keywords": {
+                    "is_refresh": "false",
+                    "artist": 954,
+                    "artist_name": "metallica",
+                    "song_genre": "rock",
+                    "tab_type": "Tabs",
+                    "tab_id": 8519,
+                    "instr": "guitar",
+                    "title": "Metallica - Nothing Else Matters (tab)"
+                  }
+                }
+              },
+              {
+                "bidder": "pubmatic",
+                "params": { "publisherId": "72623", "adSlot": "3131193" }
+              },
+              {
+                "bidder": "rubicon",
+                "params": {
+                  "accountId": "15178",
+                  "siteId": "93918",
+                  "zoneId": "441930"
+                }
+              },
+              { "bidder": "ix", "params": { "id": 1, "siteId": "177325" } },
+              {
+                "bidder": "sharethrough",
+                "params": { "pkey": "2DMGYqOnPeq1qmyOc10E0J7p" }
+              },
+              {
+                "bidder": "rise",
+                "params": { "org": "63a2de6e59cc1900018d95e6" }
+              },
+              {
+                "bidder": "ttd",
+                "params": { "supplySourceId": "muse", "publisherId": "1" }
+              },
+              {
+                "bidder": "shemedia",
+                "params": {
+                  "accountId": "10278",
+                  "siteId": "210096",
+                  "zoneId": "3510326"
+                }
+              }
+            ],
+            "customTargeting": {
+              "ab_var_web_UG_4488": 2,
+              "ab_var_web_UG_4701": 1,
+              "ab_var_web_UG_5544": 2,
+              "ab_var_web_UG_5643": 1,
+              "tab_type": "Tabs",
+              "genre": "rock",
+              "artist_name": "metallica",
+              "age": "0",
+              "main_instrument": "Piano",
+              "skill_level": "Garage band guitarist"
+            }
+          },
+          {
+            "code": "ad_cs_2010319_160_600",
+            "dfpCode": "UG_BTFR_160",
+            "sizes": [[160, 600]],
+            "placementId": "7478445",
+            "layoutPlacement": "sideBottom",
+            "mediaTypes": { "banner": { "sizes": [[160, 600]] } },
+            "refresh": {
+              "delay": 30000,
+              "delayDeviation": 10000,
+              "maxVisibleTime": 1000,
+              "limit": 30
+            },
+            "appnexusPlacementId": 12097784,
+            "mediaType": "banner",
+            "bids": [
+              {
+                "bidder": "appnexus",
+                "params": {
+                  "placementId": 7478445,
+                  "keywords": {
+                    "is_refresh": "false",
+                    "artist": 954,
+                    "artist_name": "metallica",
+                    "song_genre": "rock",
+                    "tab_type": "Tabs",
+                    "tab_id": 8519,
+                    "instr": "guitar",
+                    "title": "Metallica - Nothing Else Matters (tab)"
+                  }
+                }
+              },
+              {
+                "bidder": "pubmatic",
+                "params": { "publisherId": "72623", "adSlot": "3131225" }
+              },
+              { "bidder": "ix", "params": { "siteId": "179682", "id": "03" } },
+              {
+                "bidder": "sharethrough",
+                "params": { "pkey": "4wvqxnlPv0OVn60kXMsmh12M" }
+              },
+              {
+                "bidder": "rise",
+                "params": { "org": "63a2de6e59cc1900018d95e6" }
+              },
+              {
+                "bidder": "ttd",
+                "params": { "supplySourceId": "muse", "publisherId": "1" }
+              }
+            ],
+            "customTargeting": {
+              "ab_var_web_UG_4488": 2,
+              "ab_var_web_UG_4701": 1,
+              "ab_var_web_UG_5544": 2,
+              "ab_var_web_UG_5643": 1,
+              "tab_type": "Tabs",
+              "genre": "rock",
+              "artist_name": "metallica",
+              "age": "0",
+              "main_instrument": "Piano",
+              "skill_level": "Garage band guitarist"
+            }
+          },
+          {
+            "code": "ad_cs_2010319_300_250",
+            "dfpCode": "UG_BTFR_300",
+            "sizes": [
+              [1, 1],
+              [300, 250]
+            ],
+            "placementId": "8549997",
+            "layoutPlacement": "bottom",
+            "mediaTypes": {
+              "banner": {
+                "sizes": [
+                  [1, 1],
+                  [300, 250],
+                  [610, 300],
+                  [535, 300],
+                  [535, 400]
+                ]
+              }
+            },
+            "refresh": {
+              "delay": 30000,
+              "delayDeviation": 10000,
+              "maxVisibleTime": 1000,
+              "limit": 30
+            },
+            "withoutBids": true,
+            "appnexusPlacementId": 12097784,
+            "mediaType": "banner",
+            "bids": [
+              {
+                "bidder": "appnexus",
+                "params": {
+                  "placementId": 8549997,
+                  "keywords": {
+                    "is_refresh": "false",
+                    "artist": 954,
+                    "artist_name": "metallica",
+                    "song_genre": "rock",
+                    "tab_type": "Tabs",
+                    "tab_id": 8519,
+                    "instr": "guitar",
+                    "title": "Metallica - Nothing Else Matters (tab)"
+                  }
+                }
+              },
+              {
+                "bidder": "pubmatic",
+                "params": {
+                  "publisherId": "72623",
+                  "adSlot": "3131198@300x250"
+                }
+              },
+              {
+                "bidder": "rubicon",
+                "params": {
+                  "accountId": "15178",
+                  "siteId": "93918",
+                  "zoneId": "506312"
+                }
+              }
+            ],
+            "customTargeting": {
+              "ab_var_web_UG_4488": 2,
+              "ab_var_web_UG_4701": 1,
+              "ab_var_web_UG_5544": 2,
+              "ab_var_web_UG_5643": 1,
+              "tab_type": "Tabs",
+              "genre": "rock",
+              "artist_name": "metallica",
+              "age": "0",
+              "main_instrument": "Piano",
+              "skill_level": "Garage band guitarist",
+              "video": "atfsekindo_text"
+            },
+            "primis": true,
+            "additionalSekindoBehavior": 3,
+            "dynamic": true
+          }
+        ]
+      },
+      "experiments": {
+        "variations": {
+          "4488": 2,
+          "4701": 1,
+          "5241": 1,
+          "5544": 2,
+          "5631": 1,
+          "5643": 1,
+          "824": 2,
+          "857": 2,
+          "902": 2,
+          "923": 2,
+          "947": 1,
+          "950": 2,
+          "956": 1,
+          "965": 1,
+          "992": 2,
+          "1394": 2,
+          "1430": 3,
+          "1433": 2,
+          "1436": 2,
+          "1483": 2,
+          "1492": 2,
+          "1495": 2,
+          "1522": 2,
+          "1615": 2,
+          "1618": 2,
+          "1678": 2,
+          "1750": 2,
+          "1765": 2,
+          "1816": 2,
+          "1966": 3,
+          "2084": 2,
+          "2150": 1,
+          "2153": 2,
+          "2225": 1,
+          "2513": 3,
+          "2738": 2,
+          "3115": 3,
+          "3412": 1,
+          "3442": 2,
+          "3523": 2,
+          "3775": 2,
+          "3874": 2,
+          "3922": 2,
+          "4099": 2,
+          "4195": 2,
+          "4476": 2,
+          "4491": 2,
+          "4530": 2,
+          "4569": 2,
+          "4605": 2,
+          "4665": 2,
+          "4752": 2,
+          "4857": 2,
+          "4881": 3,
+          "5127": 2,
+          "5145": 2,
+          "5178": 2,
+          "5274": 2,
+          "5313": 2,
+          "5397": 2,
+          "5499": 1,
+          "5526": 2,
+          "5562": 2
+        },
+        "closed_experiments": {
+          "824": 2,
+          "857": 2,
+          "902": 2,
+          "923": 2,
+          "947": 1,
+          "950": 2,
+          "956": 1,
+          "965": 1,
+          "992": 2,
+          "1394": 2,
+          "1430": 3,
+          "1433": 2,
+          "1436": 2,
+          "1483": 2,
+          "1492": 2,
+          "1495": 2,
+          "1522": 2,
+          "1615": 2,
+          "1618": 2,
+          "1678": 2,
+          "1750": 2,
+          "1765": 2,
+          "1816": 2,
+          "1966": 3,
+          "2084": 2,
+          "2150": 1,
+          "2153": 2,
+          "2225": 1,
+          "2513": 3,
+          "2738": 2,
+          "3115": 3,
+          "3412": 1,
+          "3442": 2,
+          "3523": 2,
+          "3775": 2,
+          "3874": 2,
+          "3922": 2,
+          "4099": 2,
+          "4195": 2,
+          "4476": 2,
+          "4491": 2,
+          "4530": 2,
+          "4569": 2,
+          "4605": 2,
+          "4665": 2,
+          "4752": 2,
+          "4857": 2,
+          "4881": 3,
+          "5127": 2,
+          "5145": 2,
+          "5178": 2,
+          "5274": 2,
+          "5313": 2,
+          "5397": 2,
+          "5499": 1,
+          "5526": 2,
+          "5562": 2
+        }
+      },
+      "template": {
+        "module": "tab",
+        "controller": "view",
+        "action": "index",
+        "reactAction": "tab_text"
+      },
+      "documents": { "enabled": true }
+    },
+    "i18n": {
+      "locale": "en-US",
+      "language": "en",
+      "links": {
+        "default": "https://tabs.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-8519",
+        "pt": "https://pt.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-8519",
+        "es": "https://es.ultimate-guitar.com/tab/metallica/nothing-else-matters-tabs-8519"
+      }
+    },
+    "promotion": {
+      "promoType": "NewYear",
+      "promoKey": "ugapp:topBannerShow:NewYear-2024",
+      "endedKey": "_ug_promotionEnded_ugapp:topBannerShow:NewYear-2024",
+      "emergency": {
+        "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/b/b2a9afe70eebde770fe48e307fb96eb8461440f4.webp",
+        "title": "NEW YEAR SALE"
+      },
+      "exit": {
+        "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/f/f55e881eddd780cfcd0a224afefa27762dc70167.webp",
+        "title": "NEW YEAR SALE",
+        "subtitle": "",
+        "hasLabel": false,
+        "hasTimer": false
+      },
+      "heroBanner": {
+        "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/f/fad9ac36884cb3053e9d3a22ba9a6fe19834a0ff.webp",
+        "title": "",
+        "subtitle": "NEW YEAR SALE"
+      },
+      "heroBlock": {
+        "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/8/8c75a0a7b8e08e5512209274f1fdb8b46e82235c.webp",
+        "buttonColor": "brand"
+      },
+      "payment": {
+        "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/5/5f21325decb0b1a8453bd25daa26bab0dea9ab6a.webp",
+        "title": "NEW YEAR\nSALE",
+        "planName": "New year sale"
+      },
+      "permBanner": {
+        "&lt;24h_logged-in": {
+          "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/b/b25d32420882dc32580c0b8577289edc547bc524.webp",
+          "title": "New Year Sale:",
+          "subtitle": "Pro Access %percentage%",
+          "hasTimer": false,
+          "buttonText": "GET SPECIAL OFFER"
+        },
+        "&gt;24h_logged-in": {
+          "imgUrl": "https://cdn.ustatik.com/storage/marketing/images/b/b9a4efbdfcd406ae9fa4a6a4bbc512cfee52bf1a.jpeg",
+          "title": "Welcome Offer:",
+          "subtitle": "%percentage% on annual membership of Ultimate Guitar Pro",
+          "hasTimer": false,
+          "buttonText": "TRY NOW"
+        },
+        "&lt;24h_logged-out": {
+          "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/b/b25d32420882dc32580c0b8577289edc547bc524.webp",
+          "title": "New Year Sale:",
+          "subtitle": "Pro Access %percentage%",
+          "buttonText": "GET SPECIAL OFFER"
+        },
+        "&gt;24h_logged-out": {
+          "imgUrl": "https://cdn.ustatik.com/storage/marketing/images/b/b9a4efbdfcd406ae9fa4a6a4bbc512cfee52bf1a.jpeg",
+          "title": "Welcome Offer:",
+          "subtitle": "%percentage% on annual membership of Ultimate Guitar Pro",
+          "hasTimer": false,
+          "buttonText": "TRY NOW"
+        },
+        "default": {
+          "imgUrl": "https://cdn.ustatik.com/storage/marketing/images/b/b9a4efbdfcd406ae9fa4a6a4bbc512cfee52bf1a.jpeg",
+          "title": "Welcome Offer",
+          "subtitle": "%percentage% on annual membership of UG Pro",
+          "buttonText": "TRY NOW"
+        }
+      },
+      "stickyBanner": {
+        "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/4/4b99bbf8ac84787c61271ca74d27020f1f6f965a.webp",
+        "title": "",
+        "subtitle": "NEW YEAR SALE"
+      }
+    },
+    "user": {
+      "id": 3633583,
+      "pa_id": 40196558,
+      "avatarUrl": "https://tabs.ultimate-guitar.com/static/users/3/8/5/3633583.gif?d=d&amp;h=1737158286",
+      "username": "raziber",
+      "email": "razi.berg@gmail.com",
+      "usergroupid": 2,
+      "contributor": {
+        "isContributor": false,
+        "isTabContributor": false,
+        "first_tab": 0
+      },
+      "iq": 10,
+      "tabsCount": 103,
+      "playlistCount": 0,
+      "coursesCount": 0,
+      "messagesCount": 0,
+      "rights": [],
+      "hasExpiredCard": null,
+      "hasChargeError": null,
+      "hasActiveProPause": false,
+      "hasActiveEduPause": false,
+      "tab_try": null,
+      "content_access": [],
+      "joinDate": 1366548188,
+      "user_status": "",
+      "segment": {
+        "preview": {
+          "segment": 7,
+          "prediction": 0,
+          "group_segment": 2,
+          "segment_label": "users_with_high_frequency_visits",
+          "group_segment_label": "cold"
+        },
+        "current": {
+          "segment": 7,
+          "prediction": 0,
+          "group_segment": 2,
+          "segment_label": "users_with_high_frequency_visits",
+          "group_segment_label": "cold"
+        }
+      },
+      "uid2_token_url": null,
+      "ip": "176.228.10.4",
+      "id5_hashed": "c35ba1ee81d24b93edabb8db59994d4ac2ec2d7bf9042b90ee2b1598c84b61b0",
+      "family": null,
+      "spotify_songs_count": 0,
+      "spotify_is_connected": false
+    },
+    "notifications": {
+      "count_new": 1,
+      "data": [
+        {
+          "id": 1650,
+          "verb_group": 300,
+          "object_group": 0,
+          "date_group": 1736985600,
+          "date_create": 1737054000,
+          "date_update": 1737016202,
+          "activities": [
+            {
+              "id": "featured_shots_update:300:user:27957855:video_section:featured",
+              "verb": "featured_shots_update:300",
+              "date": 1737054000,
+              "actor": "user:27957855",
+              "actor_name": "",
+              "actor_avatar": "https://cdn.ustatik.com/users/5/5/8/27957855.gif?d=d",
+              "group_object": "",
+              "object": "video_section:featured",
+              "object_name": "",
+              "message": "Here are 15 awesome covers of popular songs for you to enjoy 🤩",
+              "iq": 0,
+              "preview": ""
+            }
+          ],
+          "status": 0,
+          "click": 0,
+          "user_id": 0,
+          "activity_count": 1,
+          "unseen_count": 1,
+          "date_seen": 0
+        }
+      ],
+      "giveaway_id": 1,
+      "texts": {
+        "markAll": "Mark all as read",
+        "settings": "Settings",
+        "thanksForVote": "Thanks for your vote"
+      }
+    },
+    "forms": [],
+    "theme": "dark",
+    "commentForm": { "is_new": 0 },
+    "isUgOffice": 0,
+    "book": { "is_top_menu": true },
+    "ugSearch": { "type": "tabs", "value": "" },
+    "sponsorsFooter": null,
+    "takeover": { "show": false },
+    "interstitial": false,
+    "customAlerts": []
+  },
+  "globalHelpers": [],
+  "helpers": {
+    "typeHelper": {
+      "short": {
+        "Official": "OFFICIAL",
+        "Chords": "CRD",
+        "Tabs": "TAB",
+        "Pro": "PRO",
+        "Power": "PWR",
+        "Bass Tabs": "BASS",
+        "Drum Tabs": "DRM",
+        "Video": "VID",
+        "Ukulele Chords": "UKE",
+        "Tab Pro": "TAB PRO",
+        "Chord Pro": "CRD PRO",
+        "Vocal": "VOCAL"
+      },
+      "filter": {
+        "Official": "official",
+        "Chords": "chords",
+        "Tabs": "tab",
+        "Pro": "guitar pro",
+        "Power": "power",
+        "Bass Tabs": "bass",
+        "Drum Tabs": "drums",
+        "Video": "video",
+        "Ukulele Chords": "ukulele",
+        "Tab Pro": "tab pro",
+        "Chord Pro": "chord pro",
+        "Vocal": "vocal"
+      },
+      "full": {
+        "Official": "official tab",
+        "Chords": "chords",
+        "Tabs": "tab",
+        "Pro": "guitar pro tab",
+        "Power": "power tab",
+        "Bass Tabs": "bass tab",
+        "Drum Tabs": "drum tab",
+        "Video": "video tab",
+        "Ukulele Chords": "ukulele chords",
+        "Tab Pro": "tab pro",
+        "Chord Pro": "chord pro",
+        "Vocal": "vocal tab"
+      },
+      "recommendations": {
+        "Official": "Official",
+        "Chords": "Chords",
+        "Tabs": "Tab",
+        "Pro": "Pro",
+        "Power": "Power",
+        "Bass Tabs": "Bass",
+        "Drum Tabs": "Drum",
+        "Video": "Video",
+        "Ukulele Chords": "Ukulele",
+        "Tab Pro": "Tab Pro",
+        "Chord Pro": "Chord",
+        "Vocal": "Vocal"
+      }
+    },
+    "allowedDomains": [
+      "ultimate-guitar.com",
+      "instagram.com",
+      "facebook.com",
+      "twitter.com",
+      "youtube.com",
+      "youtu.be"
+    ]
+  },
+  "cmp": {
+    "setConsentUrl": "https://www.ultimate-guitar.com/user/security/consent"
+  },
+  "bidding": {
+    "analytics": {
+      "logUrl": "//track.ultimate-guitar.com/ug/",
+      "pageType": "tab_desktop",
+      "region": "MER",
+      "device": "desktop",
+      "variation": "",
+      "hasHardRefresh": true
+    },
+    "refresh": {
+      "limit": 30,
+      "maxVisibleTime": 1000,
+      "delay": 30000,
+      "delayDeviation": 10000,
+      "enabled": true,
+      "hasHardRefresh": true,
+      "availableBidders": [
+        "appnexus",
+        "ix",
+        "pubmatic",
+        "rubicon",
+        "openx",
+        "adform",
+        "sharethrough"
+      ],
+      "ignoreChangePageVisibility": false
+    },
+    "minRefreshCpm": 0.040000000000000000832667268468867405317723751068115234375,
+    "cpmFloor": 0.1499999999999999944488848768742172978818416595458984375,
+    "timeout": 2000,
+    "refreshTimeout": 1000,
+    "dfpId": 74268401,
+    "units": [
+      {
+        "code": "ad_cs_2010320_160_600",
+        "dfpCode": "UG_ATF_160",
+        "sizes": [[160, 600]],
+        "placementId": "7478445",
+        "layoutPlacement": "side",
+        "mediaTypes": { "banner": { "sizes": [[160, 600]] } },
+        "refresh": {
+          "delay": 30000,
+          "delayDeviation": 10000,
+          "maxVisibleTime": 1000,
+          "limit": 30
+        },
+        "appnexusPlacementId": 12097756,
+        "mediaType": "banner",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "params": {
+              "placementId": 7478445,
+              "keywords": {
+                "is_refresh": "false",
+                "artist": 954,
+                "artist_name": "metallica",
+                "song_genre": "rock",
+                "tab_type": "Tabs",
+                "tab_id": 8519,
+                "instr": "guitar",
+                "title": "Metallica - Nothing Else Matters (tab)"
+              }
+            }
+          },
+          {
+            "bidder": "pubmatic",
+            "params": { "publisherId": "72623", "adSlot": "3131193" }
+          },
+          {
+            "bidder": "rubicon",
+            "params": {
+              "accountId": "15178",
+              "siteId": "93918",
+              "zoneId": "441930"
+            }
+          },
+          { "bidder": "ix", "params": { "id": 1, "siteId": "177325" } },
+          {
+            "bidder": "sharethrough",
+            "params": { "pkey": "2DMGYqOnPeq1qmyOc10E0J7p" }
+          },
+          { "bidder": "rise", "params": { "org": "63a2de6e59cc1900018d95e6" } },
+          {
+            "bidder": "ttd",
+            "params": { "supplySourceId": "muse", "publisherId": "1" }
+          },
+          {
+            "bidder": "shemedia",
+            "params": {
+              "accountId": "10278",
+              "siteId": "210096",
+              "zoneId": "3510326"
+            }
+          }
+        ],
+        "customTargeting": {
+          "ab_var_web_UG_4488": 2,
+          "ab_var_web_UG_4701": 1,
+          "ab_var_web_UG_5544": 2,
+          "ab_var_web_UG_5643": 1,
+          "tab_type": "Tabs",
+          "genre": "rock",
+          "artist_name": "metallica",
+          "age": "0",
+          "main_instrument": "Piano",
+          "skill_level": "Garage band guitarist"
+        }
+      },
+      {
+        "code": "ad_cs_2010319_160_600",
+        "dfpCode": "UG_BTFR_160",
+        "sizes": [[160, 600]],
+        "placementId": "7478445",
+        "layoutPlacement": "sideBottom",
+        "mediaTypes": { "banner": { "sizes": [[160, 600]] } },
+        "refresh": {
+          "delay": 30000,
+          "delayDeviation": 10000,
+          "maxVisibleTime": 1000,
+          "limit": 30
+        },
+        "appnexusPlacementId": 12097784,
+        "mediaType": "banner",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "params": {
+              "placementId": 7478445,
+              "keywords": {
+                "is_refresh": "false",
+                "artist": 954,
+                "artist_name": "metallica",
+                "song_genre": "rock",
+                "tab_type": "Tabs",
+                "tab_id": 8519,
+                "instr": "guitar",
+                "title": "Metallica - Nothing Else Matters (tab)"
+              }
+            }
+          },
+          {
+            "bidder": "pubmatic",
+            "params": { "publisherId": "72623", "adSlot": "3131225" }
+          },
+          { "bidder": "ix", "params": { "siteId": "179682", "id": "03" } },
+          {
+            "bidder": "sharethrough",
+            "params": { "pkey": "4wvqxnlPv0OVn60kXMsmh12M" }
+          },
+          { "bidder": "rise", "params": { "org": "63a2de6e59cc1900018d95e6" } },
+          {
+            "bidder": "ttd",
+            "params": { "supplySourceId": "muse", "publisherId": "1" }
+          }
+        ],
+        "customTargeting": {
+          "ab_var_web_UG_4488": 2,
+          "ab_var_web_UG_4701": 1,
+          "ab_var_web_UG_5544": 2,
+          "ab_var_web_UG_5643": 1,
+          "tab_type": "Tabs",
+          "genre": "rock",
+          "artist_name": "metallica",
+          "age": "0",
+          "main_instrument": "Piano",
+          "skill_level": "Garage band guitarist"
+        }
+      },
+      {
+        "code": "ad_cs_2010319_300_250",
+        "dfpCode": "UG_BTFR_300",
+        "sizes": [
+          [1, 1],
+          [300, 250]
+        ],
+        "placementId": "8549997",
+        "layoutPlacement": "bottom",
+        "mediaTypes": {
+          "banner": {
+            "sizes": [
+              [1, 1],
+              [300, 250],
+              [610, 300],
+              [535, 300],
+              [535, 400]
+            ]
+          }
+        },
+        "refresh": {
+          "delay": 30000,
+          "delayDeviation": 10000,
+          "maxVisibleTime": 1000,
+          "limit": 30
+        },
+        "withoutBids": true,
+        "appnexusPlacementId": 12097784,
+        "mediaType": "banner",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "params": {
+              "placementId": 8549997,
+              "keywords": {
+                "is_refresh": "false",
+                "artist": 954,
+                "artist_name": "metallica",
+                "song_genre": "rock",
+                "tab_type": "Tabs",
+                "tab_id": 8519,
+                "instr": "guitar",
+                "title": "Metallica - Nothing Else Matters (tab)"
+              }
+            }
+          },
+          {
+            "bidder": "pubmatic",
+            "params": { "publisherId": "72623", "adSlot": "3131198@300x250" }
+          },
+          {
+            "bidder": "rubicon",
+            "params": {
+              "accountId": "15178",
+              "siteId": "93918",
+              "zoneId": "506312"
+            }
+          }
+        ],
+        "customTargeting": {
+          "ab_var_web_UG_4488": 2,
+          "ab_var_web_UG_4701": 1,
+          "ab_var_web_UG_5544": 2,
+          "ab_var_web_UG_5643": 1,
+          "tab_type": "Tabs",
+          "genre": "rock",
+          "artist_name": "metallica",
+          "age": "0",
+          "main_instrument": "Piano",
+          "skill_level": "Garage band guitarist",
+          "video": "atfsekindo_text"
+        },
+        "primis": true,
+        "additionalSekindoBehavior": 3,
+        "dynamic": true
+      }
+    ],
+    "priceGranularity": [
+      {
+        "precision": 2,
+        "min": 0,
+        "max": 1,
+        "increment": 0.01000000000000000020816681711721685132943093776702880859375
+      },
+      {
+        "precision": 2,
+        "min": 1,
+        "max": 2,
+        "increment": 0.0200000000000000004163336342344337026588618755340576171875
+      },
+      {
+        "precision": 2,
+        "min": 2,
+        "max": 5,
+        "increment": 0.05000000000000000277555756156289135105907917022705078125
+      },
+      {
+        "precision": 2,
+        "min": 5,
+        "max": 10,
+        "increment": 0.1000000000000000055511151231257827021181583404541015625
+      },
+      {
+        "precision": 2,
+        "min": 10,
+        "max": 20,
+        "increment": 0.200000000000000011102230246251565404236316680908203125
+      },
+      { "precision": 2, "min": 20, "max": 50, "increment": 0.5 }
+    ],
+    "dynamicLoad": true,
+    "disableAdx": false,
+    "isGDPRAvailable": false,
+    "isShowOnTap": false,
+    "adsTargeting": {
+      "song": "Nothing Else Matters",
+      "artist": "Metallica",
+      "tab_subtype": ""
+    },
+    "prebidLibUrl": "https://tabs.ultimate-guitar.com/static/public/build/prebid_8_14_0_lib/prebid_ver1737134100.js",
+    "isRegistered": 3633583,
+    "emailHash": "c35ba1ee81d24b93edabb8db59994d4ac2ec2d7bf9042b90ee2b1598c84b61b0",
+    "hasConsentCookie": false,
+    "slots": []
+  }
+}

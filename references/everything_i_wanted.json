@@ -1,0 +1,3153 @@
+{
+  "config": {
+    "releaseVer": "0.0.0",
+    "backendReleaseVer": "13.16.40",
+    "adsReleaseVer": "8_14_0",
+    "renderType": "react",
+    "urlFacebook": "https://www.ultimate-guitar.com/user/auth/oauth?service=facebook",
+    "urlGoogle": "https://www.ultimate-guitar.com/user/auth/oauth?service=google",
+    "urlApple": "https://www.ultimate-guitar.com/user/auth/oauth?service=apple",
+    "main_server": "ultimate-guitar.com",
+    "ps_server": "plus.ultimate-guitar.com",
+    "api_web_serv": "api-web.ultimate-guitar.com",
+    "static_server": "https://tabs.ultimate-guitar.com/static",
+    "statik_cache": "_ver1737739650",
+    "staticPrefix": "/static",
+    "requestSchema": "https",
+    "time": 1737762124000,
+    "isGDPRAvailable": false,
+    "isCcpaAvailable": false,
+    "user": {
+      "id": 3633583,
+      "uuid": 0,
+      "unified_id": "1.1734123905.817990904",
+      "session": {
+        "id": "1.1737760435.1737762124.33",
+        "expire_duration": 300,
+        "expire_duration_dispersion": [5000, 10000],
+        "enable_refresh": true,
+        "parsed_session": {
+          "version": 1,
+          "id": 1737760435,
+          "updated": 1737762124,
+          "number": 33
+        },
+        "is_renew_session": false
+      },
+      "username": "raziber",
+      "iq": "",
+      "contributorPower": 0,
+      "is_bot": false,
+      "is_banned": false
+    },
+    "isOfficeUser": false,
+    "isOfficeRequest": false,
+    "isWebp": false,
+    "isBot": false,
+    "is_mobile": false,
+    "is_tablet": false,
+    "isThemeMobile": false,
+    "isIe": false,
+    "isEs6": true,
+    "isAsia": false,
+    "isPaidMobWeb": false,
+    "newLayout": true,
+    "socketCluster": {
+      "serviceKey": "f0557aa8-2d06-43d9-9c16-f885bc710b97:main",
+      "channelPrefix": "f0557aa8-2d06-43d9-9c16-f885bc710b97:main#prod",
+      "hostname": "socketcluster.k8s.mu.se",
+      "port": 443,
+      "channelName": "36d0de0b2f704eed3bb1782fca783023"
+    },
+    "metricaId": 0,
+    "captcha_id": "6LfCo_8SAAAAALEMHnlK18j8IemlAdvmxwRnQe2v",
+    "stripeApiKey": "",
+    "country": "IL",
+    "countryCode": "IL",
+    "browserName": "Chrome",
+    "os": "Windows",
+    "platform": 1,
+    "browser": "{\"browser\":{\"name\":\"Chrome\",\"version\":\"131\",\"type\":\"browser\"},\"engine\":{\"name\":\"Blink\"},\"os\":{\"name\":\"Windows\",\"version\":{\"value\":\"10.0\",\"alias\":\"10\"}},\"device\":{\"type\":\"desktop\"}}",
+    "urlUgProAppIcon": "https://tabs.ultimate-guitar.com/static/public/ug/img/app_icons/icon_ug_pro.png",
+    "withCritical": false,
+    "analytics": {
+      "pageViewId": 1737762124636003,
+      "userTrackerId": "SwEKQWcQBw=="
+    },
+    "braintree": {
+      "environment": "production",
+      "tokenizationKey": "production_8htvrhhr_67vpx3rpxt6m5z7c",
+      "paypalClientId": "ASwoeikdyflPIKFAC3U34ewfFVRE5-_p6qc1TTQG9g_sHNs3RP5Sq3pE_e7V2p0VTi-nJQuIA5ApP1XH",
+      "googlePayClientId": "BCR2DN6TZPEKBZBZ"
+    },
+    "vimeo": {
+      "baseImagePath": "https://cdn.ustatik.com/s3/ug.video.warm/preview/"
+    },
+    "hasStaticCache": 1,
+    "rtAnalytics": {
+      "trackUrl": "https://stats.ultimate-guitar.com/components/ab/event",
+      "trackingEnabled": true,
+      "forceSendEvents": [
+        "Tab Favorite Add Click",
+        "Tab Rate Click",
+        "Tab View",
+        "Tab View 12s",
+        "Tab View 15s",
+        "Tab View 60s",
+        "Tab View 120s",
+        "Tab View 180s",
+        "View",
+        "View 15s",
+        "Tour Start"
+      ],
+      "tabToolLogging": true,
+      "samplerHeartbeat": 5,
+      "forceSendDebounceTimeout": 1000,
+      "bufferSize": 10
+    },
+    "xtz": {
+      "isActive": true,
+      "hasAccess": true,
+      "canToggle": false,
+      "feedbackChannel": null
+    },
+    "jinba": {
+      "customTimings": [],
+      "appLabel": "tab_page_chords",
+      "appLabelExp": "null"
+    },
+    "metricaParams": {
+      "rights": 0,
+      "proRights": 0,
+      "coursesRights": 0,
+      "singRights": 0,
+      "u_id": "SwEKQWcQBw==",
+      "auth": "google",
+      "is_registered": 1,
+      "ab": {
+        "4488": 2,
+        "4701": 1,
+        "5241": 1,
+        "5658": 1,
+        "5676": 4,
+        "5694": 2,
+        "824": 2,
+        "857": 2,
+        "902": 2,
+        "923": 2,
+        "947": 1,
+        "950": 2,
+        "956": 1,
+        "965": 1,
+        "992": 2,
+        "1394": 2,
+        "1430": 3,
+        "1433": 2,
+        "1436": 2,
+        "1483": 2,
+        "1492": 2,
+        "1495": 2,
+        "1522": 2,
+        "1615": 2,
+        "1618": 2,
+        "1678": 2,
+        "1750": 2,
+        "1765": 2,
+        "1816": 2,
+        "1966": 3,
+        "2084": 2,
+        "2150": 1,
+        "2153": 2,
+        "2225": 1,
+        "2513": 3,
+        "2738": 2,
+        "3115": 3,
+        "3412": 1,
+        "3442": 2,
+        "3523": 2,
+        "3775": 2,
+        "3874": 2,
+        "3922": 2,
+        "4099": 2,
+        "4195": 2,
+        "4476": 2,
+        "4491": 2,
+        "4530": 2,
+        "4569": 2,
+        "4605": 2,
+        "4665": 2,
+        "4752": 2,
+        "4857": 2,
+        "4881": 3,
+        "5127": 2,
+        "5145": 2,
+        "5178": 2,
+        "5274": 2,
+        "5313": 2,
+        "5397": 2,
+        "5499": 1,
+        "5526": 2,
+        "5544": 2,
+        "5562": 2
+      },
+      "bookRights": 0,
+      "bookEduRights": 0,
+      "unified_id": "1.1734123905.817990904",
+      "session_id": "1.1737760435.1737762124.33"
+    }
+  },
+  "store": {
+    "offers": [],
+    "page": {
+      "data": {
+        "mobile_device": null,
+        "show_rate_layer": false,
+        "tab": {
+          "id": 2892656,
+          "song_id": 3725456,
+          "song_name": "Everything I Wanted",
+          "artist_id": 66748,
+          "artist_name": "Billie Eilish",
+          "type": "Chords",
+          "part": "",
+          "version": 2,
+          "votes": 604,
+          "difficulty": "novice",
+          "rating": 4.88374000000000041410430640098638832569122314453125,
+          "date": "1573692028",
+          "status": "approved",
+          "preset_id": 40097,
+          "tab_access_type": "public",
+          "tp_version": 0,
+          "tonality_name": "D",
+          "version_description": "Capo&#039;ed for open chords that ring out (matches sustained keyboard), well suited to acoustic covers, two different strumming variations defined.",
+          "verified": 0,
+          "recording": {
+            "is_acoustic": 0,
+            "tonality_name": "",
+            "performance": null,
+            "recording_artists": [],
+            "video_urls": null
+          },
+          "album_cover": {
+            "has_album_cover": true,
+            "web_album_cover": {
+              "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/c/ce9cda59b537fb270a28eeafc5bff7422e2e8aca/cover.jpg@300"
+            }
+          },
+          "artist_cover": {
+            "has_artist_cover": true,
+            "web_artist_cover": {
+              "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/1/13a93e73e4129cbc6223e8787ccc0c39/primary-cover.jpg@300"
+            }
+          },
+          "artist_url": "https://www.ultimate-guitar.com/artist/billie_eilish_66748",
+          "tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-chords-2892656",
+          "date_update": "1573703939",
+          "user_id": 466870,
+          "user_iq": 13942,
+          "username": "pmalavi",
+          "type_name": "Chords",
+          "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-guitar-pro-3040842"
+        },
+        "backing_track_tip": false,
+        "tab_view": {
+          "wiki_tab": {
+            "content": "Chords for strumming\r\n--------------------\r\n[ch]Cmaj7[/ch]  x3200x\r\n[ch]D[/ch]      x0023x  (or play D/A as shown for bassier sound)\r\n[ch]Bm7[/ch]    x2020x\r\n[ch]B7[/ch]     x2420x\r\n[ch]B[/ch]      x2444x\r\n\r\nCapo 2nd fret (for no capo or piano chords, transpose +2)\r\n\r\n\r\n[tab][Intro]\r\n   [ch]Cmaj7[/ch]  [ch]D[/ch]                 [ch]Bm7[/ch]   [ch]Cmaj7[/ch]            [ch]Cmaj7[/ch]  [ch]D[/ch]                 [ch]B7[/ch]    [ch]Cmaj7[/ch]\r\ne|-----------------------|-----------------------|-----------------------|-----------------------|\r\nB|--0--------------------|--0--------------------|--0--------------------|-----0-----------------|\r\nG|--0--0--2--------------|--2-----0-----0-2-4-5--|--0--0--2--------------|--------0--------------|\r\nD|--------0--------------|--0--4--2--------------|--------0--------------|--4-----2--------------| \r\nA|--3--------------------|--------3--------------|--3--------------------|--2-----3--------------|\r\nE|-----------------------|-----------------------|-----------------------|-----------------------|[/tab]\r\n\r\n\r\n[Verse 1]\r\n[tab][ch]Cmaj7[/ch]   [ch]D[/ch]           [ch]Bm7[/ch]           [ch]Cmaj7[/ch]\r\n      I had a dream,   I got everything I wanted[/tab]\r\n[tab][ch]Cmaj7[/ch]     [ch]D[/ch]                [ch]B7[/ch]           [ch]Cmaj7[/ch]\r\n      Not what you&#039;d think,  and if I&#039;m bein&#039; honest[/tab]\r\n[tab]                   [ch]Cmaj7[/ch]     [ch]D[/ch]              [ch]Bm7[/ch]        [ch]Cmaj7[/ch]\r\nIt might&#039;ve been a nightmare, to anyone who might care[/tab]\r\n\r\n[tab][ch]Cmaj7[/ch]         [ch]D[/ch]                           [ch]Bm7[/ch]             [ch]Cmaj7[/ch]\r\n      Thought I could fly (fly, fly, fly),   so I stepped off the Golden, mm[/tab]\r\n[tab][ch]Cmaj7[/ch]   [ch]D[/ch]                                [ch]B7[/ch]       [ch]Cmaj7[/ch]\r\n      Nobody cried (cried, cried, cried),  nobody even noticed[/tab]\r\n[tab]                    [ch]Cmaj7[/ch]       [ch]D[/ch]                   [ch]Bm7[/ch]        [ch]Cmaj7[/ch]\r\nI saw them standing right there, kinda thought they might care[/tab]\r\n\r\n\r\n[Pre-Chorus 1]\r\n[tab][ch]Cmaj7[/ch]   [ch]D[/ch]           [ch]Bm7[/ch]           [ch]Cmaj7[/ch]\r\n      I had a dream,   I got everything I wanted[/tab]\r\n[tab]    [ch]Cmaj7[/ch]          [ch]D[/ch]      [ch]B7[/ch]       [ch]Cmaj7[/ch]\r\nBut when I wake up I see, you with me[/tab]\r\n\r\n\r\n[Chorus 1]\r\n[tab]        [ch]Cmaj7[/ch]            [ch]D[/ch]        [ch]Bm7[/ch]           [ch]Cmaj7[/ch]   \r\nAnd you say, \"As long as I&#039;m here,   no one can hurt you\"[/tab]\r\n[tab][ch]Cmaj7[/ch]              [ch]D[/ch]       [ch]Bm7[/ch]            [ch]Cmaj7[/ch]\r\n      Don&#039;t wanna lie here,   but you can learn to[/tab]\r\n[tab][ch]Cmaj7[/ch]      [ch]D[/ch]                [ch]B[/ch]            [ch]Cmaj7[/ch]\r\n      If I could change the way that you see yourself[/tab]\r\n[tab][ch]Cmaj7[/ch]                     [ch]D[/ch]            [ch]B7[/ch]              [ch]Cmaj7[/ch]\r\n      You wouldn&#039;t wonder why you hear,  \"They don&#039;t deserve you\"[/tab]\r\n\r\n\r\n[Verse 2]\r\n[tab][ch]Cmaj7[/ch]            [ch]D[/ch]      [ch]Bm7[/ch]                     [ch]Cmaj7[/ch]\r\n      I tried to scream,   but my head was underwater[/tab]\r\n[tab][ch]Cmaj7[/ch]                [ch]D[/ch]    [ch]B7[/ch]                             [ch]Cmaj7[/ch]\r\n      They called me weak,  like I&#039;m not just somebody&#039;s daughter[/tab]\r\n\r\n[tab]                 [ch]Cmaj7[/ch]     [ch]D[/ch]                           [ch]Bm7[/ch]         [ch]Cmaj7[/ch]\r\nIt coulda been a nightmare, but it felt like they were right there[/tab]\r\n[tab]       [ch]Cmaj7[/ch]                      [ch]D[/ch]             [ch]B7[/ch]                   [ch]Cmaj7[/ch]\r\nAnd it feels like yesterday was a year ago, but I don&#039;t wanna let anybody know[/tab]\r\n[tab]       [ch]Cmaj7[/ch]                     [ch]D[/ch]                [ch]Bm7[/ch]                        [ch]Cmaj7[/ch]\r\n&#039;Cause everybody wants something from me now, and I don&#039;t wanna let &#039;em down[/tab]\r\n\r\n\r\n[Pre-Chorus 2]\r\n[tab][ch]Cmaj7[/ch]   [ch]D[/ch]           [ch]Bm7[/ch]           [ch]Cmaj7[/ch]\r\n      I had a dream,   I got everything I wanted[/tab]\r\n[tab]    [ch]Cmaj7[/ch]          [ch]D[/ch]      [ch]B7[/ch]       [ch]Cmaj7[/ch]\r\nBut when I wake up I see, you with me[/tab]\r\n\r\n\r\n[Chorus 2]\r\n[tab]        [ch]Cmaj7[/ch]            [ch]D[/ch]        [ch]Bm7[/ch]           [ch]Cmaj7[/ch]   \r\nAnd you say, \"As long as I&#039;m here,   no one can hurt you\"[/tab]\r\n[tab][ch]Cmaj7[/ch]              [ch]D[/ch]       [ch]Bm7[/ch]            [ch]Cmaj7[/ch]\r\n      Don&#039;t wanna lie here,   but you can learn to[/tab]\r\n[tab][ch]Cmaj7[/ch]      [ch]D[/ch]                [ch]B[/ch]            [ch]Cmaj7[/ch]\r\n      If I could change the way that you see yourself[/tab]\r\n[tab][ch]Cmaj7[/ch]                     [ch]D[/ch]            [ch]B7[/ch]              [ch]Cmaj7[/ch]\r\n      You wouldn&#039;t wonder why you hear,  \"They don&#039;t deserve you\"[/tab]\r\n\r\n\r\n[Outro]\r\n[tab][ch]Cmaj7[/ch]            [ch]D[/ch]                     [ch]Bm7[/ch]                  [ch]Cmaj7[/ch]\r\nIf I knew it all then, would I do it again, would I do it again?[/tab]\r\n[tab][ch]Cmaj7[/ch]                   [ch]D[/ch]                            [ch]Bm7[/ch]                         [ch]Cmaj7[/ch]\r\nIf they knew what they said would go straight to my head, what would they say instead?[/tab]\r\n[tab][ch]Cmaj7[/ch]            [ch]D[/ch]                     [ch]Bm7[/ch]                  [ch]Cmaj7[/ch]\r\nIf I knew it all then, would I do it again, would I do it again?[/tab]\r\n[tab][ch]Cmaj7[/ch]                   [ch]D[/ch]                            [ch]Bm7[/ch]                         [ch]Cmaj7[/ch]\r\nIf they knew what they said would go straight to my head, what would they say instead?[/tab]\r\n[ch]Cmaj7[/ch]  [ch]D[/ch]  [ch]Bm7[/ch]  [ch]Cmaj7[/ch]",
+            "revision_id": 8,
+            "user_id": 466870,
+            "username": "pmalavi",
+            "date": 1573703939
+          },
+          "contributors": [],
+          "strummings": [
+            {
+              "part": "Simple single strums",
+              "denuminator": 8,
+              "bpm": 120,
+              "is_triplet": 0,
+              "measures": [
+                { "measure": 3 },
+                { "measure": 202 },
+                { "measure": 202 },
+                { "measure": 1 },
+                { "measure": 202 },
+                { "measure": 202 },
+                { "measure": 3 },
+                { "measure": 202 },
+                { "measure": 202 },
+                { "measure": 202 },
+                { "measure": 202 },
+                { "measure": 202 },
+                { "measure": 202 },
+                { "measure": 202 },
+                { "measure": 202 },
+                { "measure": 202 }
+              ]
+            },
+            {
+              "part": "Rhythmic strumming variation",
+              "denuminator": 8,
+              "bpm": 120,
+              "is_triplet": 0,
+              "measures": [
+                { "measure": 3 },
+                { "measure": 202 },
+                { "measure": 1 },
+                { "measure": 101 },
+                { "measure": 202 },
+                { "measure": 101 },
+                { "measure": 3 },
+                { "measure": 202 },
+                { "measure": 202 },
+                { "measure": 101 },
+                { "measure": 1 },
+                { "measure": 202 },
+                { "measure": 1 },
+                { "measure": 202 },
+                { "measure": 1 },
+                { "measure": 101 }
+              ]
+            }
+          ],
+          "has_hq_description": 1,
+          "blocked": false,
+          "adsupp_binary_blocked": null,
+          "meta": {
+            "capo": 2,
+            "tonality": "D",
+            "tuning": {
+              "name": "Standard",
+              "value": "E A D G B E",
+              "index": 1
+            },
+            "difficulty": "novice"
+          },
+          "has_official_version": true,
+          "has_chord_pro": false,
+          "has_preset": false,
+          "versions": [
+            {
+              "id": 2900324,
+              "song_id": 3725456,
+              "song_name": "Everything I Wanted",
+              "artist_id": 66748,
+              "artist_name": "Billie Eilish",
+              "type": "Official",
+              "part": "",
+              "version": 1,
+              "votes": 366,
+              "difficulty": "",
+              "rating": 4.8520500000000001961097950697876513004302978515625,
+              "date": "1574416279",
+              "status": "approved",
+              "preset_id": 40097,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "F#m",
+              "version_description": "",
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": [],
+                "video_urls": null
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/c/ce9cda59b537fb270a28eeafc5bff7422e2e8aca/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/1/13a93e73e4129cbc6223e8787ccc0c39/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/billie_eilish_66748",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-official-2900324",
+              "date_update": "1676389660",
+              "user_id": 1064837,
+              "user_iq": 29249,
+              "username": "indieee",
+              "type_name": "Official",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-guitar-pro-3040842"
+            },
+            {
+              "id": 2892650,
+              "song_id": 3725456,
+              "song_name": "Everything I Wanted",
+              "artist_id": 66748,
+              "artist_name": "Billie Eilish",
+              "type": "Chords",
+              "part": "",
+              "version": 1,
+              "votes": 2770,
+              "difficulty": "novice",
+              "rating": 4.90022999999999964160224408260546624660491943359375,
+              "date": "1573691563",
+              "status": "approved",
+              "preset_id": 40097,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "A",
+              "version_description": "",
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": [],
+                "video_urls": null
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/c/ce9cda59b537fb270a28eeafc5bff7422e2e8aca/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/1/13a93e73e4129cbc6223e8787ccc0c39/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/billie_eilish_66748",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-chords-2892650",
+              "date_update": "1609029092",
+              "user_id": 3546921,
+              "user_iq": 7621,
+              "username": "Martin278",
+              "type_name": "Chords",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-guitar-pro-3040842"
+            },
+            {
+              "id": 2892755,
+              "song_id": 3725456,
+              "song_name": "Everything I Wanted",
+              "artist_id": 66748,
+              "artist_name": "Billie Eilish",
+              "type": "Chords",
+              "part": "",
+              "version": 3,
+              "votes": 16,
+              "difficulty": "intermediate",
+              "rating": 4.60020999999999968821384754846803843975067138671875,
+              "date": "1574085358",
+              "status": "approved",
+              "preset_id": 40097,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "F#m",
+              "version_description": "The chords I&#039;ve written out sound best on capo 6, but you can definitely transpose them to get a lower or a higher sound. Keep in mind I found these chords out by ear.",
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": [],
+                "video_urls": null
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/c/ce9cda59b537fb270a28eeafc5bff7422e2e8aca/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/1/13a93e73e4129cbc6223e8787ccc0c39/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/billie_eilish_66748",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-chords-2892755",
+              "date_update": "1638813905",
+              "user_id": 28762704,
+              "user_iq": 62,
+              "username": "MisterKoda",
+              "type_name": "Chords",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-guitar-pro-3040842"
+            },
+            {
+              "id": 2913938,
+              "song_id": 3725456,
+              "song_name": "Everything I Wanted",
+              "artist_id": 66748,
+              "artist_name": "Billie Eilish",
+              "type": "Chords",
+              "part": "",
+              "version": 4,
+              "votes": 89,
+              "difficulty": "",
+              "rating": 4.59133999999999975472064761561341583728790283203125,
+              "date": "1575447186",
+              "status": "approved",
+              "preset_id": 40097,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "",
+              "version_description": "",
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": [],
+                "video_urls": null
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/c/ce9cda59b537fb270a28eeafc5bff7422e2e8aca/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/1/13a93e73e4129cbc6223e8787ccc0c39/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/billie_eilish_66748",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-chords-2913938",
+              "date_update": "1575447186",
+              "user_id": 34395422,
+              "user_iq": 51,
+              "username": "yuukixchan111",
+              "type_name": "Chords",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-guitar-pro-3040842"
+            },
+            {
+              "id": 3101432,
+              "song_id": 3725456,
+              "song_name": "Everything I Wanted",
+              "artist_id": 66748,
+              "artist_name": "Billie Eilish",
+              "type": "Chords",
+              "part": "",
+              "version": 5,
+              "votes": 17,
+              "difficulty": "",
+              "rating": 4.870219999999999771489456179551780223846435546875,
+              "date": "1587383787",
+              "status": "approved",
+              "preset_id": 40097,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "Dm",
+              "version_description": "",
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": [],
+                "video_urls": null
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/c/ce9cda59b537fb270a28eeafc5bff7422e2e8aca/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/1/13a93e73e4129cbc6223e8787ccc0c39/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/billie_eilish_66748",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-chords-3101432",
+              "date_update": "1587383787",
+              "user_id": 16210944,
+              "user_iq": 72,
+              "username": "michael_stahl1",
+              "type_name": "Chords",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-guitar-pro-3040842"
+            },
+            {
+              "id": 2894750,
+              "song_id": 3725456,
+              "song_name": "Everything I Wanted",
+              "artist_id": 66748,
+              "artist_name": "Billie Eilish",
+              "type": "Ukulele Chords",
+              "part": "",
+              "version": 1,
+              "votes": 243,
+              "difficulty": "intermediate",
+              "rating": 4.871520000000000294448909698985517024993896484375,
+              "date": "1573909473",
+              "status": "approved",
+              "preset_id": 40097,
+              "tab_access_type": "public",
+              "tp_version": 0,
+              "tonality_name": "",
+              "version_description": "This is a ukulele tab, chords aren&#039;t too easy. I only strum down once, so I don&#039;t have submitted a strumming pattern.",
+              "verified": 0,
+              "recording": {
+                "is_acoustic": 0,
+                "tonality_name": "",
+                "performance": null,
+                "recording_artists": [],
+                "video_urls": null
+              },
+              "album_cover": {
+                "has_album_cover": true,
+                "web_album_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/song/c/ce9cda59b537fb270a28eeafc5bff7422e2e8aca/cover.jpg@300"
+                }
+              },
+              "artist_cover": {
+                "has_artist_cover": true,
+                "web_artist_cover": {
+                  "small": "https://www.ultimate-guitar.com/static/s3/ugdb/media/cover/artist/1/13a93e73e4129cbc6223e8787ccc0c39/primary-cover.jpg@300"
+                }
+              },
+              "artist_url": "https://www.ultimate-guitar.com/artist/billie_eilish_66748",
+              "tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-ukulele-2894750",
+              "date_update": "1574938394",
+              "user_id": 28217592,
+              "user_iq": 87,
+              "username": "ninoputti",
+              "type_name": "Ukulele",
+              "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-guitar-pro-3040842"
+            }
+          ],
+          "song_image": false,
+          "applicature": {
+            "Cmaj7": [
+              {
+                "id": "x32000",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [52, 47, 43, 40, 36, -1],
+                "frets": [0, 0, 0, 2, 3, -1],
+                "fingers": [0, 0, 0, 1, 2, 0],
+                "fret": 0,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x32003",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [55, 47, 43, 40, 36, -1],
+                "frets": [3, 0, 0, 2, 3, -1],
+                "fingers": [3, 0, 0, 1, 2, 0],
+                "fret": 0,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x32400",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [52, 47, 47, 40, 36, -1],
+                "frets": [0, 0, 4, 2, 3, -1],
+                "fingers": [0, 0, 3, 1, 2, 0],
+                "fret": 0,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x32403",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [55, 47, 47, 40, 36, -1],
+                "frets": [3, 0, 4, 2, 3, -1],
+                "fingers": [3, 0, 4, 1, 2, 0],
+                "fret": 0,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x32410",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [52, 48, 47, 40, 36, -1],
+                "frets": [0, 1, 4, 2, 3, -1],
+                "fingers": [0, 1, 4, 2, 3, 0],
+                "fret": 0,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x35453",
+                "listCapos": [
+                  { "fret": 3, "startString": 0, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 0,
+                "notes": [55, 52, 47, 43, 36, -1],
+                "frets": [3, 5, 4, 5, 3, -1],
+                "fingers": [0, 4, 2, 3, 0, 0],
+                "fret": 3,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "875557",
+                "listCapos": [
+                  { "fret": 5, "startString": 1, "lastString": 3, "finger": 1 }
+                ],
+                "noteIndex": 0,
+                "notes": [59, 52, 48, 43, 40, 36],
+                "frets": [7, 5, 5, 5, 7, 8],
+                "fingers": [3, 0, 0, 0, 2, 4],
+                "fret": 5,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx10987",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [59, 55, 52, 48, -1, -1],
+                "frets": [7, 8, 9, 10, -1, -1],
+                "fingers": [1, 2, 3, 4, 0, 0],
+                "fret": 7,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "8109988",
+                "listCapos": [
+                  { "fret": 8, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 0,
+                "notes": [60, 55, 52, 47, 43, 36],
+                "frets": [8, 8, 9, 9, 10, 8],
+                "fingers": [0, 0, 3, 2, 4, 0],
+                "fret": 8,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx1091212",
+                "listCapos": [
+                  { "fret": 12, "startString": 0, "lastString": 1, "finger": 4 }
+                ],
+                "noteIndex": 0,
+                "notes": [64, 59, 52, 48, -1, -1],
+                "frets": [12, 12, 9, 10, -1, -1],
+                "fingers": [0, 0, 1, 2, 0, 0],
+                "fret": 9,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx10121212",
+                "listCapos": [
+                  { "fret": 12, "startString": 0, "lastString": 2, "finger": 3 }
+                ],
+                "noteIndex": 0,
+                "notes": [64, 59, 55, 48, -1, -1],
+                "frets": [12, 12, 12, 10, -1, -1],
+                "fingers": [0, 0, 0, 1, 0, 0],
+                "fret": 10,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x3200x",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [-1, 47, 43, 40, 36, -1],
+                "frets": [-1, 0, 0, 2, 3, -1],
+                "fingers": [0, 0, 0, 1, 2, 0],
+                "fret": 0,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x3240x",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [-1, 47, 47, 40, 36, -1],
+                "frets": [-1, 0, 4, 2, 3, -1],
+                "fingers": [0, 0, 3, 1, 2, 0],
+                "fret": 0,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x3241x",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [-1, 48, 47, 40, 36, -1],
+                "frets": [-1, 1, 4, 2, 3, -1],
+                "fingers": [0, 1, 4, 2, 3, 0],
+                "fret": 0,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x3245x",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [-1, 52, 47, 40, 36, -1],
+                "frets": [-1, 5, 4, 2, 3, -1],
+                "fingers": [0, 4, 3, 1, 2, 0],
+                "fret": 2,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x3545x",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [-1, 52, 47, 43, 36, -1],
+                "frets": [-1, 5, 4, 5, 3, -1],
+                "fingers": [0, 4, 2, 3, 1, 0],
+                "fret": 3,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "810998x",
+                "listCapos": [
+                  { "fret": 8, "startString": 1, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 0,
+                "notes": [-1, 55, 52, 47, 43, 36],
+                "frets": [-1, 8, 9, 9, 10, 8],
+                "fingers": [0, 0, 3, 2, 4, 0],
+                "fret": 8,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "8799xx",
+                "listCapos": [
+                  { "fret": 9, "startString": 2, "lastString": 3, "finger": 3 }
+                ],
+                "noteIndex": 0,
+                "notes": [-1, -1, 52, 47, 40, 36],
+                "frets": [-1, -1, 9, 9, 7, 8],
+                "fingers": [0, 0, 0, 0, 1, 2],
+                "fret": 7,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "81099xx",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [-1, -1, 52, 47, 43, 36],
+                "frets": [-1, -1, 9, 9, 10, 8],
+                "fingers": [0, 0, 3, 2, 4, 1],
+                "fret": 8,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x3x410",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [52, 48, 47, -1, 36, -1],
+                "frets": [0, 1, 4, -1, 3, -1],
+                "fingers": [0, 1, 4, 0, 3, 0],
+                "fret": 0,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x3x000",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [52, 47, 43, -1, 36, -1],
+                "frets": [0, 0, 0, -1, 3, -1],
+                "fingers": [0, 0, 0, 0, 1, 0],
+                "fret": 3,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x3x400",
+                "listCapos": [],
+                "noteIndex": 0,
+                "notes": [52, 47, 47, -1, 36, -1],
+                "frets": [0, 0, 4, -1, 3, -1],
+                "fingers": [0, 0, 2, 0, 1, 0],
+                "fret": 3,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x3x453",
+                "listCapos": [
+                  { "fret": 3, "startString": 0, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 0,
+                "notes": [55, 52, 47, -1, 36, -1],
+                "frets": [3, 5, 4, -1, 3, -1],
+                "fingers": [0, 3, 2, 0, 0, 0],
+                "fret": 3,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "8x5557",
+                "listCapos": [
+                  { "fret": 5, "startString": 1, "lastString": 3, "finger": 1 }
+                ],
+                "noteIndex": 0,
+                "notes": [59, 52, 48, 43, -1, 36],
+                "frets": [7, 5, 5, 5, -1, 8],
+                "fingers": [3, 0, 0, 0, 0, 4],
+                "fret": 5,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "8x9988",
+                "listCapos": [
+                  { "fret": 8, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 0,
+                "notes": [60, 55, 52, 47, -1, 36],
+                "frets": [8, 8, 9, 9, -1, 8],
+                "fingers": [0, 0, 3, 2, 0, 0],
+                "fret": 8,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "8x998x",
+                "listCapos": [
+                  { "fret": 8, "startString": 1, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 0,
+                "notes": [-1, 55, 52, 47, -1, 36],
+                "frets": [-1, 8, 9, 9, -1, 8],
+                "fingers": [0, 0, 3, 2, 0, 0],
+                "fret": 8,
+                "type": "MAJ7",
+                "baseDisplayNote": ""
+              }
+            ],
+            "D": [
+              {
+                "id": "xx0232",
+                "listCapos": [],
+                "noteIndex": 2,
+                "notes": [54, 50, 45, 38, -1, -1],
+                "frets": [2, 3, 2, 0, -1, -1],
+                "fingers": [2, 3, 1, 0, 0, 0],
+                "fret": 0,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x54232",
+                "listCapos": [
+                  { "fret": 2, "startString": 0, "lastString": 2, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [54, 50, 45, 42, 38, -1],
+                "frets": [2, 3, 2, 4, 5, -1],
+                "fingers": [0, 2, 0, 3, 4, 0],
+                "fret": 2,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx0775",
+                "listCapos": [],
+                "noteIndex": 2,
+                "notes": [57, 54, 50, 38, -1, -1],
+                "frets": [5, 7, 7, 0, -1, -1],
+                "fingers": [1, 4, 3, 0, 0, 0],
+                "fret": 5,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x57775",
+                "listCapos": [
+                  { "fret": 5, "startString": 0, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [57, 54, 50, 45, 38, -1],
+                "frets": [5, 7, 7, 7, 5, -1],
+                "fingers": [0, 4, 3, 2, 0, 0],
+                "fret": 5,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx0111010",
+                "listCapos": [
+                  { "fret": 10, "startString": 0, "lastString": 1, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [62, 57, 54, 38, -1, -1],
+                "frets": [10, 10, 11, 0, -1, -1],
+                "fingers": [0, 0, 2, 0, 0, 0],
+                "fret": 10,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "101212111010",
+                "listCapos": [
+                  { "fret": 10, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [62, 57, 54, 50, 45, 38],
+                "frets": [10, 10, 11, 12, 12, 10],
+                "fingers": [0, 0, 2, 4, 3, 0],
+                "fret": 10,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx12111010",
+                "listCapos": [
+                  { "fret": 10, "startString": 0, "lastString": 1, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [62, 57, 54, 50, -1, -1],
+                "frets": [10, 10, 11, 12, -1, -1],
+                "fingers": [0, 0, 2, 3, 0, 0],
+                "fret": 10,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x5423x",
+                "listCapos": [],
+                "noteIndex": 2,
+                "notes": [-1, 50, 45, 42, 38, -1],
+                "frets": [-1, 3, 2, 4, 5, -1],
+                "fingers": [0, 2, 1, 3, 4, 0],
+                "fret": 2,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x5777x",
+                "listCapos": [
+                  { "fret": 7, "startString": 1, "lastString": 3, "finger": 3 }
+                ],
+                "noteIndex": 2,
+                "notes": [-1, 54, 50, 45, 38, -1],
+                "frets": [-1, 7, 7, 7, 5, -1],
+                "fingers": [0, 0, 0, 0, 1, 0],
+                "fret": 5,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "109777x",
+                "listCapos": [
+                  { "fret": 7, "startString": 1, "lastString": 3, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [-1, 54, 50, 45, 42, 38],
+                "frets": [-1, 7, 7, 7, 9, 10],
+                "fingers": [0, 0, 0, 0, 3, 4],
+                "fret": 7,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "1012121110x",
+                "listCapos": [
+                  { "fret": 10, "startString": 1, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [-1, 57, 54, 50, 45, 38],
+                "frets": [-1, 10, 11, 12, 12, 10],
+                "fingers": [0, 0, 2, 4, 3, 0],
+                "fret": 10,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "10977xx",
+                "listCapos": [
+                  { "fret": 7, "startString": 2, "lastString": 3, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [-1, -1, 50, 45, 42, 38],
+                "frets": [-1, -1, 7, 7, 9, 10],
+                "fingers": [0, 0, 0, 0, 3, 4],
+                "fret": 7,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "10121211xx",
+                "listCapos": [],
+                "noteIndex": 2,
+                "notes": [-1, -1, 54, 50, 45, 38],
+                "frets": [-1, -1, 11, 12, 12, 10],
+                "fingers": [0, 0, 2, 4, 3, 1],
+                "fret": 10,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x5x232",
+                "listCapos": [
+                  { "fret": 2, "startString": 0, "lastString": 2, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [54, 50, 45, -1, 38, -1],
+                "frets": [2, 3, 2, -1, 5, -1],
+                "fingers": [0, 2, 0, 0, 4, 0],
+                "fret": 2,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x5x775",
+                "listCapos": [
+                  { "fret": 5, "startString": 0, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [57, 54, 50, -1, 38, -1],
+                "frets": [5, 7, 7, -1, 5, -1],
+                "fingers": [0, 4, 3, 0, 0, 0],
+                "fret": 5,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "10x12111010",
+                "listCapos": [
+                  { "fret": 10, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [62, 57, 54, 50, -1, 38],
+                "frets": [10, 10, 11, 12, -1, 10],
+                "fingers": [0, 0, 2, 3, 0, 0],
+                "fret": 10,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "10x777x",
+                "listCapos": [
+                  { "fret": 7, "startString": 1, "lastString": 3, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [-1, 54, 50, 45, -1, 38],
+                "frets": [-1, 7, 7, 7, -1, 10],
+                "fingers": [0, 0, 0, 0, 0, 4],
+                "fret": 7,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "10x121110x",
+                "listCapos": [
+                  { "fret": 10, "startString": 1, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 2,
+                "notes": [-1, 57, 54, 50, -1, 38],
+                "frets": [-1, 10, 11, 12, -1, 10],
+                "fingers": [0, 0, 2, 3, 0, 0],
+                "fret": 10,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              }
+            ],
+            "Bm7": [
+              {
+                "id": "x20202",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [54, 47, 45, 38, 35, -1],
+                "frets": [2, 0, 2, 0, 2, -1],
+                "fingers": [3, 0, 2, 0, 1, 0],
+                "fret": 0,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x24232",
+                "listCapos": [
+                  { "fret": 2, "startString": 0, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [54, 50, 45, 42, 35, -1],
+                "frets": [2, 3, 2, 4, 2, -1],
+                "fingers": [0, 2, 0, 3, 0, 0],
+                "fret": 2,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x24235",
+                "listCapos": [
+                  { "fret": 2, "startString": 2, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [57, 50, 45, 42, 35, -1],
+                "frets": [5, 3, 2, 4, 2, -1],
+                "fingers": [4, 2, 0, 3, 0, 0],
+                "fret": 2,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "797777",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 54, 50, 45, 42, 35],
+                "frets": [7, 7, 7, 7, 9, 7],
+                "fingers": [0, 0, 0, 0, 3, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7977710",
+                "listCapos": [
+                  { "fret": 7, "startString": 1, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [62, 54, 50, 45, 42, 35],
+                "frets": [10, 7, 7, 7, 9, 7],
+                "fingers": [4, 0, 0, 0, 3, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7977107",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 57, 50, 45, 42, 35],
+                "frets": [7, 10, 7, 7, 9, 7],
+                "fingers": [0, 4, 0, 0, 3, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "79771010",
+                "listCapos": [
+                  { "fret": 7, "startString": 2, "lastString": 5, "finger": 1 },
+                  { "fret": 10, "startString": 0, "lastString": 1, "finger": 4 }
+                ],
+                "noteIndex": 11,
+                "notes": [62, 57, 50, 45, 42, 35],
+                "frets": [10, 10, 7, 7, 9, 7],
+                "fingers": [0, 0, 0, 0, 3, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7997107",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 57, 50, 47, 42, 35],
+                "frets": [7, 10, 7, 9, 9, 7],
+                "fingers": [0, 4, 0, 3, 2, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "79971010",
+                "listCapos": [
+                  { "fret": 7, "startString": 2, "lastString": 5, "finger": 1 },
+                  { "fret": 10, "startString": 0, "lastString": 1, "finger": 4 }
+                ],
+                "noteIndex": 11,
+                "notes": [62, 57, 50, 47, 42, 35],
+                "frets": [10, 10, 7, 9, 9, 7],
+                "fingers": [0, 0, 0, 3, 2, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx97107",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 2, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 57, 50, 47, -1, -1],
+                "frets": [7, 10, 7, 9, -1, -1],
+                "fingers": [0, 4, 0, 3, 0, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx971010",
+                "listCapos": [
+                  { "fret": 10, "startString": 0, "lastString": 1, "finger": 4 }
+                ],
+                "noteIndex": 11,
+                "notes": [62, 57, 50, 47, -1, -1],
+                "frets": [10, 10, 7, 9, -1, -1],
+                "fingers": [0, 0, 1, 3, 0, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx9111010",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [62, 57, 54, 47, -1, -1],
+                "frets": [10, 10, 11, 9, -1, -1],
+                "fingers": [3, 2, 4, 1, 0, 0],
+                "fret": 9,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2020x",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [-1, 47, 45, 38, 35, -1],
+                "frets": [-1, 0, 2, 0, 2, -1],
+                "fingers": [0, 0, 2, 0, 1, 0],
+                "fret": 0,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2023x",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [-1, 50, 45, 38, 35, -1],
+                "frets": [-1, 3, 2, 0, 2, -1],
+                "fingers": [0, 3, 2, 0, 1, 0],
+                "fret": 0,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2423x",
+                "listCapos": [
+                  { "fret": 2, "startString": 2, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 50, 45, 42, 35, -1],
+                "frets": [-1, 3, 2, 4, 2, -1],
+                "fingers": [0, 2, 0, 3, 0, 0],
+                "fret": 2,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "79777x",
+                "listCapos": [
+                  { "fret": 7, "startString": 1, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 54, 50, 45, 42, 35],
+                "frets": [-1, 7, 7, 7, 9, 7],
+                "fingers": [0, 0, 0, 0, 3, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "797710x",
+                "listCapos": [
+                  { "fret": 7, "startString": 2, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 57, 50, 45, 42, 35],
+                "frets": [-1, 10, 7, 7, 9, 7],
+                "fingers": [0, 4, 0, 0, 3, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "799710x",
+                "listCapos": [
+                  { "fret": 7, "startString": 2, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 57, 50, 47, 42, 35],
+                "frets": [-1, 10, 7, 9, 9, 7],
+                "fingers": [0, 4, 0, 3, 2, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7977xx",
+                "listCapos": [
+                  { "fret": 7, "startString": 2, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, -1, 50, 45, 42, 35],
+                "frets": [-1, -1, 7, 7, 9, 7],
+                "fingers": [0, 0, 0, 0, 3, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2x232",
+                "listCapos": [
+                  { "fret": 2, "startString": 0, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [54, 50, 45, -1, 35, -1],
+                "frets": [2, 3, 2, -1, 2, -1],
+                "fingers": [0, 2, 0, 0, 0, 0],
+                "fret": 2,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2x235",
+                "listCapos": [
+                  { "fret": 2, "startString": 2, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [57, 50, 45, -1, 35, -1],
+                "frets": [5, 3, 2, -1, 2, -1],
+                "fingers": [4, 2, 0, 0, 0, 0],
+                "fret": 2,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2x435",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [57, 50, 47, -1, 35, -1],
+                "frets": [5, 3, 4, -1, 2, -1],
+                "fingers": [4, 2, 3, 0, 1, 0],
+                "fret": 2,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x7777",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 54, 50, 45, -1, 35],
+                "frets": [7, 7, 7, 7, -1, 7],
+                "fingers": [0, 0, 0, 0, 0, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x77710",
+                "listCapos": [
+                  { "fret": 7, "startString": 1, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [62, 54, 50, 45, -1, 35],
+                "frets": [10, 7, 7, 7, -1, 7],
+                "fingers": [4, 0, 0, 0, 0, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x77107",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 57, 50, 45, -1, 35],
+                "frets": [7, 10, 7, 7, -1, 7],
+                "fingers": [0, 4, 0, 0, 0, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x771010",
+                "listCapos": [
+                  { "fret": 7, "startString": 2, "lastString": 5, "finger": 1 },
+                  { "fret": 10, "startString": 0, "lastString": 1, "finger": 4 }
+                ],
+                "noteIndex": 11,
+                "notes": [62, 57, 50, 45, -1, 35],
+                "frets": [10, 10, 7, 7, -1, 7],
+                "fingers": [0, 0, 0, 0, 0, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x97107",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 57, 50, 47, -1, 35],
+                "frets": [7, 10, 7, 9, -1, 7],
+                "fingers": [0, 4, 0, 3, 0, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x971010",
+                "listCapos": [
+                  { "fret": 7, "startString": 2, "lastString": 5, "finger": 1 },
+                  { "fret": 10, "startString": 0, "lastString": 1, "finger": 4 }
+                ],
+                "noteIndex": 11,
+                "notes": [62, 57, 50, 47, -1, 35],
+                "frets": [10, 10, 7, 9, -1, 7],
+                "fingers": [0, 0, 0, 3, 0, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x777x",
+                "listCapos": [
+                  { "fret": 7, "startString": 1, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 54, 50, 45, -1, 35],
+                "frets": [-1, 7, 7, 7, -1, 7],
+                "fingers": [0, 0, 0, 0, 0, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x7710x",
+                "listCapos": [
+                  { "fret": 7, "startString": 2, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 57, 50, 45, -1, 35],
+                "frets": [-1, 10, 7, 7, -1, 7],
+                "fingers": [0, 4, 0, 0, 0, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x9710x",
+                "listCapos": [
+                  { "fret": 7, "startString": 2, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 57, 50, 47, -1, 35],
+                "frets": [-1, 10, 7, 9, -1, 7],
+                "fingers": [0, 4, 0, 3, 0, 0],
+                "fret": 7,
+                "type": "M7",
+                "baseDisplayNote": ""
+              }
+            ],
+            "B7": [
+              {
+                "id": "x21202",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [54, 47, 45, 39, 35, -1],
+                "frets": [2, 0, 2, 1, 2, -1],
+                "fingers": [4, 0, 3, 1, 2, 0],
+                "fret": 0,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x24242",
+                "listCapos": [
+                  { "fret": 2, "startString": 0, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [54, 51, 45, 42, 35, -1],
+                "frets": [2, 4, 2, 4, 2, -1],
+                "fingers": [0, 4, 0, 3, 0, 0],
+                "fret": 2,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x24445",
+                "listCapos": [
+                  { "fret": 4, "startString": 1, "lastString": 3, "finger": 3 }
+                ],
+                "noteIndex": 11,
+                "notes": [57, 51, 47, 42, 35, -1],
+                "frets": [5, 4, 4, 4, 2, -1],
+                "fingers": [4, 0, 0, 0, 1, 0],
+                "fret": 2,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x24245",
+                "listCapos": [
+                  { "fret": 2, "startString": 2, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [57, 51, 45, 42, 35, -1],
+                "frets": [5, 4, 2, 4, 2, -1],
+                "fingers": [4, 3, 0, 2, 0, 0],
+                "fret": 2,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "764445",
+                "listCapos": [
+                  { "fret": 4, "startString": 1, "lastString": 3, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [57, 51, 47, 42, 39, 35],
+                "frets": [5, 4, 4, 4, 6, 7],
+                "fingers": [2, 0, 0, 0, 3, 4],
+                "fret": 4,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "797877",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 54, 51, 45, 42, 35],
+                "frets": [7, 7, 8, 7, 9, 7],
+                "fingers": [0, 0, 2, 0, 3, 0],
+                "fret": 7,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7978107",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 57, 51, 45, 42, 35],
+                "frets": [7, 10, 8, 7, 9, 7],
+                "fingers": [0, 4, 2, 0, 3, 0],
+                "fret": 7,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx98107",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [59, 57, 51, 47, -1, -1],
+                "frets": [7, 10, 8, 9, -1, -1],
+                "fingers": [1, 4, 2, 3, 0, 0],
+                "fret": 7,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx981011",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [63, 57, 51, 47, -1, -1],
+                "frets": [11, 10, 8, 9, -1, -1],
+                "fingers": [4, 3, 1, 2, 0, 0],
+                "fret": 8,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx9111011",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [63, 57, 54, 47, -1, -1],
+                "frets": [11, 10, 11, 9, -1, -1],
+                "fingers": [4, 2, 3, 1, 0, 0],
+                "fret": 9,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2120x",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [-1, 47, 45, 39, 35, -1],
+                "frets": [-1, 0, 2, 1, 2, -1],
+                "fingers": [0, 0, 3, 1, 2, 0],
+                "fret": 0,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2424x",
+                "listCapos": [
+                  { "fret": 2, "startString": 2, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 51, 45, 42, 35, -1],
+                "frets": [-1, 4, 2, 4, 2, -1],
+                "fingers": [0, 4, 0, 3, 0, 0],
+                "fret": 2,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "79787x",
+                "listCapos": [
+                  { "fret": 7, "startString": 1, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 54, 51, 45, 42, 35],
+                "frets": [-1, 7, 8, 7, 9, 7],
+                "fingers": [0, 0, 2, 0, 3, 0],
+                "fret": 7,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "797810x",
+                "listCapos": [
+                  { "fret": 7, "startString": 3, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 57, 51, 45, 42, 35],
+                "frets": [-1, 10, 8, 7, 9, 7],
+                "fingers": [0, 4, 2, 0, 3, 0],
+                "fret": 7,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7678xx",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [-1, -1, 51, 45, 39, 35],
+                "frets": [-1, -1, 8, 7, 6, 7],
+                "fingers": [0, 0, 4, 3, 1, 2],
+                "fret": 6,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7978xx",
+                "listCapos": [
+                  { "fret": 7, "startString": 3, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, -1, 51, 45, 42, 35],
+                "frets": [-1, -1, 8, 7, 9, 7],
+                "fingers": [0, 0, 2, 0, 3, 0],
+                "fret": 7,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2x242",
+                "listCapos": [
+                  { "fret": 2, "startString": 0, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [54, 51, 45, -1, 35, -1],
+                "frets": [2, 4, 2, -1, 2, -1],
+                "fingers": [0, 3, 0, 0, 0, 0],
+                "fret": 2,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2x245",
+                "listCapos": [
+                  { "fret": 2, "startString": 2, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [57, 51, 45, -1, 35, -1],
+                "frets": [5, 4, 2, -1, 2, -1],
+                "fingers": [4, 3, 0, 0, 0, 0],
+                "fret": 2,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2x445",
+                "listCapos": [
+                  { "fret": 4, "startString": 1, "lastString": 2, "finger": 3 }
+                ],
+                "noteIndex": 11,
+                "notes": [57, 51, 47, -1, 35, -1],
+                "frets": [5, 4, 4, -1, 2, -1],
+                "fingers": [4, 0, 0, 0, 1, 0],
+                "fret": 2,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x4445",
+                "listCapos": [
+                  { "fret": 4, "startString": 1, "lastString": 3, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [57, 51, 47, 42, -1, 35],
+                "frets": [5, 4, 4, 4, -1, 7],
+                "fingers": [2, 0, 0, 0, 0, 4],
+                "fret": 4,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x7877",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 54, 51, 45, -1, 35],
+                "frets": [7, 7, 8, 7, -1, 7],
+                "fingers": [0, 0, 2, 0, 0, 0],
+                "fret": 7,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x78107",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 57, 51, 45, -1, 35],
+                "frets": [7, 10, 8, 7, -1, 7],
+                "fingers": [0, 4, 2, 0, 0, 0],
+                "fret": 7,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x98107",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 57, 51, 47, -1, 35],
+                "frets": [7, 10, 8, 9, -1, 7],
+                "fingers": [0, 4, 2, 3, 0, 0],
+                "fret": 7,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x787x",
+                "listCapos": [
+                  { "fret": 7, "startString": 1, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 54, 51, 45, -1, 35],
+                "frets": [-1, 7, 8, 7, -1, 7],
+                "fingers": [0, 0, 2, 0, 0, 0],
+                "fret": 7,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x7810x",
+                "listCapos": [
+                  { "fret": 7, "startString": 3, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 57, 51, 45, -1, 35],
+                "frets": [-1, 10, 8, 7, -1, 7],
+                "fingers": [0, 4, 2, 0, 0, 0],
+                "fret": 7,
+                "type": "_7",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x9810x",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [-1, 57, 51, 47, -1, 35],
+                "frets": [-1, 10, 8, 9, -1, 7],
+                "fingers": [0, 4, 2, 3, 0, 1],
+                "fret": 7,
+                "type": "_7",
+                "baseDisplayNote": ""
+              }
+            ],
+            "B": [
+              {
+                "id": "x24442",
+                "listCapos": [
+                  { "fret": 2, "startString": 0, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [54, 51, 47, 42, 35, -1],
+                "frets": [2, 4, 4, 4, 2, -1],
+                "fingers": [0, 4, 3, 2, 0, 0],
+                "fret": 2,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "799877",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 54, 51, 47, 42, 35],
+                "frets": [7, 7, 8, 9, 9, 7],
+                "fingers": [0, 0, 2, 4, 3, 0],
+                "fret": 7,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx9877",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 1, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 54, 51, 47, -1, -1],
+                "frets": [7, 7, 8, 9, -1, -1],
+                "fingers": [0, 0, 2, 3, 0, 0],
+                "fret": 7,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "xx9111211",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [63, 59, 54, 47, -1, -1],
+                "frets": [11, 12, 11, 9, -1, -1],
+                "fingers": [3, 4, 2, 1, 0, 0],
+                "fret": 9,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x1413111211",
+                "listCapos": [
+                  { "fret": 11, "startString": 0, "lastString": 2, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [63, 59, 54, 51, 47, -1],
+                "frets": [11, 12, 11, 13, 14, -1],
+                "fingers": [0, 2, 0, 3, 4, 0],
+                "fret": 11,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2444x",
+                "listCapos": [
+                  { "fret": 4, "startString": 1, "lastString": 3, "finger": 3 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 51, 47, 42, 35, -1],
+                "frets": [-1, 4, 4, 4, 2, -1],
+                "fingers": [0, 0, 0, 0, 1, 0],
+                "fret": 2,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "76444x",
+                "listCapos": [
+                  { "fret": 4, "startString": 1, "lastString": 3, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 51, 47, 42, 39, 35],
+                "frets": [-1, 4, 4, 4, 6, 7],
+                "fingers": [0, 0, 0, 0, 3, 4],
+                "fret": 4,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "79987x",
+                "listCapos": [
+                  { "fret": 7, "startString": 1, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 54, 51, 47, 42, 35],
+                "frets": [-1, 7, 8, 9, 9, 7],
+                "fingers": [0, 0, 2, 4, 3, 0],
+                "fret": 7,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x14131112x",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [-1, 59, 54, 51, 47, -1],
+                "frets": [-1, 12, 11, 13, 14, -1],
+                "fingers": [0, 2, 1, 3, 4, 0],
+                "fret": 11,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7644xx",
+                "listCapos": [
+                  { "fret": 4, "startString": 2, "lastString": 3, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, -1, 47, 42, 39, 35],
+                "frets": [-1, -1, 4, 4, 6, 7],
+                "fingers": [0, 0, 0, 0, 3, 4],
+                "fret": 4,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7998xx",
+                "listCapos": [],
+                "noteIndex": 11,
+                "notes": [-1, -1, 51, 47, 42, 35],
+                "frets": [-1, -1, 8, 9, 9, 7],
+                "fingers": [0, 0, 2, 4, 3, 1],
+                "fret": 7,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x2x442",
+                "listCapos": [
+                  { "fret": 2, "startString": 0, "lastString": 4, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [54, 51, 47, -1, 35, -1],
+                "frets": [2, 4, 4, -1, 2, -1],
+                "fingers": [0, 4, 3, 0, 0, 0],
+                "fret": 2,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x9877",
+                "listCapos": [
+                  { "fret": 7, "startString": 0, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [59, 54, 51, 47, -1, 35],
+                "frets": [7, 7, 8, 9, -1, 7],
+                "fingers": [0, 0, 2, 3, 0, 0],
+                "fret": 7,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "x14x111211",
+                "listCapos": [
+                  { "fret": 11, "startString": 0, "lastString": 2, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [63, 59, 54, -1, 47, -1],
+                "frets": [11, 12, 11, -1, 14, -1],
+                "fingers": [0, 2, 0, 0, 4, 0],
+                "fret": 11,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x444x",
+                "listCapos": [
+                  { "fret": 4, "startString": 1, "lastString": 3, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 51, 47, 42, -1, 35],
+                "frets": [-1, 4, 4, 4, -1, 7],
+                "fingers": [0, 0, 0, 0, 0, 4],
+                "fret": 4,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              },
+              {
+                "id": "7x987x",
+                "listCapos": [
+                  { "fret": 7, "startString": 1, "lastString": 5, "finger": 1 }
+                ],
+                "noteIndex": 11,
+                "notes": [-1, 54, 51, 47, -1, 35],
+                "frets": [-1, 7, 8, 9, -1, 7],
+                "fingers": [0, 0, 2, 3, 0, 0],
+                "fret": 7,
+                "type": "MAJOR",
+                "baseDisplayNote": ""
+              }
+            ]
+          },
+          "piano_inversions": null,
+          "last_comments": [
+            {
+              "id": 5942270,
+              "rowid": 2892656,
+              "text": "this is just my preference but i think a Bm chords sounds a bit better",
+              "author_userid": 466870,
+              "rating": 10,
+              "userid": 23359449,
+              "usergroupid": 2,
+              "username": "dezzadiscord78",
+              "date_created": 1575614801,
+              "type": 4,
+              "parent_id": 0,
+              "added_from": "",
+              "updated_at": null,
+              "status": "new",
+              "moderator_user_id": 0,
+              "likes_count": 10,
+              "dislikes_count": 0,
+              "contributor_level": 1,
+              "avatar": "https://tabs.ultimate-guitar.com/static/users/9/4/4/23359449.gif?d=d",
+              "date": 1575614801,
+              "user_iq": 42,
+              "localized_text": ""
+            },
+            {
+              "id": 5985677,
+              "rowid": 2892656,
+              "text": "imo Cmaj7 sounds better in place of C :)",
+              "author_userid": 466870,
+              "rating": 2,
+              "userid": 25499229,
+              "usergroupid": 2,
+              "username": "evelynbgregory",
+              "date_created": 1579892287,
+              "type": 4,
+              "parent_id": 0,
+              "added_from": "mobile",
+              "updated_at": null,
+              "status": "new",
+              "moderator_user_id": 0,
+              "likes_count": 2,
+              "dislikes_count": 0,
+              "contributor_level": 1,
+              "avatar": "https://tabs.ultimate-guitar.com/static/users/9/2/2/25499229.gif?d=d",
+              "date": 1579892287,
+              "user_iq": 51,
+              "localized_text": ""
+            },
+            {
+              "id": 5923805,
+              "rowid": 2892656,
+              "text": "Strumming pattern: DD DUDU sounds nice",
+              "author_userid": 466870,
+              "rating": 2,
+              "userid": 26035962,
+              "usergroupid": 21,
+              "username": "bizzlex94",
+              "date_created": 1573693485,
+              "type": 4,
+              "parent_id": 0,
+              "added_from": "",
+              "updated_at": null,
+              "status": "new",
+              "moderator_user_id": 0,
+              "likes_count": 2,
+              "dislikes_count": 0,
+              "contributor_level": 3,
+              "avatar": "https://tabs.ultimate-guitar.com/static/users/2/6/9/26035962.gif?d=d",
+              "date": 1573693485,
+              "user_iq": 60,
+              "localized_text": ""
+            }
+          ],
+          "comments": 9,
+          "stats": { "view_total": 322042, "favorites_count": 8717 },
+          "chord_type": "guitar",
+          "tab_corrects": [],
+          "is_simplify_available": true,
+          "can_edit_tab": false,
+          "can_edit_strumming": false,
+          "can_send_tab_stats": true,
+          "official_backingtrack": null,
+          "tab_search_link": "https://www.ultimate-guitar.com/search.php?band_name=Billie+Eilish&amp;song_name=everything+i+wanted&amp;type%5B0%5D=200&amp;type%5B1%5D=300",
+          "wiki_tab_user_group_id": 21,
+          "wiki_tab_user_iq": 13942,
+          "user_group_id": 21,
+          "count_rating": 604,
+          "encode_strummings": "{\"patterns\":[{\"part\":\"Simple single strums\",\"denuminator\":8,\"bpm\":120,\"is_triplet\":0,\"measures\":[3,202,202,1,202,202,3,202,202,202,202,202,202,202,202,202]},{\"part\":\"Rhythmic strumming variation\",\"denuminator\":8,\"bpm\":120,\"is_triplet\":0,\"measures\":[3,202,1,101,202,101,3,202,202,101,1,202,1,202,1,101]}]}",
+          "alert": null,
+          "official_backingtrack_url": "https://www.ultimate-guitar.com/backing_track/billie_eilish/everything_i_wanted_75377",
+          "official_tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-official-2900324",
+          "official_tab_want": null,
+          "tab_manually_highlighted": true,
+          "pro_tab_onbording": null,
+          "smart_auto_scroll_available": true,
+          "lyrics_lines": [],
+          "video_feed": { "total_count": 570, "artist_total_count": 0 },
+          "ug_difficulty": "intermediate",
+          "new_ug_difficulty": null,
+          "tracking": {
+            "ctx": {
+              "user_registered": 1366548188,
+              "url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-chords-2892656",
+              "referer": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-chords-2892650",
+              "utm_source": "",
+              "utm_medium": "",
+              "utm_campaign": "",
+              "utm_content": "",
+              "utm_term": "",
+              "tab_id": 2892656,
+              "tab_type": "Chords",
+              "tab_created": 1573692028,
+              "tab_open_source": "",
+              "tab_views": 322042,
+              "tab_favourites_count": 8717,
+              "tab_version": 2,
+              "tab_ratings_count": 604,
+              "tab_rating": 4.88374000000000041410430640098638832569122314453125,
+              "tab_ug_difficulty": "intermediate",
+              "tab_author_difficulty": "novice",
+              "song_id": 3725456,
+              "song_artist_id": 66748,
+              "h": 223132457,
+              "dt": 1737762124
+            }
+          },
+          "brothers_by_type": null,
+          "brothers_count": null,
+          "binary_id": null
+        },
+        "artist_image": null,
+        "access": {
+          "can_edit_tab": false,
+          "can_edit_strumming": false,
+          "can_delete_comment": false,
+          "can_manage_rating": false,
+          "can_vote_strumming": true
+        },
+        "recommended_tabs": [],
+        "recentry_viewed_key": "tab:2892656",
+        "criticals": [],
+        "online": { "users": 9609, "guests": 1612 },
+        "is_in_linking_exp": true,
+        "is_in_indonesia_title_exp": false,
+        "best_pro_tab_url": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-guitar-pro-3040842",
+        "xtz_player_force_show": false,
+        "xtz_player_force_new": false
+      },
+      "header_bidding": {
+        "page_type": "tab_desktop",
+        "ad_units": [
+          {
+            "code": "ad_cs_2010320_160_600",
+            "dfpCode": "UG_ATF_160",
+            "sizes": [[160, 600]],
+            "placementId": "7478445",
+            "layoutPlacement": "side",
+            "mediaTypes": { "banner": { "sizes": [[160, 600]] } },
+            "refresh": {
+              "delay": 30000,
+              "delayDeviation": 10000,
+              "maxVisibleTime": 1000,
+              "limit": 30
+            },
+            "appnexusPlacementId": 12097756,
+            "mediaType": "banner",
+            "bids": [
+              {
+                "bidder": "appnexus",
+                "params": {
+                  "placementId": 7478445,
+                  "keywords": {
+                    "is_refresh": "false",
+                    "artist": 66748,
+                    "artist_name": "billie eilish",
+                    "song_genre": "pop",
+                    "tab_type": "Chords",
+                    "tab_id": 2892656,
+                    "instr": "guitar",
+                    "title": "Billie Eilish - Everything I Wanted (chords)"
+                  }
+                }
+              },
+              {
+                "bidder": "pubmatic",
+                "params": { "publisherId": "72623", "adSlot": "3131193" }
+              },
+              {
+                "bidder": "rubicon",
+                "params": {
+                  "accountId": "15178",
+                  "siteId": "93918",
+                  "zoneId": "441930"
+                }
+              },
+              { "bidder": "ix", "params": { "id": 1, "siteId": "177325" } },
+              {
+                "bidder": "sharethrough",
+                "params": { "pkey": "2DMGYqOnPeq1qmyOc10E0J7p" }
+              },
+              {
+                "bidder": "rise",
+                "params": { "org": "63a2de6e59cc1900018d95e6" }
+              },
+              {
+                "bidder": "ttd",
+                "params": { "supplySourceId": "muse", "publisherId": "1" }
+              },
+              {
+                "bidder": "shemedia",
+                "params": {
+                  "accountId": "10278",
+                  "siteId": "210096",
+                  "zoneId": "3510326"
+                }
+              }
+            ],
+            "customTargeting": {
+              "ab_var_web_UG_4488": 2,
+              "ab_var_web_UG_4701": 1,
+              "ab_var_web_UG_5658": 1,
+              "ab_var_web_UG_5676": 4,
+              "ab_var_web_UG_5694": 2,
+              "tab_type": "Chords",
+              "genre": "pop",
+              "artist_name": "billie eilish",
+              "age": "0",
+              "main_instrument": "Piano",
+              "skill_level": "Garage band guitarist"
+            }
+          },
+          {
+            "code": "ad_cs_2010319_160_600",
+            "dfpCode": "UG_BTFR_160",
+            "sizes": [[160, 600]],
+            "placementId": "7478445",
+            "layoutPlacement": "sideBottom",
+            "mediaTypes": { "banner": { "sizes": [[160, 600]] } },
+            "refresh": {
+              "delay": 30000,
+              "delayDeviation": 10000,
+              "maxVisibleTime": 1000,
+              "limit": 30
+            },
+            "appnexusPlacementId": 12097784,
+            "mediaType": "banner",
+            "bids": [
+              {
+                "bidder": "appnexus",
+                "params": {
+                  "placementId": 7478445,
+                  "keywords": {
+                    "is_refresh": "false",
+                    "artist": 66748,
+                    "artist_name": "billie eilish",
+                    "song_genre": "pop",
+                    "tab_type": "Chords",
+                    "tab_id": 2892656,
+                    "instr": "guitar",
+                    "title": "Billie Eilish - Everything I Wanted (chords)"
+                  }
+                }
+              },
+              {
+                "bidder": "pubmatic",
+                "params": { "publisherId": "72623", "adSlot": "3131225" }
+              },
+              { "bidder": "ix", "params": { "siteId": "179682", "id": "03" } },
+              {
+                "bidder": "sharethrough",
+                "params": { "pkey": "4wvqxnlPv0OVn60kXMsmh12M" }
+              },
+              {
+                "bidder": "rise",
+                "params": { "org": "63a2de6e59cc1900018d95e6" }
+              },
+              {
+                "bidder": "ttd",
+                "params": { "supplySourceId": "muse", "publisherId": "1" }
+              }
+            ],
+            "customTargeting": {
+              "ab_var_web_UG_4488": 2,
+              "ab_var_web_UG_4701": 1,
+              "ab_var_web_UG_5658": 1,
+              "ab_var_web_UG_5676": 4,
+              "ab_var_web_UG_5694": 2,
+              "tab_type": "Chords",
+              "genre": "pop",
+              "artist_name": "billie eilish",
+              "age": "0",
+              "main_instrument": "Piano",
+              "skill_level": "Garage band guitarist"
+            }
+          },
+          {
+            "code": "ad_cs_2010319_300_250",
+            "dfpCode": "UG_BTFR_300",
+            "sizes": [
+              [1, 1],
+              [300, 250]
+            ],
+            "placementId": "8549997",
+            "layoutPlacement": "bottom",
+            "mediaTypes": {
+              "banner": {
+                "sizes": [
+                  [1, 1],
+                  [300, 250],
+                  [610, 300],
+                  [535, 300],
+                  [535, 400]
+                ]
+              }
+            },
+            "refresh": {
+              "delay": 30000,
+              "delayDeviation": 10000,
+              "maxVisibleTime": 1000,
+              "limit": 30
+            },
+            "withoutBids": true,
+            "appnexusPlacementId": 12097784,
+            "mediaType": "banner",
+            "bids": [
+              {
+                "bidder": "appnexus",
+                "params": {
+                  "placementId": 8549997,
+                  "keywords": {
+                    "is_refresh": "false",
+                    "artist": 66748,
+                    "artist_name": "billie eilish",
+                    "song_genre": "pop",
+                    "tab_type": "Chords",
+                    "tab_id": 2892656,
+                    "instr": "guitar",
+                    "title": "Billie Eilish - Everything I Wanted (chords)"
+                  }
+                }
+              },
+              {
+                "bidder": "pubmatic",
+                "params": {
+                  "publisherId": "72623",
+                  "adSlot": "3131198@300x250"
+                }
+              },
+              {
+                "bidder": "rubicon",
+                "params": {
+                  "accountId": "15178",
+                  "siteId": "93918",
+                  "zoneId": "506312"
+                }
+              }
+            ],
+            "customTargeting": {
+              "ab_var_web_UG_4488": 2,
+              "ab_var_web_UG_4701": 1,
+              "ab_var_web_UG_5658": 1,
+              "ab_var_web_UG_5676": 4,
+              "ab_var_web_UG_5694": 2,
+              "tab_type": "Chords",
+              "genre": "pop",
+              "artist_name": "billie eilish",
+              "age": "0",
+              "main_instrument": "Piano",
+              "skill_level": "Garage band guitarist",
+              "video": "atfsekindo"
+            },
+            "primis": true,
+            "additionalSekindoBehavior": 3,
+            "dynamic": true
+          }
+        ]
+      },
+      "experiments": {
+        "variations": {
+          "4488": 2,
+          "4701": 1,
+          "5241": 1,
+          "5658": 1,
+          "5676": 4,
+          "5694": 2,
+          "824": 2,
+          "857": 2,
+          "902": 2,
+          "923": 2,
+          "947": 1,
+          "950": 2,
+          "956": 1,
+          "965": 1,
+          "992": 2,
+          "1394": 2,
+          "1430": 3,
+          "1433": 2,
+          "1436": 2,
+          "1483": 2,
+          "1492": 2,
+          "1495": 2,
+          "1522": 2,
+          "1615": 2,
+          "1618": 2,
+          "1678": 2,
+          "1750": 2,
+          "1765": 2,
+          "1816": 2,
+          "1966": 3,
+          "2084": 2,
+          "2150": 1,
+          "2153": 2,
+          "2225": 1,
+          "2513": 3,
+          "2738": 2,
+          "3115": 3,
+          "3412": 1,
+          "3442": 2,
+          "3523": 2,
+          "3775": 2,
+          "3874": 2,
+          "3922": 2,
+          "4099": 2,
+          "4195": 2,
+          "4476": 2,
+          "4491": 2,
+          "4530": 2,
+          "4569": 2,
+          "4605": 2,
+          "4665": 2,
+          "4752": 2,
+          "4857": 2,
+          "4881": 3,
+          "5127": 2,
+          "5145": 2,
+          "5178": 2,
+          "5274": 2,
+          "5313": 2,
+          "5397": 2,
+          "5499": 1,
+          "5526": 2,
+          "5544": 2,
+          "5562": 2
+        },
+        "closed_experiments": {
+          "824": 2,
+          "857": 2,
+          "902": 2,
+          "923": 2,
+          "947": 1,
+          "950": 2,
+          "956": 1,
+          "965": 1,
+          "992": 2,
+          "1394": 2,
+          "1430": 3,
+          "1433": 2,
+          "1436": 2,
+          "1483": 2,
+          "1492": 2,
+          "1495": 2,
+          "1522": 2,
+          "1615": 2,
+          "1618": 2,
+          "1678": 2,
+          "1750": 2,
+          "1765": 2,
+          "1816": 2,
+          "1966": 3,
+          "2084": 2,
+          "2150": 1,
+          "2153": 2,
+          "2225": 1,
+          "2513": 3,
+          "2738": 2,
+          "3115": 3,
+          "3412": 1,
+          "3442": 2,
+          "3523": 2,
+          "3775": 2,
+          "3874": 2,
+          "3922": 2,
+          "4099": 2,
+          "4195": 2,
+          "4476": 2,
+          "4491": 2,
+          "4530": 2,
+          "4569": 2,
+          "4605": 2,
+          "4665": 2,
+          "4752": 2,
+          "4857": 2,
+          "4881": 3,
+          "5127": 2,
+          "5145": 2,
+          "5178": 2,
+          "5274": 2,
+          "5313": 2,
+          "5397": 2,
+          "5499": 1,
+          "5526": 2,
+          "5544": 2,
+          "5562": 2
+        }
+      },
+      "template": {
+        "module": "tab",
+        "controller": "view",
+        "action": "index",
+        "reactAction": "tab_text"
+      },
+      "documents": { "enabled": true }
+    },
+    "i18n": {
+      "locale": "en-US",
+      "language": "en",
+      "links": {
+        "default": "https://tabs.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-chords-2892656",
+        "pt": "https://pt.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-chords-2892656",
+        "es": "https://es.ultimate-guitar.com/tab/billie-eilish/everything-i-wanted-chords-2892656"
+      }
+    },
+    "promotion": {
+      "promoType": "NewYear",
+      "promoKey": "ugapp:topBannerShow:NewYear-2024",
+      "endedKey": "_ug_promotionEnded_ugapp:topBannerShow:NewYear-2024",
+      "emergency": {
+        "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/b/b2a9afe70eebde770fe48e307fb96eb8461440f4.webp",
+        "title": "NEW YEAR SALE"
+      },
+      "exit": {
+        "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/f/f55e881eddd780cfcd0a224afefa27762dc70167.webp",
+        "title": "NEW YEAR SALE",
+        "subtitle": "",
+        "hasLabel": false,
+        "hasTimer": false
+      },
+      "heroBanner": {
+        "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/f/fad9ac36884cb3053e9d3a22ba9a6fe19834a0ff.webp",
+        "title": "",
+        "subtitle": "NEW YEAR SALE"
+      },
+      "heroBlock": {
+        "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/8/8c75a0a7b8e08e5512209274f1fdb8b46e82235c.webp",
+        "buttonColor": "brand"
+      },
+      "payment": {
+        "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/5/5f21325decb0b1a8453bd25daa26bab0dea9ab6a.webp",
+        "title": "NEW YEAR\nSALE",
+        "planName": "New year sale"
+      },
+      "permBanner": {
+        "&lt;24h_logged-in": {
+          "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/b/b25d32420882dc32580c0b8577289edc547bc524.webp",
+          "title": "New Year Sale:",
+          "subtitle": "Pro Access %percentage%",
+          "hasTimer": false,
+          "buttonText": "GET SPECIAL OFFER"
+        },
+        "&gt;24h_logged-in": {
+          "imgUrl": "https://cdn.ustatik.com/storage/marketing/images/b/b9a4efbdfcd406ae9fa4a6a4bbc512cfee52bf1a.jpeg",
+          "title": "Welcome Offer:",
+          "subtitle": "%percentage% on annual membership of Ultimate Guitar Pro",
+          "hasTimer": false,
+          "buttonText": "TRY NOW"
+        },
+        "&lt;24h_logged-out": {
+          "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/b/b25d32420882dc32580c0b8577289edc547bc524.webp",
+          "title": "New Year Sale:",
+          "subtitle": "Pro Access %percentage%",
+          "buttonText": "GET SPECIAL OFFER"
+        },
+        "&gt;24h_logged-out": {
+          "imgUrl": "https://cdn.ustatik.com/storage/marketing/images/b/b9a4efbdfcd406ae9fa4a6a4bbc512cfee52bf1a.jpeg",
+          "title": "Welcome Offer:",
+          "subtitle": "%percentage% on annual membership of Ultimate Guitar Pro",
+          "hasTimer": false,
+          "buttonText": "TRY NOW"
+        },
+        "default": {
+          "imgUrl": "https://cdn.ustatik.com/storage/marketing/images/b/b9a4efbdfcd406ae9fa4a6a4bbc512cfee52bf1a.jpeg",
+          "title": "Welcome Offer",
+          "subtitle": "%percentage% on annual membership of UG Pro",
+          "buttonText": "TRY NOW"
+        }
+      },
+      "stickyBanner": {
+        "imgUrl": "https://www.ultimate-guitar.com/static/storage/marketing/images/4/4b99bbf8ac84787c61271ca74d27020f1f6f965a.webp",
+        "title": "",
+        "subtitle": "NEW YEAR SALE"
+      }
+    },
+    "user": {
+      "id": 3633583,
+      "pa_id": 40196558,
+      "avatarUrl": "https://tabs.ultimate-guitar.com/static/users/3/8/5/3633583.gif?d=d&amp;h=1737762086",
+      "username": "raziber",
+      "email": "razi.berg@gmail.com",
+      "usergroupid": 2,
+      "contributor": {
+        "isContributor": false,
+        "isTabContributor": false,
+        "first_tab": 0
+      },
+      "iq": 10,
+      "tabsCount": 103,
+      "playlistCount": 0,
+      "coursesCount": 0,
+      "messagesCount": 0,
+      "rights": [],
+      "hasExpiredCard": null,
+      "hasChargeError": null,
+      "hasActiveProPause": false,
+      "hasActiveEduPause": false,
+      "tab_try": null,
+      "content_access": [],
+      "joinDate": 1366548188,
+      "user_status": "",
+      "segment": {
+        "preview": {
+          "segment": 7,
+          "prediction": 0,
+          "group_segment": 2,
+          "segment_label": "users_with_high_frequency_visits",
+          "group_segment_label": "cold"
+        },
+        "current": {
+          "segment": 7,
+          "prediction": 0,
+          "group_segment": 2,
+          "segment_label": "users_with_high_frequency_visits",
+          "group_segment_label": "cold"
+        }
+      },
+      "uid2_token_url": null,
+      "ip": "176.228.10.4",
+      "id5_hashed": "c35ba1ee81d24b93edabb8db59994d4ac2ec2d7bf9042b90ee2b1598c84b61b0",
+      "family": null,
+      "spotify_songs_count": 0,
+      "spotify_is_connected": false
+    },
+    "notifications": {
+      "count_new": 1,
+      "data": [
+        {
+          "id": 1656,
+          "verb_group": 300,
+          "object_group": 0,
+          "date_group": 1737590400,
+          "date_create": 1737658800,
+          "date_update": 1737621002,
+          "activities": [
+            {
+              "id": "featured_shots_update:300:user:27957855:video_section:featured",
+              "verb": "featured_shots_update:300",
+              "date": 1737658800,
+              "actor": "user:27957855",
+              "actor_name": "",
+              "actor_avatar": "https://cdn.ustatik.com/users/5/5/8/27957855.gif?d=d",
+              "group_object": "",
+              "object": "video_section:featured",
+              "object_name": "",
+              "message": "Here are 15 awesome covers of popular songs for you to enjoy 🤩",
+              "iq": 0,
+              "preview": ""
+            }
+          ],
+          "status": 0,
+          "click": 0,
+          "user_id": 0,
+          "activity_count": 1,
+          "unseen_count": 1,
+          "date_seen": 0
+        }
+      ],
+      "giveaway_id": 1,
+      "texts": {
+        "markAll": "Mark all as read",
+        "settings": "Settings",
+        "thanksForVote": "Thanks for your vote"
+      }
+    },
+    "forms": [],
+    "theme": "dark",
+    "commentForm": { "is_new": 0 },
+    "isUgOffice": 0,
+    "book": { "is_top_menu": true },
+    "ugSearch": { "type": "tabs", "value": "" },
+    "sponsorsFooter": null,
+    "takeover": { "show": false },
+    "interstitial": false,
+    "customAlerts": []
+  },
+  "globalHelpers": [],
+  "helpers": {
+    "typeHelper": {
+      "short": {
+        "Official": "OFFICIAL",
+        "Chords": "CRD",
+        "Tabs": "TAB",
+        "Pro": "PRO",
+        "Power": "PWR",
+        "Bass Tabs": "BASS",
+        "Drum Tabs": "DRM",
+        "Video": "VID",
+        "Ukulele Chords": "UKE",
+        "Tab Pro": "TAB PRO",
+        "Chord Pro": "CRD PRO",
+        "Vocal": "VOCAL"
+      },
+      "filter": {
+        "Official": "official",
+        "Chords": "chords",
+        "Tabs": "tab",
+        "Pro": "guitar pro",
+        "Power": "power",
+        "Bass Tabs": "bass",
+        "Drum Tabs": "drums",
+        "Video": "video",
+        "Ukulele Chords": "ukulele",
+        "Tab Pro": "tab pro",
+        "Chord Pro": "chord pro",
+        "Vocal": "vocal"
+      },
+      "full": {
+        "Official": "official tab",
+        "Chords": "chords",
+        "Tabs": "tab",
+        "Pro": "guitar pro tab",
+        "Power": "power tab",
+        "Bass Tabs": "bass tab",
+        "Drum Tabs": "drum tab",
+        "Video": "video tab",
+        "Ukulele Chords": "ukulele chords",
+        "Tab Pro": "tab pro",
+        "Chord Pro": "chord pro",
+        "Vocal": "vocal tab"
+      },
+      "recommendations": {
+        "Official": "Official",
+        "Chords": "Chords",
+        "Tabs": "Tab",
+        "Pro": "Pro",
+        "Power": "Power",
+        "Bass Tabs": "Bass",
+        "Drum Tabs": "Drum",
+        "Video": "Video",
+        "Ukulele Chords": "Ukulele",
+        "Tab Pro": "Tab Pro",
+        "Chord Pro": "Chord",
+        "Vocal": "Vocal"
+      }
+    },
+    "allowedDomains": [
+      "ultimate-guitar.com",
+      "instagram.com",
+      "facebook.com",
+      "twitter.com",
+      "youtube.com",
+      "youtu.be"
+    ]
+  },
+  "cmp": {
+    "setConsentUrl": "https://www.ultimate-guitar.com/user/security/consent"
+  },
+  "bidding": {
+    "analytics": {
+      "logUrl": "//track.ultimate-guitar.com/ug/",
+      "pageType": "tab_desktop",
+      "region": "MER",
+      "device": "desktop",
+      "variation": "",
+      "hasHardRefresh": true
+    },
+    "refresh": {
+      "limit": 30,
+      "maxVisibleTime": 1000,
+      "delay": 30000,
+      "delayDeviation": 10000,
+      "enabled": true,
+      "hasHardRefresh": true,
+      "availableBidders": [
+        "appnexus",
+        "ix",
+        "pubmatic",
+        "rubicon",
+        "openx",
+        "adform",
+        "sharethrough"
+      ],
+      "ignoreChangePageVisibility": false
+    },
+    "minRefreshCpm": 0.040000000000000000832667268468867405317723751068115234375,
+    "cpmFloor": 0.1499999999999999944488848768742172978818416595458984375,
+    "timeout": 2000,
+    "refreshTimeout": 1000,
+    "dfpId": 74268401,
+    "units": [
+      {
+        "code": "ad_cs_2010320_160_600",
+        "dfpCode": "UG_ATF_160",
+        "sizes": [[160, 600]],
+        "placementId": "7478445",
+        "layoutPlacement": "side",
+        "mediaTypes": { "banner": { "sizes": [[160, 600]] } },
+        "refresh": {
+          "delay": 30000,
+          "delayDeviation": 10000,
+          "maxVisibleTime": 1000,
+          "limit": 30
+        },
+        "appnexusPlacementId": 12097756,
+        "mediaType": "banner",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "params": {
+              "placementId": 7478445,
+              "keywords": {
+                "is_refresh": "false",
+                "artist": 66748,
+                "artist_name": "billie eilish",
+                "song_genre": "pop",
+                "tab_type": "Chords",
+                "tab_id": 2892656,
+                "instr": "guitar",
+                "title": "Billie Eilish - Everything I Wanted (chords)"
+              }
+            }
+          },
+          {
+            "bidder": "pubmatic",
+            "params": { "publisherId": "72623", "adSlot": "3131193" }
+          },
+          {
+            "bidder": "rubicon",
+            "params": {
+              "accountId": "15178",
+              "siteId": "93918",
+              "zoneId": "441930"
+            }
+          },
+          { "bidder": "ix", "params": { "id": 1, "siteId": "177325" } },
+          {
+            "bidder": "sharethrough",
+            "params": { "pkey": "2DMGYqOnPeq1qmyOc10E0J7p" }
+          },
+          { "bidder": "rise", "params": { "org": "63a2de6e59cc1900018d95e6" } },
+          {
+            "bidder": "ttd",
+            "params": { "supplySourceId": "muse", "publisherId": "1" }
+          },
+          {
+            "bidder": "shemedia",
+            "params": {
+              "accountId": "10278",
+              "siteId": "210096",
+              "zoneId": "3510326"
+            }
+          }
+        ],
+        "customTargeting": {
+          "ab_var_web_UG_4488": 2,
+          "ab_var_web_UG_4701": 1,
+          "ab_var_web_UG_5658": 1,
+          "ab_var_web_UG_5676": 4,
+          "ab_var_web_UG_5694": 2,
+          "tab_type": "Chords",
+          "genre": "pop",
+          "artist_name": "billie eilish",
+          "age": "0",
+          "main_instrument": "Piano",
+          "skill_level": "Garage band guitarist"
+        }
+      },
+      {
+        "code": "ad_cs_2010319_160_600",
+        "dfpCode": "UG_BTFR_160",
+        "sizes": [[160, 600]],
+        "placementId": "7478445",
+        "layoutPlacement": "sideBottom",
+        "mediaTypes": { "banner": { "sizes": [[160, 600]] } },
+        "refresh": {
+          "delay": 30000,
+          "delayDeviation": 10000,
+          "maxVisibleTime": 1000,
+          "limit": 30
+        },
+        "appnexusPlacementId": 12097784,
+        "mediaType": "banner",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "params": {
+              "placementId": 7478445,
+              "keywords": {
+                "is_refresh": "false",
+                "artist": 66748,
+                "artist_name": "billie eilish",
+                "song_genre": "pop",
+                "tab_type": "Chords",
+                "tab_id": 2892656,
+                "instr": "guitar",
+                "title": "Billie Eilish - Everything I Wanted (chords)"
+              }
+            }
+          },
+          {
+            "bidder": "pubmatic",
+            "params": { "publisherId": "72623", "adSlot": "3131225" }
+          },
+          { "bidder": "ix", "params": { "siteId": "179682", "id": "03" } },
+          {
+            "bidder": "sharethrough",
+            "params": { "pkey": "4wvqxnlPv0OVn60kXMsmh12M" }
+          },
+          { "bidder": "rise", "params": { "org": "63a2de6e59cc1900018d95e6" } },
+          {
+            "bidder": "ttd",
+            "params": { "supplySourceId": "muse", "publisherId": "1" }
+          }
+        ],
+        "customTargeting": {
+          "ab_var_web_UG_4488": 2,
+          "ab_var_web_UG_4701": 1,
+          "ab_var_web_UG_5658": 1,
+          "ab_var_web_UG_5676": 4,
+          "ab_var_web_UG_5694": 2,
+          "tab_type": "Chords",
+          "genre": "pop",
+          "artist_name": "billie eilish",
+          "age": "0",
+          "main_instrument": "Piano",
+          "skill_level": "Garage band guitarist"
+        }
+      },
+      {
+        "code": "ad_cs_2010319_300_250",
+        "dfpCode": "UG_BTFR_300",
+        "sizes": [
+          [1, 1],
+          [300, 250]
+        ],
+        "placementId": "8549997",
+        "layoutPlacement": "bottom",
+        "mediaTypes": {
+          "banner": {
+            "sizes": [
+              [1, 1],
+              [300, 250],
+              [610, 300],
+              [535, 300],
+              [535, 400]
+            ]
+          }
+        },
+        "refresh": {
+          "delay": 30000,
+          "delayDeviation": 10000,
+          "maxVisibleTime": 1000,
+          "limit": 30
+        },
+        "withoutBids": true,
+        "appnexusPlacementId": 12097784,
+        "mediaType": "banner",
+        "bids": [
+          {
+            "bidder": "appnexus",
+            "params": {
+              "placementId": 8549997,
+              "keywords": {
+                "is_refresh": "false",
+                "artist": 66748,
+                "artist_name": "billie eilish",
+                "song_genre": "pop",
+                "tab_type": "Chords",
+                "tab_id": 2892656,
+                "instr": "guitar",
+                "title": "Billie Eilish - Everything I Wanted (chords)"
+              }
+            }
+          },
+          {
+            "bidder": "pubmatic",
+            "params": { "publisherId": "72623", "adSlot": "3131198@300x250" }
+          },
+          {
+            "bidder": "rubicon",
+            "params": {
+              "accountId": "15178",
+              "siteId": "93918",
+              "zoneId": "506312"
+            }
+          }
+        ],
+        "customTargeting": {
+          "ab_var_web_UG_4488": 2,
+          "ab_var_web_UG_4701": 1,
+          "ab_var_web_UG_5658": 1,
+          "ab_var_web_UG_5676": 4,
+          "ab_var_web_UG_5694": 2,
+          "tab_type": "Chords",
+          "genre": "pop",
+          "artist_name": "billie eilish",
+          "age": "0",
+          "main_instrument": "Piano",
+          "skill_level": "Garage band guitarist",
+          "video": "atfsekindo"
+        },
+        "primis": true,
+        "additionalSekindoBehavior": 3,
+        "dynamic": true
+      }
+    ],
+    "priceGranularity": [
+      {
+        "precision": 2,
+        "min": 0,
+        "max": 1,
+        "increment": 0.01000000000000000020816681711721685132943093776702880859375
+      },
+      {
+        "precision": 2,
+        "min": 1,
+        "max": 2,
+        "increment": 0.0200000000000000004163336342344337026588618755340576171875
+      },
+      {
+        "precision": 2,
+        "min": 2,
+        "max": 5,
+        "increment": 0.05000000000000000277555756156289135105907917022705078125
+      },
+      {
+        "precision": 2,
+        "min": 5,
+        "max": 10,
+        "increment": 0.1000000000000000055511151231257827021181583404541015625
+      },
+      {
+        "precision": 2,
+        "min": 10,
+        "max": 20,
+        "increment": 0.200000000000000011102230246251565404236316680908203125
+      },
+      { "precision": 2, "min": 20, "max": 50, "increment": 0.5 }
+    ],
+    "dynamicLoad": true,
+    "disableAdx": false,
+    "isGDPRAvailable": false,
+    "isShowOnTap": false,
+    "adsTargeting": {
+      "song": "Everything I Wanted",
+      "artist": "Billie Eilish",
+      "tab_subtype": ""
+    },
+    "prebidLibUrl": "https://tabs.ultimate-guitar.com/static/public/build/prebid_8_14_0_lib/prebid_ver1737739650.js",
+    "isRegistered": 3633583,
+    "emailHash": "c35ba1ee81d24b93edabb8db59994d4ac2ec2d7bf9042b90ee2b1598c84b61b0",
+    "hasConsentCookie": false,
+    "slots": []
+  }
+}
