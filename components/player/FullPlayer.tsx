@@ -114,7 +114,7 @@ export function FullPlayer() {
             maskElement={
               <LinearGradient
                 colors={["transparent", "#ffffff", "#ffffff", "transparent"]}
-                locations={[0, 0.1, 0.9, 1]}
+                locations={[0, 0.1, 0.85, 1]} // Changed from [0, 0.1, 0.9, 1]
                 style={{ flex: 1 }}
               />
             }
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   bottomBar: {
-    height: 60,
+    height: 90,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
@@ -214,6 +214,7 @@ const styles = StyleSheet.create({
   bottomButton: {
     flex: 1,
     alignItems: "center",
+    marginBottom: 10,
   },
   loadingContainer: {
     flex: 1,
