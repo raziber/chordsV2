@@ -1,34 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   View,
   Dimensions,
-  Image,
-  Pressable,
+  TouchableOpacity,
   ScrollView,
   ActivityIndicator,
 } from "react-native";
-import Animated, {
-  SharedValue,
-  withSpring,
-  withTiming,
-  useAnimatedStyle,
-  Layout,
-  SlideInDown,
-  SlideOutDown,
-} from "react-native-reanimated";
+import Animated, { SlideInDown, SlideOutDown } from "react-native-reanimated";
 import { ThemedText } from "@/components/ThemedText";
 import { usePlayer } from "@/contexts/PlayerContext";
-import { useTheme } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useBackHandler } from "@react-native-community/hooks";
+import MaskedView from "@react-native-masked-view/masked-view";
 
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
+const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 export function FullPlayer() {
   const { currentTrack, isExpanded, setIsExpanded } = usePlayer();
-  const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
   useBackHandler(() => {
@@ -41,53 +32,104 @@ export function FullPlayer() {
 
   if (!isExpanded || !currentTrack) return null;
 
+  const renderContent = () => {
+    // Debug log to check what we're receiving
+    console.log("Current track data:", {
+      hasTab: !!currentTrack.parsedTab,
+      content: currentTrack.parsedTab?.content,
+    });
+
+    if (!currentTrack.parsedTab) {
+      return (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#FFFFFF" />
+        </View>
+      );
+    }
+
+    if (!currentTrack.parsedTab.content) {
+      return (
+        <View style={styles.loadingContainer}>
+          <ThemedText>No content available</ThemedText>
+        </View>
+      );
+    }
+
+    return (
+      <View style={styles.contentContainer}>
+        <ThemedText style={styles.tabText}>
+          {currentTrack.parsedTab.content}
+        </ThemedText>
+      </View>
+    );
+  };
+
   return (
     <Animated.View
       entering={SlideInDown.springify().damping(25).stiffness(200).mass(0.5)}
       exiting={SlideOutDown.duration(150)}
-      style={[styles.container, { backgroundColor: colors.card }]}
+      style={styles.container}
     >
-      <ScrollView style={styles.scrollContainer} bounces={false}>
-        <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
-          <View style={styles.headerContent}>
-            <Pressable
-              onPress={() => setIsExpanded(false)}
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-              style={({ pressed }) => [
-                styles.backButton,
-                pressed && { opacity: 0.7 },
-              ]}
-            >
-              <Ionicons name="chevron-down" size={32} color={colors.text} />
-            </Pressable>
-          </View>
-        </View>
-
-        <View style={styles.content}>
-          <Image
-            source={{ uri: currentTrack.album_cover?.web_album_cover?.small }}
-            style={styles.albumArt}
-          />
-          <View style={styles.info}>
-            <ThemedText type="title" style={styles.title}>
+      <LinearGradient colors={["#3B414D", "#272B33"]} style={styles.container}>
+        {/* Top Bar */}
+        <View style={[styles.topBar, { paddingTop: insets.top }]}>
+          <TouchableOpacity
+            style={styles.topBarLeft}
+            onPress={() => setIsExpanded(false)}
+          >
+            <Ionicons name="chevron-down" size={24} color="#FFFFFF" />
+          </TouchableOpacity>
+          <View style={styles.topBarCenter}>
+            <Ionicons name="musical-note" size={16} color="#FFFFFF" />
+            <ThemedText style={styles.songTitle} numberOfLines={1}>
               {currentTrack.song_name}
             </ThemedText>
-            <ThemedText type="subtitle" style={styles.artist}>
-              {currentTrack.artist_name}
-            </ThemedText>
           </View>
-
-          <View style={styles.tabContent}>
-            {!currentTrack.parsedTab ? (
-              <ActivityIndicator size="large" color={colors.primary} />
-            ) : (
-              <ThemedText style={styles.tabText}>
-                {currentTrack.parsedTab.content}
-              </ThemedText>
-            )}
-          </View>
+          <TouchableOpacity style={styles.topBarRight}>
+            <Ionicons name="ellipsis-vertical" size={24} color="#FFFFFF" />
+          </TouchableOpacity>
         </View>
-      </ScrollView>
+
+        {/* Scrollable Content with fade masks */}
+        <View style={styles.scrollContainer}>
+          <MaskedView
+            style={{ flex: 1 }}
+            maskElement={
+              <LinearGradient
+                colors={["transparent", "#ffffff", "#ffffff", "transparent"]}
+                locations={[0, 0.1, 0.9, 1]}
+                style={{ flex: 1 }}
+              />
+            }
+          >
+            <ScrollView
+              style={styles.scrollContent}
+              showsVerticalScrollIndicator={false}
+            >
+              {renderContent()}
+            </ScrollView>
+          </MaskedView>
+        </View>
+
+        {/* Bottom Bar */}
+        <View style={[styles.bottomBar, { paddingBottom: insets.bottom }]}>
+          <TouchableOpacity style={styles.bottomButton}>
+            <Ionicons name="cellular" size={24} color="#FFFFFF" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.bottomButton}>
+            <Ionicons name="play-skip-back" size={24} color="#FFFFFF" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.bottomButton}>
+            <Ionicons name="search" size={24} color="#FFFFFF" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.bottomButton}>
+            <Ionicons name="play-skip-forward" size={24} color="#FFFFFF" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.bottomButton}>
+            <Ionicons name="list" size={24} color="#FFFFFF" />
+          </TouchableOpacity>
+        </View>
+      </LinearGradient>
     </Animated.View>
   );
 }
@@ -101,59 +143,64 @@ const styles = StyleSheet.create({
     bottom: 0,
     zIndex: 50,
   },
-  header: {
-    width: "100%",
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-  },
-  headerContent: {
+  topBar: {
+    height: 80,
     flexDirection: "row",
-    justifyContent: "center",
-    position: "relative",
-    height: 44,
+    alignItems: "center",
+    paddingHorizontal: 24,
   },
-  backButton: {
-    position: "absolute",
-    left: 0,
-    padding: 8,
-  },
-  content: {
+  topBarLeft: {
     flex: 1,
-    alignItems: "center",
-    paddingHorizontal: 20,
   },
-  albumArt: {
-    width: SCREEN_WIDTH * 0.7,
-    height: SCREEN_WIDTH * 0.7,
-    borderRadius: 8,
-    marginVertical: 32,
-  },
-  info: {
-    width: "100%",
+  topBarCenter: {
+    flex: 5,
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     gap: 8,
   },
-  title: {
-    fontSize: 24,
-    textAlign: "center",
+  topBarRight: {
+    flex: 1,
+    alignItems: "flex-end",
   },
-  artist: {
-    opacity: 0.7,
-    textAlign: "center",
+  songTitle: {
+    fontSize: 16,
+    maxWidth: 200,
   },
   scrollContainer: {
     flex: 1,
+    position: "relative",
+    backgroundColor: "transparent",
   },
-  tabContent: {
-    width: "100%",
-    padding: 16,
-    marginTop: 16,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: "#ffffff20",
+  scrollContent: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
   },
   tabText: {
     fontFamily: "monospace",
     fontSize: 14,
-    lineHeight: 20,
+    lineHeight: 22,
+  },
+  bottomBar: {
+    height: 60,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    paddingHorizontal: 16,
+  },
+  bottomButton: {
+    flex: 1,
+    alignItems: "center",
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: 200,
+  },
+  contentContainer: {
+    minHeight: 200,
+    paddingVertical: 20,
   },
 });

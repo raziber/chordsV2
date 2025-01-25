@@ -12,7 +12,6 @@ export class TabParser {
     if (!jsonData) return null;
 
     const parsedData = this.parseParts(jsonData);
-    console.log("Parsed data:", JSON.stringify(parsedData));
     return parsedData;
   }
 
