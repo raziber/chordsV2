@@ -312,11 +312,13 @@ export class TabParser {
    * @returns tuple of intro and the rest of the song
    */
   splitByIntro(content: string): [string, string] {
-    const introStart = content.indexOf("[Intro]");
-    if (introStart === -1) {
+    const introRegex = /\[\s*intro\s*\]/i;
+    const match = content.match(introRegex);
+    if (!match) {
       return ["", content];
     }
 
+    const introStart = match.index || 0;
     return [content.slice(0, introStart), content.slice(introStart)];
   }
 
