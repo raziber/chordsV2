@@ -117,56 +117,112 @@ export namespace SongLine {
 }
 
 export namespace SongTypes {
-  export interface Metadata {
-    // must have
-    id: number;
-    song_id: number;
-    song_name: string;
-    artist_id: number;
-    artist_name: string;
-    votes: number;
-    type: string;
-    tab_url: string;
+  interface Tuning {
+    name: string;
+    value: string;
+  }
 
-    // optional
-    part?: string;
-    version?: number;
-    difficulty?: string;
-    rating?: number;
-    date?: string;
-    status?: string;
-    preset_id?: number;
-    tab_access_type?: string;
-    tp_version?: number;
-    tonality_name?: string;
-    version_description?: string;
-    verified?: number;
-    recording?: {
-      is_acoustic?: number;
-      tonality_name?: string;
-      performance?: any | null;
-      recording_artists?: any[];
-      video_urls?: any | null;
+  interface Recording {
+    isAcoustic: number;
+    tonalityName: string;
+    performance: any | null;
+    recordingArtists: any[];
+  }
+
+  interface Strumming {
+    part: string;
+    bpm: number;
+    denominator: number;
+    isTriplet: boolean;
+    measures: any[];
+  }
+
+  interface AlbumCover {
+    hasAlbumCover: boolean;
+    webAlbumCover: {
+      small: string;
     };
-    album_cover?: {
-      has_album_cover?: boolean;
-      web_album_cover?: {
-        small?: string;
-      };
+  }
+
+  interface ArtistCover {
+    hasArtistCover: boolean;
+    webArtistCover: {
+      small: string;
     };
-    artist_cover?: {
-      has_artist_cover?: boolean;
-      web_artist_cover?: {
-        small?: string;
-      };
-    };
-    artist_url?: string;
-    date_update?: string;
-    user_id?: number;
-    user_iq?: number;
-    username?: string;
-    type_name?: string;
-    best_pro_tab_url?: string;
+  }
+
+  interface VersionRecording {
+    isAcoustic: number;
+    tonalityName: string;
+    performance: any | null;
+    recordingArtists: any[];
+  }
+
+  export interface Version {
+    versionId: number;
+    songId: number;
+    songName: string;
+    artistId: number;
+    artistName: string;
+    type: string;
+    part: string;
+    version: number;
+    votes: number;
+    difficulty: string;
+    rating: number;
+    date: string;
+    status: string;
+    presetId: number;
+    tabAccessType: string;
+    tpVersion: number;
+    tonalityName: string;
+    versionDescription: string | null;
+    verified: number;
+    recording: VersionRecording;
+    albumCover: AlbumCover;
+    artistCover: ArtistCover;
+    artistUrl: string;
+    tabUrl: string;
+    dateUpdate: string;
+    userId: number;
+    userIq: number;
+    username: string;
+    typeName: string;
+    bestProTabUrl: string;
+  }
+
+  export interface Metadata {
+    songId: number;
+    songName: string;
+    artistId: number;
+    artistName: string;
+    tabType: string;
+    version: number;
+    votes: number;
+    rating: number;
+    status: string;
+    tonality: string;
+    tuning: Tuning;
+    capo: number;
+    difficulty: string;
+    presetId: number;
+    date: string;
+    dateUpdate: string;
+    verified: number;
+    typeName: string;
+    versionDescription: string;
+    bestProTabUrl: string;
+    userId: number;
+    userIq: number;
+    username: string;
+    tabUrl: string;
+    artistUrl: string;
+    albumCover: string;
+    artistCover: string;
+    tabAccessType: string;
+    tpVersion: number;
+    recording: Recording;
+    strummings: Strumming[];
   }
 
   export interface Section {
@@ -178,6 +234,7 @@ export namespace SongTypes {
     metadata: Metadata;
     preIntro: string;
     song: Section[];
+    versions: Version[];
   }
 }
 

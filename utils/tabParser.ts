@@ -11,7 +11,9 @@ export class TabParser {
     const jsonData = this.jsonifyTabPage(data);
     if (!jsonData) return null;
 
-    return this.parseParts(jsonData);
+    const parsedData = this.parseParts(jsonData);
+    console.log("Parsed data:", JSON.stringify(parsedData));
+    return parsedData;
   }
 
   jsonifyTabPage(data: string): any {
@@ -140,39 +142,150 @@ export class TabParser {
     };
   }
 
+  parseVersions(versionsPart: any[]): SongTypes.Version[] {
+    if (!Array.isArray(versionsPart)) return [];
+
+    return versionsPart.map((version: any) => ({
+      versionId: version.id,
+      songId: version.song_id,
+      songName: version.song_name,
+      artistId: version.artist_id,
+      artistName: version.artist_name,
+      type: version.type,
+      part: version.part,
+      version: version.version,
+      votes: version.votes,
+      difficulty: version.difficulty || "",
+      rating: version.rating,
+      date: version.date,
+      status: version.status,
+      presetId: version.preset_id,
+      tabAccessType: version.tab_access_type,
+      tpVersion: version.tp_version,
+      tonalityName: version.tonality_name || "",
+      versionDescription: version.version_description,
+      verified: version.verified,
+      recording: {
+        isAcoustic: version.recording?.is_acoustic || 0,
+        tonalityName: version.recording?.tonality_name || "",
+        performance: version.recording?.performance || null,
+        recordingArtists: version.recording?.recording_artists || [],
+      },
+      albumCover: {
+        hasAlbumCover: version.album_cover?.has_album_cover || false,
+        webAlbumCover: {
+          small: version.album_cover?.web_album_cover?.small || "",
+        },
+      },
+      artistCover: {
+        hasArtistCover: version.artist_cover?.has_artist_cover || false,
+        webArtistCover: {
+          small: version.artist_cover?.web_artist_cover?.small || "",
+        },
+      },
+      artistUrl: version.artist_url,
+      tabUrl: version.tab_url,
+      dateUpdate: version.date_update,
+      userId: version.user_id,
+      userIq: version.user_iq,
+      username: version.username,
+      typeName: version.type_name,
+      bestProTabUrl: version.best_pro_tab_url,
+    }));
+  }
+
   parseMetadata(
-    preSongMetadataPart: string,
-    postSongMetadataPart: string
+    tabPart: any,
+    strummingsPart: any[],
+    metaPart: any
   ): SongTypes.Metadata {
     try {
-      // Combine and clean up the JSON string
-      const jsonStr = '{"data":{' + preSongMetadataPart + "}}}";
-      // Parse the JSON string into an object
-      const data = JSON.parse(jsonStr);
-
-      console.log("Data:", JSON.stringify(data));
-
       return {
-        song_name: data.data.song_name || "",
-        artist_name: data.data.artist_name || "",
-        id: data.data.id || 0,
-        artist_id: data.data.artist_id || 0,
-        votes: data.data.votes || 0,
-        type: data.data.type || "",
-        song_id: data.data.song_id || 0,
-        tab_url: data.data.tab_url || "",
+        songId: tabPart.song_id,
+        songName: tabPart.song_name,
+        artistId: tabPart.artist_id,
+        artistName: tabPart.artist_name,
+        tabType: tabPart.type,
+        version: tabPart.version,
+        votes: tabPart.votes,
+        rating: tabPart.rating,
+        status: tabPart.status,
+        tonality: metaPart.tonality || tabPart.tonality_name,
+        tuning: {
+          name: metaPart.tuning?.name || "Standard",
+          value: metaPart.tuning?.value || "E A D G B E",
+        },
+        capo: metaPart.capo || 0,
+        difficulty: metaPart.difficulty || "Unknown",
+        presetId: tabPart.preset_id,
+        date: tabPart.date,
+        dateUpdate: tabPart.date_update,
+        verified: tabPart.verified,
+        typeName: tabPart.type_name,
+        versionDescription: tabPart.version_description,
+        bestProTabUrl: tabPart.best_pro_tab_url,
+        userId: tabPart.user_id,
+        userIq: tabPart.user_iq,
+        username: tabPart.username,
+        tabUrl: tabPart.tab_url,
+        artistUrl: tabPart.artist_url,
+        albumCover: tabPart.album_cover?.web_album_cover?.small || "",
+        artistCover: tabPart.artist_cover?.web_artist_cover?.small || "",
+        tabAccessType: tabPart.tab_access_type,
+        tpVersion: tabPart.tp_version,
+        recording: {
+          isAcoustic: tabPart.recording?.is_acoustic || 0,
+          tonalityName: tabPart.recording?.tonality_name || "",
+          performance: tabPart.recording?.performance || null,
+          recordingArtists: tabPart.recording?.recording_artists || [],
+        },
+        strummings: strummingsPart.map((strum: any) => ({
+          part: strum.part,
+          bpm: strum.bpm,
+          denominator: strum.denuminator,
+          isTriplet: strum.is_triplet,
+          measures: strum.measures.map((m: any) => m.measure),
+        })),
       };
     } catch (error) {
-      console.error("Error parsing metadata:", error);
+      console.log("Failed to parse metadata", error);
       return {
-        song_name: "",
-        artist_name: "",
-        id: 0,
-        artist_id: 0,
+        songId: 0,
+        songName: "",
+        artistId: 0,
+        artistName: "",
+        tabType: "",
+        version: 0,
         votes: 0,
-        type: "",
-        song_id: 0,
-        tab_url: "",
+        rating: 0,
+        status: "",
+        tonality: "",
+        tuning: { name: "Standard", value: "E A D G B E" },
+        capo: 0,
+        difficulty: "Unknown",
+        presetId: 0,
+        date: "",
+        dateUpdate: "",
+        verified: 0,
+        typeName: "",
+        versionDescription: "",
+        bestProTabUrl: "",
+        userId: 0,
+        userIq: 0,
+        username: "",
+        tabUrl: "",
+        artistUrl: "",
+        albumCover: "",
+        artistCover: "",
+        tabAccessType: "",
+        tpVersion: 0,
+        recording: {
+          isAcoustic: 0,
+          tonalityName: "",
+          performance: null,
+          recordingArtists: [],
+        },
+        strummings: [],
       };
     }
   }
@@ -182,7 +295,14 @@ export class TabParser {
     return preIntroPart;
   }
 
-  parseSong(songPart: string): SongTypes.Section[] {
+  parseSong(input: string): [string, SongTypes.Section[]] {
+    const [preIntroPart, songPart] = this.splitToParts(input);
+    const preIntro = this.parsePreIntro(preIntroPart);
+    const sections = this.parsePostIntro(songPart);
+    return [preIntro, sections];
+  }
+
+  parsePostIntro(songPart: string): SongTypes.Section[] {
     let parsedSections: SongTypes.Section[] = [];
 
     const sections = this.splitToSections(songPart);
