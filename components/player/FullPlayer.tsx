@@ -23,26 +23,18 @@ export function FullPlayer() {
     currentTrack,
     isExpanded,
     setIsExpanded,
+    scrollPosition,
     setScrollPosition,
-    getScrollPosition,
   } = usePlayer();
   const insets = useSafeAreaInsets();
   const scrollViewRef = React.useRef<ScrollView>(null);
-  const prevTrackIdRef = React.useRef<number | null>(null);
 
+  // Restore scroll position when expanding
   useEffect(() => {
-    if (isExpanded && scrollViewRef.current && currentTrack) {
-      // Only restore scroll position if it's the same song
-      if (prevTrackIdRef.current === currentTrack.id) {
-        const position = getScrollPosition(currentTrack.id);
-        scrollViewRef.current.scrollTo({ y: position, animated: false });
-      } else {
-        // New song, scroll to top
-        scrollViewRef.current.scrollTo({ y: 0, animated: false });
-        prevTrackIdRef.current = currentTrack.id;
-      }
+    if (isExpanded && scrollViewRef.current) {
+      scrollViewRef.current.scrollTo({ y: scrollPosition, animated: false });
     }
-  }, [isExpanded, currentTrack]);
+  }, [isExpanded]);
 
   useBackHandler(() => {
     if (isExpanded) {
@@ -132,12 +124,7 @@ export function FullPlayer() {
               style={styles.scrollContent}
               showsVerticalScrollIndicator={false}
               onScroll={(e) => {
-                if (currentTrack) {
-                  setScrollPosition(
-                    currentTrack.id,
-                    e.nativeEvent.contentOffset.y
-                  );
-                }
+                setScrollPosition(e.nativeEvent.contentOffset.y);
               }}
               scrollEventThrottle={16}
             >
