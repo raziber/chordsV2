@@ -36,7 +36,7 @@ export function FullPlayer() {
     // Debug log to check what we're receiving
     console.log("Current track data:", {
       hasTab: !!currentTrack.parsedTab,
-      content: currentTrack.parsedTab?.content,
+      content: currentTrack.parsedTab?.song[0].title,
     });
 
     if (!currentTrack.parsedTab) {
@@ -47,7 +47,7 @@ export function FullPlayer() {
       );
     }
 
-    if (!currentTrack.parsedTab.content) {
+    if (!currentTrack.parsedTab.song) {
       return (
         <View style={styles.loadingContainer}>
           <ThemedText>No content available</ThemedText>
@@ -58,7 +58,7 @@ export function FullPlayer() {
     return (
       <View style={styles.contentContainer}>
         <ThemedText style={styles.tabText}>
-          {currentTrack.parsedTab.content}
+          {currentTrack.parsedTab.song[1].lines[1].lyrics}
         </ThemedText>
       </View>
     );

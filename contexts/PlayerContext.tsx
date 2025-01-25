@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { RawSearchResult } from "@/utils/searchParser";
-import { ParsedTab } from "@/utils/tabParser";
+import { SongTypes } from "@/types/types";
 
 interface PlayerContextType {
   isExpanded: boolean;
@@ -12,7 +12,7 @@ interface PlayerContextType {
 }
 
 export interface Track extends RawSearchResult {
-  parsedTab?: ParsedTab | null;
+  parsedTab?: SongTypes.Song | null;
 }
 
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined);
