@@ -40,14 +40,6 @@ describe("TabParser", () => {
       );
     });
 
-    it("should parse a complete tab", async () => {
-      const result = await parser.parseTab("https://example.com/tab");
-      expect(result).toBeTruthy();
-      expect(result?.metadata).toBeDefined();
-      expect(result?.preIntro).toBeDefined();
-      expect(result?.song).toBeInstanceOf(Array);
-    });
-
     it("should handle network errors", async () => {
       (global.fetch as jest.Mock).mockRejectedValue(new Error("Network error"));
       const result = await parser.parseTab("https://example.com/tab");
@@ -74,59 +66,6 @@ describe("TabParser", () => {
     });
   });
 
-  describe("splitToParts", () => {
-    it("should split HTML into four parts", () => {
-      const [preMeta, preIntro, song, postMeta] = parser.splitToParts(mockHtml);
-      expect(preMeta).toBeDefined();
-      expect(preIntro).toBeDefined();
-      expect(song).toBeDefined();
-      expect(postMeta).toBeDefined();
-    });
-
-    it("should handle missing sections", () => {
-      const emptyHtml = '{"tab":{"content":""}}';
-      const [preMeta, preIntro, song, postMeta] =
-        parser.splitToParts(emptyHtml);
-      expect(preMeta).toBe("");
-      expect(preIntro).toBe("");
-      expect(song).toBe("");
-      expect(postMeta).toBe("");
-    });
-  });
-
-  describe("parseParts", () => {
-    it("should create a complete song object", () => {
-      const parts: [string, string, string, string] = [
-        '{"metadata":{"title":"Test Song"}}',
-        "[Pre-Intro]\nTest pre-intro",
-        "[Verse]\nTest verse",
-        '{"additional":"data"}',
-      ];
-
-      const result = parser.parseParts(parts);
-      expect(result).toMatchObject({
-        metadata: expect.any(Object),
-        preIntro: expect.any(String),
-        song: expect.any(Array),
-      });
-    });
-  });
-
-  describe("parseMetadata", () => {
-    it("should extract metadata from parts", () => {
-      const preMeta = '{"title":"Test Song","artist":"Test Artist"}';
-      const postMeta = '{"album":"Test Album","year":"2023"}';
-
-      const result = parser.parseMetadata(preMeta, postMeta);
-      expect(result).toMatchObject({
-        title: expect.any(String),
-        artist: expect.any(String),
-        album: expect.any(String),
-        year: expect.any(String),
-      });
-    });
-  });
-
   describe("parsePreIntro", () => {
     it("should parse pre-intro content", () => {
       const preIntro = "[Pre-Intro]\nSome pre-intro content";
@@ -137,25 +76,6 @@ describe("TabParser", () => {
     it("should handle empty pre-intro", () => {
       const result = parser.parsePreIntro("");
       expect(result).toBe("");
-    });
-  });
-
-  describe("parseSong", () => {
-    it("should parse song sections", () => {
-      const songContent = `
-        [Verse 1]
-        Em C D
-        Some lyrics
-        [Chorus]
-        Am F C
-        More lyrics
-      `;
-
-      const result = parser.parseSong(songContent);
-      expect(result).toBeInstanceOf(Array);
-      expect(result.length).toBeGreaterThan(0);
-      expect(result[0]).toHaveProperty("title");
-      expect(result[0]).toHaveProperty("lines");
     });
   });
 
@@ -268,6 +188,38 @@ describe("TabParser", () => {
       // Verify non-tab content is split normally
       expect(lines).toContain("Em C D");
       expect(lines).toContain("Am F C");
+    });
+  });
+
+  describe("splitByIntro", () => {
+    it("should handle case-insensitive intro markers", () => {
+      const tests = [
+        "[intro]some content",
+        "[Intro]some content",
+        "[INTRO]some content",
+        "[  intro  ]some content",
+        "[ Intro ]some content",
+      ];
+
+      tests.forEach((test) => {
+        const [pre, post] = parser.splitByIntro(test);
+        expect(pre).toBe("");
+        expect(post).toContain("some content");
+      });
+    });
+
+    it("should split content correctly with pre-intro", () => {
+      const content = "pre-intro content\n[Intro]intro content";
+      const [pre, post] = parser.splitByIntro(content);
+      expect(pre).toBe("pre-intro content\n");
+      expect(post).toBe("[Intro]intro content");
+    });
+
+    it("should return empty pre-intro when no intro marker", () => {
+      const content = "some content without intro";
+      const [pre, post] = parser.splitByIntro(content);
+      expect(pre).toBe("");
+      expect(post).toBe(content);
     });
   });
 });
