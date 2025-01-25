@@ -10,9 +10,9 @@ export default class HtmlUtils {
     if (!html) return "";
     // First replace all \r\n with \n, then replace any remaining \r with \n
     return html
-      .replace(/\\r\\n/g, "\n")
-      .replace(/\\r/g, "\n")
-      .replace(/\\n/g, "\n");
+      .replace(/\\r\\n/g, "\\n")
+      .replace(/\\r/g, "\\n")
+      .replace(/\\n/g, "\\n");
   }
 
   static stripTags(html: string): string {

@@ -7,7 +7,27 @@ export class TabParser {
   async parseTab(url: string): Promise<SongTypes.Song | null> {
     const data = await this.getData(url);
     if (!data) return null;
+
+    const jsonData = this.jsonifyTabPage(data);
+    if (!jsonData) return null;
+
     return this.parseParts(this.splitToParts(data));
+  }
+
+  jsonifyTabPage(data: string): any {
+    try {
+      const content = HtmlUtils.findTextBetween(
+        'data-content="',
+        '"></div>',
+        data
+      );
+      if (!content[0]) return null;
+      const parsedJson = JSON.parse(content[0] || "");
+      return parsedJson;
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return null;
+    }
   }
 
   async getData(url: string): Promise<string | null> {
