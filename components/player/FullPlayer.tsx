@@ -97,7 +97,7 @@ export function FullPlayer() {
             <Ionicons name="chevron-down" size={24} color="#FFFFFF" />
           </TouchableOpacity>
           <View style={styles.topBarCenter}>
-            <Ionicons name="musical-note" size={16} color="#FFFFFF" />
+            <Ionicons name="musical-note" size={16} color="#00FF00" />
             <ThemedText style={styles.songTitle} numberOfLines={1}>
               {currentTrack.song_name}
             </ThemedText>
@@ -114,7 +114,7 @@ export function FullPlayer() {
             maskElement={
               <LinearGradient
                 colors={["transparent", "#ffffff", "#ffffff", "transparent"]}
-                locations={[0, 0.1, 0.85, 1]} // Changed from [0, 0.1, 0.9, 1]
+                locations={[0, 0.1, 0.85, 1]} // [topStart, topEnd, bottomEnd, bottomStart]
                 style={{ flex: 1 }}
               />
             }
