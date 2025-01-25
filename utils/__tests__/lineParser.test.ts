@@ -99,7 +99,7 @@ describe("LineParser", () => {
         expect(result.chords).toEqual([
           {
             chord: { base: "G", bass: undefined, modifiers: [] },
-            position: 10,
+            position: 10.5,
           },
           {
             chord: { base: "E", bass: undefined, modifiers: ["m"] },

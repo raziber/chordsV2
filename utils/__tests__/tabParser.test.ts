@@ -109,12 +109,7 @@ describe("TabParser", () => {
       const songContent =
         "[Verse 1]\nif i add this[ch]Em[/ch] [ch]C[/ch] [ch]D[/ch]\nSome lyrics\n[tab]|-3-2-1-|[/tab]\n[Chorus]\nMore content";
 
-      console.log("\n=== Test Input ===");
-      console.log("Content:", songContent);
-
       const sections = parser.splitToSections(songContent);
-      console.log("\n=== Raw Sections ===");
-      console.dir(sections, { depth: null });
 
       expect(sections).toHaveLength(2);
       expect(sections[0].title).toBe("Verse 1");
