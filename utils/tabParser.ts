@@ -11,7 +11,7 @@ export class TabParser {
     const jsonData = this.jsonifyTabPage(data);
     if (!jsonData) return null;
 
-    return this.parseParts(this.splitToParts(data));
+    return this.parseParts(jsonData);
   }
 
   jsonifyTabPage(data: string): any {
@@ -119,23 +119,24 @@ export class TabParser {
     return "";
   }
 
-  parseParts(parts: [string, string, string, string]): SongTypes.Song {
-    const [preSongMetadataPart, preIntroPart, songPart, postSongMetadataPart] =
-      parts;
-
+  parseParts(jsonData: any): SongTypes.Song {
     const metadata = this.parseMetadata(
-      preSongMetadataPart,
-      postSongMetadataPart
+      jsonData.store.page.data.tab,
+      jsonData.store.page.data.tab_view.strummings,
+      jsonData.store.page.data.tab_view.meta
     );
-    const preIntro = this.parsePreIntro(preIntroPart);
-    const song = this.parseSong(songPart);
-
-    console.log("Metadata:", JSON.stringify(metadata));
+    const versions = this.parseVersions(
+      jsonData.store.page.data.tab_view.versions
+    );
+    const [preIntro, song] = this.parseSong(
+      jsonData.store.page.data.tab_view.wiki_tab.content
+    );
 
     return {
       metadata,
       preIntro,
       song,
+      versions,
     };
   }
 
