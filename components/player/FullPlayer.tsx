@@ -33,12 +33,6 @@ export function FullPlayer() {
   if (!isExpanded || !currentTrack) return null;
 
   const renderContent = () => {
-    // Debug log to check what we're receiving
-    console.log("Current track data:", {
-      hasTab: !!currentTrack.parsedTab,
-      content: currentTrack.parsedTab?.song[0].title,
-    });
-
     if (!currentTrack.parsedTab) {
       return (
         <View style={styles.loadingContainer}>
@@ -57,9 +51,18 @@ export function FullPlayer() {
 
     return (
       <View style={styles.contentContainer}>
-        <ThemedText style={styles.tabText}>
-          {currentTrack.parsedTab.song[1].lines[1].lyrics}
-        </ThemedText>
+        {currentTrack.parsedTab.song.map((section, sIndex) => (
+          <View key={`section-${sIndex}`} style={styles.sectionContainer}>
+            <ThemedText style={styles.sectionTitle}>{section.title}</ThemedText>
+            {section.lines.map((line, lIndex) => (
+              <View key={`line-${sIndex}-${lIndex}`}>
+                {line.lyrics && (
+                  <ThemedText style={styles.tabText}>{line.lyrics}</ThemedText>
+                )}
+              </View>
+            ))}
+          </View>
+        ))}
       </View>
     );
   };
@@ -200,7 +203,17 @@ const styles = StyleSheet.create({
     minHeight: 200,
   },
   contentContainer: {
-    minHeight: 200,
+    minHeight: SCREEN_HEIGHT - 160, // Account for top and bottom bars
     paddingVertical: 20,
+    paddingBottom: SCREEN_HEIGHT / 2, // Add extra half screen of padding at bottom
+  },
+  sectionContainer: {
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "#FFFFFF",
   },
 });
