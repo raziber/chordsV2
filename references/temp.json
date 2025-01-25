@@ -59,8 +59,419 @@
       }
     ]
   },
-  "preIntro": "",
-  "song": [{ "title": "No Song...", "lines": [] }],
+  "preIntro": "Capo: 1st fret\nPlay: G\nKey: Ab\n\nFor chords in original key transpose this chord sheet +1 (and \"use flats\").\n\nPlay this song with the regular shapes of the chords given in this song\nor use the ones that can be heard on the recording:\n\n[tab]      E-A-D-G-B-e\nG     3-x-0-0-3(3)\nEm    0-2-2-0-3(3) (= Em7)\nC     x-3-2-0-3(3) (= Cadd9)\n[Coda]\nDsus4 x-x-0-2-3-3 or x-x-0-0-3-3 (= a D chord which is neither major nor minor)\nG/B   x-2-0-0-0-3  (= G chord with a \"b\" as the root)\nD/F#  2-x-0-2-3-x  (= D chord with a \"f#\" as the root)[/tab]\n\nThe \"%\" signs mean \"repeat the bar before\", so \"| D | % |\" = two bars of D. \nIt's a common abbreviation. (Real Book etc.: https://www.swiss-jazz.ch/standards-jazz/AllOfMe.pdf)\n\n---------------------------------------------------------------------------------------------------\n\n",
+  "song": [
+    {
+      "title": "Intro",
+      "lines": [
+        {
+          "type": "bars",
+          "bars": [{ "chords": [{ "base": "G", "modifiers": [] }] }]
+        }
+      ]
+    },
+    {
+      "title": "Verse 1",
+      "lines": [
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "I found a love for me",
+          "chords": [
+            { "chord": { "base": "G", "modifiers": [] }, "position": 10.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 20 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Darling, just dive right in, and follow my lead",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 14.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 43.5 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Well, I found a girl beautiful and sweet",
+          "chords": [
+            { "chord": { "base": "G", "modifiers": [] }, "position": 16.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 28 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "I never knew you were the someone waiting for me",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 8.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 46.5 }
+          ],
+          "tabs": { "": [] }
+        }
+      ]
+    },
+    {
+      "title": "Pre-Chorus",
+      "lines": [
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Cause we were just kids when we fell in love",
+          "chords": [
+            { "chord": { "base": "G", "modifiers": [] }, "position": 32.5 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Not knowing what it was, I will not give you up this ti-ime",
+          "chords": [
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 13 },
+            { "chord": { "base": "C", "modifiers": [] }, "position": 36.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 53.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 56.5 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Darling just kiss me slow, your heart is all I own",
+          "chords": [
+            { "chord": { "base": "G", "modifiers": [] }, "position": 13.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 42 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "And in your eyes you're holding mine",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 12.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 34.5 }
+          ],
+          "tabs": { "": [] }
+        }
+      ]
+    },
+    {
+      "title": "Chorus",
+      "lines": [
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Baby, I'm dancing in the dark, with you between my arms",
+          "chords": [
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 7 },
+            { "chord": { "base": "C", "modifiers": [] }, "position": 11.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 25.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 36.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 52 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Barefoot on the grass, listening to our favourite song",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 0.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 17.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 23.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 41 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "When you said you looked a mess, I whispered underneath my breath",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 10.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 27.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 45.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 61 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "But you heard it, darling you look perfect tonight",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 9.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 26.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 35.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 46.5 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "bars",
+          "bars": [
+            {
+              "chords": [
+                { "base": "G", "modifiers": [] },
+                { "base": "D", "modifiers": [], "bass": "F#" },
+                { "base": "E", "modifiers": ["m"] },
+                { "base": "D", "modifiers": [] }
+              ]
+            },
+            {
+              "chords": [
+                { "base": "C", "modifiers": [] },
+                { "base": "D", "modifiers": [] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Verse 2",
+      "lines": [
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Well, I found a woman, stronger than anyone I know",
+          "chords": [
+            { "chord": { "base": "G", "modifiers": [] }, "position": 16.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 38 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "She shares my dreams, I hope that someday I'll share her home",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 14.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 57.5 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "I found a love, to carry more than just my secrets",
+          "chords": [
+            { "chord": { "base": "G", "modifiers": [] }, "position": 11.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 26 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "To carry love, to carry children of our own",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 9.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 40.5 }
+          ],
+          "tabs": { "": [] }
+        }
+      ]
+    },
+    {
+      "title": "Pre-Chorus",
+      "lines": [
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "We are still kids, but we're so in love, fighting against all odds",
+          "chords": [
+            { "chord": { "base": "G", "modifiers": [] }, "position": 29.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 52 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "I know we'll be alright this ti-ime",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 13.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 29.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 32.5 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Darling just hold my hand, be my girl, I'll be your man",
+          "chords": [
+            { "chord": { "base": "G", "modifiers": [] }, "position": 13.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 45 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "I see my future in your eyes",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 9.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 25.5 }
+          ],
+          "tabs": { "": [] }
+        }
+      ]
+    },
+    {
+      "title": "Chorus",
+      "lines": [
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Baby, I'm dancing in the dark, with you between my arms",
+          "chords": [
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 7 },
+            { "chord": { "base": "C", "modifiers": [] }, "position": 11.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 26.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 36.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 52 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Barefoot on the grass, listening to our favourite song",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 0.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 17.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 23.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 41 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "When I saw you in that dress, looking so beautiful",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 8.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 25.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 42.5 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "I don't deserve this, darling you look perfect tonight",
+          "chords": [
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 3 },
+            { "chord": { "base": "C", "modifiers": [] }, "position": 11.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 30.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 39.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 50.5 }
+          ],
+          "tabs": { "": [] }
+        }
+      ]
+    },
+    {
+      "title": "Interlude",
+      "lines": [
+        {
+          "type": "chords",
+          "lyrics": "| |  |  | % |",
+          "chords": [
+            { "chord": { "base": "G", "modifiers": [] }, "position": 15.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 20.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 25 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chords",
+          "lyrics": "|   | % |   | % |",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 19.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 28.5 }
+          ],
+          "tabs": { "": [] }
+        }
+      ]
+    },
+    {
+      "title": "Chorus",
+      "lines": [
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Baby, I'm dancing in the dark, with you between my arms",
+          "chords": [
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 7 },
+            { "chord": { "base": "C", "modifiers": [] }, "position": 11.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 26.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 36.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 52 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "Barefoot on the grass, listening to our favourite song",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 0.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 17.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 23.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 41 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "I have faith in what I see, now I know I have met an angel",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 8.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 23.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 39.5 },
+            { "chord": { "base": "E", "modifiers": ["m"] }, "position": 54 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "In person, and she looks perfect",
+          "chords": [
+            { "chord": { "base": "C", "modifiers": [] }, "position": 4.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 15.5 },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 25.5 }
+          ],
+          "tabs": { "": [] }
+        }
+      ]
+    },
+    {
+      "title": "Outro",
+      "lines": [
+        {
+          "type": "chordsAndLyrics",
+          "lyrics": "I don't deserve this, you look perfect tonight",
+          "chords": [
+            {
+              "chord": { "base": "G", "modifiers": [], "bass": "B" },
+              "position": 3.5
+            },
+            { "chord": { "base": "C", "modifiers": [] }, "position": 10.5 },
+            {
+              "chord": { "base": "D", "modifiers": ["sus4"] },
+              "position": 24.5
+            },
+            { "chord": { "base": "D", "modifiers": [] }, "position": 31.5 },
+            { "chord": { "base": "G", "modifiers": [] }, "position": 42.5 }
+          ],
+          "tabs": { "": [] }
+        },
+        {
+          "type": "bars",
+          "bars": [
+            {
+              "chords": [
+                { "base": "G", "modifiers": [] },
+                { "base": "D", "modifiers": [], "bass": "F#" },
+                { "base": "E", "modifiers": ["m"] },
+                { "base": "D", "modifiers": [] }
+              ]
+            },
+            {
+              "chords": [
+                { "base": "C", "modifiers": [] },
+                { "base": "D", "modifiers": [] }
+              ]
+            },
+            { "chords": [{ "base": "G", "modifiers": [] }] }
+          ]
+        }
+      ]
+    }
+  ],
   "versions": [
     {
       "versionId": 2240195,

@@ -296,10 +296,28 @@ export class TabParser {
   }
 
   parseSong(input: string): [string, SongTypes.Section[]] {
-    const [preIntroPart, songPart] = this.splitToParts(input);
+    const [preIntroPart, songPart] = this.splitByIntro(input);
     const preIntro = this.parsePreIntro(preIntroPart);
     const sections = this.parsePostIntro(songPart);
     return [preIntro, sections];
+  }
+
+  /**
+   * Splits the content into the intro and the rest of the song
+   * Finds the first occurrence of [Intro] and splits the content by it
+   * If no [Intro] is found, returns an empty string for the intro
+   * and the whole content as the rest of the song
+   *
+   * @param content input content
+   * @returns tuple of intro and the rest of the song
+   */
+  splitByIntro(content: string): [string, string] {
+    const introStart = content.indexOf("[Intro]");
+    if (introStart === -1) {
+      return ["", content];
+    }
+
+    return [content.slice(0, introStart), content.slice(introStart)];
   }
 
   parsePostIntro(songPart: string): SongTypes.Section[] {
