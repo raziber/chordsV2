@@ -9,6 +9,8 @@ interface PlayerContextType {
   setIsExpanded: (expanded: boolean) => void;
   setCurrentTrack: (track: Track | null) => void;
   setIsLoading: (loading: boolean) => void;
+  setScrollPosition: (songId: number, position: number) => void;
+  getScrollPosition: (songId: number) => number;
 }
 
 export interface Track extends RawSearchResult {
@@ -21,6 +23,17 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [scrollPositions, setScrollPositions] = useState<
+    Record<number, number>
+  >({});
+
+  const setScrollPosition = (songId: number, position: number) => {
+    setScrollPositions((prev) => ({ ...prev, [songId]: position }));
+  };
+
+  const getScrollPosition = (songId: number) => {
+    return scrollPositions[songId] || 0;
+  };
 
   return (
     <PlayerContext.Provider
@@ -31,6 +44,8 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         setIsExpanded,
         setCurrentTrack,
         setIsLoading,
+        setScrollPosition,
+        getScrollPosition,
       }}
     >
       {children}

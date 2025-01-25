@@ -19,8 +19,30 @@ import MaskedView from "@react-native-masked-view/masked-view";
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 export function FullPlayer() {
-  const { currentTrack, isExpanded, setIsExpanded } = usePlayer();
+  const {
+    currentTrack,
+    isExpanded,
+    setIsExpanded,
+    setScrollPosition,
+    getScrollPosition,
+  } = usePlayer();
   const insets = useSafeAreaInsets();
+  const scrollViewRef = React.useRef<ScrollView>(null);
+  const prevTrackIdRef = React.useRef<number | null>(null);
+
+  useEffect(() => {
+    if (isExpanded && scrollViewRef.current && currentTrack) {
+      // Only restore scroll position if it's the same song
+      if (prevTrackIdRef.current === currentTrack.id) {
+        const position = getScrollPosition(currentTrack.id);
+        scrollViewRef.current.scrollTo({ y: position, animated: false });
+      } else {
+        // New song, scroll to top
+        scrollViewRef.current.scrollTo({ y: 0, animated: false });
+        prevTrackIdRef.current = currentTrack.id;
+      }
+    }
+  }, [isExpanded, currentTrack]);
 
   useBackHandler(() => {
     if (isExpanded) {
@@ -106,8 +128,18 @@ export function FullPlayer() {
             }
           >
             <ScrollView
+              ref={scrollViewRef}
               style={styles.scrollContent}
               showsVerticalScrollIndicator={false}
+              onScroll={(e) => {
+                if (currentTrack) {
+                  setScrollPosition(
+                    currentTrack.id,
+                    e.nativeEvent.contentOffset.y
+                  );
+                }
+              }}
+              scrollEventThrottle={16}
             >
               {renderContent()}
             </ScrollView>
