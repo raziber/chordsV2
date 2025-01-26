@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { ChordTypes } from "@/types/types";
 import {
   StyleSheet,
   View,
@@ -15,8 +16,22 @@ import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useBackHandler } from "@react-native-community/hooks";
 import MaskedView from "@react-native-masked-view/masked-view";
+import { LyricsLine } from "@/components/LyricsLine";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+
+const extractChordText = (chord: ChordTypes.Chord): string => {
+  if (!chord) return "";
+
+  let chordText = chord.base;
+  if (chord.modifiers?.length > 0) {
+    chordText += chord.modifiers.join("");
+  }
+  if (chord.bass) {
+    chordText += `/${chord.bass}`;
+  }
+  return chordText;
+};
 
 export function FullPlayer() {
   const {
@@ -65,18 +80,30 @@ export function FullPlayer() {
 
     return (
       <View style={styles.contentContainer}>
-        {currentTrack.parsedTab.song.map((section, sIndex) => (
-          <View key={`section-${sIndex}`} style={styles.sectionContainer}>
-            <ThemedText style={styles.sectionTitle}>{section.title}</ThemedText>
-            {section.lines.map((line, lIndex) => (
-              <View key={`line-${sIndex}-${lIndex}`}>
-                {line.lyrics && (
-                  <ThemedText style={styles.tabText}>{line.lyrics}</ThemedText>
-                )}
-              </View>
-            ))}
-          </View>
-        ))}
+        {currentTrack.parsedTab.song.map((section, sIndex) => {
+          return (
+            <View key={`section-${sIndex}`} style={styles.sectionContainer}>
+              <ThemedText style={styles.sectionTitle}>
+                {section.title}
+              </ThemedText>
+              {section.lines.map((line, lIndex) => {
+                return (
+                  <View key={`line-${sIndex}-${lIndex}`}>
+                    <LyricsLine
+                      lyrics={line.lyrics || ""}
+                      chords={
+                        line.chords?.map((c) => ({
+                          chord: extractChordText(c.chord),
+                          position: c.position,
+                        })) || []
+                      }
+                    />
+                  </View>
+                );
+              })}
+            </View>
+          );
+        })}
       </View>
     );
   };
