@@ -22,11 +22,12 @@ export function ChordBox({ chord, onPress }: ChordBoxProps) {
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    borderColor: "#666",
+    borderColor: "rgba(0, 0, 0, 0.8)",
     borderRadius: 4,
     padding: 4,
     paddingHorizontal: 6,
-    backgroundColor: "rgba(0, 0, 0, 0.1)",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    alignSelf: "center",
   },
   text: {
     fontSize: 14,
