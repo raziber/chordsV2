@@ -17,16 +17,22 @@ export function LyricsLine({ lyrics, chords }: Props) {
   const measurementsComplete = useRef<boolean>(false);
 
   // Create text segments for measurement
-  const segments = chords.reduce<string[]>((acc, chord, i) => {
-    const start = i > 0 ? chords[i - 1].position : 0;
-    const end = chord.position;
-    acc.push(lyrics.substring(start, end));
-    if (i === chords.length - 1) {
-      // Add remaining text after last chord
-      acc.push(lyrics.substring(end));
-    }
-    return acc;
-  }, []);
+  const segments =
+    lyrics.length === 0
+      ? [""]
+      : chords.reduce<string[]>(
+          (acc, chord, i) => {
+            const start = i > 0 ? chords[i - 1].position : 0;
+            const end = chord.position;
+            acc.push(lyrics.substring(start, end));
+            if (i === chords.length - 1) {
+              // Add remaining text after last chord
+              acc.push(lyrics.substring(end));
+            }
+            return acc;
+          },
+          chords.length === 0 ? [lyrics] : []
+        );
 
   // Handle segment measurement
   const onSegmentLayout = (event: LayoutChangeEvent, index: number) => {
@@ -45,14 +51,16 @@ export function LyricsLine({ lyrics, chords }: Props) {
   };
 
   // Calculate chord position based on measured segments
-  const getChordPosition = (chordIndex: number): number => {
-    return (
+  function getChordPosition(chordIndex: number): number {
+    const rawPosition =
       segmentWidths
         .slice(0, chordIndex + 1)
         .reduce((sum, width) => sum + width, 0) -
-      chordWidth / 2
-    );
-  };
+      chordWidth / 2;
+
+    // Prevent negative positions so chords don't get placed off-screen
+    return Math.max(rawPosition, 0);
+  }
 
   // Check if all measurements are complete
   const isMeasuringComplete =
@@ -85,15 +93,22 @@ export function LyricsLine({ lyrics, chords }: Props) {
       {/* Changed layout structure */}
       <View style={styles.contentWrapper}>
         <View style={styles.chordLine}>
-          {measurementsComplete.current &&
-            chords.map((chord, index) => (
-              <View
-                key={`chord-${index}`}
-                style={[styles.chordWrapper, { left: getChordPosition(index) }]}
-              >
-                <ChordBox chord={chord.chord} />
-              </View>
-            ))}
+          {chords.map((chord, index) => (
+            <View
+              key={`chord-${index}`}
+              style={[
+                styles.chordWrapper,
+                {
+                  left:
+                    segmentWidths.length === segments.length
+                      ? getChordPosition(index)
+                      : 0,
+                },
+              ]}
+            >
+              <ChordBox chord={chord.chord} />
+            </View>
+          ))}
         </View>
         <View style={styles.lyricsLine}>
           <ThemedText style={styles.lyrics}>{lyrics}</ThemedText>
