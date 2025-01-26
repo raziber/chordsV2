@@ -82,44 +82,54 @@ export function LyricsLine({ lyrics, chords }: Props) {
         </View>
       </View>
 
-      {/* Actual visible content */}
-      <View style={styles.chordLine}>
-        {measurementsComplete.current &&
-          chords.map((chord, index) => (
-            <View
-              key={`chord-${index}`}
-              style={[styles.chordWrapper, { left: getChordPosition(index) }]}
-            >
-              <ChordBox chord={chord.chord} />
-            </View>
-          ))}
+      {/* Changed layout structure */}
+      <View style={styles.contentWrapper}>
+        <View style={styles.chordLine}>
+          {measurementsComplete.current &&
+            chords.map((chord, index) => (
+              <View
+                key={`chord-${index}`}
+                style={[styles.chordWrapper, { left: getChordPosition(index) }]}
+              >
+                <ChordBox chord={chord.chord} />
+              </View>
+            ))}
+        </View>
+        <View style={styles.lyricsLine}>
+          <ThemedText style={styles.lyrics}>{lyrics}</ThemedText>
+        </View>
       </View>
-      <ThemedText style={styles.lyrics}>{lyrics}</ThemedText>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 8,
+    marginVertical: 4,
+  },
+  contentWrapper: {
+    position: "relative", // Changed to relative for absolute child positioning
   },
   measureContainer: {
     position: "absolute",
     opacity: 0,
     flexDirection: "row",
-    left: -1000, // Hide off-screen
+    left: -1000,
   },
   chordLine: {
-    height: 24,
-    marginBottom: 4,
     position: "relative",
+    height: 36, // Height for chord line area
   },
   chordWrapper: {
     position: "absolute",
-    top: 0,
+    bottom: 2, // Position from bottom instead of top
+  },
+  lyricsLine: {
+    minHeight: 20,
   },
   lyrics: {
-    fontSize: 14,
+    fontSize: 16,
+    fontWeight: "400",
     lineHeight: 20,
   },
 });
