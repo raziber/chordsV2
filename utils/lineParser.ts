@@ -30,6 +30,9 @@ import { SongLine, TabsTypes, ChordTypes } from "../types/types";
 import { ChordParser } from "./chordParser";
 
 export default class LineParser {
+  // Add constant for repeat characters
+  private static readonly BAR_REPEAT_CHARS = ["%"];
+
   static parseLine(line: string): SongLine.Line {
     this.validateInput(line);
     const subLines = this.prepareSubLines(line);
@@ -256,7 +259,8 @@ export default class LineParser {
     for (const line of lines) {
       const withoutChords = this.extractChords(line)[0];
       const cleanedLine = withoutChords.trim();
-      if (cleanedLine && !/^[|\s\(\)\[\]\{\}]*$/.test(cleanedLine)) {
+      // Add % to the allowed characters in bars
+      if (cleanedLine && !/^[|%\s\(\)\[\]\{\}]*$/.test(cleanedLine)) {
         return false;
       }
     }
@@ -276,11 +280,24 @@ export default class LineParser {
       barStrings.pop();
     }
 
-    const bars = barStrings.map((segment) => {
-      const [_, chordPositions] = this.extractChords(segment);
-      const chords = chordPositions.map((pos) => pos.chord);
-      return { chords };
+    const bars: ChordTypes.Bar[] = [];
+
+    barStrings.forEach((segment, index) => {
+      // Check if current segment is a repeat character
+      if (this.BAR_REPEAT_CHARS.includes(segment) && index > 0) {
+        // If it is, copy the previous bar
+        const previousBar = bars[index - 1];
+        if (previousBar) {
+          bars.push({ ...previousBar });
+        }
+      } else {
+        // If not a repeat, parse normally
+        const [_, chordPositions] = this.extractChords(segment);
+        const chords = chordPositions.map((pos) => pos.chord);
+        bars.push({ chords });
+      }
     });
+
     return { type: SongLine.Type.Bars, bars };
   }
 

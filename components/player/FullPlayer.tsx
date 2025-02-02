@@ -145,14 +145,11 @@ export function FullPlayer() {
                 {section.title}
               </ThemedText>
               {section.lines.map((line, lIndex) => {
-                console.log("Processing line:", line);
-
                 // Handle bars line type
                 if (line.type === "bars" && line.bars) {
                   const chordsArray = line.bars.flatMap((bar) =>
                     bar.chords.map((chord) => extractChordText(chord))
                   );
-                  console.log("Bars chords array:", chordsArray);
 
                   return (
                     <View key={`line-${sIndex}-${lIndex}`}>

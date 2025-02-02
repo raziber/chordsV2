@@ -9,12 +9,9 @@ type Props = {
 };
 
 export function BarsLine({ chords, showBarLines = true }: Props) {
-  console.log("BarsLine received chords:", chords);
-
   return (
     <View style={styles.container}>
       {chords.map((chord, index) => {
-        console.log("Rendering chord:", chord);
         return (
           <View key={`chord-${index}`} style={styles.chordContainer}>
             <ChordBox chord={chord} removeAbsolute />
