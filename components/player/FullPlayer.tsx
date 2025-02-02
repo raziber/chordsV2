@@ -18,6 +18,7 @@ import { useBackHandler } from "@react-native-community/hooks";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LyricsLine } from "@/components/LyricsLine";
 import { useRouter } from "expo-router";
+import { BarsLine } from "@/components/BarsLine";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -144,6 +145,23 @@ export function FullPlayer() {
                 {section.title}
               </ThemedText>
               {section.lines.map((line, lIndex) => {
+                console.log("Processing line:", line);
+
+                // Handle bars line type
+                if (line.type === "bars" && line.bars) {
+                  const chordsArray = line.bars.flatMap((bar) =>
+                    bar.chords.map((chord) => extractChordText(chord))
+                  );
+                  console.log("Bars chords array:", chordsArray);
+
+                  return (
+                    <View key={`line-${sIndex}-${lIndex}`}>
+                      <BarsLine chords={chordsArray} />
+                    </View>
+                  );
+                }
+
+                // Handle regular lyrics line
                 return (
                   <View key={`line-${sIndex}-${lIndex}`}>
                     <LyricsLine

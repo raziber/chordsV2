@@ -5,12 +5,16 @@ import { ThemedText } from "./ThemedText";
 type ChordBoxProps = {
   chord: string;
   onPress?: () => void;
+  removeAbsolute?: boolean;
 };
 
-export function ChordBox({ chord, onPress }: ChordBoxProps) {
+export function ChordBox({ chord, onPress, removeAbsolute }: ChordBoxProps) {
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={[
+        styles.container,
+        removeAbsolute && styles.containerWithoutAbsolute,
+      ]}
       onPress={onPress}
       activeOpacity={0.7}
     >
@@ -36,6 +40,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: "50%",
     transform: [{ translateX: "-50%" }], // Center box horizontally
+  },
+  containerWithoutAbsolute: {
+    position: "relative",
+    left: 0,
+    transform: [],
   },
   text: {
     fontSize: 16,
