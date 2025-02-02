@@ -16,6 +16,7 @@ import { SearchResultItem } from "@/components/SearchResultItem";
 import { ActivityIndicator, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { FocusManager } from "@/utils/focusUtils";
+import { useLocalSearchParams } from "expo-router";
 
 const SEARCH_INPUT_KEY = "main-search";
 
@@ -27,6 +28,18 @@ export default function SearchScreen() {
   const { colors } = useTheme();
   const searchAnim = new Animated.Value(0);
   const navigation = useNavigation<any>();
+  const params = useLocalSearchParams();
+
+  useEffect(() => {
+    // Check for either param to trigger the effect
+    if (params.clearAndFocus === "true" || params.timestamp) {
+      setSearchQuery("");
+      // Slightly longer timeout to ensure navigation is complete
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 150);
+    }
+  }, [params.clearAndFocus, params.timestamp]); // Add timestamp to dependencies
 
   useEffect(() => {
     if (inputRef.current) {

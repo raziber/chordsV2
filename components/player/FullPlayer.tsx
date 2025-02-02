@@ -17,6 +17,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useBackHandler } from "@react-native-community/hooks";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LyricsLine } from "@/components/LyricsLine";
+import { useRouter } from "expo-router";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -43,6 +44,7 @@ export function FullPlayer() {
   } = usePlayer();
   const insets = useSafeAreaInsets();
   const scrollViewRef = React.useRef<ScrollView>(null);
+  const router = useRouter();
 
   // Restore scroll position when expanding
   useEffect(() => {
@@ -60,6 +62,18 @@ export function FullPlayer() {
   });
 
   if (!isExpanded || !currentTrack) return null;
+
+  const handleSearchPress = () => {
+    setIsExpanded(false);
+    // Add timestamp to force params to be treated as new
+    router.push({
+      pathname: "/(tabs)",
+      params: {
+        clearAndFocus: "true",
+        timestamp: Date.now().toString(),
+      },
+    });
+  };
 
   const renderContent = () => {
     if (!currentTrack.parsedTab) {
@@ -168,7 +182,10 @@ export function FullPlayer() {
           <TouchableOpacity style={styles.bottomButton}>
             <Ionicons name="play-skip-back" size={24} color="#FFFFFF" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.bottomButton}>
+          <TouchableOpacity
+            style={styles.bottomButton}
+            onPress={handleSearchPress}
+          >
             <Ionicons name="search" size={24} color="#FFFFFF" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.bottomButton}>
