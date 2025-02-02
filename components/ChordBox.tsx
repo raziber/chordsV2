@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     left: "50%",
-    transform: [{ translateX: "-50%" }], // Center box horizontally
+    transform: [{ translateX: -50 }], // Changed from "-50%" to -50
   },
   containerWithoutAbsolute: {
     position: "relative",
