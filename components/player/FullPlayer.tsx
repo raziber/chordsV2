@@ -34,6 +34,48 @@ const extractChordText = (chord: ChordTypes.Chord): string => {
   return chordText;
 };
 
+const MetadataSection = ({ meta }: { meta: any }) => {
+  if (!meta) return null;
+
+  const items = [];
+
+  if (meta.capo) {
+    items.push(
+      <View key="capo" style={styles.metadataItem}>
+        <Ionicons name="git-network-outline" size={16} color="#FFFFFF" />
+        <ThemedText style={styles.metadataText}>Capo: {meta.capo}</ThemedText>
+      </View>
+    );
+  }
+
+  if (meta.tonality) {
+    items.push(
+      <View key="key" style={styles.metadataItem}>
+        <Ionicons name="musical-notes-outline" size={16} color="#FFFFFF" />
+        <ThemedText style={styles.metadataText}>
+          Key: {meta.tonality}
+        </ThemedText>
+      </View>
+    );
+  }
+
+  // Only show tuning if it's not standard
+  if (meta.tuning?.value && meta.tuning.name?.toLowerCase() !== "standard") {
+    items.push(
+      <View key="tuning" style={styles.metadataItem}>
+        <Ionicons name="settings-outline" size={16} color="#FFFFFF" />
+        <ThemedText style={styles.metadataText}>
+          Tuning: {meta.tuning.value}
+        </ThemedText>
+      </View>
+    );
+  }
+
+  if (items.length === 0) return null;
+
+  return <View style={styles.metadataContainer}>{items}</View>;
+};
+
 export function FullPlayer() {
   const {
     currentTrack,
@@ -94,6 +136,7 @@ export function FullPlayer() {
 
     return (
       <View style={styles.contentContainer}>
+        <MetadataSection meta={currentTrack.parsedTab.metadata} />
         {currentTrack.parsedTab.song.map((section, sIndex) => {
           return (
             <View key={`section-${sIndex}`} style={styles.sectionContainer}>
@@ -279,5 +322,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     color: "#FFFFFF",
+  },
+  metadataContainer: {
+    marginBottom: 20,
+    padding: 12,
+    backgroundColor: "rgba(0,0,0,0.2)",
+    borderRadius: 8,
+    gap: 8,
+  },
+  metadataItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  metadataText: {
+    fontSize: 14,
+    color: "#FFFFFF",
+    opacity: 0.9,
   },
 });
