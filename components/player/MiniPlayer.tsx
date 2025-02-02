@@ -8,15 +8,13 @@ import {
 } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { usePlayer } from "@/contexts/PlayerContext";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@react-navigation/native";
 
 export function MiniPlayer() {
   const { currentTrack, setIsExpanded } = usePlayer();
-  const colorScheme = useColorScheme();
-  const insets = useSafeAreaInsets();
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
 
   if (!currentTrack) return null;
 
@@ -26,7 +24,7 @@ export function MiniPlayer() {
         styles.container,
         {
           bottom: insets.bottom + 66,
-          backgroundColor: colors.card,
+          backgroundColor: "#3B414D",
         },
       ]}
       onPress={() => setIsExpanded(true)}
