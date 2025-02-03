@@ -36,27 +36,6 @@ export function OverlayMenu({
 }: OverlayMenuProps) {
   const { colors } = useTheme();
 
-  const menuItems =
-    items.length > 0
-      ? items
-      : [
-          {
-            icon: "settings-outline" as keyof typeof Ionicons.glyphMap,
-            label: "Settings",
-            onPress: () => console.log("Settings pressed"),
-          },
-          {
-            icon: "star-outline" as keyof typeof Ionicons.glyphMap,
-            label: "Favorites",
-            onPress: () => console.log("Favorites pressed"),
-          },
-          {
-            icon: "time-outline" as keyof typeof Ionicons.glyphMap,
-            label: "History",
-            onPress: () => console.log("History pressed"),
-          },
-        ];
-
   return (
     <Modal
       transparent
@@ -77,7 +56,7 @@ export function OverlayMenu({
               style={styles.animatedContainer}
             >
               <ThemedView style={styles.menuContainer}>
-                {menuItems.map((item, index) => (
+                {items.map((item, index) => (
                   <TouchableOpacity
                     key={index}
                     style={styles.menuItem}

@@ -264,19 +264,39 @@ export function FullPlayer() {
           onClose={() => setMenuVisible(false)}
           items={[
             {
-              icon: "share-outline",
-              label: "Share",
-              onPress: () => console.log("Share pressed"),
+              icon: "open-outline",
+              label: "Open in UG",
+              onPress: () => console.log("Open in UG"),
+            },
+            {
+              icon: "documents-outline",
+              label: "Versions",
+              onPress: () => console.log("Versions"),
             },
             {
               icon: "star-outline",
               label: "Add to Favorites",
-              onPress: () => console.log("Favorite pressed"),
+              onPress: () => console.log("Add to Favorites"),
             },
             {
-              icon: "copy-outline",
-              label: "Copy Link",
-              onPress: () => console.log("Copy pressed"),
+              icon: "share-outline",
+              label: "Share",
+              onPress: () => console.log("Share"),
+            },
+            {
+              icon: "list-outline",
+              label: "Add to Playlist",
+              onPress: () => console.log("Add to Playlist"),
+            },
+            {
+              icon: "add-circle-outline",
+              label: "Add to Queue",
+              onPress: () => console.log("Add to Queue"),
+            },
+            {
+              icon: "musical-notes-outline",
+              label: "Open in Spotify",
+              onPress: () => console.log("Open in Spotify"),
             },
           ]}
         />
