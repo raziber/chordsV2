@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ChordTypes } from "@/types/types";
 import {
   StyleSheet,
@@ -19,6 +19,7 @@ import MaskedView from "@react-native-masked-view/masked-view";
 import { LyricsLine } from "@/components/LyricsLine";
 import { useRouter } from "expo-router";
 import { BarsLine } from "@/components/BarsLine";
+import { OverlayMenu } from "@/components/OverlayMenu";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -78,6 +79,7 @@ const MetadataSection = ({ meta }: { meta: any }) => {
 };
 
 export function FullPlayer() {
+  const [menuVisible, setMenuVisible] = useState(false);
   const {
     currentTrack,
     isExpanded,
@@ -201,7 +203,10 @@ export function FullPlayer() {
               {currentTrack.song_name}
             </ThemedText>
           </View>
-          <TouchableOpacity style={styles.topBarRight}>
+          <TouchableOpacity
+            style={styles.topBarRight}
+            onPress={() => setMenuVisible(true)}
+          >
             <Ionicons name="ellipsis-vertical" size={24} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
@@ -253,6 +258,28 @@ export function FullPlayer() {
             <Ionicons name="list" size={24} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
+
+        <OverlayMenu
+          visible={menuVisible}
+          onClose={() => setMenuVisible(false)}
+          items={[
+            {
+              icon: "square.and.arrow.up",
+              label: "Share",
+              onPress: () => {},
+            },
+            {
+              icon: "star",
+              label: "Add to Favorites",
+              onPress: () => {},
+            },
+            {
+              icon: "doc.on.doc",
+              label: "Copy Link",
+              onPress: () => {},
+            },
+          ]}
+        />
       </LinearGradient>
     </Animated.View>
   );

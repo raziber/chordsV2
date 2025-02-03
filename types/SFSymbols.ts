@@ -1,0 +1,17 @@
+export type SFSymbols6_0 =
+  | "house.fill"
+  | "magnifyingglass.circle.fill"
+  | "paperplane.fill"
+  | "gearshape"
+  | "star.fill"
+  | "clock"
+  | "square.and.arrow.up"
+  | "doc.on.doc"
+  | "star"
+  | "list"
+  | "ellipsis.circle.fill"
+  | "musical.note"
+  | "search"
+  | "cellular"
+  | "play-skip-back"
+  | "play-skip-forward";
