@@ -264,19 +264,19 @@ export function FullPlayer() {
           onClose={() => setMenuVisible(false)}
           items={[
             {
-              icon: "square.and.arrow.up",
+              icon: "share-outline",
               label: "Share",
-              onPress: () => {},
+              onPress: () => console.log("Share pressed"),
             },
             {
-              icon: "star",
+              icon: "star-outline",
               label: "Add to Favorites",
-              onPress: () => {},
+              onPress: () => console.log("Favorite pressed"),
             },
             {
-              icon: "doc.on.doc",
+              icon: "copy-outline",
               label: "Copy Link",
-              onPress: () => {},
+              onPress: () => console.log("Copy pressed"),
             },
           ]}
         />

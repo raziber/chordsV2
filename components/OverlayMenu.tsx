@@ -9,8 +9,7 @@ import {
 import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
 import { useTheme } from "@react-navigation/native";
-import { IconSymbol } from "./ui/IconSymbol";
-import { SFSymbols6_0 } from "sf-symbols-typescript";
+import { Ionicons } from "@expo/vector-icons";
 import Animated, {
   SlideInRight,
   SlideOutRight,
@@ -19,7 +18,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 type MenuItem = {
-  icon: SFSymbols6_0;
+  icon: keyof typeof Ionicons.glyphMap;
   label: string;
   onPress: () => void;
 };
@@ -37,25 +36,24 @@ export function OverlayMenu({
 }: OverlayMenuProps) {
   const { colors } = useTheme();
 
-  // Use provided items or fallback to default items if none provided
   const menuItems =
     items.length > 0
       ? items
       : [
           {
-            icon: "gearshape.fill" as SFSymbols6_0,
+            icon: "settings-outline" as keyof typeof Ionicons.glyphMap,
             label: "Settings",
-            onPress: () => {},
+            onPress: () => console.log("Settings pressed"),
           },
           {
-            icon: "star.fill" as SFSymbols6_0,
+            icon: "star-outline" as keyof typeof Ionicons.glyphMap,
             label: "Favorites",
-            onPress: () => {},
+            onPress: () => console.log("Favorites pressed"),
           },
           {
-            icon: "clock.fill" as SFSymbols6_0,
+            icon: "time-outline" as keyof typeof Ionicons.glyphMap,
             label: "History",
-            onPress: () => {},
+            onPress: () => console.log("History pressed"),
           },
         ];
 
@@ -76,7 +74,7 @@ export function OverlayMenu({
             <Animated.View
               entering={SlideInRight.duration(100)}
               exiting={SlideOutRight.duration(100)}
-              style={[styles.animatedContainer]}
+              style={styles.animatedContainer}
             >
               <ThemedView style={styles.menuContainer}>
                 {menuItems.map((item, index) => (
@@ -85,7 +83,7 @@ export function OverlayMenu({
                     style={styles.menuItem}
                     onPress={item.onPress}
                   >
-                    <IconSymbol
+                    <Ionicons
                       name={item.icon}
                       size={24}
                       color={colors.text}
@@ -116,7 +114,7 @@ const styles = StyleSheet.create({
   },
   animatedContainer: {
     position: "absolute",
-    right: -420, // Start offscreen (width of menu + right margin)
+    right: -420, // Reduced from -420 to -220 to match menu width
     top: 10,
   },
   menuContainer: {
