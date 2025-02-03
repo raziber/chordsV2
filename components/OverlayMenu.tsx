@@ -11,6 +11,12 @@ import { ThemedView } from "./ThemedView";
 import { useTheme } from "@react-navigation/native";
 import { IconSymbol } from "./ui/IconSymbol";
 import { SFSymbols6_0 } from "sf-symbols-typescript";
+import Animated, {
+  SlideInRight,
+  SlideOutRight,
+  FadeIn,
+  FadeOut,
+} from "react-native-reanimated";
 
 type MenuItem = {
   icon: SFSymbols6_0;
@@ -57,32 +63,44 @@ export function OverlayMenu({
     <Modal
       transparent
       visible={visible}
-      animationType="fade"
+      animationType="none"
       onRequestClose={onClose}
     >
-      <TouchableWithoutFeedback onPress={onClose}>
-        <View style={styles.overlay}>
-          <TouchableWithoutFeedback>
-            <ThemedView style={styles.menuContainer}>
-              {menuItems.map((item, index) => (
-                <TouchableOpacity
-                  key={index}
-                  style={styles.menuItem}
-                  onPress={item.onPress}
-                >
-                  <IconSymbol
-                    name={item.icon}
-                    size={24}
-                    color={colors.text}
-                    style={styles.icon}
-                  />
-                  <ThemedText style={styles.menuText}>{item.label}</ThemedText>
-                </TouchableOpacity>
-              ))}
-            </ThemedView>
-          </TouchableWithoutFeedback>
-        </View>
-      </TouchableWithoutFeedback>
+      <Animated.View
+        style={styles.overlay}
+        entering={FadeIn.duration(100)}
+        exiting={FadeOut.duration(100)}
+      >
+        <TouchableWithoutFeedback onPress={onClose}>
+          <View style={styles.overlayContent}>
+            <Animated.View
+              entering={SlideInRight.duration(100)}
+              exiting={SlideOutRight.duration(100)}
+              style={[styles.animatedContainer]}
+            >
+              <ThemedView style={styles.menuContainer}>
+                {menuItems.map((item, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={styles.menuItem}
+                    onPress={item.onPress}
+                  >
+                    <IconSymbol
+                      name={item.icon}
+                      size={24}
+                      color={colors.text}
+                      style={styles.icon}
+                    />
+                    <ThemedText style={styles.menuText}>
+                      {item.label}
+                    </ThemedText>
+                  </TouchableOpacity>
+                ))}
+              </ThemedView>
+            </Animated.View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Animated.View>
     </Modal>
   );
 }
@@ -92,11 +110,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
-  menuContainer: {
+  overlayContent: {
+    flex: 1,
+    alignItems: "flex-end",
+  },
+  animatedContainer: {
     position: "absolute",
-    right: 20,
-    top: 0,
+    right: -420, // Start offscreen (width of menu + right margin)
+    top: 10,
+  },
+  menuContainer: {
     width: 200,
+    marginRight: 20, // Margin from right edge of screen
     borderRadius: 12,
     padding: 8,
     shadowColor: "#000",
