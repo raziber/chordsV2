@@ -72,6 +72,15 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="test"
+        options={{
+          title: "Test",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="music.note" color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
